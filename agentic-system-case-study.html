@@ -6,7 +6,7 @@
     <link rel="icon" type="image/jpg" href="assets/favicon.jpg">
     <title>Nestbank Case Study - Laura Ledesna</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@600&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@600&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=DM+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script>
         tailwind.config = {
@@ -732,9 +732,9 @@
             </video>
             
             <!-- Agentic Circle Animation (Centered, not split-screen) -->
-            <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--surface-primary); z-index: 5;">
-                <canvas id="canvas-hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;"></canvas>
-                <canvas id="text-canvas-hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 16; pointer-events: none;"></canvas>
+            <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 5; touch-action: none;">
+                <canvas id="canvas-hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; z-index: 10;"></canvas>
+                <canvas id="text-canvas-hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; pointer-events: none;"></canvas>
             </div>
             
             <div style="position: relative; z-index: 20; margin-top: 100vh;">
@@ -742,7 +742,7 @@
                     <div class="flex flex-row gap-6 mt-8 animate-slide-up" style="animation-delay: 0.4s;">
                         <div class="basis-0 grow">
                             <h1 class="font-syne font-medium text-[32px] leading-[1.4] text-theme-heading">
-                                How I Designed the Operating System for AI-Native Product Triads
+                                Designing an Agentic System for Product Teams 
                             </h1>
                         </div>
                         <div class="basis-0 grow">
@@ -805,22 +805,172 @@
 
         <!-- Content Block with Image -->
         <div class="bg-theme-primary px-8 py-8 scroll-animate" data-scroll>
-            <div class="w-full mx-auto flex flex-row gap-8 h-[700px] content-image-row pt-16">
+            <div class="w-full mx-auto flex flex-row gap-8 h-[620px] content-image-row pt-16">
                 <!-- Text Content -->
                 <div class="basis-0 grow flex flex-col justify-flex-start">
                     <div class="flex flex-row gap-10">
                         <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Business Problem</p>
+                            <p class="font-syne font-medium text-[30px] leading-[1.4]" style="color: #666666;">Business Problem</p>
                         </div>
                         <div class="basis-0 grow">
                             <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Building software runs on a sequential information flow: PRD → Design → Code. Each role's intent gets encoded in a separate artifact, with no feedback loop between them. AI tools accelerate each silo, producing output that looks right but runs on desynchronized context.</p>
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph mt-6">The competitive advantage is no longer "who can build faster," but: who can design better systems, manage complexity, and align product, UX, and engineering into one coherent workflow.</p>
-                        </div>
+                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph mt-6">
+                                <span class="text-white underline">The competitive advantage is no longer "who can build faster," but: who can design better systems.</span> manage complexity, and align product, UX, and engineering into one coherent workflow.
+                            </p>
+                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph mt-6">The image on the right shows the current sequential collaboration model.</p>                        </div>
                     </div>
                 </div>
                 <!-- Image -->
                 <div <div class="basis-0 grow h-auto">
                     <img src="assets/agentic-system-case-study/media-1.jpg" alt="Collaboration model — Sequential" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Solution Section -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate" data-scroll>
+            <div class="w-full flex flex-col gap-8">
+                <!-- Section label -->
+                <p class="font-syne font-medium text-[30px] leading-[1.4]" style="color: #666666;">Solution</p>
+
+                <!-- Subtitle + Text -->
+                <div class="flex flex-row gap-6">
+                    <div class="basis-0 grow">
+                        <h2 class="font-syne font-medium text-[20px] leading-[1.4] text-theme-heading">01. From Roles to Agents</h2>
+                    </div>
+                    <div class="basis-0 grow flex flex-col gap-4">
+                        <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="w-full" style="height: 500px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
+                  <style>
+                    .cg-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: 'DM Mono', monospace; user-select: none; }
+                    .cg-wrap svg { width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; transform: scale(1.1); transform-origin: center center; }
+                    .cg-wrap .phase-node { cursor: pointer; }
+                    .cg-wrap .phase-node:hover circle { filter: brightness(0.85); }
+                    .cg-wrap #cg-phase-lines { opacity: 0.5; }
+                    .cg-wrap .center-node { cursor: grab; }
+                    #cg-tooltip { position: absolute; background: #1a1a1a; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; width: 190px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 0.15s ease, transform 0.12s ease; transform: scale(0.95); z-index: 100; font-family: 'DM Mono', monospace; }
+                    #cg-tooltip.visible { opacity: 1; pointer-events: auto; transform: scale(1); }
+                    #cg-tooltip .cg-tt-title { display: inline-block; border-radius: 5px; padding: 3px 9px; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+                    #cg-tooltip .cg-tt-content { font-size: 10px; line-height: 1.8; color: #d1d5db; }
+                  </style>
+                  <div class="cg-wrap" id="cg-wrap">
+                    <svg id="cg-svg" viewBox="0 0 900 800">
+                      <defs>
+                        <filter id="cg-phase-glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                      </defs>
+                      <g id="cg-phase-lines" stroke="#444" stroke-width="2" opacity="0.5" fill="none">
+                        <path/><path/><path/><path/><path/><path/>
+                      </g>
+                      <circle class="center-node" cx="450" cy="400" r="14" fill="#000" stroke="#d1d5db" stroke-width="1.5" filter="url(#cg-phase-glow)"/>
+                      <text x="450" y="432" text-anchor="middle" font-size="16" font-weight="400" fill="#d1d5db" letter-spacing="0.35em" font-family="'DM Mono', monospace" style="text-transform:uppercase; cursor:grab;">AGENTIC SYSTEM CYCLE</text>
+                      <g id="cg-phase-1" class="phase-node"><circle cx="0" cy="0" r="20" fill="#E8F0FE" stroke="#1A56B0" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#1A56B0">1</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Setup</text></g>
+                      <g id="cg-phase-2" class="phase-node"><circle cx="0" cy="0" r="20" fill="#EDE9FE" stroke="#5B21B6" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#5B21B6">2</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Generation</text></g>
+                      <g id="cg-phase-3" class="phase-node"><circle cx="0" cy="0" r="20" fill="#FEF3C7" stroke="#92600A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#92600A">3</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Review</text></g>
+                      <g id="cg-phase-4" class="phase-node"><circle cx="0" cy="0" r="20" fill="#F3F4F6" stroke="#374151" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#374151">4</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Validation</text></g>
+                      <g id="cg-phase-5" class="phase-node"><circle cx="0" cy="0" r="20" fill="#E8F0FE" stroke="#1A56B0" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#1A56B0">5</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Prototype Gen</text></g>
+                      <g id="cg-phase-6" class="phase-node"><circle cx="0" cy="0" r="20" fill="#EDE9FE" stroke="#5B21B6" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18" font-weight="500" fill="#5B21B6">6</text><text x="0" y="48" text-anchor="middle" font-size="18" font-weight="500" fill="#d1d5db">Closure</text></g>
+                    </svg>
+                    <div id="cg-tooltip">
+                      <div class="cg-tt-title" id="cg-tt-title"></div>
+                      <div class="cg-tt-content" id="cg-tt-content"></div>
+                    </div>
+                  </div>
+                  <script>
+                  (function(){
+                    const CX=450,CY=400;
+                    const data={
+                      'cg-phase-1':{title:'SETUP',content:'1. PM writes PRD<br>2. PM Agent → PRD.md',bg:'#E8F0FE',color:'#1A56B0'},
+                      'cg-phase-2':{title:'GENERATION',content:'1. DA generates UXDD + design-spec<br>2. EA generates TDD + openspec',bg:'#EDE9FE',color:'#5B21B6'},
+                      'cg-phase-3':{title:'REVIEW',content:'1. Designer/Engineer review & PR<br>2. QA Agent scans assumptions<br>3. Orchestrator notifies PM Agent',bg:'#FEF3C7',color:'#92600A'},
+                      'cg-phase-4':{title:'VALIDATION',content:'1. PM Agent validates coherence<br>2. QA Agent generates evals.yaml<br>3. Designer/Engineer approve evals',bg:'#F3F4F6',color:'#374151'},
+                      'cg-phase-5':{title:'PROTOTYPE GEN',content:'1. DA generates HTML prototype<br>2. Designer reviews & approves<br>3. EA implements React code<br>4. QA runs evals → eval-report',bg:'#E8F0FE',color:'#1A56B0'},
+                      'cg-phase-6':{title:'CLOSURE',content:'1. Orchestrator archives findings<br>2. PM delivers V0.1<br>3. Cycle restarts',bg:'#EDE9FE',color:'#5B21B6'}
+                    };
+                    const configs=[
+                      {id:'cg-phase-1',baseX:450,baseY:120,speed:4.0,amp:7,delay:0.0},
+                      {id:'cg-phase-2',baseX:680,baseY:250,speed:4.5,amp:6,delay:0.6},
+                      {id:'cg-phase-3',baseX:680,baseY:500,speed:3.8,amp:8,delay:1.1},
+                      {id:'cg-phase-4',baseX:450,baseY:650,speed:4.2,amp:7,delay:1.6},
+                      {id:'cg-phase-5',baseX:220,baseY:500,speed:3.6,amp:8,delay:0.9},
+                      {id:'cg-phase-6',baseX:220,baseY:250,speed:4.3,amp:7,delay:1.4}
+                    ];
+                    const curveSeeds=[{ox:60,oy:-40},{ox:50,oy:50},{ox:-55,oy:30},{ox:-40,oy:-50},{ox:-60,oy:40},{ox:45,oy:55}];
+                    const svg=document.getElementById('cg-svg');
+                    const lines=Array.from(document.querySelectorAll('#cg-phase-lines path'));
+                    const nodes=Array.from(document.querySelectorAll('#cg-svg .phase-node'));
+                    const centerCircle=svg.querySelector('.center-node');
+                    const centerLabel=svg.querySelector('text[letter-spacing]');
+                    const globalOffset={x:0,y:0};
+                    const offsets=configs.map(()=>({x:0,y:0}));
+                    let activePhase=null;
+                    function toSVG(cx,cy){const r=svg.getBoundingClientRect();return{x:(cx-r.left)/r.width*900,y:(cy-r.top)/r.height*800};}
+                    const wrap=document.getElementById('cg-wrap');
+                    nodes.forEach(node=>{
+                      node.addEventListener('click',function(e){
+                        e.stopPropagation();
+                        const id=this.id;const tt=document.getElementById('cg-tooltip');
+                        if(activePhase===id){tt.classList.remove('visible');activePhase=null;return;}
+                        const d=data[id];if(!d)return;
+                        document.getElementById('cg-tt-title').textContent=d.title;
+                        document.getElementById('cg-tt-title').style.background=d.bg;
+                        document.getElementById('cg-tt-title').style.color=d.color;
+                        document.getElementById('cg-tt-content').innerHTML=d.content;
+                        const rect=this.getBoundingClientRect();const wrapRect=wrap.getBoundingClientRect();
+                        let left=rect.right-wrapRect.left+14;let top=rect.top-wrapRect.top+rect.height/2-40;
+                        if(left+190>wrapRect.width-12)left=rect.left-wrapRect.left-190-14;
+                        top=Math.max(8,Math.min(top,wrapRect.height-130));
+                        tt.style.left=left+'px';tt.style.top=top+'px';
+                        tt.classList.add('visible');activePhase=id;
+                      });
+                    });
+                    wrap.addEventListener('click',()=>{document.getElementById('cg-tooltip').classList.remove('visible');activePhase=null;});
+                    let active=null,activeIdx=null;
+                    nodes.forEach((node,idx)=>{node.addEventListener('mousedown',e=>{e.preventDefault();e.stopPropagation();active=node;activeIdx=idx;});});
+                    window.addEventListener('mousemove',e=>{if(active===null||activeIdx===null)return;const{x,y}=toSVG(e.clientX,e.clientY);const cfg=configs[activeIdx];offsets[activeIdx].x=x-cfg.baseX-globalOffset.x;offsets[activeIdx].y=y-cfg.baseY-globalOffset.y;});
+                    window.addEventListener('mouseup',()=>{if(active){active=null;activeIdx=null;}});
+                    let cDrag=false,cStart={sx:0,sy:0,gx:0,gy:0};
+                    function startCD(e){e.preventDefault();e.stopPropagation();cDrag=true;const p=toSVG(e.clientX,e.clientY);cStart={sx:p.x,sy:p.y,gx:globalOffset.x,gy:globalOffset.y};svg.style.cursor='grabbing';}
+                    if(centerCircle){centerCircle.style.cursor='grab';centerCircle.addEventListener('mousedown',startCD);}
+                    if(centerLabel){centerLabel.style.cursor='grab';centerLabel.addEventListener('mousedown',startCD);}
+                    window.addEventListener('mousemove',e=>{if(!cDrag)return;const p=toSVG(e.clientX,e.clientY);globalOffset.x=cStart.gx+(p.x-cStart.sx);globalOffset.y=cStart.gy+(p.y-cStart.sy);});
+                    window.addEventListener('mouseup',()=>{if(cDrag){cDrag=false;svg.style.cursor='';}});
+                    function tick(t){
+                      const cx=CX+globalOffset.x,cy=CY+globalOffset.y;
+                      if(centerCircle){centerCircle.setAttribute('cx',cx);centerCircle.setAttribute('cy',cy);}
+                      if(centerLabel){centerLabel.setAttribute('x',cx);centerLabel.setAttribute('y',cy+32);}
+                      configs.forEach((cfg,idx)=>{
+                        const fy=Math.sin((t/1000)*(2*Math.PI/cfg.speed)+cfg.delay)*cfg.amp;
+                        const fx=Math.cos((t/1000)*(2*Math.PI/(cfg.speed*1.3))+cfg.delay)*(cfg.amp*0.4);
+                        const x=cfg.baseX+globalOffset.x+offsets[idx].x+fx;
+                        const y=cfg.baseY+globalOffset.y+offsets[idx].y+fy;
+                        const node=nodes[idx];const circle=node.querySelector('circle');const texts=node.querySelectorAll('text');const path=lines[idx];
+                        if(circle){circle.setAttribute('cx',x);circle.setAttribute('cy',y);}
+                        if(texts[0]){texts[0].setAttribute('x',x);texts[0].setAttribute('y',y+7);}
+                        if(texts[1]){texts[1].setAttribute('x',x);texts[1].setAttribute('y',y+45);}
+                        if(path){const seed=curveSeeds[idx];const wave=Math.sin((t/1000)*0.7+cfg.delay)*18;const qx=(cx+x)/2+seed.ox+wave*0.4;const qy=(cy+y)/2+seed.oy+wave*0.3;path.setAttribute('d','M'+cx+','+cy+' Q'+qx+','+qy+' '+x+','+y);}
+                      });
+                      requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                  })();
+                  </script>
+                </div>
+                <div class="flex flex-row gap-6" style="margin-top: 48px;">
+                    <div class="basis-0 grow">
+                        <h2 class="font-syne font-medium text-[20px] leading-[1.4] text-theme-heading">02. From Sequential Assignments to Delegation Cycle</h2>
+                    </div>
+                    <div class="basis-0 grow flex flex-col gap-4">
+                        <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </div>
+
+                <!-- Placeholder Image -->
+                <div class="w-full bg-theme-secondary border border-theme flex items-center justify-center" style="height: 500px; background-color: var(--surface-secondary);">
+                    <p class="font-syne font-normal text-[14px] text-theme-paragraph opacity-40">Image placeholder</p>
                 </div>
             </div>
         </div>
@@ -1449,302 +1599,297 @@
       })();
     </script>
 
-    <!-- Centered Circle Animation (exact copy from agentic-centered-circle.html) -->
+    <!-- Interactive Mesh Animation -->
     <script>
-const canvas = document.getElementById('canvas-hero');
-const ctx = canvas.getContext('2d');
+    (function(){
+    const TEXT_CONTENT = 'VALIDATION CYCLE • TRUST LAYERS • WORKSPACE MEMORY • MULTI-AGENT SYSTEM • ';
+    const FONT_SETTINGS = '500 13px "Space Grotesk", "JetBrains Mono", "DM Mono", monospace';
 
-const textCanvas = document.getElementById('text-canvas-hero');
-const textCtx = textCanvas.getContext('2d');
-
-// Responsive canvas
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  textCanvas.width = window.innerWidth;
-  textCanvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-// Mouse tracking
-let mouse = {
-  x: canvas.width / 2,
-  y: canvas.height / 2
-};
-
-document.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-// Text particle system
-class TextParticle {
-  constructor(x, y, char) {
-    this.homeX = x;
-    this.homeY = y;
-    this.x = x;
-    this.y = y;
-    this.char = char;
-    this.vx = 0;
-    this.vy = 0;
-    this.exploded = false;
-  }
-
-  explode(mouseX, mouseY) {
-    const angle = Math.atan2(this.y - mouseY, this.x - mouseX);
-    const force = 3 + Math.random() * 2;
-    this.vx = Math.cos(angle) * force;
-    this.vy = Math.sin(angle) * force;
-    this.exploded = true;
-  }
-
-  update() {
-    if (this.exploded) {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vx *= 0.95;
-      this.vy *= 0.95;
-      
-      const dx = this.homeX - this.x;
-      const dy = this.homeY - this.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      
-      if (dist < 1) {
-        this.exploded = false;
-        this.x = this.homeX;
-        this.y = this.homeY;
+    class MeshTextParticle {
+      constructor(x, y, char) {
+        this.homeX = x;
+        this.homeY = y;
+        this.x = x;
+        this.y = y;
+        this.char = char;
         this.vx = 0;
         this.vy = 0;
-      } else {
-        this.vx += dx * 0.001;
-        this.vy += dy * 0.001;
+        this.exploded = false;
+      }
+      explode(mouseX, mouseY) {
+        const angle = Math.atan2(this.y - mouseY, this.x - mouseX);
+        const force = 3 + Math.random() * 3;
+        this.vx = Math.cos(angle) * force;
+        this.vy = Math.sin(angle) * force;
+        this.exploded = true;
+      }
+      update() {
+        if (this.exploded) {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vx *= 0.94;
+          this.vy *= 0.94;
+          const dx = this.homeX - this.x;
+          const dy = this.homeY - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 0.8) {
+            this.exploded = false;
+            this.x = this.homeX;
+            this.y = this.homeY;
+            this.vx = 0;
+            this.vy = 0;
+          } else {
+            this.vx += dx * 0.002;
+            this.vy += dy * 0.002;
+          }
+        }
+      }
+      draw(ctx) {
+        ctx.fillStyle = this.exploded ? 'rgba(255, 255, 255, 0.8)' : 'rgba(153, 153, 153, 0.45)';
+        ctx.fillText(this.char, this.x, this.y);
       }
     }
-  }
 
-  draw() {
-    textCtx.fillStyle = this.exploded ? '#CCCCCC' : '#666666';
-    textCtx.fillText(this.char, this.x, this.y);
-  }
-}
-
-const textParticles = [];
-const textContent = 'AGENTIC SYSTEMS FOR AI TRIADS • ';
-
-function initTextParticles() {
-  textParticles.length = 0;
-  textCtx.font = '500 12px SF Mono, Monaco, monospace';
-  
-  let currentX = 0;
-  const textY = textCanvas.height / 2;
-  for (let rep = 0; rep < 12; rep++) {
-    for (let i = 0; i < textContent.length; i++) {
-      const char = textContent[i];
-      const metrics = textCtx.measureText(char);
-      textParticles.push(new TextParticle(currentX, textY, char));
-      currentX += metrics.width;
-    }
-  }
-}
-
-function checkTextExplosion() {
-  const textYPos = textCanvas.height / 2;
-  const time = Date.now() / 1000;
-  const scrollSpeed = 100;
-  const offset = (time * scrollSpeed) % (textCtx.measureText(textContent).width);
-  
-  textParticles.forEach(particle => {
-    const particleScreenX = (particle.homeX - offset) % (textCanvas.width + 500);
-    const dx = mouse.x - particleScreenX;
-    const dy = mouse.y - textYPos;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    
-    if (dist < 100 && !particle.exploded) {
-      particle.explode(mouse.x, mouse.y);
-    }
-  });
-}
-
-function drawScrollingText() {
-  textCtx.clearRect(0, 0, textCanvas.width, textCanvas.height);
-  textCtx.font = '500 12px SF Mono, Monaco, monospace';
-  textCtx.textBaseline = 'middle';
-  
-  const time = Date.now() / 1000;
-  const scrollSpeed = 100;
-  const offset = (time * scrollSpeed) % (textCtx.measureText(textContent).width);
-  
-  textCtx.save();
-  textCtx.translate(-offset, 0);
-  
-  textParticles.forEach(particle => {
-    particle.update();
-    particle.draw();
-  });
-  
-  textCtx.restore();
-}
-
-// Particle system - circular formation centered
-class Particle {
-  constructor() {
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = Math.min(canvas.width, canvas.height) * 0.175;
-    
-    const angle = Math.random() * Math.PI * 2;
-    const r = Math.random() * radius;
-    this.x = centerX + Math.cos(angle) * r;
-    this.y = centerY + Math.sin(angle) * r;
-    this.homeX = centerX + Math.cos(angle) * r;
-    this.homeY = centerY + Math.sin(angle) * r;
-    
-    this.vx = (Math.random() - 0.5) * 2;
-    this.vy = (Math.random() - 0.5) * 2;
-    this.ax = 0;
-    this.ay = 0;
-    this.size = Math.random() * 1.5 + 0.5;
-    this.maxSize = this.size;
-    this.friction = 0.95;
-  }
-
-  update() {
-    const dx = mouse.x - this.x;
-    const dy = mouse.y - this.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const minDistance = 150;
-
-    if (distance < minDistance) {
-      const angle = Math.atan2(dy, dx);
-      const force = (minDistance - distance) / minDistance * 3;
-      this.ax -= Math.cos(angle) * force;
-      this.ay -= Math.sin(angle) * force;
-    }
-
-    const returnDx = this.homeX - this.x;
-    const returnDy = this.homeY - this.y;
-    const returnDist = Math.sqrt(returnDx * returnDx + returnDy * returnDy);
-    
-    if (returnDist > 1) {
-      const returnForce = returnDist * 0.0002;
-      this.ax += (returnDx / returnDist) * returnForce;
-      this.ay += (returnDy / returnDist) * returnForce;
-    }
-
-    this.vx += this.ax;
-    this.vy += this.ay;
-    this.vx *= this.friction;
-    this.vy *= this.friction;
-
-    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-    if (speed > 5) {
-      this.vx = (this.vx / speed) * 5;
-      this.vy = (this.vy / speed) * 5;
-    }
-
-    this.x += this.vx;
-    this.y += this.vy;
-
-    this.ax *= 0.9;
-    this.ay *= 0.9;
-
-    if (this.x < 0) this.x = 0;
-    if (this.x > canvas.width) this.x = canvas.width;
-    if (this.y < 0) this.y = 0;
-    if (this.y > canvas.height) this.y = canvas.height;
-
-    const distToMouse = Math.sqrt(
-      Math.pow(mouse.x - this.x, 2) + Math.pow(mouse.y - this.y, 2)
-    );
-    const sizeInfluence = Math.max(0.4, 1 - distToMouse / 300);
-    this.size = this.maxSize * sizeInfluence;
-  }
-
-  draw() {
-    const alpha = 0.6 * (this.size / this.maxSize);
-    ctx.fillStyle = `rgba(153, 153, 153, ${alpha})`;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-const particles = [];
-const particleCount = 90;
-
-function initializeParticles() {
-  particles.length = 0;
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-}
-
-function drawConnections() {
-  ctx.strokeStyle = 'rgba(153, 153, 153, 0.12)';
-  ctx.lineWidth = 0.5;
-  
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[j].x - particles[i].x;
-      const dy = particles[j].y - particles[i].y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 150) {
+    class MeshParticle {
+      constructor(width, height, densityScale) {
+        densityScale = densityScale || 1.0;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const baseRadius = Math.min(width, height) * 0.207;
+        const radius = baseRadius * densityScale;
+        const angle = Math.random() * Math.PI * 2;
+        const r = Math.random() * radius;
+        this.x = centerX + Math.cos(angle) * r;
+        this.y = centerY + Math.sin(angle) * r;
+        this.homeX = this.x;
+        this.homeY = this.y;
+        this.vx = (Math.random() - 0.5) * 1.5;
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.ax = 0;
+        this.ay = 0;
+        this.size = Math.random() * 1.6 + 0.6;
+        this.maxSize = this.size;
+        this.friction = 0.95;
+      }
+      update(mouseX, mouseY) {
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const pushRadius = 140;
+        if (distance < pushRadius && distance > 0) {
+          const angle = Math.atan2(dy, dx);
+          const force = ((pushRadius - distance) / pushRadius) * 2.5;
+          this.ax -= Math.cos(angle) * force;
+          this.ay -= Math.sin(angle) * force;
+        }
+        const returnDx = this.homeX - this.x;
+        const returnDy = this.homeY - this.y;
+        const returnDist = Math.sqrt(returnDx * returnDx + returnDy * returnDy);
+        if (returnDist > 1) {
+          const returnForce = returnDist * 0.0003;
+          this.ax += (returnDx / returnDist) * returnForce;
+          this.ay += (returnDy / returnDist) * returnForce;
+        }
+        this.vx += this.ax;
+        this.vy += this.ay;
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (speed > 4) {
+          this.vx = (this.vx / speed) * 4;
+          this.vy = (this.vy / speed) * 4;
+        }
+        this.x += this.vx;
+        this.y += this.vy;
+        this.ax *= 0.9;
+        this.ay *= 0.9;
+        const sizeInfluence = Math.max(0.4, 1 - distance / 250);
+        this.size = this.maxSize * sizeInfluence;
+      }
+      draw(ctx) {
+        const alpha = 0.55 * (this.size / this.maxSize);
+        ctx.fillStyle = 'rgba(155, 155, 155, ' + alpha + ')';
         ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
-  }
-}
 
-function drawCursorIndicator() {
-  ctx.strokeStyle = 'rgba(153, 153, 153, 0.3)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.arc(mouse.x, mouse.y, 100, 0, Math.PI * 2);
-  ctx.stroke();
-}
+    const meshCanvas = document.getElementById('canvas-hero');
+    const textCanvas = document.getElementById('text-canvas-hero');
+    if (!meshCanvas || !textCanvas) return;
+    const meshCtx = meshCanvas.getContext('2d');
+    const textCtx = textCanvas.getContext('2d');
 
-// Initialize after everything is defined
-initializeParticles();
-initTextParticles();
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let virtualMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let particles = [];
+    let textParticles = [];
 
-// Animation loop
-function animate() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function updateCoordinates(x, y) {
+      mouse.x = x;
+      mouse.y = y;
+    }
 
-  particles.forEach(particle => {
-    particle.update();
-    particle.draw();
-  });
+    window.addEventListener('mousemove', function(e) {
+      updateCoordinates(e.clientX, e.clientY);
+    }, { passive: true });
 
-  drawConnections();
-  drawCursorIndicator();
-  
-  checkTextExplosion();
-  drawScrollingText();
+    window.addEventListener('touchmove', function(e) {
+      if (e.touches && e.touches[0]) {
+        updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
 
-  requestAnimationFrame(animate);
-}
+    window.addEventListener('click', function(e) {
+      textParticles.forEach(function(p) { p.explode(e.clientX, e.clientY); });
+    });
 
-animate();
+    function resizeAndInit() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      meshCanvas.width = w;
+      meshCanvas.height = h;
+      textCanvas.width = w;
+      textCanvas.height = h;
+      mouse.x = w / 2;
+      mouse.y = h / 2;
+      virtualMouse.x = w / 2;
+      virtualMouse.y = h / 2;
 
-window.addEventListener('blur', () => {
-  particles.forEach(p => {
-    p.friction = 0.98;
-  });
-});
+      var count = 220;
+      particles = [];
+      for (var i = 0; i < count; i++) {
+        particles.push(new MeshParticle(w, h, 1.0));
+      }
 
-window.addEventListener('focus', () => {
-  particles.forEach(p => {
-    p.friction = 0.95;
-  });
-});
+      textCtx.font = FONT_SETTINGS;
+      var singleTextWidth = 0;
+      for (var idx = 0; idx < TEXT_CONTENT.length; idx++) {
+        singleTextWidth += textCtx.measureText(TEXT_CONTENT[idx]).width + 3;
+      }
+      if (singleTextWidth === 0) singleTextWidth = 320;
+      var reps = Math.ceil(w / singleTextWidth) + 3;
+
+      textParticles = [];
+      var centerY = h / 2;
+      var curX = 0;
+
+      for (var r = 0; r < reps; r++) {
+        for (var idx2 = 0; idx2 < TEXT_CONTENT.length; idx2++) {
+          var char = TEXT_CONTENT[idx2];
+          var widthInfo = textCtx.measureText(char);
+          textParticles.push(new MeshTextParticle(curX, centerY, char));
+          curX += widthInfo.width + 3;
+        }
+      }
+    }
+
+    resizeAndInit();
+    window.addEventListener('resize', resizeAndInit);
+
+    function step() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var curTime = Date.now();
+
+      virtualMouse.x += (mouse.x - virtualMouse.x) * 0.09;
+      virtualMouse.y += (mouse.y - virtualMouse.y) * 0.09;
+
+      var mX = virtualMouse.x;
+      var mY = virtualMouse.y;
+
+      meshCtx.fillStyle = 'rgba(0, 0, 0, 0.09)';
+      meshCtx.fillRect(0, 0, w, h);
+
+      // Background concentric circles
+      var numBgCirc = 42;
+      meshCtx.lineWidth = 0.5;
+
+      for (var i = 0; i < numBgCirc; i++) {
+        meshCtx.strokeStyle = 'rgba(130, 130, 130, ' + (0.008 + (i % 2 === 0 ? 0.006 : 0.002)) + ')';
+        meshCtx.beginPath();
+        var leftCenterX = -50 + Math.sin(curTime * 0.0001 + i) * 15;
+        var leftCenterY = (h / 2) + Math.cos(curTime * 0.00015 + i) * 15;
+        meshCtx.arc(leftCenterX, leftCenterY, 120 + i * 16, 0, Math.PI * 2);
+        meshCtx.stroke();
+      }
+
+      for (var i2 = 0; i2 < numBgCirc; i2++) {
+        meshCtx.strokeStyle = 'rgba(130, 130, 130, ' + (0.008 + (i2 % 2 === 0 ? 0.006 : 0.002)) + ')';
+        meshCtx.beginPath();
+        var rightCenterX = w + 50 + Math.sin(curTime * 0.00012 + i2) * 15;
+        var rightCenterY = (h / 2) + Math.cos(curTime * 0.00014 + i2) * 15;
+        meshCtx.arc(rightCenterX, rightCenterY, 120 + i2 * 16, 0, Math.PI * 2);
+        meshCtx.stroke();
+      }
+
+      particles.forEach(function(p) {
+        p.update(mX, mY);
+        p.draw(meshCtx);
+      });
+
+      // Connection lines
+      var lineLimit = 58;
+      meshCtx.strokeStyle = 'rgba(155, 155, 155, 0.35)';
+      meshCtx.lineWidth = 0.5;
+
+      for (var a = 0; a < particles.length; a++) {
+        for (var b = a + 1; b < particles.length; b++) {
+          var dx = particles[b].x - particles[a].x;
+          var dy = particles[b].y - particles[a].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < lineLimit) {
+            meshCtx.beginPath();
+            meshCtx.moveTo(particles[a].x, particles[a].y);
+            meshCtx.lineTo(particles[b].x, particles[b].y);
+            meshCtx.stroke();
+          }
+        }
+      }
+
+      // Cursor indicator
+      meshCtx.strokeStyle = 'rgba(138, 138, 138, 0.28)';
+      meshCtx.lineWidth = 0.75;
+      meshCtx.beginPath();
+      meshCtx.arc(mX, mY, 100, 0, Math.PI * 2);
+      meshCtx.stroke();
+
+      // Text layer
+      textCtx.clearRect(0, 0, w, h);
+      textCtx.font = FONT_SETTINGS;
+      textCtx.textBaseline = 'middle';
+
+      var textWidthSingle = 0;
+      for (var ti = 0; ti < TEXT_CONTENT.length; ti++) {
+        textWidthSingle += textCtx.measureText(TEXT_CONTENT[ti]).width + 3;
+      }
+      if (textWidthSingle === 0) textWidthSingle = 320;
+      var scrollSpeed = 82;
+      var offset = ((curTime / 1000) * scrollSpeed) % textWidthSingle;
+
+      textParticles.forEach(function(p) {
+        var liveScreenX = (p.homeX - offset) % (w + 400);
+        var tdx = mX - liveScreenX;
+        var tdy = mY - (h / 2);
+        var tdistance = Math.sqrt(tdx * tdx + tdy * tdy);
+        if (tdistance < 96 && !p.exploded) {
+          p.explode(mX, mY);
+        }
+      });
+
+      textCtx.save();
+      textCtx.translate(-offset, 0);
+      textParticles.forEach(function(p) {
+        p.update();
+        p.draw(textCtx);
+      });
+      textCtx.restore();
+
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    })();
     </script>
   </body>
 </html>
