@@ -882,17 +882,18 @@
             <div class="flex flex-col space-y-6">
                 <!-- Case Study Card 1 -->
                 <div class="w-full max-w-[950px] cs-card-wrap animate-slide-up case-study-1">
-                    <a href="ai-solution-case-study.html" class="block">
+                    <a href="agentic-system-case-study.html" class="block">
                     <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/ai-solution-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" muted loop playsinline preload="none">
-                                    <source src="assets/ai-solution-case-study/media-14.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
-                            <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph">Product Strategist • AI • Zero UI Design • NUVUN</div>
-                            <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">AI Research, Before You Even Ask</div>
+                            <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Agentic Systems • Workflow Design</div>
+                            <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph opacity-70">Client: Boost B2B payments.</div>
+                            <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">No More Handoffs, No More Waiting</div>
                             <div class="flex justify-end">
                                 <div class="relative shrink-0 size-8">
                                     <div class="absolute inset-[15%]">
@@ -911,12 +912,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/nestbank-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" muted loop playsinline preload="none">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
                                     <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
-                                <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph">Lead UX • Fintech • 0-1 • Grameen America</div>
+                                <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Fintech • 0-1</div>
+                                <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph opacity-70">Client: Grameen America</div>
                                 <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">Inclusive Finance, Powered by Design</div>
                                 <div class="flex justify-end">
                                     <div class="relative shrink-0 size-8">
@@ -936,12 +938,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medigo-case-study/media-20.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" muted loop playsinline preload="none">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
                                     <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
-                            <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph">Lead UX • Healthtech • AI Driven • MedBridge</div>
+                            <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Healthtech • AI Driven</div>
+                            <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph opacity-70">Client: MedBridge</div>
                             <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">When Doctors Said No to AI</div>
                             <div class="flex justify-end">
                                 <div class="relative shrink-0 size-8">
@@ -1297,7 +1300,7 @@
           if (!card) return;
 
           video.pause();
-          video.preload = 'none';
+          video.preload = 'metadata';
 
           if (canHover) {
             card.addEventListener('pointerenter', () => playVideo(video));

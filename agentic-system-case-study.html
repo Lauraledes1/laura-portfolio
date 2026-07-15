@@ -2295,10 +2295,10 @@
                                 <span class="proc-h-label">Human–agent relationships</span>
                             </div>
                             <div class="proc-h-body">
-                                <div class="proc-h-content">
+                                <div class="proc-h-content" style="min-height:266px;">
                                     <p class="proc-h-desc font-syne">I defined how each human and each agent relate to each other before designing anything else. Each relationship determines what the agent communicates, when it escalates, and how much autonomy it holds. Everything else follows from that.</p>
                                     <div class="proc-h-img" style="height:auto; overflow:visible; background:none;">
-                                        <img src="assets/agentic-system-case-study/group-16.png" style="width:95%; height:auto; object-fit:contain; border-radius:8px; display:block;" alt="Human–agent relationships">
+                                        <img src="assets/agentic-system-case-study/human-agent.png" style="width:95%; height:auto; object-fit:contain; display:block;" alt="Human–agent relationships">
                                     </div>
                                 </div>
                             </div>
@@ -2332,7 +2332,7 @@
                                 <div class="proc-h-content">
                                     <p class="proc-h-desc font-syne">GitHub centralizes specs, validations, and evals versioned by cycle. Git history acts as the system's memory, no separate semantic memory required.</p>
                                     <div class="proc-h-img">
-                                        <div style="width:100%; height:100%; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #555;">Image placeholder</span></div>
+                                        <img src="assets/agentic-system-case-study/repo.png" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" alt="Organizing the repo - GitHub repository structure">
                                     </div>
                                 </div>
                             </div>
@@ -2343,13 +2343,13 @@
                             <div class="proc-h-title">
                                 <svg class="proc-h-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
                                 <span class="proc-h-num">05</span>
-                                <span class="proc-h-label">Running the cycle</span>
+                                <span class="proc-h-label">Handling failure</span>
                             </div>
                             <div class="proc-h-body">
                                 <div class="proc-h-content">
-                                    <p class="proc-h-desc font-syne">The orchestrator activates only through human-initiated PRs, running gate validations and cross-referencing specs before the cycle advances. This is by design: the system starts at L2/Collaborator on the trust ladder, where humans remain the gatekeepers. As agents prove reliability through successful cycles, autonomy scales progressively.</p>
-                                    <div class="proc-h-img">
-                                        <div style="width:100%; height:100%; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #555;">Image placeholder</span></div>
+                                    <p class="proc-h-desc font-syne">Each failure generates a report directed to the responsible agent; the QA Agent validates integrity before proceeding. The fix is confirmed via human PR, reactivating the cycle from that point.</p>
+                                    <div class="proc-h-img" style="height:auto; overflow:visible; background:none;">
+                                        <img src="assets/agentic-system-case-study/evals.png" style="width:100%; height:auto; object-fit:contain; display:block; border-radius:8px;" alt="Handling failure - eval report">
                                     </div>
                                 </div>
                             </div>
@@ -2360,49 +2360,18 @@
                             <div class="proc-h-title">
                                 <svg class="proc-h-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
                                 <span class="proc-h-num">06</span>
-                                <span class="proc-h-label">Handling failure</span>
-                            </div>
-                            <div class="proc-h-body">
-                                <div class="proc-h-content">
-                                    <p class="proc-h-desc font-syne">Each failure generates a report directed to the responsible agent; the QA Agent validates integrity before proceeding. The fix is confirmed via human PR, reactivating the cycle from that point.</p>
-                                    <div class="proc-h-img">
-                                        <div style="width:100%; height:100%; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #555;">Image placeholder</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="proc-h-item" onclick="var items=document.querySelectorAll('.proc-h-item');items.forEach(function(el){if(el!==this)el.classList.remove('open')}.bind(this));this.classList.toggle('open')">
-                        <div class="proc-h-row">
-                            <div class="proc-h-title">
-                                <svg class="proc-h-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
-                                <span class="proc-h-num">07</span>
                                 <span class="proc-h-label">Closing the loop</span>
                             </div>
                             <div class="proc-h-body">
                                 <div class="proc-h-content">
                                     <p class="proc-h-desc font-syne">Once Designer, Engineer, and PM sign off, the Orchestrator archives the cycle's artifacts. Any new version or feature restarts the process from the PRD, with full traceability via git.</p>
-                                    <div class="proc-h-img">
-                                        <div style="width:100%; height:100%; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 11px; color: #555;">Image placeholder</span></div>
+                                    <div class="proc-h-img" style="height:auto; overflow:hidden; background:none; border-radius:8px;">
+                                        <img src="assets/agentic-system-case-study/loop.png" style="width:100%; height:auto; object-fit:contain; display:block; border-radius:8px;" alt="Closing the loop - cycle closure log">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </div>
-        </div>
-
-        <!-- Two Column Image Block -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full flex flex-row gap-8 two-col-images">
-                <!-- Left Image -->
-                <div class="basis-0 grow bg-cover bg-center bg-no-repeat h-[925px] min-h-px min-w-px shrink-0" style="background-image: url(&#39;assets/nestbank-case-study/media-5.jpg&#39;)"></div>
-                <!-- Right Image -->
-                <div class="basis-0 grow h-[925px] min-h-px min-w-px shrink-0">
-                    <video class="w-full h-full object-cover" autoplay="" muted="" loop="" playsinline="">
-                        <source src="assets/nestbank-case-study/media-6.mp4" type="video/mp4">
-                    </video>
-                </div>
             </div>
         </div>
 
@@ -2412,44 +2381,33 @@
                 <h2 class="font-syne font-medium text-[30px] leading-[1.4] text-theme-heading mb-14">Controversial Decisions</h2>
                 <div class="flex flex-col gap-8">
 
-                    <!-- The Scope Expansion Choice -->
+                    <!-- Workspace memory over semantic memory -->
                     <div class="flex flex-row gap-6">
                         <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">The Scope Expansion Choice</p>
+                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Workspace memory over semantic memory</p>
                         </div>
                         <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Journey mapping revealed critical user tasks not in original stakeholder expectations. I advocated for expanding scope despite timeline and budget pressures.</p>
+                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Agents don't need to remember, they need to read specific files. I chose .md files over semantic memory, trading recall for full git auditability.</p>
                         </div>
                     </div>
 
-                    <!-- Why this was controversial -->
+                    <!-- Graph-based orchestration, not open-ended reasoning -->
                     <div class="flex flex-row gap-6">
                         <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Why this was controversial</p>
+                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Graph-based orchestration, not open-ended reasoning</p>
                         </div>
                         <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Stakeholders wanted original timeline and features, but research showed critical gaps that would cause adoption failure if ignored.</p>
+                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">The Orchestrator follows predefined paths, not open-ended reasoning. I traded flexibility for predictable behavior in a production workflow.</p>
                         </div>
                     </div>
 
-
-                    <!-- Feature-First Choice -->
+                    <!-- QA Agent has more autonomy than DA and EA -->
                     <div class="flex flex-row gap-6">
                         <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Feature-First Choice</p>
+                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">QA Agent has more autonomy than DA and EA</p>
                         </div>
                         <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">I advocated for implementing a comprehensive three-phase change management strategy (awareness, preparation, endurance) before launching core features</p>
-                        </div>
-                    </div>
-
-                    <!-- Why this was controversial -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Why this was controversial</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Leadership wanted to focus development resources on loan management features to show immediate business value. I argued that without proper change management, even perfect features would fail due to emotional resistance from members.</p>
+                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Validation is deterministic. I gave QA Agent more autonomy than DA and EA, despite it being the newest agent in the system.</p>
                         </div>
                     </div>
 
@@ -2457,239 +2415,309 @@
             </div>
         </div>  
 
-        <!-- Full Width Image Section -->
+        <!-- Full Width Animated Terminal: QA Evals Loop -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <video class="case-study-hero w-full h-full object-cover" autoplay="" muted="" loop="" playsinline="">
-                <source src="assets/nestbank-case-study/media-7.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <!-- Content Block with Multiple Text Sections -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full mx-auto flex flex-row gap-8">
-                <!-- Text Content -->
-                <div class="basis-0 grow flex flex-col gap-8">
-
-                    <!-- Text Block 3 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Aug, 2022</p>
+            <div class="w-full flex flex-row gap-8" style="height: 740px;">
+                <!-- Left: Terminal animation -->
+                <div class="basis-0 grow qat-stage" style="background-color:#000; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                    <style>
+                    .qat-stage { font-family: 'DM Mono', monospace; }
+                    .qat-window {
+                        width: 100%;
+                        max-width: 520px;
+                        background: #0b0b0b;
+                        border-radius: 10px;
+                        border: 1px solid rgba(255,255,255,0.08);
+                        box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+                        overflow: hidden;
+                    }
+                    .qat-titlebar {
+                        background: #1c1c1c;
+                        padding: 10px 14px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        border-bottom: 1px solid rgba(255,255,255,0.06);
+                    }
+                    .qat-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+                    .qat-dot.qat-red { background: #ff5f56; }
+                    .qat-dot.qat-yellow { background: #ffbd2e; }
+                    .qat-dot.qat-green { background: #27c93f; }
+                    .qat-titlebar-label {
+                        flex: 1;
+                        text-align: center;
+                        font-size: 12px;
+                        color: #8a8a8a;
+                        margin-right: 54px;
+                        letter-spacing: 0.2px;
+                    }
+                    .qat-body {
+                        padding: 22px 24px 28px;
+                        font-size: 13.5px;
+                        line-height: 1.75;
+                        color: #e6e6e6;
+                        height: 460px;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        white-space: pre-wrap;
+                        word-break: break-word;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+                        scroll-behavior: smooth;
+                    }
+                    .qat-body::-webkit-scrollbar { display: none; }
+                    .qat-invader-scene { width: 100%; display: flex; justify-content: center; padding: 6px 0; }
+                    .qat-invader-formation {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 12px;
+                        animation: qat-march 3.6s steps(9) infinite alternate;
+                    }
+                    .qat-invader-row { display: flex; gap: 10px; }
+                    .qat-invader-row svg, .qat-ship-row svg { display: block; }
+                    @keyframes qat-march {
+                        from { transform: translateX(-90px); }
+                        to { transform: translateX(90px); }
+                    }
+                    .qat-prompt-arrow { color: #5dcaa5; }
+                    .qat-prompt-path { color: #5cb3f0; }
+                    .qat-prompt-branch { color: #d4537e; }
+                    .qat-cmd { color: #f2f2f2; }
+                    .qat-eval-pass { color: #5dcaa5; }
+                    .qat-eval-fail { color: #e2504a; }
+                    .qat-eval-name { color: #b7b7b7; }
+                    .qat-eval-summary { color: #efaf27; }
+                    .qat-eval-write { color: #6a6a6a; }
+                    .qat-out-hash { color: #efaf27; }
+                    .qat-out-dim { color: #8a8a8a; }
+                    .qat-out-summary { color: #b7b7b7; }
+                    .qat-log-line { color: #d4537e; }
+                    .qat-log-line .qat-log-tag { color: #d4537e; }
+                    .qat-log-line .qat-log-rest { color: #9a9a9a; }
+                    .qat-cursor {
+                        display: inline-block;
+                        width: 7px;
+                        height: 15px;
+                        background: #e6e6e6;
+                        margin-left: 1px;
+                        vertical-align: -2px;
+                        animation: qat-blink 1s step-start infinite;
+                    }
+                    @keyframes qat-blink { 50% { opacity: 0; } }
+                    .qat-line { min-height: 1.75em; }
+                </style>
+                    <div class="qat-window">
+                        <div class="qat-titlebar">
+                            <span class="qat-dot qat-red"></span>
+                            <span class="qat-dot qat-yellow"></span>
+                            <span class="qat-dot qat-green"></span>
+                            <span class="qat-titlebar-label">agentic-workspace — zsh</span>
                         </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                Stakeholders expected simple microlending app → I designed comprehensive user research to understand excluded community needs.</p>
-                        </div>
+                        <div class="qat-body" id="qat-term-body"></div>
                     </div>
-
-                    <!-- Text Block 4 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Sep, 2022</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                Organization wanted basic attendance lists → I created peer voting visualization system to maintain community trust.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Text Block 5 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Nov, 2022</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                Members feared technology would disrupt relationships → I developed three-phase change management to involve users from the beginning.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Text Block 6 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Dec, 2022</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                Budget constraints limited testing scope → I defended A/B testing to validate gamification  approach with real users.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Text Block 1 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Mar, 2023</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                Complex financial data overwhelmed users → I centralized scattered information into intuitive dashboard design</p>
-                        </div>
-                    </div>
-
-                    <!-- Text Block 2 -->
-                    <div class="flex flex-row gap-6">
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">May, 2023</p>
-                        </div>
-                        <div class="basis-0 grow">
-                            <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                                PSD2 compliance threatened user experience → I designed friendly onboarding that met security requirements without intimidation</p>
-                        </div>
-                    </div>
-
                 </div>
-
-                <!-- Image -->
-                <div class="basis-0 grow bg-cover bg-center" style="background-image: url(&#39;assets/nestbank-case-study/media-3.jpg&#39;)"></div>
+                <!-- Right: Image -->
+                <div class="basis-0 grow bg-cover bg-center bg-no-repeat" style="background-image: url('assets/agentic-system-case-study/media-8.jpg');"></div>
             </div>
         </div>
+        <script>
+        (function () {
+            var body = document.getElementById('qat-term-body');
+            if (!body) return;
 
-        <!-- Full Width Image Section -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <video class="case-study-hero w-full h-full object-cover" autoplay="" muted="" loop="" playsinline="">
-                <source src="assets/nestbank-case-study/media-4.mp4" type="video/mp4">
-            </video>
-        </div>
+            var PROMPT_HTML = '<span class="qat-prompt-arrow">➜</span>&nbsp;&nbsp;<span class="qat-prompt-path">agentic-workspace</span> <span class="qat-prompt-branch">git:(main)</span> ';
 
-        <!-- Approach -->
-        <div class="bg-theme-primary p-8 pb-16 scroll-animate" data-scroll="">
-            <div class="w-full flex flex-row gap-8">
-                <div class="basis-0 grow flex flex-col justify-start">
-                    <h2 class="font-syne font-medium text-[30px] leading-[1.4] text-theme-heading mb-14">Approach</h2>
-                    <div class="flex flex-col gap-8">
-                           <!-- Text Container 1 -->
-                            <div class="flex flex-row gap-6">
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Change is an emotional process</p>
-                                </div>
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">I aimed to protect member trust and reduce disruption by involving them early. <br> To support adoption, we created a three-step plan: plan, execute, and assess.</p>
-                                </div>
-                            </div>
-    
-                            <!-- Text Container 2 -->
-                            <div class="flex flex-row gap-6">
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Finance, Demystified</p>
-                                </div>
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">We streamlined the “My Loan” page to make loan management clearer and more accessible. Using journey maps and user stories, we identified pain points and validated key scenarios.</p>
-                                </div>
-                            </div>
-    
-                            <!-- Text Container 3 -->
-                            <div class="flex flex-row gap-6">
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Security That Empowers</p>
-                                </div>
-                                <div class="basis-0 grow">
-                                    <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">We designed a user-friendly onboarding flow to help new members set up their Grameen profiles. To ensure data protection, the flow was built in compliance with PSD2 regulations, using two-factor authentication.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
+            var scrollRaf = null;
+            function scrollToBottom() {
+                if (scrollRaf) return;
+                scrollRaf = requestAnimationFrame(function () {
+                    scrollRaf = null;
+                    body.scrollTo({ top: body.scrollHeight, behavior: 'smooth' });
+                });
+            }
 
-        <!-- Statistics Section -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full mx-auto flex flex-wrap gap-6 stats-grid">
-                <!-- Statistic Card 1 -->
-                <div class="basis-0 grow min-w-[300px] bg-theme-primary p-6 border border-theme">
-                    <div class="mb-6" style="height: 52px; display: flex; align-items: center;">
-                        <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="text-theme-heading"><path d="M26 6L14 28h10l-2 14L34 20H24l2-14z"/></svg>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h3 class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">
-                            Leaner Documentation, Faster Cycles
-                        </h3>
-                        <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                            Large, catch-all PRDs replaced with scoped, feature-specific documents. Faster iteration per workstream.
-                        </p>
-                    </div>
-                </div>
+            var scrollObserver = new MutationObserver(scrollToBottom);
+            scrollObserver.observe(body, { childList: true, subtree: true, characterData: true });
 
-                <!-- Statistic Card 2 -->
-                <div class="basis-0 grow min-w-[300px] bg-theme-primary p-6 border border-theme">
-                    <div class="mb-6" style="height: 52px; display: flex; align-items: center;">
-                        <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="text-theme-heading"><path d="M8 24h32"/><path d="M14 18l-6 6 6 6"/><path d="M34 18l6 6-6 6"/></svg>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h3 class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">
-                            Flexible System, Not Fixed Sequence
-                        </h3>
-                        <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                            The workflow adapts to each product. Some products start with a prototype, not a PRD.
-                        </p>
-                    </div>
-                </div>
+            function makeLine() {
+                var div = document.createElement('div');
+                div.className = 'qat-line';
+                body.appendChild(div);
+                return div;
+            }
 
-                <!-- Statistic Card 3 -->
-                <div class="basis-0 grow min-w-[300px] bg-theme-primary p-6 border border-theme">
-                    <div class="mb-6" style="height: 52px; display: flex; align-items: center;">
-                        <svg width="30" height="30" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="text-theme-heading"><path d="M24 8L6 40h36L24 8z"/><path d="M24 20v10"/><path d="M24 34v1"/></svg>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <h3 class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">
-                            Upfront Calibration Cost
-                        </h3>
-                        <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">
-                            Tuning agents and behavior tests took time; justifying the investment was the hardest sell.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            function sleep(ms) {
+                return new Promise(function (resolve) { setTimeout(resolve, ms); });
+            }
 
-        <!-- Full Width Image Section -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <video class="case-study-hero w-full h-full object-cover" autoplay="" muted="" loop="" playsinline="">
-                <source src="assets/nestbank-case-study/media-12.mp4" type="video/mp4">
-            </video>
-        </div>
+            function typeCommand(line, text) {
+                return new Promise(function (resolve) {
+                    var i = 0;
+                    var promptSpan = document.createElement('span');
+                    promptSpan.innerHTML = PROMPT_HTML;
+                    line.appendChild(promptSpan);
+                    var cmdSpan = document.createElement('span');
+                    cmdSpan.className = 'qat-cmd';
+                    line.appendChild(cmdSpan);
+                    var cursor = document.createElement('span');
+                    cursor.className = 'qat-cursor';
+                    line.appendChild(cursor);
+
+                    var interval = setInterval(function () {
+                        if (i < text.length) {
+                            cmdSpan.textContent += text.charAt(i);
+                            i++;
+                        } else {
+                            clearInterval(interval);
+                            cursor.remove();
+                            resolve();
+                        }
+                    }, 32 + Math.random() * 26);
+                });
+            }
+
+            function printOutput(rows) {
+                rows.forEach(function (row) {
+                    var div = document.createElement('div');
+                    div.className = 'qat-line';
+                    div.innerHTML = row;
+                    body.appendChild(div);
+                });
+            }
+
+            function printBlank() {
+                makeLine();
+            }
+
+            function printLog(text) {
+                return new Promise(function (resolve) {
+                    var div = document.createElement('div');
+                    div.className = 'qat-line qat-log-line';
+                    div.innerHTML = '<span class="qat-log-tag">[orchestrator]</span> <span class="qat-log-rest">' + text + '</span>';
+                    body.appendChild(div);
+                    resolve();
+                });
+            }
+
+            function clearTerminal() {
+                body.innerHTML = '';
+            }
+
+            var INVADER_SVG = '<svg width="14" height="14" viewBox="0 0 8 8" shape-rendering="crispEdges">' +
+                '<rect x="2" y="0" width="1" height="1" fill="#e2504a"/><rect x="5" y="0" width="1" height="1" fill="#e2504a"/>' +
+                '<rect x="3" y="1" width="1" height="1" fill="#e2504a"/><rect x="4" y="1" width="1" height="1" fill="#e2504a"/>' +
+                '<rect x="1" y="2" width="6" height="1" fill="#e2504a"/>' +
+                '<rect x="0" y="3" width="1" height="1" fill="#e2504a"/><rect x="2" y="3" width="4" height="1" fill="#e2504a"/><rect x="7" y="3" width="1" height="1" fill="#e2504a"/>' +
+                '<rect x="0" y="4" width="8" height="1" fill="#e2504a"/>' +
+                '<rect x="1" y="5" width="1" height="1" fill="#e2504a"/><rect x="3" y="5" width="2" height="1" fill="#e2504a"/><rect x="6" y="5" width="1" height="1" fill="#e2504a"/>' +
+                '<rect x="0" y="6" width="1" height="1" fill="#e2504a"/><rect x="2" y="6" width="1" height="1" fill="#e2504a"/><rect x="5" y="6" width="1" height="1" fill="#e2504a"/><rect x="7" y="6" width="1" height="1" fill="#e2504a"/>' +
+                '</svg>';
+
+            var SHIP_SVG = '<svg width="14" height="14" viewBox="0 0 8 8" shape-rendering="crispEdges">' +
+                '<rect x="3" y="0" width="2" height="1" fill="#e6e6e6"/>' +
+                '<rect x="2" y="1" width="4" height="1" fill="#e6e6e6"/>' +
+                '<rect x="1" y="2" width="6" height="1" fill="#e6e6e6"/>' +
+                '<rect x="0" y="3" width="8" height="1" fill="#e6e6e6"/>' +
+                '<rect x="1" y="4" width="1" height="1" fill="#e6e6e6"/><rect x="3" y="4" width="2" height="1" fill="#e6e6e6"/><rect x="6" y="4" width="1" height="1" fill="#e6e6e6"/>' +
+                '</svg>';
+
+            function printShipScene() {
+                var scene = document.createElement('div');
+                scene.className = 'qat-invader-scene';
+                scene.innerHTML =
+                    '<div class="qat-invader-formation">' +
+                        '<div class="qat-invader-row">' + INVADER_SVG + INVADER_SVG + INVADER_SVG + '</div>' +
+                        '<div class="qat-ship-row">' + SHIP_SVG + '</div>' +
+                    '</div>';
+                body.appendChild(scene);
+            }
+
+            var EVALS_FIRST_RUN = [
+                '<span class="qat-eval-name">Running evals-design.yaml against prototype...</span>',
+                '<span class="qat-eval-name">Running evals-eng.yaml against code...</span>',
+                '',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">design.onboarding.three_phase_flow</span>        passed',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">design.token_usage.brand_consistency</span>      passed',
+                '<span class="qat-eval-fail">✗</span> <span class="qat-eval-name">eng.api.auth_endpoint_response_schema</span>     failed',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">eng.performance.dashboard_load_time</span>       passed',
+                '',
+                '<span class="qat-eval-summary">3 passed · 1 failed</span>',
+                '<span class="qat-eval-write">Writing eval-report-v1.md</span>'
+            ];
+
+            var COMMIT_OUTPUT = [
+                '<span class="qat-out-summary">[main <span class="qat-out-hash">9c21f4a</span>] EA: fix auth endpoint response schema (eval-report-v1)</span>',
+                '<span class="qat-out-summary">&nbsp;1 file changed, 6 insertions(+), 2 deletions(-)</span>'
+            ];
+
+            var EVALS_SECOND_RUN = [
+                '<span class="qat-eval-name">Running evals-design.yaml against prototype...</span>',
+                '<span class="qat-eval-name">Running evals-eng.yaml against code...</span>',
+                '',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">design.onboarding.three_phase_flow</span>        passed',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">design.token_usage.brand_consistency</span>      passed',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">eng.api.auth_endpoint_response_schema</span>     passed',
+                '<span class="qat-eval-pass">✓</span> <span class="qat-eval-name">eng.performance.dashboard_load_time</span>       passed',
+                '',
+                '<span class="qat-eval-summary">4 passed · 0 failed</span>',
+                '<span class="qat-eval-write">Writing eval-report-v2.md</span>'
+            ];
+
+            async function runSequence() {
+                clearTerminal();
+                await sleep(500);
+
+                var l1 = makeLine();
+                await typeCommand(l1, 'qa-agent run --design evals-design.yaml --eng evals-eng.yaml');
+                await sleep(320);
+                printOutput(EVALS_FIRST_RUN);
+                printBlank();
+                await sleep(1500);
+
+                await printLog('eval-report-v1.md &rarr; 1 failure detected &rarr; notifying @EA');
+                printBlank();
+                await sleep(1600);
+
+                var l2 = makeLine();
+                await typeCommand(l2, 'git commit -m "EA: fix auth endpoint response schema (eval-report-v1)"');
+                await sleep(320);
+                printOutput(COMMIT_OUTPUT);
+                printBlank();
+                await sleep(1400);
+
+                await printLog('fix detected &rarr; re-activating QA Agent');
+                printBlank();
+                await sleep(1400);
+
+                var l3 = makeLine();
+                await typeCommand(l3, 'qa-agent run --design evals-design.yaml --eng evals-eng.yaml');
+                await sleep(320);
+                printOutput(EVALS_SECOND_RUN);
+                printBlank();
+                await sleep(1500);
+
+                await printLog('all evals passed &rarr; dashboard v0.1 ready for PM review');
+                printBlank();
+                await sleep(900);
+
+                printShipScene();
+                await sleep(2200);
+
+                printOutput(['<span style="color:#e2504a;">GAME OVER — insert PRD to continue</span>']);
+                printBlank();
+                await sleep(2600);
+
+                runSequence();
+            }
+
+            runSequence();
+        })();
+        </script>
 
         <!-- Where We're Going -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full flex flex-row gap-8 h-[725px]">
-                <div class="basis-0 grow flex flex-col justify-start">
-                    <h2 class="font-syne font-medium text-[30px] leading-[1.4] text-theme-heading mb-14">Where We’re Going</h2>
-                    <div class="flex flex-col gap-8">
-                        <!-- Step 1 -->
-                        <div class="flex flex-row gap-6">
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Individual → Community</p>
-                            </div>
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Shift from solo dashboards to shared, peer-driven tools.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="flex flex-row gap-6">
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Onboarding → Trust</p>
-                            </div>
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Extend onboarding into a 90-day guided experience with other members.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="flex flex-row gap-6">
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-bold text-[14px] leading-[1.6] text-theme-heading">Utility → Empowerment</p>
-                            </div>
-                            <div class="basis-0 grow">
-                                <p class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Add cues, visuals, and feedback to boost engagement.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image -->
-                <div class="basis-0 grow bg-cover bg-center" style="background-image: url(&#39;assets/nestbank-case-study/media-2.jpg&#39;)"></div>
-            </div>
+            <img src="assets/agentic-system-case-study/media-10.jpg" alt="Where We're Going — work in progress" class="w-full h-auto object-cover">
         </div>
 
 
@@ -2719,18 +2747,18 @@
         <section class="light bg-theme-primary px-8 pt-[54px] pb-[54px] animate-slide-up related-cases" style="animation-delay: 1.0s;">
             <h2 class="font-syne font-medium text-[30px] leading-[1.4] text-theme-heading mb-[48px]">More from me</h2>
             <div class="w-full mx-auto flex flex-row gap-6 flex-wrap">
-                <!-- Case Study: AI Solution -->
+                <!-- Case Study: Grameen America -->
                 <div class="basis-0 grow min-w-[300px]">
-                    <a href="ai-solution-case-study.html" class="block">
+                    <a href="nestbank-case-study.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" autoplay="" muted="" loop="" playsinline="">
-                                    <source src="assets/ai-solution-case-study/media-14.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
-                                <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Product Strategist • AI • Zero UI Design • NUVUN</div>
-                                <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">AI Research, Before You Even Ask</div>
+                                <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph">Lead UX • Fintech • 0-1</div>
+                                <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">Grameen America</div>
                                 <div class="flex justify-end">
                                     <div class="relative shrink-0 size-8">
                                         <div class="absolute inset-[15%]">
@@ -2748,7 +2776,7 @@
                     <a href="medigo-case-study.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
                                     <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -2772,7 +2800,7 @@
                     <a href="archive.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
                                     <source src="assets/archive/archive.mp4" type="video/mp4">
                                 </video>
                             </div>
