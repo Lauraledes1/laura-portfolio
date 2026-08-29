@@ -794,6 +794,15 @@
           .flow-art svg { width:100%; height:auto; max-width:450px; display:block; }
           @media (max-width:880px){ .flow-art { min-height:0; padding:34px 26px; } }
           .flow-stage { background:var(--flow-accent); display:flex; align-items:center; justify-content:center; padding:44px 20px; }
+          /* two-image placeholder pair */
+          .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
+                  border:1px solid var(--b-line); border-radius:14px; overflow:hidden; }
+          @media (max-width:880px){ .b100-imgpair { grid-template-columns:1fr; } }
+          .b100-imgcell { height:460px; background:#B2CBAC center/cover no-repeat;
+                  display:flex; align-items:center; justify-content:center;
+                  font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#5E7459; }
+          .b100-imgcell.alt { background-color:#9FBE99; color:#3B583A; }
+          @media (max-width:880px){ .b100-imgcell { height:280px; } }
           .b100-flowdemo .phone { position:relative; width:252px; height:520px; flex-shrink:0; border-radius:44px;
                   background:linear-gradient(#191c20,#0c0e11); padding:11px; cursor:pointer;
                   box-shadow:0 40px 90px -20px rgba(0,0,0,.65), inset 0 0 0 1px rgba(255,255,255,.06),
@@ -1327,8 +1336,7 @@
         <!-- ============ FIVE PATTERNS ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="w-full">
-                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Five patterns, specced as components</h2>
-                <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="max-width:640px; margin-bottom:40px;">These are the primitives. Each is one spec that behaves consistently across all three levels, not a percentage in L2 and a green check in L3.</p>
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Five patterns</h2>
                 <div class="b100-rows">
                     <div class="b100-row"><div class="rk"><p>Confidence signal</p></div><div class="rv"><p>One vocabulary across levels, <em>confirmed / likely / uncertain</em>, shown on hover at L1, inline at L2, in the audit trail at L3. Never a bare number floating on its own.</p></div></div>
                     <div class="b100-row"><div class="rk"><p>Citation &amp; sourcing</p></div><div class="rv"><p>Every agent claim is tied to its source, Gen&nbsp;3 / Transfermate / Gen&nbsp;2, with the time it was queried. Hover at L1, inline at L2, in the audit trail at L3.</p></div></div>
@@ -1339,16 +1347,35 @@
             </div>
         </div>
 
+        <!-- ============ IMAGE PAIR 1 ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="b100-imgpair">
+                <!-- replace with assets/b100-agent-case-study/patterns-a.jpg -->
+                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
+                <!-- replace with assets/b100-agent-case-study/patterns-b.jpg -->
+                <div class="b100-imgcell alt" role="img" aria-label="Photo placeholder">image</div>
+            </div>
+        </div>
+
         <!-- ============ WHERE AI DOESN'T GO ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="w-full">
                 <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where AI doesn't go</h2>
-                <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="max-width:640px; margin-bottom:40px;">Showing where the AI stays out is as much a design decision as showing where it goes in.</p>
                 <div class="b100-rows">
                     <div class="b100-row"><div class="rk"><p>Direct Ops data entry</p></div><div class="rv"><p>Mapping a new buyer, for example, not automated until there's enough volume to justify the calibration cost.</p></div></div>
                     <div class="b100-row"><div class="rk"><p>Compliance &amp; legal approvals</p></div><div class="rv"><p>Human, non-negotiable. The agent can assemble the packet; it cannot sign off.</p></div></div>
                     <div class="b100-row"><div class="rk"><p>Terminal states of money already moved</p></div><div class="rv"><p>Audit yes, action no. Once funds have settled, the interaction is read-only by design.</p></div></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- ============ IMAGE PAIR 2 ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="b100-imgpair">
+                <!-- replace with assets/b100-agent-case-study/boundary-a.jpg -->
+                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
+                <!-- replace with assets/b100-agent-case-study/boundary-b.jpg -->
+                <div class="b100-imgcell alt" role="img" aria-label="Photo placeholder">image</div>
             </div>
         </div>
 
