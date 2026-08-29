@@ -739,8 +739,7 @@
                   --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#666;
                   --b-mono:'DM Mono',ui-monospace,monospace; }
           .b100-figure { width:100%; border:1px solid var(--b-line); border-radius:12px;
-                  background:#000; background-image:radial-gradient(circle,#2a2a2a 0.8px,transparent 0.8px);
-                  background-size:22px 22px; overflow:hidden; position:relative; }
+                  background:#050505; overflow:hidden; position:relative; }
           .b100-cap { font-family:var(--b-mono); font-size:12px; color:var(--b-faint);
                   letter-spacing:0.03em; margin-top:12px; }
           .b100-eyebrow { font-family:var(--b-mono); font-size:12px; letter-spacing:0.14em;
@@ -785,8 +784,15 @@
           .sys-foot { padding:0 26px 30px; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.6; color:var(--b-dim); }
           .sys-foot b { color:#fff; font-weight:600; }
 
-          /* ===== end-to-end flow: pixel-polished mobile mockup ===== */
-          .b100-flowdemo { display:flex; flex-direction:column; align-items:center; padding:34px 20px 24px; }
+          /* ===== end-to-end flow: photo + pixel-polished mobile mockup ===== */
+          .b100-flowdemo { display:flex; flex-direction:column; align-items:center; }
+          .flow-split { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
+                  border:1px solid var(--b-line); border-radius:14px; overflow:hidden; }
+          @media (max-width:880px){ .flow-split { grid-template-columns:1fr; } }
+          .flow-photo { background:#C7C1B2 center/cover no-repeat;
+                  background-image:url('assets/b100-agent-case-study/flow.jpg'); min-height:100%; }
+          @media (max-width:880px){ .flow-photo { min-height:0; height:280px; } }
+          .flow-stage { background:var(--flow-accent,#EAC559); display:flex; align-items:center; justify-content:center; padding:44px 20px; }
           .b100-flowdemo .phone { position:relative; width:252px; height:520px; flex-shrink:0; border-radius:44px;
                   background:linear-gradient(#191c20,#0c0e11); padding:11px; cursor:pointer;
                   box-shadow:0 40px 90px -20px rgba(0,0,0,.65), inset 0 0 0 1px rgba(255,255,255,.06),
@@ -948,7 +954,7 @@
           .flow-cap b { color:#fff; font-weight:600; }
           .flow-hint { margin-top:12px; font-family:var(--b-mono); font-size:10px; color:var(--b-faint); }
           .b100-flowdemo.paused .flow-hint::before { content:'❚❚  '; }
-          @media (max-width:460px){ .b100-flowdemo { padding:20px 12px; } .b100-flowdemo .phone { transform:scale(.9); margin:-24px 0; } }
+          @media (max-width:420px){ .flow-stage { padding:32px 14px; } .b100-flowdemo .phone { transform:scale(.92); margin:-20px 0; } }
           @media (prefers-reduced-motion:reduce){ .scr,.m-sheet { transition:none; } .m-spin,.m-input::after { animation:none; } }
 
           /* pattern + decision rows reuse .proc-h / plain rows */
@@ -1161,9 +1167,13 @@
                     </div>
                 </div>
 
-                <div class="b100-figure b100-flowdemo" data-flowdemo="">
-                  <div class="phone" aria-label="Mobile mockup of the B100 Ops app walking through the scenario">
-                    <div class="phone-screen">
+                <div class="b100-flowdemo" data-flowdemo="">
+                  <div class="flow-split">
+                    <!-- replace with a photo at assets/b100-agent-case-study/flow.jpg -->
+                    <div class="flow-photo" role="img" aria-label="Photo placeholder"></div>
+                    <div class="flow-stage">
+                      <div class="phone" aria-label="Mobile mockup of the B100 Ops app walking through the scenario">
+                        <div class="phone-screen">
 
                       <!-- 1 — Transactions list -->
                       <div class="scr on" data-step="1">
@@ -1272,6 +1282,8 @@
                         </div></div>
                       </div>
 
+                    </div>
+                      </div>
                     </div>
                   </div>
 
