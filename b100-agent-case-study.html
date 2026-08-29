@@ -9,6 +9,7 @@
     <link href="./agentic-system-case-study_files/css2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="./agentic-system-case-study_files/web"></script><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style.css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(1).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(2).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(3).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(4).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(5).css">
     <script>
         tailwind.config = {
@@ -784,22 +785,171 @@
           .sys-foot { padding:0 26px 30px; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.6; color:var(--b-dim); }
           .sys-foot b { color:#fff; font-weight:600; }
 
-          /* end-to-end flow */
-          .eef { padding:14px 26px; display:flex; flex-direction:column; }
-          .eef-step { border-top:1px solid var(--b-line); }
-          .eef-step:first-child { border-top:0; }
-          .eef-step > summary { list-style:none; cursor:pointer; padding:16px 0; display:flex; align-items:center; gap:14px; }
-          .eef-step > summary::-webkit-details-marker { display:none; }
-          .eef-step > summary::after { content:'+'; margin-left:auto; font-family:var(--b-mono); font-size:14px; color:var(--b-faint); }
-          .eef-step[open] > summary::after { content:'–'; }
-          .eef-title { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:#fff; }
-          .eef-step > p { font-family:'Syne',sans-serif; font-size:14px; line-height:1.6; color:var(--b-dim); margin:0 0 16px; }
-          .eef-tag { font-family:var(--b-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase;
-                  padding:3px 7px; border-radius:5px; white-space:nowrap; flex-shrink:0; }
-          .eef-tag.l1 { color:var(--l1); border:1px solid var(--l1); }
-          .eef-tag.l2 { color:var(--l2); border:1px solid var(--l2); }
-          .eef-tag.l3 { color:var(--l3); border:1px solid var(--l3); }
-          .eef-tag.tr { color:#ddd; border:1px dashed #777; }
+          /* ===== end-to-end flow: pixel-polished mobile mockup ===== */
+          .b100-flowdemo { display:flex; flex-direction:column; align-items:center; padding:34px 20px 24px; }
+          .b100-flowdemo .phone { position:relative; width:252px; height:520px; flex-shrink:0; border-radius:44px;
+                  background:linear-gradient(#191c20,#0c0e11); padding:11px; cursor:pointer;
+                  box-shadow:0 40px 90px -20px rgba(0,0,0,.65), inset 0 0 0 1px rgba(255,255,255,.06),
+                             inset 0 0 0 3px #060708; }
+          .b100-flowdemo .phone::after { content:''; position:absolute; z-index:9; top:20px; left:50%; transform:translateX(-50%);
+                  width:82px; height:24px; background:#050607; border-radius:13px; }
+          .phone-screen { position:relative; width:100%; height:100%; border-radius:33px; overflow:hidden;
+                  background:var(--m-bg); font-family:'Roboto',-apple-system,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased;
+                  --m-bg:#F5F7F9; --m-card:#FFFFFF; --m-ink:#16202A; --m-ink2:#5B6874; --m-ink3:#93A0AC;
+                  --m-line:#E6EAEE; --m-line2:#EEF1F4;
+                  --m-p:#0B79C4; --m-p-tint:#E7F2FA; --m-p-dark:#075E9B;
+                  --m-amber:#A85A08; --m-amber-bg:#FCEBD5; --m-green:#0F7A46; --m-green-bg:#E4F4EA;
+                  --m-red:#BE362C; --m-red-bg:#FBE9E7;
+                  --m-sh-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.09);
+                  --m-sh-md:0 4px 10px rgba(16,24,40,.08),0 2px 4px rgba(16,24,40,.06); }
+          .scr { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--m-bg);
+                  opacity:0; z-index:1; transition:none; pointer-events:none; }
+          .scr.on { opacity:1; z-index:2; pointer-events:auto; transition:opacity .28s ease; }
+          .phone-screen::after { content:''; position:absolute; z-index:8; bottom:7px; left:50%; transform:translateX(-50%);
+                  width:104px; height:4px; border-radius:2px; background:rgba(22,32,42,.22); }
+          /* status bar */
+          .m-status { height:40px; display:flex; align-items:center; justify-content:space-between; padding:0 20px 0 22px;
+                  font-size:12px; font-weight:600; color:var(--m-ink); letter-spacing:.2px; flex-shrink:0; }
+          .m-status .m-r { display:flex; align-items:center; gap:5px; }
+          .m-status .m-cell { display:flex; align-items:flex-end; gap:1.5px; height:9px; }
+          .m-status .m-cell i { width:2.5px; background:var(--m-ink); border-radius:.5px; }
+          .m-status .m-cell i:nth-child(1){height:4px}.m-status .m-cell i:nth-child(2){height:6px}
+          .m-status .m-cell i:nth-child(3){height:8px}.m-status .m-cell i:nth-child(4){height:9px}
+          .m-status .m-wifi { width:13px; height:9px; border-radius:0 0 6px 6px; border:2px solid var(--m-ink); border-top:0; opacity:.9; }
+          .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(22,32,42,.4); border-radius:3px; position:relative; padding:1.5px; }
+          .m-status .m-bat::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:rgba(22,32,42,.4); border-radius:0 1px 1px 0; }
+          .m-status .m-bat i { display:block; height:100%; width:72%; background:var(--m-ink); border-radius:1.5px; }
+          /* app bar */
+          .m-appbar { height:48px; padding:0 15px; display:flex; align-items:center; gap:9px; flex-shrink:0; background:var(--m-bg); }
+          .m-appbar .m-back { width:22px; height:22px; flex-shrink:0; color:var(--m-ink); margin-left:-4px; }
+          .m-appbar h5 { margin:0; font-size:16px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); flex:1; }
+          .m-appbar .m-act { width:21px; height:21px; flex-shrink:0; color:var(--m-ink2); }
+          /* filter row */
+          .m-filters { display:flex; gap:8px; padding:2px 16px 12px; flex-shrink:0; }
+          .m-fchip { display:flex; align-items:center; gap:4px; height:28px; padding:0 12px; border:1px solid var(--m-line);
+                  background:var(--m-card); border-radius:8px; font-size:11.5px; font-weight:500; color:var(--m-ink2); box-shadow:var(--m-sh-sm); }
+          .m-fchip.sel { background:var(--m-p-tint); border-color:var(--m-p); color:var(--m-p-dark); }
+          /* scroll body */
+          .m-body { flex:1; overflow:hidden; padding:2px 16px 16px; }
+          .m-list { display:flex; flex-direction:column; gap:10px; }
+          .m-card { background:var(--m-card); border:1px solid var(--m-line); border-radius:12px; box-shadow:var(--m-sh-sm); }
+          .m-row { padding:13px 14px; }
+          .m-row.flag { border-left:3px solid #E8940C; border-radius:12px; }
+          .m-row .m-rt { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+          .m-buyer { font-size:13px; font-weight:600; letter-spacing:-.1px; color:var(--m-ink); }
+          .m-sub { font-size:11.5px; color:var(--m-ink2); margin-top:3px; }
+          .m-chip { display:inline-flex; align-items:center; height:22px; padding:0 8px; border-radius:6px;
+                  font-size:10.5px; font-weight:600; white-space:nowrap; letter-spacing:.1px; }
+          .m-chip.warn { background:var(--m-amber-bg); color:var(--m-amber); }
+          .m-chip.ok { background:var(--m-green-bg); color:var(--m-green); }
+          .m-chip.err { background:var(--m-red-bg); color:var(--m-red); }
+          .m-chip.pend { background:#EEF1F4; color:var(--m-ink2); }
+          .m-agentbadge { display:inline-flex; align-items:center; gap:3px; height:19px; padding:0 7px; border-radius:5px;
+                  font-size:10px; font-weight:600; color:var(--m-green); background:var(--m-green-bg); margin-top:8px; }
+          /* copilot bottom sheet */
+          .m-scrim { position:absolute; inset:0; background:rgba(15,23,32,.32); }
+          .m-sheet { position:absolute; left:0; right:0; bottom:0; background:var(--m-card); border-radius:18px 18px 0 0;
+                  box-shadow:0 -14px 44px rgba(15,23,32,.22); padding:10px 16px 18px; display:flex; flex-direction:column;
+                  transform:translateY(101%); transition:transform .48s cubic-bezier(.32,.72,0,1); }
+          .scr.on .m-sheet { transform:translateY(0); }
+          .m-grab { width:36px; height:5px; border-radius:3px; background:#D6DBE0; margin:0 auto 14px; flex-shrink:0; }
+          .m-sheet h6 { margin:0 0 12px; font-size:14px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); }
+          .m-ctxchip { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500; color:var(--m-amber);
+                  background:var(--m-amber-bg); border-radius:8px; padding:8px 10px; margin-bottom:12px; }
+          .m-input { display:flex; align-items:center; height:38px; border:1px solid var(--m-line); border-radius:9px;
+                  padding:0 12px; font-size:12.5px; color:var(--m-ink); background:#F9FAFB; }
+          .m-input::after { content:''; width:1.5px; height:16px; background:var(--m-p); margin-left:2px; animation:m-caret 1s step-end infinite; }
+          @keyframes m-caret { 50% { opacity:0; } }
+          .m-plan { margin-top:14px; border:1px solid var(--m-line); border-radius:10px; padding:12px; }
+          .m-plan-t { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:9px; }
+          .m-plan-step { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--m-ink2); padding:5px 0; white-space:nowrap; }
+          .m-plan-step b { color:var(--m-ink); font-weight:600; }
+          .m-plan-step .m-mut { color:var(--m-ink3); }
+          .m-ctxchip { white-space:nowrap; overflow:hidden; }
+          .m-dot2 { width:7px; height:7px; border-radius:50%; background:#D6DBE0; flex-shrink:0; }
+          .m-spin { width:13px; height:13px; border:2px solid var(--m-p); border-right-color:transparent; border-radius:50%;
+                  flex-shrink:0; animation:m-spin .7s linear infinite; }
+          @keyframes m-spin { to { transform:rotate(360deg); } }
+          /* chat / answer */
+          .m-chat { flex:1; overflow:hidden; padding:6px 16px 16px; display:flex; flex-direction:column; gap:9px; }
+          .m-src { border:1px solid var(--m-line); border-left-width:3px; border-radius:10px; padding:10px 12px; background:var(--m-card); box-shadow:var(--m-sh-sm); }
+          .m-src.ok { border-left-color:var(--m-green); } .m-src.warn { border-left-color:var(--m-amber); } .m-src.err { border-left-color:var(--m-red); }
+          .m-src-h { display:flex; justify-content:space-between; align-items:baseline; }
+          .m-src-name { font-size:11px; font-weight:700; color:var(--m-ink); letter-spacing:.1px; }
+          .m-src-time { font-size:10px; color:var(--m-ink3); }
+          .m-src-body { font-size:11.5px; line-height:1.4; color:var(--m-ink2); margin-top:4px; }
+          .m-answer { font-size:12.5px; line-height:1.5; color:var(--m-ink); padding:2px 2px 0; }
+          .m-answer b { font-weight:700; }
+          .m-conf { display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 11px; border-radius:999px;
+                  font-size:10.5px; font-weight:600; color:var(--m-amber); background:var(--m-amber-bg); align-self:flex-start; }
+          .m-conf::before { content:''; width:9px; height:9px; border-radius:50%;
+                  background:conic-gradient(var(--m-amber) 55%, rgba(168,90,8,.25) 0); }
+          .m-btn { display:flex; align-items:center; justify-content:center; height:40px; border-radius:9px;
+                  font-size:13px; font-weight:600; letter-spacing:.1px; background:var(--m-p); color:#fff; box-shadow:var(--m-sh-md); }
+          .m-btn.text { height:38px; background:transparent; color:var(--m-p); box-shadow:none; }
+          .m-btn.danger { background:#fff; color:var(--m-red); box-shadow:none; border:1.4px solid var(--m-red); }
+          .m-bubble { max-width:82%; font-size:12px; line-height:1.42; padding:9px 12px; border-radius:14px; }
+          .m-bubble.me { align-self:flex-end; background:var(--m-p); color:#fff; border-bottom-right-radius:5px; }
+          .m-bubble.bot { align-self:flex-start; background:var(--m-card); border:1px solid var(--m-line); color:var(--m-ink2); border-bottom-left-radius:5px; box-shadow:var(--m-sh-sm); }
+          .m-collapsed { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500; color:var(--m-ink2);
+                  background:var(--m-card); border:1px solid var(--m-line); border-radius:9px; padding:9px 11px; box-shadow:var(--m-sh-sm); }
+          .m-collapsed::before { content:'▸'; color:var(--m-ink3); }
+          /* agent action card */
+          .m-action { margin:8px 16px 0; border:1px solid var(--m-line); border-radius:13px; overflow:hidden; background:var(--m-card); box-shadow:var(--m-sh-md); }
+          .m-action-h { display:flex; align-items:center; gap:7px; background:var(--m-p-tint); padding:8px 13px; white-space:nowrap;
+                  font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--m-p-dark); }
+          .m-action-h::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--m-p); flex-shrink:0; }
+          .m-action-state { margin-left:auto; font-size:8.5px; font-weight:700; letter-spacing:.05em; padding:2px 7px;
+                  border-radius:999px; background:#fff; color:var(--m-p-dark); }
+          .m-action-b { padding:12px 13px 10px; }
+          .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); }
+          .m-action-meta { font-size:11px; color:var(--m-ink2); margin-top:4px; }
+          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:10px 13px 0; overflow:hidden; }
+          .m-progress i { display:block; height:100%; background:var(--m-p); border-radius:3px; }
+          .m-alist { border-top:1px solid var(--m-line2); }
+          .m-arow { display:flex; align-items:center; gap:10px; height:38px; padding:0 13px; border-bottom:1px solid var(--m-line2);
+                  font-size:11.5px; color:var(--m-ink); white-space:nowrap; }
+          .m-arow:last-child { border-bottom:0; }
+          .m-arow.mut { color:var(--m-ink3); }
+          .m-arow .m-amt { margin-left:auto; color:var(--m-ink2); font-variant-numeric:tabular-nums; }
+          .m-check { width:16px; height:16px; border-radius:5px; border:1.75px solid var(--m-p); flex-shrink:0; position:relative; }
+          .m-check.on { background:var(--m-p); }
+          .m-check.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px;
+                  border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
+          .m-check.off { border-color:var(--m-ink3); }
+          .m-atag { font-size:9px; font-weight:600; background:var(--m-red-bg); color:var(--m-red); border-radius:4px; padding:2px 6px; margin-left:auto; white-space:nowrap; }
+          .m-astat { margin-left:auto; font-size:11px; font-weight:500; display:flex; align-items:center; gap:4px; }
+          .m-astat.ok { color:var(--m-green); } .m-astat.run { color:var(--m-p); }
+          .m-astat.ok::before { content:''; width:11px; height:11px; border-radius:50%; background:var(--m-green);
+                  -webkit-mask:linear-gradient(#000 0 0) center/5px 2px no-repeat; }
+          .m-action-f { display:flex; gap:8px; padding:11px 13px; border-top:1px solid var(--m-line2); }
+          .m-action-f .m-btn { flex:2; white-space:nowrap; font-size:12px; height:38px; }
+          .m-action-f .m-btn.text { flex:1; }
+          /* audit timeline */
+          .m-timeline { margin-top:10px; padding-left:4px; border-left:1.5px solid var(--m-line); }
+          .m-tl { display:flex; align-items:baseline; gap:9px; font-size:11px; padding:4px 0; position:relative; }
+          .m-tl::before { content:''; position:absolute; left:-8.5px; top:6px; width:7px; height:7px; border-radius:50%;
+                  background:var(--m-card); border:1.75px solid var(--m-p); }
+          .m-tl-k { font-weight:600; color:var(--m-ink); }
+          .m-tl-v { margin-left:auto; color:var(--m-ink3); }
+          /* controls */
+          .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+          .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
+                  color:var(--b-faint); font-family:var(--b-mono); font-size:9.5px; cursor:pointer; transition:border-color .15s,color .15s; }
+          .flow-rail button:hover { color:var(--b-dim); }
+          .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
+          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.55; color:var(--b-dim); }
+          .flow-cap-tag { display:inline-block; font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+                  padding:2px 6px; border-radius:4px; margin-right:7px; white-space:nowrap; vertical-align:1px; }
+          .flow-cap-tag.l1 { color:var(--l1); border:1px solid var(--l1); }
+          .flow-cap-tag.l2 { color:var(--l2); border:1px solid var(--l2); }
+          .flow-cap-tag.l3 { color:var(--l3); border:1px solid var(--l3); }
+          .flow-cap-tag.tr { color:#ddd; border:1px dashed #777; }
+          .flow-cap b { color:#fff; font-weight:600; }
+          .flow-hint { margin-top:12px; font-family:var(--b-mono); font-size:10px; color:var(--b-faint); }
+          .b100-flowdemo.paused .flow-hint::before { content:'❚❚  '; }
+          @media (max-width:460px){ .b100-flowdemo { padding:20px 12px; } .b100-flowdemo .phone { transform:scale(.9); margin:-24px 0; } }
+          @media (prefers-reduced-motion:reduce){ .scr,.m-sheet { transition:none; } .m-spin,.m-input::after { animation:none; } }
 
           /* pattern + decision rows reuse .proc-h / plain rows */
           .b100-rows { display:flex; flex-direction:column; gap:2rem; }
@@ -1011,17 +1161,130 @@
                     </div>
                 </div>
 
-                <div class="b100-figure">
-                  <div class="eef">
-                    <details class="eef-step"><summary><span class="eef-tag l1">L1</span><span class="eef-title">The flag</span></summary><p>Ops opens the Transactions tab. A row for Acme Corp carries an amber badge: "Amount to Supplier doesn't match this buyer's pattern." Hovering it gives a plain-language reason, not a status code.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag tr">L1 → L2</span><span class="eef-title">Expand</span></summary><p>Ops taps the badge. The copilot opens with the anomaly already loaded and shows its plan: check Gen&nbsp;3, then Transfermate, then Gen&nbsp;2.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag l2">L2</span><span class="eef-title">The answer</span></summary><p>Gen&nbsp;3: card captured in full. Transfermate: Leg&nbsp;1 complete, Leg&nbsp;2 never initiated. Gen&nbsp;2: no Gateway ID match. Each claim cites its system and query time. Confidence: medium. It also finds 11 more Acme transactions in the same state.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag tr">L2 → L3</span><span class="eef-title">Promote</span></summary><p>The answer ends with "Retry Leg&nbsp;2 settlement on these 12." Ops clicks it. An Agent Action Card appears with the plan and a per-item list.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag l3">L3</span><span class="eef-title">Approve &amp; execute</span></summary><p>Ops unchecks one transaction that's under dispute, approves the other 11 in batch. The card shows abortable progress; 11 succeed, each written to the audit log.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag tr">L3 → L2</span><span class="eef-title">Explain</span></summary><p>Ops asks "why oldest-first?" The card drops back to dialogue and answers, execution record intact.</p></details>
-                    <details class="eef-step"><summary><span class="eef-tag tr">L3 → L1</span><span class="eef-title">Audit trail</span></summary><p>Back in the table, the 11 rows now carry a "settled by agent · 14:32" badge, each expandable to intent → plan → approval → execution → result.</p></details>
+                <div class="b100-figure b100-flowdemo" data-flowdemo="">
+                  <div class="phone" aria-label="Mobile mockup of the B100 Ops app walking through the scenario">
+                    <div class="phone-screen">
+
+                      <!-- 1 — Transactions list -->
+                      <div class="scr on" data-step="1">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-filters"><span class="m-fchip sel">This month</span><span class="m-fchip">All buyers</span></div>
+                        <div class="m-body"><div class="m-list">
+                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;$25,000.00</div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;$42,000.00</div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;$8,200.00</div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">TechStart Inc</span><span class="m-chip err">Error</span></div><div class="m-sub">CloudServ&nbsp;·&nbsp;$5,500.00</div></div>
+                        </div></div>
+                      </div>
+
+                      <!-- 2 — Copilot opens (L1 -> L2) -->
+                      <div class="scr" data-step="2">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-body" style="filter:blur(1.5px);opacity:.5"><div class="m-list">
+                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;$25,000.00</div></div>
+                        </div></div>
+                        <div class="m-scrim"></div>
+                        <div class="m-sheet">
+                          <div class="m-grab"></div>
+                          <h6>Copilot</h6>
+                          <div class="m-ctxchip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly&nbsp;·&nbsp;Acme Corp&nbsp;·&nbsp;GW…6541</div>
+                          <div class="m-input">Why didn&rsquo;t this settle?</div>
+                          <div class="m-plan">
+                            <div class="m-plan-t">Plan</div>
+                            <div class="m-plan-step"><span class="m-spin"></span><b>Gen&nbsp;3</b><span class="m-mut">&nbsp;·&nbsp;card system</span></div>
+                            <div class="m-plan-step"><span class="m-dot2"></span><b>Transfermate</b><span class="m-mut">&nbsp;·&nbsp;transfer</span></div>
+                            <div class="m-plan-step"><span class="m-dot2"></span><b>Gen&nbsp;2</b><span class="m-mut">&nbsp;·&nbsp;mapping</span></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 3 — The answer (L2) -->
+                      <div class="scr" data-step="3">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
+                        <div class="m-chat">
+                          <div class="m-src ok"><div class="m-src-h"><span class="m-src-name">Gen 3</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">Card captured in full&nbsp;·&nbsp;$10,000.00</div></div>
+                          <div class="m-src warn"><div class="m-src-h"><span class="m-src-name">Transfermate</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">Leg 1 complete&nbsp;·&nbsp;Leg 2 never initiated</div></div>
+                          <div class="m-src err"><div class="m-src-h"><span class="m-src-name">Gen 2</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">No Gateway ID match</div></div>
+                          <div class="m-answer">Leg 2 never fired. <b>11 more</b> Acme transactions are in the same state.</div>
+                          <span class="m-conf">Confidence: medium</span>
+                          <div class="m-btn">Retry Leg 2 on these 12</div>
+                        </div>
+                      </div>
+
+                      <!-- 4 — Approve & execute (L2 -> L3 -> L3) -->
+                      <div class="scr" data-step="4">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
+                        <div class="m-chat" style="padding-top:2px">
+                          <div class="m-action">
+                            <div class="m-action-h">Agent action<span class="m-action-state">Proposed</span></div>
+                            <div class="m-action-b">
+                              <div class="m-action-t">Retry Leg 2 settlement</div>
+                              <div class="m-action-meta">11 of 12 selected&nbsp;·&nbsp;oldest first&nbsp;·&nbsp;stop after 2 fails</div>
+                            </div>
+                            <div class="m-alist">
+                              <div class="m-arow"><span class="m-check on"></span>GW…826541<span class="m-amt">$10,000</span></div>
+                              <div class="m-arow"><span class="m-check on"></span>GW…826544<span class="m-amt">$42,000</span></div>
+                              <div class="m-arow"><span class="m-check off"></span>GW…826547<span class="m-atag">disputed</span></div>
+                              <div class="m-arow"><span class="m-check on"></span>GW…826550<span class="m-amt">$8,200</span></div>
+                              <div class="m-arow mut"><span style="width:16px;flex-shrink:0"></span>+ 7 more selected</div>
+                            </div>
+                            <div class="m-action-f"><span class="m-btn">Approve 11</span><span class="m-btn text">Review</span></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 5 — Explain (L3 -> L2) -->
+                      <div class="scr" data-step="5">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
+                        <div class="m-chat">
+                          <div class="m-collapsed">Agent action&nbsp;·&nbsp;11 settled&nbsp;·&nbsp;1 skipped</div>
+                          <div class="m-bubble me">why oldest-first?</div>
+                          <div class="m-bubble bot">Oldest transactions are closest to their settlement SLA, so they clear first. Order doesn&rsquo;t change the success rate.</div>
+                        </div>
+                      </div>
+
+                      <!-- 6 — Audit trail (L3 -> L1) -->
+                      <div class="scr" data-step="6">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-body"><div class="m-list">
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div>
+                            <span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span>
+                            <div class="m-timeline">
+                              <div class="m-tl"><span class="m-tl-k">Intent</span><span class="m-tl-v">Ops</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Plan</span><span class="m-tl-v">agent</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Approved</span><span class="m-tl-v">Ops&nbsp;·&nbsp;14:32</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Executed</span><span class="m-tl-v">agent</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Result</span><span class="m-tl-v">settled</span></div>
+                            </div>
+                          </div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;$42,000.00</div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;$8,200.00</div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
+                        </div></div>
+                      </div>
+
+                    </div>
                   </div>
-                  <p class="b100-cap">02, The hero flow: L1 → L2 → L3 → L2 → L1, touching every transition. Open a step for detail.</p>
+
+                  <div class="flow-rail" role="tablist">
+                    <button data-step="1" class="on" aria-label="Step 1: the flag">01</button>
+                    <button data-step="2" aria-label="Step 2: expand">02</button>
+                    <button data-step="3" aria-label="Step 3: the answer">03</button>
+                    <button data-step="4" aria-label="Step 4: approve and execute">04</button>
+                    <button data-step="5" aria-label="Step 5: explain">05</button>
+                    <button data-step="6" aria-label="Step 6: audit trail">06</button>
+                  </div>
+                  <p class="flow-cap"></p>
+                  <p class="flow-hint">tap the phone to pause&nbsp;·&nbsp;tap a number to jump</p>
                 </div>
             </div>
         </div>
@@ -1065,6 +1328,53 @@
                 </div>
             </div>
         </div>
+
+        <!-- ============ FLOW DEMO SCRIPT ============ -->
+        <script>
+        (function(){
+          var demo = document.querySelector('[data-flowdemo]');
+          if(!demo) return;
+          var screens = Array.prototype.slice.call(demo.querySelectorAll('.scr'));
+          var dots = Array.prototype.slice.call(demo.querySelectorAll('.flow-rail button'));
+          var cap = demo.querySelector('.flow-cap');
+          var CAPS = [
+            {tag:'l1', t:'L1', h:'The flag', c:'An anomaly chip on the Acme Corp row: the amount to the supplier is off pattern. Ambient, no chat.'},
+            {tag:'tr', t:'L1 → L2', h:'Expand', c:'Tapping the chip opens the copilot with the anomaly loaded and its plan visible: card system, then transfer provider, then legacy mapping.'},
+            {tag:'l2', t:'L2', h:'The answer', c:'Every source is cited with a query time. Leg 2 never fired, and 11 more Acme transactions match. Confidence: medium.'},
+            {tag:'l3', t:'L2 → L3', h:'Approve & execute', c:'The answer becomes an Agent Action Card. Ops drops the one transaction under dispute and approves the rest; progress is abortable and every step is logged.'},
+            {tag:'tr', t:'L3 → L2', h:'Explain', c:'Ops drops back into dialogue to ask why the agent ordered them oldest-first, without losing the execution record.'},
+            {tag:'tr', t:'L3 → L1', h:'Audit trail', c:'Back in the list, settled rows carry an agent badge that expands to the full chain: intent, plan, approval, execution, result.'}
+          ];
+          var i = 0, timer = null, paused = false;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          function render(){
+            screens.forEach(function(s,k){ s.classList.toggle('on', k===i); });
+            dots.forEach(function(d,k){ d.classList.toggle('on', k===i); });
+            var C = CAPS[i];
+            cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+'</b> &nbsp;'+C.c;
+          }
+          function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
+          function tick(){ go(i+1); }
+          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 3400); }
+          function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+          demo.querySelector('.phone').addEventListener('click', function(){
+            paused = !paused; demo.classList.toggle('paused', paused);
+            paused ? stop() : play();
+          });
+          dots.forEach(function(d){
+            d.addEventListener('click', function(){
+              go(parseInt(d.getAttribute('data-step'),10) - 1);
+              paused = true; demo.classList.add('paused'); stop();
+            });
+          });
+          render();
+          if('IntersectionObserver' in window){
+            new IntersectionObserver(function(entries){
+              entries.forEach(function(e){ e.isIntersecting ? play() : stop(); });
+            }, {threshold: 0.35}).observe(demo);
+          } else { play(); }
+        })();
+        </script>
 
         <section class="bg-theme-primary px-8 pt-[56px] pb-[56px] scroll-animate medium-feature" data-scroll="">
             <div class="w-full mx-auto flex flex-col gap-6">
