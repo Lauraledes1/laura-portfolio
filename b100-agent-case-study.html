@@ -751,6 +751,12 @@
           .ladder-svg { width:100%; height:auto; display:block; overflow:visible; }
           .ladder-panels { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; }
           @media (max-width:820px){ .ladder-panels{ grid-template-columns:1fr; } }
+          @media (max-width:680px){
+            .ladder-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+            .ladder-scroll::-webkit-scrollbar { display:none; }
+            .ladder-wrap { padding:26px 16px; }
+            .ladder-svg { min-width:600px; }
+          }
           .ladder-panel { border:1px solid var(--b-line); border-radius:10px; background:var(--b-panel); }
           .ladder-panel > summary { list-style:none; cursor:pointer; padding:16px 18px; display:block; }
           .ladder-panel > summary::-webkit-details-marker { display:none; }
@@ -1084,6 +1090,7 @@
 
                 <div class="b100-figure">
                   <div class="ladder-wrap">
+                    <div class="ladder-scroll">
                     <svg class="ladder-svg" viewBox="0 0 820 300" role="img" aria-label="A three-level escalation ladder: L1 ambient, L2 copilot, L3 agentic, with escalation arrows rising and de-escalation arrows returning.">
                       <rect x="40"  y="208" width="200" height="56" rx="8" fill="rgba(138,143,152,0.12)" stroke="#8A8F98" stroke-width="1.5"/>
                       <rect x="310" y="126" width="200" height="56" rx="8" fill="rgba(42,165,224,0.12)"  stroke="#2AA5E0" stroke-width="1.5"/>
@@ -1111,6 +1118,7 @@
                         <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
                       </circle>
                     </svg>
+                    </div>
                     <div class="ladder-panels">
                       <details class="ladder-panel">
                         <summary>
