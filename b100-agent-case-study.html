@@ -864,7 +864,8 @@
                   background:var(--m-surface); border-radius:9px; font-size:11.5px; font-weight:500; color:var(--m-ink); box-shadow:var(--m-e1); }
           .m-fchip svg { width:11px; height:11px; color:var(--m-ink3); }
           /* transaction list */
-          .m-body { flex:1; overflow:hidden; padding:2px 16px 16px; }
+          .m-body { flex:1; overflow-y:auto; scrollbar-width:none; padding:2px 16px 16px; }
+          .m-body::-webkit-scrollbar { display:none; }
           .m-list { display:flex; flex-direction:column; gap:8px; }
           .m-card { background:var(--m-surface); border:1px solid var(--m-line); border-radius:13px; box-shadow:var(--m-e1); }
           .m-row { padding:12px 14px; position:relative; }
