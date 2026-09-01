@@ -792,18 +792,16 @@
 
           /* ===== end-to-end flow: photo + pixel-polished mobile mockup ===== */
           .b100-flowdemo { display:flex; flex-direction:column; align-items:center; }
-          .flow-split { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
-                  border:1px solid var(--b-line); border-radius:14px; overflow:hidden;
+          .flow-split { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:32px;
                   --flow-accent:#AEBFC9; }
-          @media (max-width:880px){ .flow-split { grid-template-columns:1fr; } }
+          @media (max-width:880px){ .flow-split { grid-template-columns:1fr; gap:24px; } }
           .flow-photo { background:var(--flow-accent) center/cover no-repeat;
                   background-image:url('assets/b100-agent-case-study/flow.jpg'); min-height:100%; }
-          @media (max-width:880px){ .flow-photo { min-height:0; height:300px; } }
+          @media (max-width:880px){ .flow-photo { min-height:0; height:320px; } }
           .flow-stage { background:var(--flow-accent); display:flex; align-items:center; justify-content:center; padding:44px 20px; }
           /* two-image placeholder pair */
-          .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
-                  border:1px solid var(--b-line); border-radius:14px; overflow:hidden; }
-          @media (max-width:880px){ .b100-imgpair { grid-template-columns:1fr; } }
+          .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+          @media (max-width:880px){ .b100-imgpair { grid-template-columns:1fr; gap:24px; } }
           .b100-imgcell { height:460px; background:#D9BEB2 center/cover no-repeat;
                   display:flex; align-items:center; justify-content:center;
                   font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A6F63; }
