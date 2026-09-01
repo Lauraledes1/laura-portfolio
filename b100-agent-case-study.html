@@ -897,10 +897,12 @@
           .m-turn.bot { gap:9px; }
           .m-turn.bot > .m-mark { margin-top:1px; }
           .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
-          /* white cards break out of the avatar indent to use the full conversation width */
-          .m-turn.bot .m-turn-c > .m-plan,
-          .m-turn.bot .m-turn-c > .m-srcs,
-          .m-turn.bot .m-turn-c > .m-action { margin-left:-26px; }
+          /* bot response breaks out of the avatar indent to use the full conversation width;
+             only a leading text line (ctxline / short intro answer) stays beside the avatar */
+          .m-turn.bot .m-turn-c > .m-plan:first-child,
+          .m-turn.bot .m-turn-c > .m-srcs:first-child,
+          .m-turn.bot .m-turn-c > .m-action:first-child,
+          .m-turn.bot .m-turn-c > :not(:first-child) { margin-left:-26px; }
           .m-ctxline { display:flex; align-items:flex-start; gap:6px; font-size:10.5px; font-weight:500; line-height:1.35; color:var(--m-amber); }
           .m-ctxline svg { width:16px; height:16px; flex-shrink:0; margin-top:-1px; }
           .m-thinking { font-size:11.5px; color:var(--m-ink2); display:flex; align-items:center; gap:8px; }
@@ -934,20 +936,17 @@
           .m-src-dot { width:6px; height:6px; border-radius:50%; }
           .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
           .m-src-time { font-family:var(--m-mono); font-size:9px; color:var(--m-ink3); }
-          /* confidence meter */
-          .m-conf { display:inline-flex; align-items:center; gap:8px; height:24px; padding:0 11px 0 8px; border-radius:999px;
-                  font-size:10px; font-weight:600; color:var(--m-ink2); background:#ECEAE3; align-self:flex-start; }
-          .m-conf-bars { display:flex; align-items:flex-end; gap:2px; }
-          .m-conf-bars i { width:3px; border-radius:1px; background:var(--m-ink3); }
-          .m-conf-bars i:nth-child(1){ height:5px; } .m-conf-bars i:nth-child(2){ height:8px; } .m-conf-bars i:nth-child(3){ height:11px; }
-          .m-conf.med { color:var(--m-amber); background:var(--m-amber-bg); }
-          .m-conf.med .m-conf-bars i:nth-child(-n+2){ background:var(--m-amber); }
-          .m-conf.high { color:var(--m-green); background:var(--m-green-bg); }
-          .m-conf.high .m-conf-bars i{ background:var(--m-green); }
+          /* confidence signal */
+          .m-conf { display:inline-flex; align-items:center; gap:6px; font-size:10.5px; font-weight:600;
+                  color:var(--m-ink3); align-self:flex-start; }
+          .m-conf::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+          .m-conf.med { color:var(--m-amber); }
+          .m-conf.high { color:var(--m-green); }
           /* CTA + buttons */
-          .m-cta { display:flex; align-items:center; justify-content:center; gap:7px; height:40px; border-radius:11px;
-                  font-size:12.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-ink); color:#fff; box-shadow:var(--m-e2); }
-          .m-cta svg { width:14px; height:14px; }
+          .m-cta { display:inline-flex; align-items:center; justify-content:center; gap:6px; align-self:flex-start;
+                  height:32px; padding:0 15px; border:0; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:600;
+                  letter-spacing:-.1px; background:var(--m-ink); color:#fff; box-shadow:var(--m-e1); cursor:pointer; }
+          .m-cta svg { width:13px; height:13px; }
           .m-btn { display:flex; align-items:center; justify-content:center; height:40px; border-radius:11px;
                   font-size:12.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-ink); color:#fff; }
           .m-btn.text { background:transparent; color:var(--m-ink2); }
@@ -1343,8 +1342,8 @@
                               <div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div>
                             </div>
                             <div class="m-answer">Leg 2 was never initiated. <b>11 more</b> Brightwater transactions are stuck the same way.</div>
-                            <span class="m-conf med"><span class="m-conf-bars"><i></i><i></i><i></i></span>Confidence: medium</span>
-                            <div class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"></path></svg>Retry Leg 2 on all 12</div>
+                            <span class="m-conf med">Confidence: medium</span>
+                            <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry Leg 2 for all 12</button>
                           </div></div>
                         </div>
                         <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
