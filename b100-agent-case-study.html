@@ -807,182 +807,214 @@
                   font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A6F63; }
           .b100-imgcell.alt { background-color:#C9AA9C; color:#5A413A; }
           @media (max-width:880px){ .b100-imgcell { height:280px; } }
-          .b100-flowdemo .phone { position:relative; width:252px; height:520px; flex-shrink:0; border-radius:44px;
-                  background:linear-gradient(#191c20,#0c0e11); padding:11px; cursor:pointer;
-                  box-shadow:0 40px 90px -20px rgba(0,0,0,.65), inset 0 0 0 1px rgba(255,255,255,.06),
-                             inset 0 0 0 3px #060708; }
+          .b100-flowdemo .phone { position:relative; width:256px; height:524px; flex-shrink:0; border-radius:46px;
+                  background:linear-gradient(#1a1d22,#0c0e11); padding:11px; cursor:pointer;
+                  box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
           .b100-flowdemo .phone::after { content:''; position:absolute; z-index:9; top:20px; left:50%; transform:translateX(-50%);
-                  width:82px; height:24px; background:#050607; border-radius:13px; }
-          .phone-screen { position:relative; width:100%; height:100%; border-radius:33px; overflow:hidden;
-                  background:var(--m-bg); font-family:'Roboto',-apple-system,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased;
-                  --m-bg:#F3F2ED; --m-card:#FFFFFF;
-                  --m-ink:#1B2430; --m-ink2:#616B78; --m-ink3:#9AA3AD;
-                  --m-line:#E8E4DC; --m-line2:#F1EEE7;
-                  --m-accent:#2F5FCB; --m-accent-tint:#EBF1FC;
-                  --m-solid:#1E2732;
-                  --m-amber:#95580F; --m-amber-bg:#FAEAD2; --m-amber-dot:#D98A1C;
-                  --m-green:#0F7245; --m-green-bg:#E2F0E7; --m-green-dot:#1E9E63;
-                  --m-red:#B23A2E; --m-red-bg:#FAE7E3; --m-red-dot:#D0503F;
+                  width:84px; height:24px; background:#050607; border-radius:13px;
+                  box-shadow:inset -18px 0 0 -12px #16181c; }
+          .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
+                  background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
+                  --m-bg:#F4F3EF; --m-surface:#FFFFFF;
+                  --m-ink:#1A2330; --m-ink2:#5C6672; --m-ink3:#98A0AB;
+                  --m-line:#E9E5DD; --m-line2:#F1EEE7;
+                  --m-accent:#2E5FC9; --m-accent-tint:#E9F0FC;
+                  --m-amber:#8F5410; --m-amber-bg:#FBEBD1; --m-amber-dot:#D68A1F;
+                  --m-green:#0E6E43; --m-green-bg:#E3F0E8; --m-green-dot:#1E9E63;
+                  --m-red:#AC382D; --m-red-bg:#FAE7E2; --m-red-dot:#CE5142;
+                  --m-sans:'Roboto',-apple-system,'Segoe UI',sans-serif;
+                  --m-sys:-apple-system,'SF Pro Text','Helvetica Neue',Roboto,sans-serif;
                   --m-mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
-                  --m-sh-sm:0 1px 2px rgba(27,36,48,.05),0 1px 1px rgba(27,36,48,.03);
-                  --m-sh-md:0 10px 26px -8px rgba(27,36,48,.16),0 2px 6px rgba(27,36,48,.05);
-                  --m-sh-lg:0 24px 54px -14px rgba(27,36,48,.26); }
+                  --m-e1:0 1px 2px rgba(20,26,38,.05);
+                  --m-e2:0 8px 22px -8px rgba(20,26,38,.15),0 2px 6px rgba(20,26,38,.05);
+                  --m-e3:0 26px 52px -16px rgba(20,26,38,.30); }
           .scr { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--m-bg);
                   opacity:0; z-index:1; transition:none; pointer-events:none; }
           .scr.on { opacity:1; z-index:2; pointer-events:auto; transition:opacity .28s ease; }
           .phone-screen::after { content:''; position:absolute; z-index:8; bottom:7px; left:50%; transform:translateX(-50%);
-                  width:104px; height:4px; border-radius:2px; background:rgba(27,36,48,.22); }
-          /* agent mark — the app's signature */
+                  width:108px; height:4px; border-radius:2px; background:rgba(20,26,38,.24); }
+          /* agent mark */
           .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-ink); position:relative; flex-shrink:0; }
           .m-mark::before { content:''; position:absolute; inset:0; margin:auto; width:10px; height:10px; background:#fff;
                   clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%); }
-          .m-mark.sm { width:18px; height:18px; border-radius:6px; }
+          .m-mark.sm { width:17px; height:17px; border-radius:6px; }
           .m-mark.sm::before { width:8px; height:8px; }
           /* status bar */
-          .m-status { height:40px; display:flex; align-items:center; justify-content:space-between; padding:0 20px 0 22px;
-                  font-family:var(--m-mono); font-size:11.5px; font-weight:500; color:var(--m-ink); letter-spacing:.4px; flex-shrink:0; }
+          .m-status { height:38px; display:flex; align-items:center; justify-content:space-between; padding:0 20px 0 24px;
+                  font-family:var(--m-sys); font-size:13px; font-weight:600; color:var(--m-ink); flex-shrink:0; }
           .m-status .m-r { display:flex; align-items:center; gap:5px; }
           .m-status .m-cell { display:flex; align-items:flex-end; gap:1.5px; height:9px; }
           .m-status .m-cell i { width:2.5px; background:var(--m-ink); border-radius:.5px; }
           .m-status .m-cell i:nth-child(1){height:4px}.m-status .m-cell i:nth-child(2){height:6px}
           .m-status .m-cell i:nth-child(3){height:8px}.m-status .m-cell i:nth-child(4){height:9px}
-          .m-status .m-wifi { width:13px; height:9px; border-radius:0 0 6px 6px; border:2px solid var(--m-ink); border-top:0; opacity:.9; }
-          .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(27,36,48,.4); border-radius:3px; position:relative; padding:1.5px; }
-          .m-status .m-bat::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:rgba(27,36,48,.4); border-radius:0 1px 1px 0; }
-          .m-status .m-bat i { display:block; height:100%; width:72%; background:var(--m-ink); border-radius:1.5px; }
+          .m-status .m-wifi { width:14px; height:10px; border-radius:0 0 7px 7px; border:2px solid var(--m-ink); border-top:0; }
+          .m-status .m-bat { width:21px; height:10px; border:1px solid rgba(20,26,38,.35); border-radius:3px; position:relative; padding:1.5px; }
+          .m-status .m-bat::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:rgba(20,26,38,.35); border-radius:0 1px 1px 0; }
+          .m-status .m-bat i { display:block; height:100%; width:88%; background:var(--m-ink); border-radius:1.5px; }
           /* app bar */
-          .m-appbar { height:50px; padding:0 16px; display:flex; align-items:center; gap:10px; flex-shrink:0; background:var(--m-bg);
-                  border-bottom:1px solid transparent; }
-          .m-appbar .m-back { width:22px; height:22px; flex-shrink:0; color:var(--m-ink); margin-left:-4px; }
-          .m-appbar h5 { margin:0; font-size:17px; font-weight:700; letter-spacing:-.4px; color:var(--m-ink); flex:1; }
-          .m-appbar .m-act { width:20px; height:20px; flex-shrink:0; color:var(--m-ink2); }
+          .m-appbar { min-height:50px; padding:8px 14px 10px; display:flex; align-items:center; gap:10px; flex-shrink:0; background:var(--m-bg); border-bottom:1px solid var(--m-line); }
+          .m-appbar.plain { border-bottom-color:transparent; }
+          .m-appbar .m-back { width:11px; height:20px; flex-shrink:0; color:var(--m-ink); }
+          .m-appbar h5 { margin:0; font-size:18px; font-weight:700; letter-spacing:-.4px; color:var(--m-ink); flex:1;
+                  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-appbar .m-sub5 { display:block; font-family:var(--m-sans); font-size:10.5px; font-weight:400; color:var(--m-ink2); letter-spacing:0; margin-top:1px; }
+          .m-appbar h5.thread { font-size:14px; }
+          .m-appbar .m-act { width:19px; height:19px; flex-shrink:0; color:var(--m-ink2); }
           /* filter row */
-          .m-filters { display:flex; gap:8px; padding:4px 16px 14px; flex-shrink:0; }
-          .m-fchip { display:flex; align-items:center; gap:5px; height:28px; padding:0 13px; border:1px solid var(--m-line);
-                  background:var(--m-card); border-radius:999px; font-size:11px; font-weight:500; color:var(--m-ink2); box-shadow:var(--m-sh-sm); }
-          .m-fchip.sel { background:var(--m-ink); border-color:var(--m-ink); color:#fff; box-shadow:none; }
-          /* scroll body + list */
-          .m-body { flex:1; overflow:hidden; padding:4px 16px 16px; }
-          .m-list { display:flex; flex-direction:column; gap:9px; }
-          .m-card { background:var(--m-card); border:1px solid var(--m-line); border-radius:14px; box-shadow:var(--m-sh-sm); }
-          .m-row { padding:13px 15px; position:relative; }
-          .m-row.flag { background:#FFFBF4; }
-          .m-row.flag::before { content:''; position:absolute; left:0; top:15px; bottom:15px; width:3px; border-radius:0 3px 3px 0; background:var(--m-amber-dot); }
-          .m-row .m-rt { display:flex; align-items:center; justify-content:space-between; gap:8px; }
-          .m-buyer { font-size:13.5px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink); }
-          .m-sub { font-size:11.5px; color:var(--m-ink2); margin-top:3px; }
-          .m-money { font-family:var(--m-mono); font-size:11px; color:var(--m-ink); letter-spacing:-.2px; }
+          .m-filters { display:flex; gap:8px; padding:10px 16px 12px; flex-shrink:0; }
+          .m-fchip { display:flex; align-items:center; gap:6px; height:30px; padding:0 11px; border:1px solid var(--m-line);
+                  background:var(--m-surface); border-radius:9px; font-size:11.5px; font-weight:500; color:var(--m-ink); box-shadow:var(--m-e1); }
+          .m-fchip svg { width:11px; height:11px; color:var(--m-ink3); }
+          /* transaction list */
+          .m-body { flex:1; overflow:hidden; padding:2px 16px 16px; }
+          .m-list { display:flex; flex-direction:column; gap:8px; }
+          .m-card { background:var(--m-surface); border:1px solid var(--m-line); border-radius:13px; box-shadow:var(--m-e1); }
+          .m-row { padding:12px 14px; position:relative; }
+          .m-row.flag { background:#FEFAF3; }
+          .m-row.flag::before { content:''; position:absolute; left:0; top:13px; bottom:13px; width:3px; border-radius:0 3px 3px 0; background:var(--m-amber-dot); }
+          .m-row .m-rt { display:flex; align-items:center; gap:8px; }
+          .m-buyer { flex:1; min-width:0; font-size:13.5px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink);
+                  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-row-b { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-top:5px; }
+          .m-sub { font-size:11.5px; color:var(--m-ink2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-money { font-family:var(--m-sans); font-size:12.5px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink);
+                  font-variant-numeric:tabular-nums; white-space:nowrap; }
           .m-chip { display:inline-flex; align-items:center; gap:5px; height:21px; padding:0 9px 0 8px; border-radius:999px;
-                  font-size:10px; font-weight:600; white-space:nowrap; letter-spacing:.2px; }
+                  font-size:10px; font-weight:600; white-space:nowrap; letter-spacing:.1px; flex-shrink:0; }
           .m-chip::before { content:''; width:5px; height:5px; border-radius:50%; }
           .m-chip.warn { background:var(--m-amber-bg); color:var(--m-amber); } .m-chip.warn::before { background:var(--m-amber-dot); }
           .m-chip.ok { background:var(--m-green-bg); color:var(--m-green); } .m-chip.ok::before { background:var(--m-green-dot); }
           .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
-          .m-chip.pend { background:#EDEBE5; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
-          .m-agentbadge { display:inline-flex; align-items:center; gap:4px; height:20px; padding:0 8px; border-radius:999px;
-                  font-size:10px; font-weight:600; color:var(--m-green); background:var(--m-green-bg); margin-top:9px; }
-          /* copilot bottom sheet */
-          .m-scrim { position:absolute; inset:0; background:rgba(27,36,48,.34); }
-          .m-sheet { position:absolute; left:0; right:0; bottom:0; background:var(--m-card); border-radius:24px 24px 0 0;
-                  box-shadow:0 -18px 50px rgba(27,36,48,.24); padding:8px 16px 18px; display:flex; flex-direction:column;
-                  transform:translateY(101%); transition:transform .48s cubic-bezier(.32,.72,0,1); }
-          .scr.on .m-sheet { transform:translateY(0); }
-          .m-grab { width:38px; height:5px; border-radius:3px; background:#DEDBD3; margin:2px auto 14px; flex-shrink:0; }
-          .m-sheet-h { display:flex; align-items:center; gap:9px; margin-bottom:13px; }
-          .m-sheet-h h6 { margin:0; font-size:14.5px; font-weight:700; letter-spacing:-.3px; color:var(--m-ink); flex:1; }
-          .m-sheet-h .m-x { width:18px; height:18px; color:var(--m-ink3); flex-shrink:0; }
-          .m-sheet h6 { margin:0 0 12px; font-size:14px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
-          .m-ctxchip { display:flex; align-items:center; gap:6px; font-family:var(--m-mono); font-size:10.5px; font-weight:500; color:var(--m-amber);
-                  background:var(--m-amber-bg); border-radius:9px; padding:8px 10px; margin-bottom:12px; white-space:nowrap; overflow:hidden; }
-          .m-input { display:flex; align-items:center; height:40px; border:1px solid var(--m-line); border-radius:11px;
-                  padding:0 13px; font-size:12.5px; color:var(--m-ink); background:var(--m-bg); }
-          .m-input::after { content:''; width:1.5px; height:16px; background:var(--m-accent); margin-left:2px; animation:m-caret 1s step-end infinite; }
-          @keyframes m-caret { 50% { opacity:0; } }
-          .m-plan { margin-top:14px; border:1px solid var(--m-line); border-radius:12px; padding:13px 14px; background:var(--m-bg); }
-          .m-plan-t { font-family:var(--m-mono); font-size:9px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:10px; }
-          .m-plan-steps { position:relative; }
-          .m-plan-steps::before { content:''; position:absolute; left:6px; top:12px; bottom:12px; width:1.5px; background:var(--m-line); }
-          .m-plan-step { display:flex; align-items:center; gap:11px; font-size:12px; color:var(--m-ink2); padding:5px 0; white-space:nowrap; position:relative; }
-          .m-plan-step b { color:var(--m-ink); font-weight:600; }
-          .m-plan-step .m-mut { color:var(--m-ink3); }
-          .m-dot2 { width:13px; height:13px; border-radius:50%; background:var(--m-card); border:1.5px solid var(--m-line); flex-shrink:0; box-sizing:border-box; }
-          .m-spin { width:13px; height:13px; border:2px solid var(--m-accent); border-right-color:transparent; border-radius:50%;
-                  flex-shrink:0; background:var(--m-card); animation:m-spin .7s linear infinite; }
-          @keyframes m-spin { to { transform:rotate(360deg); } }
-          /* chat / answer */
-          .m-chat { flex:1; overflow:hidden; padding:8px 16px 16px; display:flex; flex-direction:column; gap:9px; }
-          .m-src { display:flex; gap:10px; border:1px solid var(--m-line); border-radius:12px; padding:10px 12px; background:var(--m-card); box-shadow:var(--m-sh-sm); }
-          .m-src-mono { width:26px; height:26px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-                  font-family:var(--m-mono); font-size:9px; font-weight:500; letter-spacing:.02em; }
-          .m-src.ok .m-src-mono { background:var(--m-green-bg); color:var(--m-green); }
-          .m-src.warn .m-src-mono { background:var(--m-amber-bg); color:var(--m-amber); }
-          .m-src.err .m-src-mono { background:var(--m-red-bg); color:var(--m-red); }
-          .m-src-c { flex:1; min-width:0; }
-          .m-src-h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
-          .m-src-name { font-size:11.5px; font-weight:700; color:var(--m-ink); letter-spacing:-.1px; }
-          .m-src-time { font-family:var(--m-mono); font-size:9.5px; color:var(--m-ink3); white-space:nowrap; }
-          .m-src-body { font-size:11.5px; line-height:1.4; color:var(--m-ink2); margin-top:3px; }
-          .m-answer { font-size:13px; line-height:1.55; color:var(--m-ink); padding:4px 2px 2px; }
+          .m-chip.pend { background:#ECEAE3; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
+          /* conversation */
+          .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:14px 15px 8px; display:flex; flex-direction:column; gap:14px; }
+          .m-conv::-webkit-scrollbar { display:none; }
+          .m-turn { display:flex; }
+          .m-turn.user { justify-content:flex-end; }
+          .m-turn.user .m-utext { max-width:80%; font-size:12.5px; line-height:1.45; padding:9px 13px; border-radius:16px 16px 6px 16px;
+                  background:var(--m-ink); color:#fff; }
+          .m-turn.bot { gap:9px; }
+          .m-turn.bot > .m-mark { margin-top:1px; }
+          .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
+          .m-ctxline { display:flex; align-items:center; gap:6px; font-size:10.5px; font-weight:500; color:var(--m-amber); }
+          .m-ctxline svg { width:12px; height:12px; }
+          .m-thinking { font-size:11.5px; color:var(--m-ink2); display:flex; align-items:center; gap:8px; }
+          .m-answer { font-size:12.5px; line-height:1.55; color:var(--m-ink); }
           .m-answer b { font-weight:700; }
-          .m-conf { display:inline-flex; align-items:center; gap:8px; height:26px; padding:0 12px 0 8px; border-radius:999px;
-                  font-size:10.5px; font-weight:600; color:var(--m-amber); background:var(--m-amber-bg); align-self:flex-start; }
+          .m-tstamp { font-family:var(--m-mono); font-size:9px; color:var(--m-ink3); }
+          /* plan stepper */
+          .m-plan { border:1px solid var(--m-line); border-radius:12px; padding:11px 13px; background:var(--m-surface); box-shadow:var(--m-e1); }
+          .m-plan-t { font-size:9px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:9px; }
+          .m-steps { position:relative; }
+          .m-steps::before { content:''; position:absolute; left:7.5px; top:14px; bottom:14px; width:1.5px; background:var(--m-line); }
+          .m-step { display:flex; align-items:center; gap:11px; font-size:11.5px; color:var(--m-ink2); padding:4px 0; position:relative; white-space:nowrap; }
+          .m-step b { color:var(--m-ink); font-weight:600; }
+          .m-step .m-node { width:16px; height:16px; border-radius:50%; flex-shrink:0; background:var(--m-surface);
+                  border:1.6px solid var(--m-line); box-sizing:border-box; position:relative; }
+          .m-step.done .m-node { background:var(--m-green-dot); border-color:var(--m-green-dot); }
+          .m-step.done .m-node::after { content:''; position:absolute; left:5px; top:2.5px; width:3px; height:6px; border:solid #fff; border-width:0 1.6px 1.6px 0; transform:rotate(42deg); }
+          .m-step.run .m-node { border-color:var(--m-accent); border-right-color:transparent; animation:m-spin .7s linear infinite; }
+          @keyframes m-spin { to { transform:rotate(360deg); } }
+          .m-step.done, .m-step.run { color:var(--m-ink); }
+          /* source rows */
+          .m-srcs { border:1px solid var(--m-line); border-radius:12px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e1); }
+          .m-src { display:flex; align-items:center; gap:10px; padding:9px 12px; border-bottom:1px solid var(--m-line2); }
+          .m-src:last-child { border-bottom:0; }
+          .m-src-mono { width:24px; height:24px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                  font-family:var(--m-mono); font-size:8.5px; font-weight:500; background:#EEF0F3; color:var(--m-ink2); }
+          .m-src-c { flex:1; min-width:0; }
+          .m-src-name { font-size:11px; font-weight:600; color:var(--m-ink); }
+          .m-src-body { font-size:10.5px; line-height:1.35; color:var(--m-ink2); margin-top:2px; }
+          .m-src-r { flex-shrink:0; display:flex; align-items:center; gap:6px; }
+          .m-src-dot { width:6px; height:6px; border-radius:50%; }
+          .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
+          .m-src-time { font-family:var(--m-mono); font-size:9px; color:var(--m-ink3); }
+          /* confidence meter */
+          .m-conf { display:inline-flex; align-items:center; gap:8px; height:24px; padding:0 11px 0 8px; border-radius:999px;
+                  font-size:10px; font-weight:600; color:var(--m-ink2); background:#ECEAE3; align-self:flex-start; }
           .m-conf-bars { display:flex; align-items:flex-end; gap:2px; }
-          .m-conf-bars i { width:3px; border-radius:1px; background:currentColor; opacity:.28; }
+          .m-conf-bars i { width:3px; border-radius:1px; background:var(--m-ink3); }
           .m-conf-bars i:nth-child(1){ height:5px; } .m-conf-bars i:nth-child(2){ height:8px; } .m-conf-bars i:nth-child(3){ height:11px; }
-          .m-conf.med .m-conf-bars i:nth-child(-n+2){ opacity:1; }
-          .m-conf.low .m-conf-bars i:nth-child(1){ opacity:1; }
-          .m-conf.high .m-conf-bars i{ opacity:1; }
-          .m-btn { display:flex; align-items:center; justify-content:center; height:42px; border-radius:12px;
-                  font-size:13px; font-weight:600; letter-spacing:-.1px; background:var(--m-solid); color:#fff; box-shadow:var(--m-sh-md); }
-          .m-btn.text { height:40px; background:transparent; color:var(--m-ink2); box-shadow:none; font-weight:600; }
-          .m-btn.danger { background:var(--m-card); color:var(--m-red); box-shadow:none; border:1.4px solid var(--m-red); }
-          .m-bubble { max-width:82%; font-size:12.5px; line-height:1.45; padding:10px 13px; border-radius:16px; }
-          .m-bubble.me { align-self:flex-end; background:var(--m-ink); color:#fff; border-bottom-right-radius:6px; }
-          .m-bubble.bot { align-self:flex-start; background:var(--m-card); border:1px solid var(--m-line); color:var(--m-ink2); border-bottom-left-radius:6px; box-shadow:var(--m-sh-sm); }
-          .m-collapsed { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:600; color:var(--m-ink2);
-                  background:var(--m-card); border:1px solid var(--m-line); border-radius:11px; padding:10px 12px; box-shadow:var(--m-sh-sm); }
-          .m-collapsed::after { content:'▸'; color:var(--m-ink3); margin-left:auto; }
-          /* agent action card — the hero component */
-          .m-action { margin:10px 16px 0; border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-card); box-shadow:var(--m-sh-lg); }
-          .m-action-h { display:flex; align-items:center; gap:9px; background:var(--m-ink); padding:10px 13px; white-space:nowrap;
-                  font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:#fff; }
-          .m-action-h .m-mark { background:rgba(255,255,255,.16); }
+          .m-conf.med { color:var(--m-amber); background:var(--m-amber-bg); }
+          .m-conf.med .m-conf-bars i:nth-child(-n+2){ background:var(--m-amber); }
+          .m-conf.high { color:var(--m-green); background:var(--m-green-bg); }
+          .m-conf.high .m-conf-bars i{ background:var(--m-green); }
+          /* CTA + buttons */
+          .m-cta { display:flex; align-items:center; justify-content:center; gap:7px; height:40px; border-radius:11px;
+                  font-size:12.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-ink); color:#fff; box-shadow:var(--m-e2); }
+          .m-cta svg { width:14px; height:14px; }
+          .m-btn { display:flex; align-items:center; justify-content:center; height:40px; border-radius:11px;
+                  font-size:12.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-ink); color:#fff; }
+          .m-btn.text { background:transparent; color:var(--m-ink2); }
+          .m-btn.danger { background:var(--m-surface); color:var(--m-red); border:1.4px solid var(--m-red); }
+          /* agent action card */
+          .m-action { border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e3); }
+          .m-action-h { display:flex; align-items:center; gap:5px; background:var(--m-ink); padding:9px 10px;
+                  font-size:8.5px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:#fff; white-space:nowrap; }
+          .m-action-h .m-mark { flex-shrink:0; background:rgba(255,255,255,.16); }
           .m-action-h .m-mark::before { background:#fff; }
-          .m-action-b { padding:12px 14px 10px; }
-          .m-action-t { font-size:13.5px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
-          .m-action-meta { font-size:10.5px; color:var(--m-ink2); margin-top:5px; }
-          .m-action-meta .m-state { font-size:8.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-                  color:var(--m-accent); background:var(--m-accent-tint); border-radius:999px; padding:2px 7px; margin-right:6px; }
-          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:11px 14px 0; overflow:hidden; }
+          .m-action-h span { overflow:hidden; text-overflow:ellipsis; }
+          .m-action-state { flex-shrink:0; margin-left:auto; font-size:8px; font-weight:600; letter-spacing:.05em; padding:3px 7px;
+                  border-radius:999px; background:rgba(255,255,255,.15); color:#fff; white-space:nowrap; }
+          .m-action-b { padding:12px 13px; }
+          .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
+          .m-action-facts { margin-top:8px; display:flex; flex-direction:column; gap:5px; }
+          .m-fact { display:grid; grid-template-columns:52px 1fr; column-gap:8px; font-size:10.5px; color:var(--m-ink2); line-height:1.4; }
+          .m-fact b { color:var(--m-ink); font-weight:600; font-variant-numeric:tabular-nums; }
+          .m-fact .m-k { color:var(--m-ink3); }
+          .m-note { margin-top:9px; font-size:10px; color:var(--m-ink2); display:flex; align-items:center; gap:6px; }
+          .m-note svg { width:12px; height:12px; color:var(--m-green-dot); flex-shrink:0; }
+          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:11px 13px 3px; overflow:hidden; }
           .m-progress i { display:block; height:100%; background:var(--m-ink); border-radius:3px; }
-          .m-alist { border-top:1px solid var(--m-line2); }
-          .m-arow { display:flex; align-items:center; gap:11px; height:37px; padding:0 14px; border-bottom:1px solid var(--m-line2);
-                  font-family:var(--m-mono); font-size:11px; color:var(--m-ink); white-space:nowrap; letter-spacing:-.2px; }
+          .m-progress-l { font-size:10px; color:var(--m-ink2); padding:0 13px 4px; }
+          .m-alist { border-top:1px solid var(--m-line2); max-height:132px; overflow-y:auto; scrollbar-width:none; }
+          .m-alist::-webkit-scrollbar { display:none; }
+          .m-arow { display:flex; align-items:center; gap:10px; height:36px; padding:0 13px; border-bottom:1px solid var(--m-line2);
+                  font-size:11px; color:var(--m-ink); white-space:nowrap; }
           .m-arow:last-child { border-bottom:0; }
-          .m-arow.mut { color:var(--m-ink3); font-family:'Roboto',sans-serif; letter-spacing:0; }
-          .m-arow .m-amt { margin-left:auto; color:var(--m-ink2); font-variant-numeric:tabular-nums; }
-          .m-check { width:17px; height:17px; border-radius:6px; border:1.75px solid var(--m-ink); flex-shrink:0; position:relative; }
+          .m-arow .m-gw { font-family:var(--m-mono); font-size:10px; letter-spacing:-.3px; }
+          .m-arow .m-amt { margin-left:auto; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.2px; }
+          .m-check { width:16px; height:16px; border-radius:5px; border:1.6px solid var(--m-ink); flex-shrink:0; position:relative; }
           .m-check.on { background:var(--m-ink); }
-          .m-check.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px;
-                  border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
+          .m-check.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
           .m-check.off { border-color:var(--m-ink3); }
-          .m-atag { font-family:'Roboto',sans-serif; font-size:9px; font-weight:600; background:var(--m-red-bg); color:var(--m-red);
-                  border-radius:999px; padding:2px 8px; margin-left:auto; white-space:nowrap; letter-spacing:0; }
-          .m-astat { margin-left:auto; font-family:'Roboto',sans-serif; font-size:10.5px; font-weight:600; display:flex; align-items:center; gap:5px; letter-spacing:0; }
+          .m-atag { font-size:9px; font-weight:600; background:var(--m-red-bg); color:var(--m-red); border-radius:999px; padding:2px 8px; margin-left:auto; }
+          .m-astat { margin-left:auto; font-size:10px; font-weight:600; display:flex; align-items:center; gap:5px; }
           .m-astat.ok { color:var(--m-green); } .m-astat.run { color:var(--m-accent); }
           .m-astat.ok::before { content:''; width:12px; height:12px; border-radius:50%; background:var(--m-green-dot);
                   -webkit-mask:linear-gradient(#000 0 0) center/5px 2px no-repeat; }
           .m-astat.run::before { content:''; width:9px; height:9px; border:1.5px solid currentColor; border-right-color:transparent; border-radius:50%; animation:m-spin .7s linear infinite; }
-          .m-action-f { display:flex; gap:8px; padding:12px 14px; border-top:1px solid var(--m-line2); }
-          .m-action-f .m-btn { flex:2; white-space:nowrap; font-size:12.5px; height:40px; }
-          .m-action-f .m-btn.text { flex:1; }
-          /* audit timeline */
-          .m-timeline { margin-top:11px; padding-left:5px; border-left:1.5px solid var(--m-line); }
-          .m-tl { display:flex; align-items:baseline; gap:9px; font-size:11px; padding:4px 0; position:relative; }
-          .m-tl::before { content:''; position:absolute; left:-9.5px; top:6px; width:8px; height:8px; border-radius:50%;
-                  background:var(--m-card); border:1.75px solid var(--m-ink); }
+          .m-action-f { display:flex; gap:8px; padding:11px 13px; border-top:1px solid var(--m-line2); }
+          .m-action-f .m-btn { flex:1; white-space:nowrap; font-size:12px; height:38px; }
+          .m-action-f .m-btn.text { flex:0 0 auto; padding:0 6px; }
+          /* collapsed action pill */
+          .m-collapsed { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--m-ink2);
+                  background:var(--m-surface); border:1px solid var(--m-line); border-radius:11px; padding:9px 12px; box-shadow:var(--m-e1); }
+          .m-collapsed .m-mark { width:16px; height:16px; border-radius:5px; }
+          .m-collapsed .m-mark::before { width:7px; height:7px; }
+          .m-collapsed .m-cv { margin-left:auto; width:12px; height:12px; color:var(--m-ink3); }
+          /* input bar */
+          .m-inputbar { flex-shrink:0; display:flex; align-items:center; gap:9px; padding:9px 14px 12px; border-top:1px solid var(--m-line); background:var(--m-bg); }
+          .m-inputbar .m-field { flex:1; height:38px; border:1px solid var(--m-line); border-radius:999px; background:var(--m-surface);
+                  display:flex; align-items:center; padding:0 15px; font-size:12px; color:var(--m-ink3); }
+          .m-inputbar .m-send { width:38px; height:38px; border-radius:50%; background:var(--m-ink); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+          .m-inputbar .m-send svg { width:15px; height:15px; color:#fff; }
+          /* audit trail (screen 7) */
+          .m-agentbadge { display:inline-flex; align-items:center; gap:4px; height:20px; padding:0 8px; border-radius:999px;
+                  font-size:10px; font-weight:600; color:var(--m-green); background:var(--m-green-bg); }
+          .m-agentbadge svg { width:10px; height:10px; }
+          .m-row-agent { display:flex; align-items:center; gap:8px; margin-top:8px; }
+          .m-row-agent .m-cv { margin-left:auto; width:13px; height:13px; color:var(--m-ink3); }
+          .m-audit { margin-top:11px; padding-top:11px; border-top:1px solid var(--m-line2); }
+          .m-audit-t { font-size:9px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:9px; }
+          .m-tl { display:flex; align-items:center; gap:10px; font-size:10.5px; padding:3.5px 0; position:relative; padding-left:20px; }
+          .m-tl::before { content:''; position:absolute; left:7px; top:0; bottom:0; width:1.5px; background:var(--m-line); }
+          .m-tl:first-child::before { top:50%; }
+          .m-tl:last-child::before { bottom:50%; }
+          .m-tl::after { content:''; position:absolute; left:2.5px; top:50%; transform:translateY(-50%); width:10px; height:10px; border-radius:50%;
+                  background:var(--m-green-dot); }
           .m-tl-k { font-weight:600; color:var(--m-ink); }
-          .m-tl-v { margin-left:auto; font-family:var(--m-mono); font-size:10px; color:var(--m-ink3); }
+          .m-tl-v { margin-left:auto; font-size:10px; color:var(--m-ink2); font-variant-numeric:tabular-nums; }
           /* controls */
           .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
           .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
@@ -1243,109 +1275,179 @@
                       <!-- 1 — Transactions list -->
                       <div class="scr on" data-step="1">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
-                        <div class="m-filters"><span class="m-fchip sel">This month</span><span class="m-fchip">All buyers</span></div>
+                        <div class="m-appbar plain"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-filters">
+                          <span class="m-fchip">This month <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
+                          <span class="m-fchip">All buyers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
+                        </div>
                         <div class="m-body"><div class="m-list">
-                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;<span class="m-money">$25,000.00</span></div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;<span class="m-money">$42,000.00</span></div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;<span class="m-money">$8,200.00</span></div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">TechStart Inc</span><span class="m-chip err">Error</span></div><div class="m-sub">CloudServ&nbsp;·&nbsp;<span class="m-money">$5,500.00</span></div></div>
+                          <div class="m-card m-row flag">
+                            <div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div>
+                            <div class="m-row-b"><span class="m-sub">Widget Co · card processed today</span><span class="m-money">$10,000.00</span></div>
+                          </div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Global Industries Ltd</span><span class="m-chip pend">Pending</span></div>
+                            <div class="m-row-b"><span class="m-sub">Parts Plus</span><span class="m-money">$25,000.00</span></div>
+                          </div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">FleetCo</span><span class="m-money">$42,000.00</span></div>
+                          </div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">FarmFresh</span><span class="m-money">$8,200.00</span></div>
+                          </div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">TechStart Inc</span><span class="m-chip err">Error</span></div>
+                            <div class="m-row-b"><span class="m-sub">CloudServ</span><span class="m-money">$5,500.00</span></div>
+                          </div>
                         </div></div>
                       </div>
 
-                      <!-- 2 — Copilot opens (L1 -> L2) -->
+                      <!-- 2 — Copilot: question sent, plan running -->
                       <div class="scr" data-step="2">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
-                        <div class="m-body" style="filter:blur(1.5px);opacity:.5"><div class="m-list">
-                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;<span class="m-money">$25,000.00</span></div></div>
-                        </div></div>
-                        <div class="m-scrim"></div>
-                        <div class="m-sheet">
-                          <div class="m-grab"></div>
-                          <div class="m-sheet-h"><span class="m-mark"></span><h6>Copilot</h6><svg class="m-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
-                          <div class="m-ctxchip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly&nbsp;·&nbsp;Acme Corp&nbsp;·&nbsp;GW…541</div>
-                          <div class="m-input">Why didn&rsquo;t this settle?</div>
-                          <div class="m-plan">
-                            <div class="m-plan-t">Plan</div>
-                            <div class="m-plan-steps">
-                              <div class="m-plan-step"><span class="m-spin"></span><b>Gen&nbsp;3</b><span class="m-mut">&nbsp;·&nbsp;card system</span></div>
-                              <div class="m-plan-step"><span class="m-dot2"></span><b>Transfermate</b><span class="m-mut">&nbsp;·&nbsp;transfer</span></div>
-                              <div class="m-plan-step"><span class="m-dot2"></span><b>Gen&nbsp;2</b><span class="m-mut">&nbsp;·&nbsp;mapping</span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Acme Corp · GW…541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-ctxline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 4 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 4a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly on this transaction · loaded as context</div>
+                            <div class="m-plan">
+                              <div class="m-plan-t">Checking sources</div>
+                              <div class="m-steps">
+                                <div class="m-step run"><span class="m-node"></span><b>Gen 3</b> · card system</div>
+                                <div class="m-step"><span class="m-node"></span>Transfermate · transfer</div>
+                                <div class="m-step"><span class="m-node"></span>Gen 2 · mapping</div>
+                              </div>
                             </div>
-                          </div>
+                          </div></div>
                         </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
                       </div>
 
-                      <!-- 3 — The answer (L2) -->
+                      <!-- 3 — Copilot: the answer -->
                       <div class="scr" data-step="3">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
-                        <div class="m-chat">
-                          <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Gen 3</span><span class="m-src-time">14:31</span></div><div class="m-src-body">Card captured in full&nbsp;·&nbsp;$10,000.00</div></div></div>
-                          <div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Transfermate</span><span class="m-src-time">14:31</span></div><div class="m-src-body">Leg 1 complete&nbsp;·&nbsp;Leg 2 never initiated</div></div></div>
-                          <div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Gen 2</span><span class="m-src-time">14:31</span></div><div class="m-src-body">No Gateway ID match</div></div></div>
-                          <div class="m-answer">Leg 2 never fired. <b>11 more</b> Acme transactions are in the same state.</div>
-                          <span class="m-conf med"><span class="m-conf-bars"><i></i><i></i><i></i></span>Confidence: medium</span>
-                          <div class="m-btn">Retry Leg 2 on these 12</div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Acme Corp · GW…541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-srcs">
+                              <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div>
+                              <div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div>
+                              <div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div>
+                            </div>
+                            <div class="m-answer">Leg 2 was never initiated. <b>11 more</b> Acme transactions are stuck the same way.</div>
+                            <span class="m-conf med"><span class="m-conf-bars"><i></i><i></i><i></i></span>Confidence: medium</span>
+                            <div class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"></path></svg>Retry Leg 2 on all 12</div>
+                          </div></div>
                         </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
                       </div>
 
-                      <!-- 4 — Approve & execute (L2 -> L3 -> L3) -->
+                      <!-- 4 — Agent Action Card: proposed -->
                       <div class="scr" data-step="4">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
-                        <div class="m-chat" style="padding-top:2px">
-                          <div class="m-action">
-                            <div class="m-action-h"><span class="m-mark"></span>Agent action</div>
-                            <div class="m-action-b">
-                              <div class="m-action-t">Retry Leg 2 settlement</div>
-                              <div class="m-action-meta"><span class="m-state">Proposed</span> 11 of 12 selected&nbsp;·&nbsp;oldest first</div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Acme Corp · GW…541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Here's the retry, ready for your approval.</div>
+                            <div class="m-action">
+                              <div class="m-action-h"><span class="m-mark"></span>Agent action<span class="m-action-state">Proposed</span></div>
+                              <div class="m-action-b">
+                                <div class="m-action-t">Retry Leg 2 settlement</div>
+                                <div class="m-action-facts">
+                                  <div class="m-fact"><span class="m-k">Scope</span><span><b>11 of 12</b> transactions</span></div>
+                                  <div class="m-fact"><span class="m-k">Total</span><span><b>$284,900</b> to 11 suppliers</span></div>
+                                  <div class="m-fact"><span class="m-k">Order</span><span>Oldest first, stop after 2 fails</span></div>
+                                </div>
+                                <div class="m-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4"></path></svg>Reversible for 24h · every step is logged</div>
+                              </div>
+                              <div class="m-alist">
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826541</span><span class="m-amt">$10,000</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826544</span><span class="m-amt">$42,000</span></div>
+                                <div class="m-arow"><span class="m-check off"></span><span class="m-gw">GW…826547</span><span class="m-atag">under dispute</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826550</span><span class="m-amt">$8,200</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826551</span><span class="m-amt">$15,400</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-amt">$31,000</span></div>
+                              </div>
+                              <div class="m-action-f"><span class="m-btn">Approve 11</span><span class="m-btn text">Review each</span></div>
                             </div>
-                            <div class="m-alist">
-                              <div class="m-arow"><span class="m-check on"></span>GW…826541<span class="m-amt">$10,000</span></div>
-                              <div class="m-arow"><span class="m-check on"></span>GW…826544<span class="m-amt">$42,000</span></div>
-                              <div class="m-arow"><span class="m-check off"></span>GW…826547<span class="m-atag">disputed</span></div>
-                              <div class="m-arow"><span class="m-check on"></span>GW…826550<span class="m-amt">$8,200</span></div>
-                              <div class="m-arow mut"><span style="width:16px;flex-shrink:0"></span>+ 7 more selected</div>
-                            </div>
-                            <div class="m-action-f"><span class="m-btn">Approve 11</span><span class="m-btn text">Review</span></div>
-                          </div>
+                          </div></div>
                         </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
                       </div>
 
-                      <!-- 5 — Explain (L3 -> L2) -->
+                      <!-- 5 — Agent Action Card: executing -->
                       <div class="scr" data-step="5">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
-                        <div class="m-chat">
-                          <div class="m-collapsed">Agent action&nbsp;·&nbsp;11 settled&nbsp;·&nbsp;1 skipped</div>
-                          <div class="m-bubble me">why oldest-first?</div>
-                          <div class="m-bubble bot">Oldest transactions are closest to their settlement SLA, so they clear first. Order doesn&rsquo;t change the success rate.</div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Acme Corp · GW…541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Retrying now. You can stop the remaining at any point.</div>
+                            <div class="m-action">
+                              <div class="m-action-h"><span class="m-mark"></span>Agent action<span class="m-action-state">Executing</span></div>
+                              <div class="m-progress"><i style="width:82%"></i></div>
+                              <div class="m-progress-l">9 of 11 settled · 2 in progress</div>
+                              <div class="m-alist">
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826541</span><span class="m-astat ok">Settled</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826544</span><span class="m-astat ok">Settled</span></div>
+                                <div class="m-arow"><span class="m-check off"></span><span class="m-gw">GW…826547</span><span class="m-atag">skipped</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826550</span><span class="m-astat run">Retrying</span></div>
+                                <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826551</span><span class="m-astat run">Retrying</span></div>
+                              </div>
+                              <div class="m-action-f"><span class="m-btn danger">Abort remaining</span></div>
+                            </div>
+                          </div></div>
                         </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
                       </div>
 
-                      <!-- 6 — Audit trail (L3 -> L1) -->
+                      <!-- 6 — Explain: back to chat -->
                       <div class="scr" data-step="6">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
-                        <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Acme Corp · GW…541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-collapsed"><span class="m-mark"></span>Agent action · 11 settled, 1 skipped<svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+                          </div></div>
+                          <div class="m-turn user"><span class="m-utext">Why were these ordered oldest-first?</span></div>
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Oldest transactions are closest to their settlement SLA, so they clear first. The order doesn't change the success rate.</div>
+                            <span class="m-tstamp">14:33</span>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                      <!-- 7 — Audit trail -->
+                      <div class="scr" data-step="7">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar plain"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
                         <div class="m-body"><div class="m-list">
                           <div class="m-card m-row">
                             <div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip ok">Funded</span></div>
-                            <div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div>
-                            <span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span>
-                            <div class="m-timeline">
-                              <div class="m-tl"><span class="m-tl-k">Intent</span><span class="m-tl-v">Ops</span></div>
-                              <div class="m-tl"><span class="m-tl-k">Plan</span><span class="m-tl-v">agent</span></div>
-                              <div class="m-tl"><span class="m-tl-k">Approved</span><span class="m-tl-v">Ops&nbsp;·&nbsp;14:32</span></div>
-                              <div class="m-tl"><span class="m-tl-k">Executed</span><span class="m-tl-v">agent</span></div>
-                              <div class="m-tl"><span class="m-tl-k">Result</span><span class="m-tl-v">settled</span></div>
+                            <div class="m-row-b"><span class="m-sub">Widget Co</span><span class="m-money">$10,000.00</span></div>
+                            <div class="m-row-agent"><span class="m-agentbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Settled by agent · 14:32</span><svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg></div>
+                            <div class="m-audit">
+                              <div class="m-audit-t">Audit trail</div>
+                              <div class="m-tl"><span class="m-tl-k">Intent</span><span class="m-tl-v">Ops · 14:29</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Plan</span><span class="m-tl-v">Agent · 14:30</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Approved</span><span class="m-tl-v">Ops · 14:31</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Executed</span><span class="m-tl-v">Agent · 14:32</span></div>
+                              <div class="m-tl"><span class="m-tl-k">Result</span><span class="m-tl-v">Settled</span></div>
                             </div>
                           </div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;<span class="m-money">$42,000.00</span></div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;<span class="m-money">$8,200.00</span></div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">FleetCo</span><span class="m-money">$42,000.00</span></div>
+                            <div class="m-row-agent"><span class="m-agentbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Settled by agent · 14:32</span><svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+                          </div>
+                          <div class="m-card m-row">
+                            <div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">FarmFresh</span><span class="m-money">$8,200.00</span></div>
+                            <div class="m-row-agent"><span class="m-agentbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Settled by agent · 14:32</span><svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+                          </div>
                         </div></div>
                       </div>
 
@@ -1358,9 +1460,10 @@
                     <button data-step="1" class="on" aria-label="Step 1: the flag">01</button>
                     <button data-step="2" aria-label="Step 2: expand">02</button>
                     <button data-step="3" aria-label="Step 3: the answer">03</button>
-                    <button data-step="4" aria-label="Step 4: approve and execute">04</button>
-                    <button data-step="5" aria-label="Step 5: explain">05</button>
-                    <button data-step="6" aria-label="Step 6: audit trail">06</button>
+                    <button data-step="4" aria-label="Step 4: propose">04</button>
+                    <button data-step="5" aria-label="Step 5: execute">05</button>
+                    <button data-step="6" aria-label="Step 6: explain">06</button>
+                    <button data-step="7" aria-label="Step 7: audit trail">07</button>
                   </div>
                   <p class="flow-cap"></p>
                   <p class="flow-hint">tap the phone to pause&nbsp;·&nbsp;tap a number to jump</p>
@@ -1436,9 +1539,10 @@
           var cap = demo.querySelector('.flow-cap');
           var CAPS = [
             {tag:'l1', t:'L1', h:'The flag', c:'An anomaly chip on the Acme Corp row: the amount to the supplier is off pattern. Ambient, no chat.'},
-            {tag:'tr', t:'L1 → L2', h:'Expand', c:'Tapping the chip opens the copilot with the anomaly loaded and its plan visible: card system, then transfer provider, then legacy mapping.'},
-            {tag:'l2', t:'L2', h:'The answer', c:'Every source is cited with a query time. Leg 2 never fired, and 11 more Acme transactions match. Confidence: medium.'},
-            {tag:'l3', t:'L2 → L3', h:'Approve & execute', c:'The answer becomes an Agent Action Card. Ops drops the one transaction under dispute and approves the rest; progress is abortable and every step is logged.'},
+            {tag:'tr', t:'L1 → L2', h:'Expand', c:'The chip opens the copilot with the anomaly loaded as context. It shows its plan and starts checking Gen 3, Transfermate, then Gen 2.'},
+            {tag:'l2', t:'L2', h:'The answer', c:'Each source is cited with the time it was queried. Leg 2 was never initiated, and 11 more Acme transactions are stuck the same way. Confidence: medium.'},
+            {tag:'l3', t:'L2 → L3', h:'Propose', c:'The answer becomes an Agent Action Card: scope, total value, order, and a reversible-for-24h note. The disputed transaction is already dropped.'},
+            {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Progress is per-item and abortable at any point; the skipped transaction stays out.'},
             {tag:'tr', t:'L3 → L2', h:'Explain', c:'Ops drops back into dialogue to ask why the agent ordered them oldest-first, without losing the execution record.'},
             {tag:'tr', t:'L3 → L1', h:'Audit trail', c:'Back in the list, settled rows carry an agent badge that expands to the full chain: intent, plan, approval, execution, result.'}
           ];
