@@ -749,13 +749,13 @@
           /* ladder */
           .ladder-wrap { font-family:var(--b-mono); user-select:none; padding:36px 24px; }
           .ladder-svg { width:100%; height:auto; display:block; overflow:visible; }
+          .ladder-svg.ladder-v { display:none; max-width:360px; margin:0 auto; }
           .ladder-panels { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; }
           @media (max-width:820px){ .ladder-panels{ grid-template-columns:1fr; } }
           @media (max-width:680px){
-            .ladder-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-            .ladder-scroll::-webkit-scrollbar { display:none; }
-            .ladder-wrap { padding:26px 16px; }
-            .ladder-svg { min-width:600px; }
+            .ladder-wrap { padding:24px 14px; }
+            .ladder-svg.ladder-h { display:none; }
+            .ladder-svg.ladder-v { display:block; }
           }
           .ladder-panel { border:1px solid var(--b-line); border-radius:10px; background:var(--b-panel); }
           .ladder-panel > summary { list-style:none; cursor:pointer; padding:16px 18px; display:block; }
@@ -1090,8 +1090,7 @@
 
                 <div class="b100-figure">
                   <div class="ladder-wrap">
-                    <div class="ladder-scroll">
-                    <svg class="ladder-svg" viewBox="0 0 820 300" role="img" aria-label="A three-level escalation ladder: L1 ambient, L2 copilot, L3 agentic, with escalation arrows rising and de-escalation arrows returning.">
+                    <svg class="ladder-svg ladder-h" viewBox="0 0 820 300" role="img" aria-label="A three-level escalation ladder: L1 ambient, L2 copilot, L3 agentic, with escalation arrows rising and de-escalation arrows returning.">
                       <rect x="40"  y="208" width="200" height="56" rx="8" fill="rgba(138,143,152,0.12)" stroke="#8A8F98" stroke-width="1.5"/>
                       <rect x="310" y="126" width="200" height="56" rx="8" fill="rgba(42,165,224,0.12)"  stroke="#2AA5E0" stroke-width="1.5"/>
                       <rect x="580" y="44"  width="200" height="56" rx="8" fill="rgba(255,107,90,0.12)"  stroke="#FF6B5A" stroke-width="1.5"/>
@@ -1118,7 +1117,35 @@
                         <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
                       </circle>
                     </svg>
-                    </div>
+
+                    <svg class="ladder-svg ladder-v" viewBox="0 0 340 500" role="img" aria-label="A three-level escalation ladder stacked vertically: L3 agentic on top, then L2 copilot, then L1 ambient; solid arrows escalate up the left, dashed arrows return context down the right.">
+                      <rect x="84" y="18"  width="172" height="56" rx="9" fill="rgba(255,107,90,0.12)" stroke="#FF6B5A" stroke-width="1.5"/>
+                      <rect x="84" y="216" width="172" height="56" rx="9" fill="rgba(42,165,224,0.12)"  stroke="#2AA5E0" stroke-width="1.5"/>
+                      <rect x="84" y="414" width="172" height="56" rx="9" fill="rgba(138,143,152,0.12)"  stroke="#8A8F98" stroke-width="1.5"/>
+                      <text x="170" y="41"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#FF6B5A" letter-spacing="1">L3 · AGENTIC</text>
+                      <text x="170" y="59"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">propose → approve → act</text>
+                      <text x="170" y="239" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#2AA5E0" letter-spacing="1">L2 · COPILOT</text>
+                      <text x="170" y="257" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">dialogue</text>
+                      <text x="170" y="437" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#8A8F98" letter-spacing="1">L1 · AMBIENT</text>
+                      <text x="170" y="455" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">system speaks</text>
+                      <path d="M84 216 C 68 194, 68 100, 84 78" fill="none" stroke="#cfd2d6" stroke-width="1.6"/>
+                      <path d="M79 86 L84 76 L89 86 Z" fill="#cfd2d6"/>
+                      <path d="M84 414 C 68 392, 68 298, 84 276" fill="none" stroke="#cfd2d6" stroke-width="1.6"/>
+                      <path d="M79 284 L84 274 L89 284 Z" fill="#cfd2d6"/>
+                      <text x="30" y="150" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#b9c0c6">promote</text>
+                      <text x="30" y="348" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#b9c0c6">expand</text>
+                      <path d="M256 78 C 272 100, 272 194, 256 216" fill="none" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 4"/>
+                      <path d="M251 208 L256 218 L261 208 Z" fill="#8a8a8a"/>
+                      <path d="M284 80 L284 406" fill="none" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 4"/>
+                      <path d="M279 398 L284 408 L289 398 Z" fill="#8a8a8a"/>
+                      <text x="314" y="148" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#8a8a8a">explain</text>
+                      <text x="312" y="312" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#8a8a8a" transform="rotate(90 312 312)">audit trail</text>
+                      <circle r="3" fill="#2AA5E0">
+                        <animateMotion dur="5.5s" repeatCount="indefinite" path="M62 442 L62 44"/>
+                        <animate attributeName="opacity" values="0;1;1;0" dur="5.5s" repeatCount="indefinite"/>
+                      </circle>
+                    </svg>
+
                     <div class="ladder-panels">
                       <details class="ladder-panel">
                         <summary>
