@@ -794,11 +794,11 @@
           .b100-flowdemo { display:flex; flex-direction:column; align-items:center; }
           .flow-split { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
                   border:1px solid var(--b-line); border-radius:14px; overflow:hidden;
-                  --flow-accent:#B2CBAC; }
+                  --flow-accent:#C8BCA5; }
           @media (max-width:880px){ .flow-split { grid-template-columns:1fr; } }
-          .flow-art { background:var(--flow-accent); display:flex; align-items:center; justify-content:center; padding:30px 26px; min-height:100%; }
-          .flow-art svg { width:100%; height:auto; max-width:450px; display:block; }
-          @media (max-width:880px){ .flow-art { min-height:0; padding:34px 26px; } }
+          .flow-photo { background:var(--flow-accent) center/cover no-repeat;
+                  background-image:url('assets/b100-agent-case-study/flow.jpg'); min-height:100%; }
+          @media (max-width:880px){ .flow-photo { min-height:0; height:300px; } }
           .flow-stage { background:var(--flow-accent); display:flex; align-items:center; justify-content:center; padding:44px 20px; }
           /* two-image placeholder pair */
           .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2px;
@@ -1205,30 +1205,8 @@
 
                 <div class="b100-flowdemo" data-flowdemo="">
                   <div class="flow-split">
-                    <div class="flow-art">
-                      <svg viewBox="0 0 400 408" role="img" aria-label="The case as a route: L1 flag, up to L2, peak at L3 approve and act, back down through L2 explain to L1 audit.">
-                        <text x="26" y="30" font-family="'DM Mono',monospace" font-size="11" letter-spacing="2.5" fill="#3D5A3B">ONE CASE, END TO END</text>
-                        <line x1="26" y1="110" x2="374" y2="110" stroke="#8FAB8C" stroke-width="1" stroke-dasharray="2 5"/>
-                        <line x1="26" y1="250" x2="374" y2="250" stroke="#8FAB8C" stroke-width="1" stroke-dasharray="2 5"/>
-                        <text x="374" y="106" text-anchor="end" font-family="'DM Mono',monospace" font-size="9" fill="#526E4F">L3</text>
-                        <text x="374" y="246" text-anchor="end" font-family="'DM Mono',monospace" font-size="9" fill="#526E4F">L2</text>
-                        <text x="374" y="384" text-anchor="end" font-family="'DM Mono',monospace" font-size="9" fill="#526E4F">L1</text>
-                        <path id="flow-route" d="M44 366 L134 250 L210 92 L286 250 L376 366" fill="none" stroke="#223421" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="44" cy="366" r="8" fill="#8A8F98" stroke="#B2CBAC" stroke-width="3"/>
-                        <circle cx="134" cy="250" r="8" fill="#2AA5E0" stroke="#B2CBAC" stroke-width="3"/>
-                        <circle cx="210" cy="92" r="10" fill="#FF6B5A" stroke="#B2CBAC" stroke-width="3"/>
-                        <circle cx="286" cy="250" r="8" fill="#2AA5E0" stroke="#B2CBAC" stroke-width="3"/>
-                        <circle cx="376" cy="366" r="8" fill="#8A8F98" stroke="#B2CBAC" stroke-width="3"/>
-                        <text x="44" y="392" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#223421">flag</text>
-                        <text x="124" y="278" text-anchor="end" font-family="'DM Mono',monospace" font-size="10" fill="#223421">expand · answer</text>
-                        <text x="210" y="66" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#223421">approve &amp; act</text>
-                        <text x="296" y="278" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#223421">explain</text>
-                        <text x="376" y="392" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#223421">audit</text>
-                        <circle r="4.5" fill="#223421">
-                          <animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flow-route"></mpath></animateMotion>
-                        </circle>
-                      </svg>
-                    </div>
+                    <!-- replace with a photo at assets/b100-agent-case-study/flow.jpg -->
+                    <div class="flow-photo" role="img" aria-label="An operations analyst on a call at her laptop"></div>
                     <div class="flow-stage">
                       <div class="phone" aria-label="Mobile mockup of the B100 Ops app walking through the scenario">
                         <div class="phone-screen">
