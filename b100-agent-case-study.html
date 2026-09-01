@@ -903,6 +903,8 @@
           .m-turn.bot .m-turn-c > .m-srcs:first-child,
           .m-turn.bot .m-turn-c > .m-action:first-child,
           .m-turn.bot .m-turn-c > :not(:first-child) { margin-left:-26px; }
+          .m-ctxline { display:flex; align-items:flex-start; gap:6px; font-size:10.5px; font-weight:500; line-height:1.35; color:var(--m-amber); }
+          .m-ctxline svg { width:16px; height:16px; flex-shrink:0; margin-top:-1px; }
           .m-thinking { font-size:11.5px; color:var(--m-ink2); display:flex; align-items:center; gap:8px; }
           .m-answer { font-size:12.5px; line-height:1.55; color:var(--m-ink); }
           .m-answer b { font-weight:700; }
@@ -946,15 +948,6 @@
           .m-src-dot { width:6px; height:6px; border-radius:50%; }
           .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
           .m-src-time { font-family:var(--m-mono); font-size:9px; color:var(--m-ink3); }
-          /* pinned transaction context strip */
-          .m-pin { flex-shrink:0; padding:10px 15px 12px; background:var(--m-bg); border-bottom:1px solid var(--m-line); }
-          .m-txn { border:1px solid var(--m-line); border-radius:12px; background:var(--m-surface); padding:9px 12px; box-shadow:var(--m-e1); }
-          .m-txn-top { display:flex; align-items:center; gap:8px; }
-          .m-txn-amt { font-size:14px; font-weight:700; letter-spacing:-.3px; color:var(--m-ink); font-variant-numeric:tabular-nums; }
-          .m-txn-top .m-chip { margin-left:auto; }
-          .m-txn-bot { display:flex; align-items:center; gap:5px; margin-top:3px; font-size:11px; color:var(--m-ink2); min-width:0; }
-          .m-txn-bot svg { width:11px; height:11px; color:var(--m-ink3); flex-shrink:0; }
-          .m-txn-party { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
           /* confidence signal (expandable) */
           .m-conf { border:1px solid var(--m-line2); border-radius:10px; overflow:hidden; background:var(--m-surface); }
           .m-conf-b { display:flex; align-items:center; gap:7px; width:100%; padding:8px 11px; border:0; background:transparent;
@@ -1336,15 +1329,10 @@
                       <div class="scr" data-step="2">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
                         <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
-                        <div class="m-pin">
-                          <div class="m-txn">
-                            <div class="m-txn-top"><span class="m-txn-amt">$10,000.00</span><span class="m-chip warn">Anomaly</span></div>
-                            <div class="m-txn-bot"><span class="m-txn-party">Brightwater Logistics</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg><span class="m-txn-party">Tamsett Components</span></div>
-                          </div>
-                        </div>
                         <div class="m-conv">
                           <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
                           <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-ctxline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 4 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 4a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly on this transaction · loaded as context</div>
                             <div class="m-plan">
                               <div class="m-plan-t">Checking sources</div>
                               <div class="m-steps">
@@ -1362,12 +1350,6 @@
                       <div class="scr" data-step="3">
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
                         <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
-                        <div class="m-pin">
-                          <div class="m-txn">
-                            <div class="m-txn-top"><span class="m-txn-amt">$10,000.00</span><span class="m-chip warn">Anomaly</span></div>
-                            <div class="m-txn-bot"><span class="m-txn-party">Brightwater Logistics</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg><span class="m-txn-party">Tamsett Components</span></div>
-                          </div>
-                        </div>
                         <div class="m-conv">
                           <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
                           <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
@@ -1590,7 +1572,7 @@
           var cap = demo.querySelector('.flow-cap');
           var CAPS = [
             {tag:'l1', t:'L1', h:'The flag', c:'An anomaly chip on the Brightwater Logistics row: the amount to the supplier is off pattern. Ambient, no chat.'},
-            {tag:'tr', t:'L1 → L2', h:'Expand', c:'The chip opens the copilot with the flagged transaction pinned as context, amount and all. It shows its plan and checks Gen 3, Transfermate, then Gen 2.'},
+            {tag:'tr', t:'L1 → L2', h:'Expand', c:'The chip opens the copilot with the anomaly loaded as context. It shows its plan and starts checking Gen 3, Transfermate, then Gen 2.'},
             {tag:'l2', t:'L2', h:'The answer', c:'Each source is cited with its query time and opens to the record. Leg 2 was never initiated here or on 11 others, $284,900 in total. Confidence is medium, and says why.'},
             {tag:'l3', t:'L2 → L3', h:'Propose', c:'The answer becomes an Agent Action Card: scope, total value, order, and a reversible-for-24h note. The disputed transaction is already dropped.'},
             {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Progress is per-item and abortable at any point; the skipped transaction stays out.'},
