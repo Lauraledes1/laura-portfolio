@@ -925,12 +925,20 @@
           .m-step.done, .m-step.run { color:var(--m-ink); }
           /* source rows */
           .m-srcs { border:1px solid var(--m-line); border-radius:12px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e1); }
-          .m-src { display:flex; align-items:center; gap:10px; padding:9px 10px 9px 12px; border-bottom:1px solid var(--m-line2);
+          .m-src-item { border-bottom:1px solid var(--m-line2); }
+          .m-src-item:last-child { border-bottom:0; }
+          .m-src { display:flex; align-items:center; gap:10px; padding:9px 10px 9px 12px;
                   cursor:pointer; transition:background .12s ease; }
-          .m-src:last-child { border-bottom:0; }
           .m-src:hover { background:var(--m-line2); }
-          .m-src:active { background:var(--m-line); }
-          .m-src-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); }
+          .m-src-item.open .m-src, .m-src:active { background:var(--m-line); }
+          .m-src-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); transition:transform .18s ease; }
+          .m-src-item.open .m-src-cv { transform:rotate(90deg); }
+          .m-src-detail { display:none; padding:2px 12px 11px 46px; }
+          .m-src-item.open .m-src-detail { display:block; }
+          .m-src-detail dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:3px 12px;
+                  font-family:var(--m-mono); font-size:9.5px; line-height:1.4; }
+          .m-src-detail dt { color:var(--m-ink3); white-space:nowrap; }
+          .m-src-detail dd { margin:0; color:var(--m-ink2); }
           .m-src-mono { width:24px; height:24px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
                   font-family:var(--m-mono); font-size:8.5px; font-weight:500; background:#EEF0F3; color:var(--m-ink2); }
           .m-src-c { flex:1; min-width:0; }
@@ -1341,9 +1349,18 @@
                           <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
                           <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
                             <div class="m-srcs">
-                              <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-                              <div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-                              <div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                              <div class="m-src-item">
+                                <div class="m-src ok" role="button" tabindex="0"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Record</dt><dd>card ••4471 · full capture</dd><dt>Auth</dt><dd>approved 14:29:58</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+                              </div>
+                              <div class="m-src-item">
+                                <div class="m-src warn" role="button" tabindex="0"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Leg 1</dt><dd>settled 14:12:30</dd><dt>Leg 2</dt><dd>not initiated · no trigger event</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+                              </div>
+                              <div class="m-src-item">
+                                <div class="m-src err" role="button" tabindex="0"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Expected</dt><dd>GW-826541</dd><dt>Found</dt><dd>no match</dd><dt>Mapping</dt><dd>table last synced Aug 28</dd></dl></div>
+                              </div>
                             </div>
                             <div class="m-answer">Leg 2 was never initiated. <b>11 more</b> Brightwater transactions are stuck the same way.</div>
                             <span class="m-conf med">Confidence: medium</span>
@@ -1559,6 +1576,7 @@
           function render(){
             screens.forEach(function(s,k){ s.classList.toggle('on', k===i); });
             dots.forEach(function(d,k){ d.classList.toggle('on', k===i); });
+            demo.querySelectorAll('.m-src-item.open').forEach(function(x){ x.classList.remove('open'); });
             var C = CAPS[i];
             cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+'</b> &nbsp;'+C.c;
           }
@@ -1574,6 +1592,17 @@
             d.addEventListener('click', function(){
               go(parseInt(d.getAttribute('data-step'),10) - 1);
               paused = true; demo.classList.add('paused'); stop();
+            });
+          });
+          demo.querySelectorAll('.m-src').forEach(function(s){
+            function toggle(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              s.parentElement.classList.toggle('open');
+            }
+            s.addEventListener('click', toggle);
+            s.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(e); }
             });
           });
           render();
