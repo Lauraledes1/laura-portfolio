@@ -817,143 +817,174 @@
                   width:82px; height:24px; background:#050607; border-radius:13px; }
           .phone-screen { position:relative; width:100%; height:100%; border-radius:33px; overflow:hidden;
                   background:var(--m-bg); font-family:'Roboto',-apple-system,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased;
-                  --m-bg:#F5F7F9; --m-card:#FFFFFF; --m-ink:#16202A; --m-ink2:#5B6874; --m-ink3:#93A0AC;
-                  --m-line:#E6EAEE; --m-line2:#EEF1F4;
-                  --m-p:#0B79C4; --m-p-tint:#E7F2FA; --m-p-dark:#075E9B;
-                  --m-amber:#A85A08; --m-amber-bg:#FCEBD5; --m-green:#0F7A46; --m-green-bg:#E4F4EA;
-                  --m-red:#BE362C; --m-red-bg:#FBE9E7;
-                  --m-sh-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.09);
-                  --m-sh-md:0 4px 10px rgba(16,24,40,.08),0 2px 4px rgba(16,24,40,.06); }
+                  --m-bg:#F3F2ED; --m-card:#FFFFFF;
+                  --m-ink:#1B2430; --m-ink2:#616B78; --m-ink3:#9AA3AD;
+                  --m-line:#E8E4DC; --m-line2:#F1EEE7;
+                  --m-accent:#2F5FCB; --m-accent-tint:#EBF1FC;
+                  --m-solid:#1E2732;
+                  --m-amber:#95580F; --m-amber-bg:#FAEAD2; --m-amber-dot:#D98A1C;
+                  --m-green:#0F7245; --m-green-bg:#E2F0E7; --m-green-dot:#1E9E63;
+                  --m-red:#B23A2E; --m-red-bg:#FAE7E3; --m-red-dot:#D0503F;
+                  --m-mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+                  --m-sh-sm:0 1px 2px rgba(27,36,48,.05),0 1px 1px rgba(27,36,48,.03);
+                  --m-sh-md:0 10px 26px -8px rgba(27,36,48,.16),0 2px 6px rgba(27,36,48,.05);
+                  --m-sh-lg:0 24px 54px -14px rgba(27,36,48,.26); }
           .scr { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--m-bg);
                   opacity:0; z-index:1; transition:none; pointer-events:none; }
           .scr.on { opacity:1; z-index:2; pointer-events:auto; transition:opacity .28s ease; }
           .phone-screen::after { content:''; position:absolute; z-index:8; bottom:7px; left:50%; transform:translateX(-50%);
-                  width:104px; height:4px; border-radius:2px; background:rgba(22,32,42,.22); }
+                  width:104px; height:4px; border-radius:2px; background:rgba(27,36,48,.22); }
+          /* agent mark — the app's signature */
+          .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-ink); position:relative; flex-shrink:0; }
+          .m-mark::before { content:''; position:absolute; inset:0; margin:auto; width:10px; height:10px; background:#fff;
+                  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%); }
+          .m-mark.sm { width:18px; height:18px; border-radius:6px; }
+          .m-mark.sm::before { width:8px; height:8px; }
           /* status bar */
           .m-status { height:40px; display:flex; align-items:center; justify-content:space-between; padding:0 20px 0 22px;
-                  font-size:12px; font-weight:600; color:var(--m-ink); letter-spacing:.2px; flex-shrink:0; }
+                  font-family:var(--m-mono); font-size:11.5px; font-weight:500; color:var(--m-ink); letter-spacing:.4px; flex-shrink:0; }
           .m-status .m-r { display:flex; align-items:center; gap:5px; }
           .m-status .m-cell { display:flex; align-items:flex-end; gap:1.5px; height:9px; }
           .m-status .m-cell i { width:2.5px; background:var(--m-ink); border-radius:.5px; }
           .m-status .m-cell i:nth-child(1){height:4px}.m-status .m-cell i:nth-child(2){height:6px}
           .m-status .m-cell i:nth-child(3){height:8px}.m-status .m-cell i:nth-child(4){height:9px}
           .m-status .m-wifi { width:13px; height:9px; border-radius:0 0 6px 6px; border:2px solid var(--m-ink); border-top:0; opacity:.9; }
-          .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(22,32,42,.4); border-radius:3px; position:relative; padding:1.5px; }
-          .m-status .m-bat::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:rgba(22,32,42,.4); border-radius:0 1px 1px 0; }
+          .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(27,36,48,.4); border-radius:3px; position:relative; padding:1.5px; }
+          .m-status .m-bat::after { content:''; position:absolute; right:-3px; top:3px; width:2px; height:4px; background:rgba(27,36,48,.4); border-radius:0 1px 1px 0; }
           .m-status .m-bat i { display:block; height:100%; width:72%; background:var(--m-ink); border-radius:1.5px; }
           /* app bar */
-          .m-appbar { height:48px; padding:0 15px; display:flex; align-items:center; gap:9px; flex-shrink:0; background:var(--m-bg); }
+          .m-appbar { height:50px; padding:0 16px; display:flex; align-items:center; gap:10px; flex-shrink:0; background:var(--m-bg);
+                  border-bottom:1px solid transparent; }
           .m-appbar .m-back { width:22px; height:22px; flex-shrink:0; color:var(--m-ink); margin-left:-4px; }
-          .m-appbar h5 { margin:0; font-size:16px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); flex:1; }
-          .m-appbar .m-act { width:21px; height:21px; flex-shrink:0; color:var(--m-ink2); }
+          .m-appbar h5 { margin:0; font-size:17px; font-weight:700; letter-spacing:-.4px; color:var(--m-ink); flex:1; }
+          .m-appbar .m-act { width:20px; height:20px; flex-shrink:0; color:var(--m-ink2); }
           /* filter row */
-          .m-filters { display:flex; gap:8px; padding:2px 16px 12px; flex-shrink:0; }
-          .m-fchip { display:flex; align-items:center; gap:4px; height:28px; padding:0 12px; border:1px solid var(--m-line);
-                  background:var(--m-card); border-radius:8px; font-size:11.5px; font-weight:500; color:var(--m-ink2); box-shadow:var(--m-sh-sm); }
-          .m-fchip.sel { background:var(--m-p-tint); border-color:var(--m-p); color:var(--m-p-dark); }
-          /* scroll body */
-          .m-body { flex:1; overflow:hidden; padding:2px 16px 16px; }
-          .m-list { display:flex; flex-direction:column; gap:10px; }
-          .m-card { background:var(--m-card); border:1px solid var(--m-line); border-radius:12px; box-shadow:var(--m-sh-sm); }
-          .m-row { padding:13px 14px; }
-          .m-row.flag { border-left:3px solid #E8940C; border-radius:12px; }
+          .m-filters { display:flex; gap:8px; padding:4px 16px 14px; flex-shrink:0; }
+          .m-fchip { display:flex; align-items:center; gap:5px; height:28px; padding:0 13px; border:1px solid var(--m-line);
+                  background:var(--m-card); border-radius:999px; font-size:11px; font-weight:500; color:var(--m-ink2); box-shadow:var(--m-sh-sm); }
+          .m-fchip.sel { background:var(--m-ink); border-color:var(--m-ink); color:#fff; box-shadow:none; }
+          /* scroll body + list */
+          .m-body { flex:1; overflow:hidden; padding:4px 16px 16px; }
+          .m-list { display:flex; flex-direction:column; gap:9px; }
+          .m-card { background:var(--m-card); border:1px solid var(--m-line); border-radius:14px; box-shadow:var(--m-sh-sm); }
+          .m-row { padding:13px 15px; position:relative; }
+          .m-row.flag { background:#FFFBF4; }
+          .m-row.flag::before { content:''; position:absolute; left:0; top:15px; bottom:15px; width:3px; border-radius:0 3px 3px 0; background:var(--m-amber-dot); }
           .m-row .m-rt { display:flex; align-items:center; justify-content:space-between; gap:8px; }
-          .m-buyer { font-size:13px; font-weight:600; letter-spacing:-.1px; color:var(--m-ink); }
+          .m-buyer { font-size:13.5px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink); }
           .m-sub { font-size:11.5px; color:var(--m-ink2); margin-top:3px; }
-          .m-chip { display:inline-flex; align-items:center; height:22px; padding:0 8px; border-radius:6px;
-                  font-size:10.5px; font-weight:600; white-space:nowrap; letter-spacing:.1px; }
-          .m-chip.warn { background:var(--m-amber-bg); color:var(--m-amber); }
-          .m-chip.ok { background:var(--m-green-bg); color:var(--m-green); }
-          .m-chip.err { background:var(--m-red-bg); color:var(--m-red); }
-          .m-chip.pend { background:#EEF1F4; color:var(--m-ink2); }
-          .m-agentbadge { display:inline-flex; align-items:center; gap:3px; height:19px; padding:0 7px; border-radius:5px;
-                  font-size:10px; font-weight:600; color:var(--m-green); background:var(--m-green-bg); margin-top:8px; }
+          .m-money { font-family:var(--m-mono); font-size:11px; color:var(--m-ink); letter-spacing:-.2px; }
+          .m-chip { display:inline-flex; align-items:center; gap:5px; height:21px; padding:0 9px 0 8px; border-radius:999px;
+                  font-size:10px; font-weight:600; white-space:nowrap; letter-spacing:.2px; }
+          .m-chip::before { content:''; width:5px; height:5px; border-radius:50%; }
+          .m-chip.warn { background:var(--m-amber-bg); color:var(--m-amber); } .m-chip.warn::before { background:var(--m-amber-dot); }
+          .m-chip.ok { background:var(--m-green-bg); color:var(--m-green); } .m-chip.ok::before { background:var(--m-green-dot); }
+          .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
+          .m-chip.pend { background:#EDEBE5; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
+          .m-agentbadge { display:inline-flex; align-items:center; gap:4px; height:20px; padding:0 8px; border-radius:999px;
+                  font-size:10px; font-weight:600; color:var(--m-green); background:var(--m-green-bg); margin-top:9px; }
           /* copilot bottom sheet */
-          .m-scrim { position:absolute; inset:0; background:rgba(15,23,32,.32); }
-          .m-sheet { position:absolute; left:0; right:0; bottom:0; background:var(--m-card); border-radius:18px 18px 0 0;
-                  box-shadow:0 -14px 44px rgba(15,23,32,.22); padding:10px 16px 18px; display:flex; flex-direction:column;
+          .m-scrim { position:absolute; inset:0; background:rgba(27,36,48,.34); }
+          .m-sheet { position:absolute; left:0; right:0; bottom:0; background:var(--m-card); border-radius:24px 24px 0 0;
+                  box-shadow:0 -18px 50px rgba(27,36,48,.24); padding:8px 16px 18px; display:flex; flex-direction:column;
                   transform:translateY(101%); transition:transform .48s cubic-bezier(.32,.72,0,1); }
           .scr.on .m-sheet { transform:translateY(0); }
-          .m-grab { width:36px; height:5px; border-radius:3px; background:#D6DBE0; margin:0 auto 14px; flex-shrink:0; }
-          .m-sheet h6 { margin:0 0 12px; font-size:14px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); }
-          .m-ctxchip { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500; color:var(--m-amber);
-                  background:var(--m-amber-bg); border-radius:8px; padding:8px 10px; margin-bottom:12px; }
-          .m-input { display:flex; align-items:center; height:38px; border:1px solid var(--m-line); border-radius:9px;
-                  padding:0 12px; font-size:12.5px; color:var(--m-ink); background:#F9FAFB; }
-          .m-input::after { content:''; width:1.5px; height:16px; background:var(--m-p); margin-left:2px; animation:m-caret 1s step-end infinite; }
+          .m-grab { width:38px; height:5px; border-radius:3px; background:#DEDBD3; margin:2px auto 14px; flex-shrink:0; }
+          .m-sheet-h { display:flex; align-items:center; gap:9px; margin-bottom:13px; }
+          .m-sheet-h h6 { margin:0; font-size:14.5px; font-weight:700; letter-spacing:-.3px; color:var(--m-ink); flex:1; }
+          .m-sheet-h .m-x { width:18px; height:18px; color:var(--m-ink3); flex-shrink:0; }
+          .m-sheet h6 { margin:0 0 12px; font-size:14px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
+          .m-ctxchip { display:flex; align-items:center; gap:6px; font-family:var(--m-mono); font-size:10.5px; font-weight:500; color:var(--m-amber);
+                  background:var(--m-amber-bg); border-radius:9px; padding:8px 10px; margin-bottom:12px; white-space:nowrap; overflow:hidden; }
+          .m-input { display:flex; align-items:center; height:40px; border:1px solid var(--m-line); border-radius:11px;
+                  padding:0 13px; font-size:12.5px; color:var(--m-ink); background:var(--m-bg); }
+          .m-input::after { content:''; width:1.5px; height:16px; background:var(--m-accent); margin-left:2px; animation:m-caret 1s step-end infinite; }
           @keyframes m-caret { 50% { opacity:0; } }
-          .m-plan { margin-top:14px; border:1px solid var(--m-line); border-radius:10px; padding:12px; }
-          .m-plan-t { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:9px; }
-          .m-plan-step { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--m-ink2); padding:5px 0; white-space:nowrap; }
+          .m-plan { margin-top:14px; border:1px solid var(--m-line); border-radius:12px; padding:13px 14px; background:var(--m-bg); }
+          .m-plan-t { font-family:var(--m-mono); font-size:9px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:10px; }
+          .m-plan-steps { position:relative; }
+          .m-plan-steps::before { content:''; position:absolute; left:6px; top:12px; bottom:12px; width:1.5px; background:var(--m-line); }
+          .m-plan-step { display:flex; align-items:center; gap:11px; font-size:12px; color:var(--m-ink2); padding:5px 0; white-space:nowrap; position:relative; }
           .m-plan-step b { color:var(--m-ink); font-weight:600; }
           .m-plan-step .m-mut { color:var(--m-ink3); }
-          .m-ctxchip { white-space:nowrap; overflow:hidden; }
-          .m-dot2 { width:7px; height:7px; border-radius:50%; background:#D6DBE0; flex-shrink:0; }
-          .m-spin { width:13px; height:13px; border:2px solid var(--m-p); border-right-color:transparent; border-radius:50%;
-                  flex-shrink:0; animation:m-spin .7s linear infinite; }
+          .m-dot2 { width:13px; height:13px; border-radius:50%; background:var(--m-card); border:1.5px solid var(--m-line); flex-shrink:0; box-sizing:border-box; }
+          .m-spin { width:13px; height:13px; border:2px solid var(--m-accent); border-right-color:transparent; border-radius:50%;
+                  flex-shrink:0; background:var(--m-card); animation:m-spin .7s linear infinite; }
           @keyframes m-spin { to { transform:rotate(360deg); } }
           /* chat / answer */
-          .m-chat { flex:1; overflow:hidden; padding:6px 16px 16px; display:flex; flex-direction:column; gap:9px; }
-          .m-src { border:1px solid var(--m-line); border-left-width:3px; border-radius:10px; padding:10px 12px; background:var(--m-card); box-shadow:var(--m-sh-sm); }
-          .m-src.ok { border-left-color:var(--m-green); } .m-src.warn { border-left-color:var(--m-amber); } .m-src.err { border-left-color:var(--m-red); }
-          .m-src-h { display:flex; justify-content:space-between; align-items:baseline; }
-          .m-src-name { font-size:11px; font-weight:700; color:var(--m-ink); letter-spacing:.1px; }
-          .m-src-time { font-size:10px; color:var(--m-ink3); }
-          .m-src-body { font-size:11.5px; line-height:1.4; color:var(--m-ink2); margin-top:4px; }
-          .m-answer { font-size:12.5px; line-height:1.5; color:var(--m-ink); padding:2px 2px 0; }
+          .m-chat { flex:1; overflow:hidden; padding:8px 16px 16px; display:flex; flex-direction:column; gap:9px; }
+          .m-src { display:flex; gap:10px; border:1px solid var(--m-line); border-radius:12px; padding:10px 12px; background:var(--m-card); box-shadow:var(--m-sh-sm); }
+          .m-src-mono { width:26px; height:26px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                  font-family:var(--m-mono); font-size:9px; font-weight:500; letter-spacing:.02em; }
+          .m-src.ok .m-src-mono { background:var(--m-green-bg); color:var(--m-green); }
+          .m-src.warn .m-src-mono { background:var(--m-amber-bg); color:var(--m-amber); }
+          .m-src.err .m-src-mono { background:var(--m-red-bg); color:var(--m-red); }
+          .m-src-c { flex:1; min-width:0; }
+          .m-src-h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+          .m-src-name { font-size:11.5px; font-weight:700; color:var(--m-ink); letter-spacing:-.1px; }
+          .m-src-time { font-family:var(--m-mono); font-size:9.5px; color:var(--m-ink3); white-space:nowrap; }
+          .m-src-body { font-size:11.5px; line-height:1.4; color:var(--m-ink2); margin-top:3px; }
+          .m-answer { font-size:13px; line-height:1.55; color:var(--m-ink); padding:4px 2px 2px; }
           .m-answer b { font-weight:700; }
-          .m-conf { display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 11px; border-radius:999px;
+          .m-conf { display:inline-flex; align-items:center; gap:8px; height:26px; padding:0 12px 0 8px; border-radius:999px;
                   font-size:10.5px; font-weight:600; color:var(--m-amber); background:var(--m-amber-bg); align-self:flex-start; }
-          .m-conf::before { content:''; width:9px; height:9px; border-radius:50%;
-                  background:conic-gradient(var(--m-amber) 55%, rgba(168,90,8,.25) 0); }
-          .m-btn { display:flex; align-items:center; justify-content:center; height:40px; border-radius:9px;
-                  font-size:13px; font-weight:600; letter-spacing:.1px; background:var(--m-p); color:#fff; box-shadow:var(--m-sh-md); }
-          .m-btn.text { height:38px; background:transparent; color:var(--m-p); box-shadow:none; }
-          .m-btn.danger { background:#fff; color:var(--m-red); box-shadow:none; border:1.4px solid var(--m-red); }
-          .m-bubble { max-width:82%; font-size:12px; line-height:1.42; padding:9px 12px; border-radius:14px; }
-          .m-bubble.me { align-self:flex-end; background:var(--m-p); color:#fff; border-bottom-right-radius:5px; }
-          .m-bubble.bot { align-self:flex-start; background:var(--m-card); border:1px solid var(--m-line); color:var(--m-ink2); border-bottom-left-radius:5px; box-shadow:var(--m-sh-sm); }
-          .m-collapsed { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500; color:var(--m-ink2);
-                  background:var(--m-card); border:1px solid var(--m-line); border-radius:9px; padding:9px 11px; box-shadow:var(--m-sh-sm); }
-          .m-collapsed::before { content:'▸'; color:var(--m-ink3); }
-          /* agent action card */
-          .m-action { margin:8px 16px 0; border:1px solid var(--m-line); border-radius:13px; overflow:hidden; background:var(--m-card); box-shadow:var(--m-sh-md); }
-          .m-action-h { display:flex; align-items:center; gap:7px; background:var(--m-p-tint); padding:8px 13px; white-space:nowrap;
-                  font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--m-p-dark); }
-          .m-action-h::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--m-p); flex-shrink:0; }
-          .m-action-state { margin-left:auto; font-size:8.5px; font-weight:700; letter-spacing:.05em; padding:2px 7px;
-                  border-radius:999px; background:#fff; color:var(--m-p-dark); }
-          .m-action-b { padding:12px 13px 10px; }
-          .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.1px; color:var(--m-ink); }
-          .m-action-meta { font-size:11px; color:var(--m-ink2); margin-top:4px; }
-          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:10px 13px 0; overflow:hidden; }
-          .m-progress i { display:block; height:100%; background:var(--m-p); border-radius:3px; }
+          .m-conf-bars { display:flex; align-items:flex-end; gap:2px; }
+          .m-conf-bars i { width:3px; border-radius:1px; background:currentColor; opacity:.28; }
+          .m-conf-bars i:nth-child(1){ height:5px; } .m-conf-bars i:nth-child(2){ height:8px; } .m-conf-bars i:nth-child(3){ height:11px; }
+          .m-conf.med .m-conf-bars i:nth-child(-n+2){ opacity:1; }
+          .m-conf.low .m-conf-bars i:nth-child(1){ opacity:1; }
+          .m-conf.high .m-conf-bars i{ opacity:1; }
+          .m-btn { display:flex; align-items:center; justify-content:center; height:42px; border-radius:12px;
+                  font-size:13px; font-weight:600; letter-spacing:-.1px; background:var(--m-solid); color:#fff; box-shadow:var(--m-sh-md); }
+          .m-btn.text { height:40px; background:transparent; color:var(--m-ink2); box-shadow:none; font-weight:600; }
+          .m-btn.danger { background:var(--m-card); color:var(--m-red); box-shadow:none; border:1.4px solid var(--m-red); }
+          .m-bubble { max-width:82%; font-size:12.5px; line-height:1.45; padding:10px 13px; border-radius:16px; }
+          .m-bubble.me { align-self:flex-end; background:var(--m-ink); color:#fff; border-bottom-right-radius:6px; }
+          .m-bubble.bot { align-self:flex-start; background:var(--m-card); border:1px solid var(--m-line); color:var(--m-ink2); border-bottom-left-radius:6px; box-shadow:var(--m-sh-sm); }
+          .m-collapsed { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:600; color:var(--m-ink2);
+                  background:var(--m-card); border:1px solid var(--m-line); border-radius:11px; padding:10px 12px; box-shadow:var(--m-sh-sm); }
+          .m-collapsed::after { content:'▸'; color:var(--m-ink3); margin-left:auto; }
+          /* agent action card — the hero component */
+          .m-action { margin:10px 16px 0; border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-card); box-shadow:var(--m-sh-lg); }
+          .m-action-h { display:flex; align-items:center; gap:9px; background:var(--m-ink); padding:10px 13px; white-space:nowrap;
+                  font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:#fff; }
+          .m-action-h .m-mark { background:rgba(255,255,255,.16); }
+          .m-action-h .m-mark::before { background:#fff; }
+          .m-action-b { padding:12px 14px 10px; }
+          .m-action-t { font-size:13.5px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
+          .m-action-meta { font-size:10.5px; color:var(--m-ink2); margin-top:5px; }
+          .m-action-meta .m-state { font-size:8.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+                  color:var(--m-accent); background:var(--m-accent-tint); border-radius:999px; padding:2px 7px; margin-right:6px; }
+          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:11px 14px 0; overflow:hidden; }
+          .m-progress i { display:block; height:100%; background:var(--m-ink); border-radius:3px; }
           .m-alist { border-top:1px solid var(--m-line2); }
-          .m-arow { display:flex; align-items:center; gap:10px; height:38px; padding:0 13px; border-bottom:1px solid var(--m-line2);
-                  font-size:11.5px; color:var(--m-ink); white-space:nowrap; }
+          .m-arow { display:flex; align-items:center; gap:11px; height:37px; padding:0 14px; border-bottom:1px solid var(--m-line2);
+                  font-family:var(--m-mono); font-size:11px; color:var(--m-ink); white-space:nowrap; letter-spacing:-.2px; }
           .m-arow:last-child { border-bottom:0; }
-          .m-arow.mut { color:var(--m-ink3); }
+          .m-arow.mut { color:var(--m-ink3); font-family:'Roboto',sans-serif; letter-spacing:0; }
           .m-arow .m-amt { margin-left:auto; color:var(--m-ink2); font-variant-numeric:tabular-nums; }
-          .m-check { width:16px; height:16px; border-radius:5px; border:1.75px solid var(--m-p); flex-shrink:0; position:relative; }
-          .m-check.on { background:var(--m-p); }
+          .m-check { width:17px; height:17px; border-radius:6px; border:1.75px solid var(--m-ink); flex-shrink:0; position:relative; }
+          .m-check.on { background:var(--m-ink); }
           .m-check.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px;
                   border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
           .m-check.off { border-color:var(--m-ink3); }
-          .m-atag { font-size:9px; font-weight:600; background:var(--m-red-bg); color:var(--m-red); border-radius:4px; padding:2px 6px; margin-left:auto; white-space:nowrap; }
-          .m-astat { margin-left:auto; font-size:11px; font-weight:500; display:flex; align-items:center; gap:4px; }
-          .m-astat.ok { color:var(--m-green); } .m-astat.run { color:var(--m-p); }
-          .m-astat.ok::before { content:''; width:11px; height:11px; border-radius:50%; background:var(--m-green);
+          .m-atag { font-family:'Roboto',sans-serif; font-size:9px; font-weight:600; background:var(--m-red-bg); color:var(--m-red);
+                  border-radius:999px; padding:2px 8px; margin-left:auto; white-space:nowrap; letter-spacing:0; }
+          .m-astat { margin-left:auto; font-family:'Roboto',sans-serif; font-size:10.5px; font-weight:600; display:flex; align-items:center; gap:5px; letter-spacing:0; }
+          .m-astat.ok { color:var(--m-green); } .m-astat.run { color:var(--m-accent); }
+          .m-astat.ok::before { content:''; width:12px; height:12px; border-radius:50%; background:var(--m-green-dot);
                   -webkit-mask:linear-gradient(#000 0 0) center/5px 2px no-repeat; }
-          .m-action-f { display:flex; gap:8px; padding:11px 13px; border-top:1px solid var(--m-line2); }
-          .m-action-f .m-btn { flex:2; white-space:nowrap; font-size:12px; height:38px; }
+          .m-astat.run::before { content:''; width:9px; height:9px; border:1.5px solid currentColor; border-right-color:transparent; border-radius:50%; animation:m-spin .7s linear infinite; }
+          .m-action-f { display:flex; gap:8px; padding:12px 14px; border-top:1px solid var(--m-line2); }
+          .m-action-f .m-btn { flex:2; white-space:nowrap; font-size:12.5px; height:40px; }
           .m-action-f .m-btn.text { flex:1; }
           /* audit timeline */
-          .m-timeline { margin-top:10px; padding-left:4px; border-left:1.5px solid var(--m-line); }
+          .m-timeline { margin-top:11px; padding-left:5px; border-left:1.5px solid var(--m-line); }
           .m-tl { display:flex; align-items:baseline; gap:9px; font-size:11px; padding:4px 0; position:relative; }
-          .m-tl::before { content:''; position:absolute; left:-8.5px; top:6px; width:7px; height:7px; border-radius:50%;
-                  background:var(--m-card); border:1.75px solid var(--m-p); }
+          .m-tl::before { content:''; position:absolute; left:-9.5px; top:6px; width:8px; height:8px; border-radius:50%;
+                  background:var(--m-card); border:1.75px solid var(--m-ink); }
           .m-tl-k { font-weight:600; color:var(--m-ink); }
-          .m-tl-v { margin-left:auto; color:var(--m-ink3); }
+          .m-tl-v { margin-left:auto; font-family:var(--m-mono); font-size:10px; color:var(--m-ink3); }
           /* controls */
           .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
           .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
@@ -1217,11 +1248,11 @@
                         <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
                         <div class="m-filters"><span class="m-fchip sel">This month</span><span class="m-fchip">All buyers</span></div>
                         <div class="m-body"><div class="m-list">
-                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;$25,000.00</div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;$42,000.00</div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;$8,200.00</div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">TechStart Inc</span><span class="m-chip err">Error</span></div><div class="m-sub">CloudServ&nbsp;·&nbsp;$5,500.00</div></div>
+                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;<span class="m-money">$25,000.00</span></div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;<span class="m-money">$42,000.00</span></div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;<span class="m-money">$8,200.00</span></div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">TechStart Inc</span><span class="m-chip err">Error</span></div><div class="m-sub">CloudServ&nbsp;·&nbsp;<span class="m-money">$5,500.00</span></div></div>
                         </div></div>
                       </div>
 
@@ -1230,20 +1261,22 @@
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
                         <div class="m-appbar"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
                         <div class="m-body" style="filter:blur(1.5px);opacity:.5"><div class="m-list">
-                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;$25,000.00</div></div>
+                          <div class="m-card m-row flag"><div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip warn">Anomaly</span></div><div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Global Industries</span><span class="m-chip pend">Pending</span></div><div class="m-sub">Parts Plus&nbsp;·&nbsp;<span class="m-money">$25,000.00</span></div></div>
                         </div></div>
                         <div class="m-scrim"></div>
                         <div class="m-sheet">
                           <div class="m-grab"></div>
-                          <h6>Copilot</h6>
-                          <div class="m-ctxchip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly&nbsp;·&nbsp;Acme Corp&nbsp;·&nbsp;GW…6541</div>
+                          <div class="m-sheet-h"><span class="m-mark"></span><h6>Copilot</h6><svg class="m-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+                          <div class="m-ctxchip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>Anomaly&nbsp;·&nbsp;Acme Corp&nbsp;·&nbsp;GW…541</div>
                           <div class="m-input">Why didn&rsquo;t this settle?</div>
                           <div class="m-plan">
                             <div class="m-plan-t">Plan</div>
-                            <div class="m-plan-step"><span class="m-spin"></span><b>Gen&nbsp;3</b><span class="m-mut">&nbsp;·&nbsp;card system</span></div>
-                            <div class="m-plan-step"><span class="m-dot2"></span><b>Transfermate</b><span class="m-mut">&nbsp;·&nbsp;transfer</span></div>
-                            <div class="m-plan-step"><span class="m-dot2"></span><b>Gen&nbsp;2</b><span class="m-mut">&nbsp;·&nbsp;mapping</span></div>
+                            <div class="m-plan-steps">
+                              <div class="m-plan-step"><span class="m-spin"></span><b>Gen&nbsp;3</b><span class="m-mut">&nbsp;·&nbsp;card system</span></div>
+                              <div class="m-plan-step"><span class="m-dot2"></span><b>Transfermate</b><span class="m-mut">&nbsp;·&nbsp;transfer</span></div>
+                              <div class="m-plan-step"><span class="m-dot2"></span><b>Gen&nbsp;2</b><span class="m-mut">&nbsp;·&nbsp;mapping</span></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1253,11 +1286,11 @@
                         <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><span class="m-wifi"></span><span class="m-bat"><i></i></span></span></div>
                         <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
                         <div class="m-chat">
-                          <div class="m-src ok"><div class="m-src-h"><span class="m-src-name">Gen 3</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">Card captured in full&nbsp;·&nbsp;$10,000.00</div></div>
-                          <div class="m-src warn"><div class="m-src-h"><span class="m-src-name">Transfermate</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">Leg 1 complete&nbsp;·&nbsp;Leg 2 never initiated</div></div>
-                          <div class="m-src err"><div class="m-src-h"><span class="m-src-name">Gen 2</span><span class="m-src-time">queried 14:31</span></div><div class="m-src-body">No Gateway ID match</div></div>
+                          <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Gen 3</span><span class="m-src-time">14:31</span></div><div class="m-src-body">Card captured in full&nbsp;·&nbsp;$10,000.00</div></div></div>
+                          <div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Transfermate</span><span class="m-src-time">14:31</span></div><div class="m-src-body">Leg 1 complete&nbsp;·&nbsp;Leg 2 never initiated</div></div></div>
+                          <div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-h"><span class="m-src-name">Gen 2</span><span class="m-src-time">14:31</span></div><div class="m-src-body">No Gateway ID match</div></div></div>
                           <div class="m-answer">Leg 2 never fired. <b>11 more</b> Acme transactions are in the same state.</div>
-                          <span class="m-conf">Confidence: medium</span>
+                          <span class="m-conf med"><span class="m-conf-bars"><i></i><i></i><i></i></span>Confidence: medium</span>
                           <div class="m-btn">Retry Leg 2 on these 12</div>
                         </div>
                       </div>
@@ -1268,10 +1301,10 @@
                         <div class="m-appbar"><svg class="m-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><h5>Copilot</h5></div>
                         <div class="m-chat" style="padding-top:2px">
                           <div class="m-action">
-                            <div class="m-action-h">Agent action<span class="m-action-state">Proposed</span></div>
+                            <div class="m-action-h"><span class="m-mark"></span>Agent action</div>
                             <div class="m-action-b">
                               <div class="m-action-t">Retry Leg 2 settlement</div>
-                              <div class="m-action-meta">11 of 12 selected&nbsp;·&nbsp;oldest first&nbsp;·&nbsp;stop after 2 fails</div>
+                              <div class="m-action-meta"><span class="m-state">Proposed</span> 11 of 12 selected&nbsp;·&nbsp;oldest first</div>
                             </div>
                             <div class="m-alist">
                               <div class="m-arow"><span class="m-check on"></span>GW…826541<span class="m-amt">$10,000</span></div>
@@ -1303,7 +1336,7 @@
                         <div class="m-body"><div class="m-list">
                           <div class="m-card m-row">
                             <div class="m-rt"><span class="m-buyer">Acme Corp</span><span class="m-chip ok">Funded</span></div>
-                            <div class="m-sub">Widget Co&nbsp;·&nbsp;$10,000.00</div>
+                            <div class="m-sub">Widget Co&nbsp;·&nbsp;<span class="m-money">$10,000.00</span></div>
                             <span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span>
                             <div class="m-timeline">
                               <div class="m-tl"><span class="m-tl-k">Intent</span><span class="m-tl-v">Ops</span></div>
@@ -1313,8 +1346,8 @@
                               <div class="m-tl"><span class="m-tl-k">Result</span><span class="m-tl-v">settled</span></div>
                             </div>
                           </div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;$42,000.00</div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
-                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;$8,200.00</div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Metro Logistics</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FleetCo&nbsp;·&nbsp;<span class="m-money">$42,000.00</span></div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
+                          <div class="m-card m-row"><div class="m-rt"><span class="m-buyer">Sunrise Foods</span><span class="m-chip ok">Funded</span></div><div class="m-sub">FarmFresh&nbsp;·&nbsp;<span class="m-money">$8,200.00</span></div><span class="m-agentbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>settled by agent&nbsp;·&nbsp;14:32</span></div>
                         </div></div>
                       </div>
 
