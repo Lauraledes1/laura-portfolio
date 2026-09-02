@@ -891,6 +891,7 @@
           .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
           .m-chip.pend { background:#ECEAE3; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
           .m-row.flag .m-chip.warn { background:var(--m-red-dot); color:#fff; } .m-row.flag .m-chip.warn::before { background:#fff; }
+          .m-flag-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
           /* conversation */
           .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:18px 16px 12px; display:flex; flex-direction:column; gap:18px; }
           .m-conv::-webkit-scrollbar { display:none; }
@@ -964,17 +965,17 @@
           .m-conf-why { display:none; padding:2px 12px 12px; font-size:10.5px; line-height:1.55; color:var(--m-ink2); }
           .m-conf.open .m-conf-why { display:block; }
           /* CTA + buttons */
-          .m-cta { display:inline-flex; align-items:center; justify-content:center; gap:6px; align-self:flex-start;
+          .m-cta { display:inline-flex; align-items:center; justify-content:center; gap:6px;
                   height:32px; padding:0 15px; border:0; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:600;
                   letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); cursor:pointer; }
           .m-cta svg { width:13px; height:13px; }
+          .m-cta.ghost { background:transparent; color:var(--m-ink2); box-shadow:none; padding:0 10px; }
+          .m-cta-row { display:flex; align-items:center; gap:6px; align-self:flex-start; }
           .m-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; height:32px; padding:0 15px; border:0; border-radius:8px;
                   font-size:11.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); }
           .m-btn.text { background:transparent; color:var(--m-ink); box-shadow:none; }
           .m-btn.danger { background:transparent; color:var(--m-red); border:0; box-shadow:none; }
           .m-btn.danger:hover { background:var(--m-red-bg); }
-          .m-btn.ghost { background:transparent; color:var(--m-ink); border:0; box-shadow:none; }
-          .m-btn.ghost:hover { background:var(--m-line2); }
           .m-action-f:has(.m-btn.danger) { border-top-color:var(--m-line); padding-top:11px; }
           /* agent action card */
           .m-action { border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e3); }
@@ -992,8 +993,12 @@
           .m-action-steps.s3 .m-steps-l { text-align:right; }
           .m-action-b { padding:14px 15px 15px; }
           .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
+          .m-action-type { margin-top:4px; display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:600;
+                  letter-spacing:.02em; color:var(--m-red); }
+          .m-action-type::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--m-red-dot); flex-shrink:0; }
           .m-action-sum { margin-top:5px; font-size:11.5px; letter-spacing:-.1px; line-height:1.5; color:var(--m-ink3); }
           .m-action-sum b { color:var(--m-ink); font-weight:700; font-variant-numeric:tabular-nums; }
+          .m-action-note { margin-top:3px; font-size:10px; line-height:1.4; letter-spacing:-.1px; color:var(--m-ink3); }
           .m-disc-wrap { border-top:1px solid var(--m-line2); }
           .m-disc { display:flex; align-items:center; gap:10px; padding:13px 15px; cursor:pointer;
                   font-size:12px; font-weight:600; color:var(--m-ink); transition:background .12s ease; }
@@ -1003,6 +1008,15 @@
           .m-disc-n { margin-left:auto; color:var(--m-ink3); font-weight:600; font-variant-numeric:tabular-nums; }
           .m-disc-wrap .m-alist { display:none; }
           .m-disc-wrap.open .m-alist { display:block; }
+          .m-audit { display:none; border-top:1px solid var(--m-line2); padding:8px 15px 12px; }
+          .m-disc-wrap.open .m-audit { display:block; }
+          .m-au-row { position:relative; display:flex; align-items:baseline; gap:10px; padding:5px 0 5px 15px; }
+          .m-au-row::before { content:''; position:absolute; left:3px; top:0; bottom:0; width:1.5px; background:var(--m-line); }
+          .m-au-row:first-child::before { top:9px; }
+          .m-au-row:last-child::before { bottom:calc(100% - 9px); }
+          .m-au-row::after { content:''; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:50%; background:var(--m-accent); }
+          .m-au-k { width:60px; flex-shrink:0; font-size:10.5px; font-weight:500; color:var(--m-ink); }
+          .m-au-v { font-family:var(--m-mono); font-size:10px; color:var(--m-ink3); font-variant-numeric:tabular-nums; }
           .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:13px 0 0; overflow:hidden; }
           .m-progress i { display:block; height:100%; background:var(--m-accent); border-radius:3px; }
           .m-progress-l { margin-top:8px; font-size:11px; letter-spacing:-.1px; color:var(--m-ink3); }
@@ -1029,8 +1043,9 @@
           .m-tag.run { background:var(--m-accent-tint); color:var(--m-accent); }
           .m-tag.run::before { content:''; flex-shrink:0; width:8px; height:8px; border:1.5px solid currentColor;
                   border-right-color:transparent; border-radius:50%; animation:m-spin .7s linear infinite; }
-          .m-action-f { display:flex; gap:8px; justify-content:center; padding:12px 15px 14px; border-top:1px solid var(--m-line2); }
-          .m-action-f .m-btn { white-space:nowrap; height:34px; padding:0 20px; border-radius:9px; font-size:12px; }
+          .m-action-f { display:flex; align-items:center; gap:4px; justify-content:center; padding:11px 12px 13px; border-top:1px solid var(--m-line2); }
+          .m-action-f .m-btn { white-space:nowrap; height:34px; padding:0 16px; border-radius:9px; font-size:12px; }
+          .m-action-f .m-btn.text { padding:0 8px; }
           /* input bar */
           .m-inputbar { flex-shrink:0; display:flex; align-items:center; gap:7px; padding:8px 13px 10px; border-top:1px solid var(--m-line); background:var(--m-bg); }
           .m-inputbar .m-field { flex:1; height:30px; border:1px solid var(--m-line); border-radius:999px; background:var(--m-surface);
@@ -1334,6 +1349,7 @@
                           <div class="m-row flag" role="button" tabindex="0" aria-label="Open Brightwater Logistics in the copilot">
                             <div class="m-rt"><span class="m-buyer">Brightwater Logistics</span><span class="m-chip warn">Anomaly</span></div>
                             <div class="m-row-b"><span class="m-sub">Tamsett Co. · due today</span><span class="m-money">$10,000</span></div>
+                            <div class="m-flag-why">$10,000 vs ~$3,100 typical · flagged by Gen 3</div>
                           </div>
                           <div class="m-row">
                             <div class="m-rt"><span class="m-buyer">Kestrel Mfg.</span><span class="m-chip pend">Pending</span></div>
@@ -1401,7 +1417,11 @@
                               <button type="button" class="m-conf-b">Confidence: medium<svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
                               <div class="m-conf-why">Gen 3 and Transfermate agree. Gen 2's mapping table is outdated, so the affected transaction count may be off by one or two.</div>
                             </div>
-                            <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry All</button>
+                            <div class="m-answer">Gen 2's mapping is stale, so the count could be off by one or two. I can retry the 11 I'm sure about, or re-check the count first.</div>
+                            <div class="m-cta-row">
+                              <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry the 11</button>
+                              <button type="button" class="m-cta ghost">Re-check first</button>
+                            </div>
                           </div></div>
                         </div>
                         <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
@@ -1421,7 +1441,9 @@
                               </div>
                               <div class="m-action-b">
                                 <div class="m-action-t">Retry Leg 2 settlement</div>
+                                <div class="m-action-type">Destructive action</div>
                                 <div class="m-action-sum"><b>$284,900</b> · 11 of 12 transactions</div>
+                                <div class="m-action-note">1 excluded — under dispute, can't verify</div>
                               </div>
                               <div class="m-disc-wrap">
                                 <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Review transactions</span><span class="m-disc-n">11</span></div>
@@ -1434,7 +1456,7 @@
                                   <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-amt">$31,000</span></div>
                                 </div>
                               </div>
-                              <div class="m-action-f"><span class="m-btn">Approve All</span></div>
+                              <div class="m-action-f"><span class="m-btn">Approve All</span><span class="m-btn text">Review each</span></div>
                             </div>
                           </div></div>
                         </div>
@@ -1502,8 +1524,17 @@
                                   <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-tag ok">Settled</span></div>
                                 </div>
                               </div>
+                              <div class="m-disc-wrap">
+                                <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Audit trail</span></div>
+                                <div class="m-audit">
+                                  <div class="m-au-row"><span class="m-au-k">Intent</span><span class="m-au-v">Ops · 14:29</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Plan</span><span class="m-au-v">Agent · 14:30</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Approved</span><span class="m-au-v">Ops · 14:31</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Executed</span><span class="m-au-v">Agent · 14:32</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Result</span><span class="m-au-v">Settled</span></div>
+                                </div>
+                              </div>
                               <div class="m-revert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4"></path></svg>Reversible until 3:32pm · <button type="button" class="m-undo">Undo</button></div>
-                              <div class="m-action-f"><span class="m-btn ghost">View audit trail</span></div>
                             </div>
                           </div></div>
                         </div>
