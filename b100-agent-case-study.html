@@ -816,7 +816,7 @@
           .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
                   background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
                   --m-bg:#F4F3EF; --m-surface:#FFFFFF;
-                  --m-ink:#1A2330; --m-ink2:#5C6672; --m-ink3:#98A0AB;
+                  --m-ink:#1A2330; --m-ink2:#3F4855; --m-ink3:#565E6B;
                   --m-line:#E9E5DD; --m-line2:#F1EEE7;
                   --m-accent:#324e79; --m-accent-tint:#E9F0FC;
                   --m-amber:#8F5410; --m-amber-bg:#FBEBD1; --m-amber-dot:#D68A1F;
@@ -832,11 +832,11 @@
                   opacity:0; z-index:1; transition:none; pointer-events:none; }
           .scr.on { opacity:1; z-index:2; pointer-events:auto; transition:opacity .28s ease; }
           /* agent mark */
-          .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-ink); position:relative; flex-shrink:0; }
-          .m-mark::before { content:''; position:absolute; inset:0; margin:auto; width:10px; height:10px; background:#fff;
-                  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%); }
+          .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-ink); position:relative; flex-shrink:0;
+                  display:flex; align-items:center; justify-content:center; }
+          .m-mark::before { content:'b'; color:#fff; font-family:var(--m-sans); font-weight:700; font-size:14px; line-height:1; }
           .m-mark.sm { width:17px; height:17px; border-radius:6px; }
-          .m-mark.sm::before { width:8px; height:8px; }
+          .m-mark.sm::before { font-size:11px; }
           /* status bar */
           .m-status { height:38px; display:flex; align-items:center; justify-content:space-between; padding:0 15px 0 22px;
                   font-family:var(--m-sys); font-size:13.5px; font-weight:600; letter-spacing:.1px; color:var(--m-ink); flex-shrink:0; }
@@ -889,7 +889,7 @@
           .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
           .m-chip.pend { background:#ECEAE3; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
           /* conversation */
-          .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:14px 15px 8px; display:flex; flex-direction:column; gap:14px; }
+          .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:18px 16px 12px; display:flex; flex-direction:column; gap:18px; }
           .m-conv::-webkit-scrollbar { display:none; }
           .m-turn { display:flex; }
           .m-turn.user { justify-content:flex-end; }
@@ -897,7 +897,7 @@
                   background:var(--m-ink); color:#fff; }
           .m-turn.bot { gap:9px; }
           .m-turn.bot > .m-mark { margin-top:1px; }
-          .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
+          .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:12px; }
           /* bot response breaks out of the avatar indent to use the full conversation width;
              only a leading text line (ctxline / short intro answer) stays beside the avatar */
           .m-turn.bot .m-turn-c > .m-plan:first-child,
@@ -907,15 +907,15 @@
           .m-ctxline { display:flex; align-items:flex-start; gap:6px; font-size:10.5px; font-weight:500; line-height:1.35; color:var(--m-red); }
           .m-ctxline svg { width:16px; height:16px; flex-shrink:0; margin-top:-1px; }
           .m-thinking { font-size:11.5px; color:var(--m-ink2); display:flex; align-items:center; gap:8px; }
-          .m-answer { font-size:12.5px; line-height:1.55; color:var(--m-ink); }
+          .m-answer { font-size:12.5px; line-height:1.62; color:var(--m-ink); }
           .m-answer b { font-weight:700; }
           .m-tstamp { font-family:var(--m-mono); font-size:9px; color:var(--m-ink3); }
           /* plan stepper */
-          .m-plan { border:1px solid var(--m-line); border-radius:12px; padding:11px 13px; background:var(--m-surface); box-shadow:var(--m-e1); }
-          .m-plan-t { font-size:9px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:9px; }
+          .m-plan { border:1px solid var(--m-line); border-radius:12px; padding:13px 14px; background:var(--m-surface); box-shadow:var(--m-e1); }
+          .m-plan-t { font-size:9.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:11px; }
           .m-steps { position:relative; }
           .m-steps::before { content:''; position:absolute; left:7.5px; top:14px; bottom:14px; width:1.5px; background:var(--m-line); }
-          .m-step { display:flex; align-items:center; gap:11px; font-size:11.5px; color:var(--m-ink2); padding:4px 0; position:relative; white-space:nowrap; }
+          .m-step { display:flex; align-items:center; gap:11px; font-size:11.5px; color:var(--m-ink2); padding:6px 0; position:relative; white-space:nowrap; }
           .m-step b { color:var(--m-ink); font-weight:600; }
           .m-step .m-node { width:16px; height:16px; border-radius:50%; flex-shrink:0; background:var(--m-surface);
                   border:1.6px solid var(--m-line); box-sizing:border-box; position:relative; }
@@ -928,37 +928,38 @@
           .m-srcs { border:1px solid var(--m-line); border-radius:12px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e1); }
           .m-src-item { border-bottom:1px solid var(--m-line2); }
           .m-src-item:last-child { border-bottom:0; }
-          .m-src { display:flex; align-items:center; gap:10px; padding:9px 10px 9px 12px;
+          .m-src { display:flex; align-items:center; gap:10px; padding:12px 12px;
                   cursor:pointer; transition:background .12s ease; }
           .m-src:hover { background:#EFEFF1; }
           .m-src-item.open .m-src, .m-src:active { background:#E7E7EB; }
+          .m-src-item.open .m-src { padding-bottom:2px; }
           .m-src-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); transition:transform .18s ease; }
           .m-src-item.open .m-src-cv { transform:rotate(90deg); }
-          .m-src-detail { display:none; padding:2px 12px 11px 46px; }
+          .m-src-detail { display:none; padding:12px 14px 12px 46px; }
           .m-src-item.open .m-src-detail { display:block; }
-          .m-src-detail dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:3px 12px;
-                  font-family:var(--m-mono); font-size:9.5px; line-height:1.4; }
+          .m-src-detail dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 12px;
+                  font-family:var(--m-mono); font-size:10px; line-height:1.5; }
           .m-src-detail dt { color:var(--m-ink3); white-space:nowrap; }
           .m-src-detail dd { margin:0; color:var(--m-ink2); }
           .m-src-mono { width:24px; height:24px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
                   font-family:var(--m-mono); font-size:8.5px; font-weight:500; background:#EEF0F3; color:var(--m-ink2); }
           .m-src-c { flex:1; min-width:0; }
-          .m-src-name { font-size:11px; font-weight:600; color:var(--m-ink); }
-          .m-src-body { font-size:10.5px; line-height:1.35; color:#3D4652; margin-top:2px; }
-          .m-src-r { flex-shrink:0; display:flex; align-items:center; gap:6px; }
+          .m-src-name { font-size:11px; font-weight:600; color:var(--m-ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-src-r { flex-shrink:0; display:flex; align-items:center; gap:5px; }
           .m-src-dot { width:6px; height:6px; border-radius:50%; }
           .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
-          .m-src-time { font-family:var(--m-mono); font-size:9px; color:#79818D; }
+          .m-src-status { font-size:10px; font-weight:600; letter-spacing:-.1px; white-space:nowrap; }
+          .m-src.ok .m-src-status { color:var(--m-green); } .m-src.warn .m-src-status { color:var(--m-amber); } .m-src.err .m-src-status { color:var(--m-red); }
           /* confidence signal (expandable) */
           .m-conf { border:1px solid var(--m-line2); border-radius:10px; overflow:hidden; background:var(--m-surface); }
-          .m-conf-b { display:flex; align-items:center; gap:7px; width:100%; padding:8px 11px; border:0; background:transparent;
-                  font-family:inherit; font-size:10.5px; font-weight:600; color:var(--m-ink3); text-align:left; cursor:pointer; }
+          .m-conf-b { display:flex; align-items:center; gap:7px; width:100%; padding:11px 12px; border:0; background:transparent;
+                  font-family:inherit; font-size:11px; font-weight:600; color:var(--m-ink3); text-align:left; cursor:pointer; }
           .m-conf-b::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
           .m-conf-b .m-cv { margin-left:auto; width:12px; height:12px; transition:transform .18s ease; }
           .m-conf.open .m-conf-b .m-cv { transform:rotate(90deg); }
           .m-conf.med .m-conf-b { color:var(--m-amber); }
           .m-conf.high .m-conf-b { color:var(--m-green); }
-          .m-conf-why { display:none; padding:0 11px 10px; font-size:10px; line-height:1.5; color:var(--m-ink2); }
+          .m-conf-why { display:none; padding:2px 12px 12px; font-size:10.5px; line-height:1.55; color:var(--m-ink2); }
           .m-conf.open .m-conf-why { display:block; }
           /* CTA + buttons */
           .m-cta { display:inline-flex; align-items:center; justify-content:center; gap:6px; align-self:flex-start;
@@ -971,27 +972,27 @@
           .m-btn.danger { background:var(--m-surface); color:var(--m-red); border:1.4px solid var(--m-red); }
           /* agent action card */
           .m-action { border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e3); }
-          .m-action-h { display:flex; align-items:center; gap:5px; background:var(--m-ink); padding:9px 10px;
-                  font-size:8.5px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:#fff; white-space:nowrap; }
+          .m-action-h { display:flex; align-items:center; gap:6px; background:var(--m-ink); padding:10px 11px;
+                  font-size:9px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#fff; white-space:nowrap; }
           .m-action-h .m-mark { flex-shrink:0; background:rgba(255,255,255,.16); }
-          .m-action-h .m-mark::before { background:#fff; }
+          .m-action-h .m-mark::before { color:#fff; }
           .m-action-h span { overflow:hidden; text-overflow:ellipsis; }
-          .m-action-state { flex-shrink:0; margin-left:auto; font-size:8px; font-weight:600; letter-spacing:.05em; padding:3px 7px;
-                  border-radius:999px; background:rgba(255,255,255,.15); color:#fff; white-space:nowrap; }
-          .m-action-b { padding:12px 13px; }
+          .m-action-state { flex-shrink:0; margin-left:auto; font-size:8.5px; font-weight:600; letter-spacing:.05em; padding:3px 8px;
+                  border-radius:999px; background:rgba(255,255,255,.18); color:#fff; white-space:nowrap; }
+          .m-action-b { padding:15px 14px; }
           .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
-          .m-action-facts { margin-top:8px; display:flex; flex-direction:column; gap:5px; }
-          .m-fact { display:grid; grid-template-columns:52px 1fr; column-gap:8px; font-size:10.5px; color:var(--m-ink2); line-height:1.4; }
+          .m-action-facts { margin-top:11px; display:flex; flex-direction:column; gap:8px; }
+          .m-fact { display:grid; grid-template-columns:52px 1fr; column-gap:8px; font-size:11px; color:var(--m-ink2); line-height:1.5; }
           .m-fact b { color:var(--m-ink); font-weight:600; font-variant-numeric:tabular-nums; }
           .m-fact .m-k { color:var(--m-ink3); }
-          .m-note { margin-top:9px; font-size:10px; color:var(--m-ink2); display:flex; align-items:center; gap:6px; }
+          .m-note { margin-top:12px; font-size:10.5px; color:var(--m-ink2); display:flex; align-items:center; gap:6px; }
           .m-note svg { width:12px; height:12px; color:var(--m-green-dot); flex-shrink:0; }
           .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:11px 13px 3px; overflow:hidden; }
           .m-progress i { display:block; height:100%; background:var(--m-ink); border-radius:3px; }
-          .m-progress-l { font-size:10px; color:var(--m-ink2); padding:0 13px 4px; }
-          .m-alist { border-top:1px solid var(--m-line2); max-height:132px; overflow-y:auto; scrollbar-width:none; }
+          .m-progress-l { font-size:10.5px; color:var(--m-ink2); padding:0 14px 4px; }
+          .m-alist { border-top:1px solid var(--m-line2); max-height:156px; overflow-y:auto; scrollbar-width:none; }
           .m-alist::-webkit-scrollbar { display:none; }
-          .m-arow { display:flex; align-items:center; gap:10px; height:36px; padding:0 13px; border-bottom:1px solid var(--m-line2);
+          .m-arow { display:flex; align-items:center; gap:10px; height:42px; padding:0 14px; border-bottom:1px solid var(--m-line2);
                   font-size:11px; color:var(--m-ink); white-space:nowrap; }
           .m-arow:last-child { border-bottom:0; }
           .m-arow .m-gw { font-family:var(--m-mono); font-size:10px; letter-spacing:-.3px; }
@@ -1013,7 +1014,7 @@
           .m-collapsed { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--m-ink2);
                   background:var(--m-surface); border:1px solid var(--m-line); border-radius:11px; padding:9px 12px; box-shadow:var(--m-e1); }
           .m-collapsed .m-mark { width:16px; height:16px; border-radius:5px; }
-          .m-collapsed .m-mark::before { width:7px; height:7px; }
+          .m-collapsed .m-mark::before { font-size:10px; }
           .m-collapsed .m-cv { margin-left:auto; width:12px; height:12px; color:var(--m-ink3); }
           /* input bar */
           .m-inputbar { flex-shrink:0; display:flex; align-items:center; gap:7px; padding:8px 13px 10px; border-top:1px solid var(--m-line); background:var(--m-bg); }
@@ -1358,15 +1359,15 @@
                           <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
                             <div class="m-srcs">
                               <div class="m-src-item">
-                                <div class="m-src ok" role="button" tabindex="0"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src ok" role="button" tabindex="0"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">Complete</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
                                 <div class="m-src-detail"><dl><dt>Amount</dt><dd>$10,000.00 · full capture</dd><dt>Card</dt><dd>••4471 · auth 14:29:58</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
                               </div>
                               <div class="m-src-item">
-                                <div class="m-src warn" role="button" tabindex="0"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-                                <div class="m-src-detail"><dl><dt>Leg 1</dt><dd>settled 14:12:30</dd><dt>Leg 2</dt><dd>not initiated · no trigger event</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+                                <div class="m-src warn" role="button" tabindex="0"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">Partial</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Leg 1</dt><dd>settled 14:12:30</dd><dt>Leg 2</dt><dd>not initiated, no trigger event</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
                               </div>
                               <div class="m-src-item">
-                                <div class="m-src err" role="button" tabindex="0"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src err" role="button" tabindex="0"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">No match</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
                                 <div class="m-src-detail"><dl><dt>Expected</dt><dd>GW-826541</dd><dt>Found</dt><dd>no match</dd><dt>Mapping</dt><dd>table last synced Aug 28</dd></dl></div>
                               </div>
                             </div>
