@@ -976,7 +976,8 @@
           .m-cta.ghost { background:transparent; color:var(--m-ink2); box-shadow:none; padding:0 6px; }
           .m-cta-row { display:flex; align-items:center; gap:4px; align-self:flex-start; }
           .m-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; height:32px; padding:0 15px; border:0; border-radius:8px;
-                  font-size:11.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); }
+                  font-size:11.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); cursor:pointer; }
+          .m-btn:not(.text):hover { filter:brightness(1.08); }
           .m-btn.text { background:transparent; color:var(--m-ink); box-shadow:none; }
           .m-btn.danger { background:transparent; color:var(--m-red); border:0; box-shadow:none; }
           .m-btn.danger:hover { background:var(--m-red-bg); }
@@ -1333,7 +1334,7 @@
                                   <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-amt">$31,000</span></div>
                                 </div>
                               </div>
-                              <div class="m-action-f"><span class="m-btn">Approve All</span><span class="m-btn text">Review each</span></div>
+                              <div class="m-action-f"><span class="m-btn" role="button" tabindex="0">Approve All</span><span class="m-btn text" role="button" tabindex="0">Review each</span></div>
                             </div>
                           </div></div>
                         </div>
@@ -1732,6 +1733,31 @@
               e.stopPropagation();
               paused = true; demo.classList.add('paused'); stop();
               go(3);
+            });
+          }
+          var approveBtn = demo.querySelector('.scr[data-step="4"] .m-action-f .m-btn:not(.text)');
+          if(approveBtn){
+            function approveAll(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              go(4);
+            }
+            approveBtn.addEventListener('click', approveAll);
+            approveBtn.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); approveAll(e); }
+            });
+          }
+          var reviewEachBtn = demo.querySelector('.scr[data-step="4"] .m-action-f .m-btn.text');
+          if(reviewEachBtn){
+            function reviewEach(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              var w = reviewEachBtn.closest('.m-action').querySelector('.m-disc-wrap');
+              if(w){ w.classList.add('open'); }
+            }
+            reviewEachBtn.addEventListener('click', reviewEach);
+            reviewEachBtn.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); reviewEach(e); }
             });
           }
           render();
