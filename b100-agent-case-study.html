@@ -803,11 +803,10 @@
           /* two-image placeholder pair */
           .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
           @media (max-width:880px){ .b100-imgpair { grid-template-columns:1fr; gap:24px; } }
-          .b100-imgcell { height:460px; width:100%; object-fit:cover; background:#D9BEB2 center/cover no-repeat;
+          .b100-imgcell { aspect-ratio:1/1; width:100%; object-fit:cover; background:#D9BEB2 center/cover no-repeat;
                   display:flex; align-items:center; justify-content:center;
                   font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A6F63; }
           .b100-imgcell.alt { background-color:#C9AA9C; color:#5A413A; }
-          @media (max-width:880px){ .b100-imgcell { height:280px; } }
           .b100-flowdemo .phone { position:relative; width:256px; height:524px; flex-shrink:0; border-radius:46px;
                   background:linear-gradient(#1a1d22,#0c0e11); padding:11px; cursor:pointer;
                   box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
