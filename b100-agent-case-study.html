@@ -808,6 +808,8 @@
                   font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A6F63; }
           .b100-imgcell.alt { background-color:#C9AA9C; color:#5A413A; }
           @media (max-width:880px){ .b100-imgcell { height:280px; } }
+          .b100-img { width:100%; height:520px; object-fit:cover; display:block; }
+          @media (max-width:880px){ .b100-img { height:300px; } }
           .b100-flowdemo .phone { position:relative; width:256px; height:524px; flex-shrink:0; border-radius:46px;
                   background:linear-gradient(#1a1d22,#0c0e11); padding:11px; cursor:pointer;
                   box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
@@ -1571,14 +1573,9 @@
             </div>
         </div>
 
-        <!-- ============ IMAGE PAIR 1 ============ -->
+        <!-- ============ IMAGE 2 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
-            <div class="b100-imgpair">
-                <!-- replace with assets/b100-agent-case-study/patterns-a.jpg -->
-                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
-                <!-- replace with assets/b100-agent-case-study/patterns-b.jpg -->
-                <div class="b100-imgcell alt" role="img" aria-label="Photo placeholder">image</div>
-            </div>
+            <img src="assets/b100-agent-case-study/image2.jpg" alt="The B100 Operations Portal in use" class="b100-img">
         </div>
 
         <!-- ============ WHERE AI DOESN'T GO ============ -->
