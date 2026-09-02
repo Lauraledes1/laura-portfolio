@@ -1722,6 +1722,14 @@
               if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openCopilot(e); }
             });
           }
+          var retryBtn = demo.querySelector('.scr[data-step="3"] .m-cta:not(.ghost)');
+          if(retryBtn){
+            retryBtn.addEventListener('click', function(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              go(3);
+            });
+          }
           render();
           if('IntersectionObserver' in window){
             new IntersectionObserver(function(entries){
