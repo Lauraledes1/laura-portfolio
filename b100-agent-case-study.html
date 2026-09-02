@@ -1082,6 +1082,17 @@
           .b100-row .rv { flex:1 1 0; }
           .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:17px; line-height:1.6; color:var(--typography-paragraph); }
 
+          /* work-in-progress section — blurred content behind a status card */
+          .wip-section { position:relative; }
+          .wip-section .wip-content { filter:blur(6px); opacity:.4; pointer-events:none; user-select:none; }
+          .wip-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:24px; }
+          .wip-card { border:1px solid var(--b-line); background:rgba(10,10,10,.7); backdrop-filter:blur(2px);
+                  -webkit-backdrop-filter:blur(2px); border-radius:14px; padding:30px 36px; max-width:440px; text-align:center; }
+          .wip-card .wip-title { font-family:'Syne',sans-serif; font-weight:600; font-size:22px; line-height:1.4; color:#fff; margin:0 0 9px; }
+          .wip-card .wip-title .wip-status { color:var(--l3); }
+          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:15px; line-height:1.6; color:var(--b-dim); margin:0; }
+          @media (max-width:900px){ .wip-card { padding:24px 22px; } .wip-card .wip-title { font-size:19px; } }
+
           /* patterns — expandable list (matches the Process section on the agentic case) */
           .pat-item { border-top:1px solid rgba(255,255,255,.12); cursor:pointer; }
           .pat-item:last-child { border-bottom:1px solid rgba(255,255,255,.12); }
@@ -1435,6 +1446,18 @@
             </div>
         </div>
 
+        <!-- ============ WHERE AI DOESN'T GO ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="w-full">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where AI doesn't go</h2>
+                <div class="b100-rows">
+                    <div class="b100-row"><div class="rk"><p>Direct Ops data entry</p></div><div class="rv"><p>New buyer mapping stays manual until volume justifies the calibration cost.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Compliance &amp; legal approvals</p></div><div class="rv"><p>Human, non-negotiable. The agent can assemble the packet; it cannot sign off.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Terminal states of money already moved</p></div><div class="rv"><p>Audit yes, action no. Once funds have settled, the interaction is read-only by design.</p></div></div>
+                </div>
+            </div>
+        </div>
+
         <!-- ============ THE ESCALATION LADDER ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="w-full flex flex-col gap-8">
@@ -1613,18 +1636,6 @@
             </div>
         </div>
 
-        <!-- ============ WHERE AI DOESN'T GO ============ -->
-        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
-            <div class="w-full">
-                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where AI doesn't go</h2>
-                <div class="b100-rows">
-                    <div class="b100-row"><div class="rk"><p>Direct Ops data entry</p></div><div class="rv"><p>New buyer mapping stays manual until volume justifies the calibration cost.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Compliance &amp; legal approvals</p></div><div class="rv"><p>Human, non-negotiable. The agent can assemble the packet; it cannot sign off.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Terminal states of money already moved</p></div><div class="rv"><p>Audit yes, action no. Once funds have settled, the interaction is read-only by design.</p></div></div>
-                </div>
-            </div>
-        </div>
-
         <!-- ============ IMAGE PAIR 2 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
@@ -1643,6 +1654,24 @@
                     <div class="b100-row"><div class="rk"><p>Three levels, not two or five</p></div><div class="rv"><p>Two collapses ambient into copilot and loses the "the product got smarter" move. Five splits hairs Ops won't feel. Three maps to the real thresholds: does it talk back, and can it change state.</p></div></div>
                     <div class="b100-row"><div class="rk"><p>Batch approval for destructive actions</p></div><div class="rv"><p>Far faster for the 12-transaction case, but one "approve all" click carries more weight. Mitigated with per-item opt-out and undo, still open whether high-value transactions should force per-item approval.</p></div></div>
                     <div class="b100-row"><div class="rk"><p>Open, whose name is on the action?</p></div><div class="rv"><p>Accountability blurs between the human who approved and the agent that executed. The audit trail captures the full chain, but the org still has to decide where responsibility sits.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ WHERE WE'RE GOING (WORK IN PROGRESS) ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100 wip-section" data-scroll="">
+            <div class="w-full wip-content" aria-hidden="true">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where we're going</h2>
+                <div class="b100-rows">
+                    <div class="b100-row"><div class="rk"><p>Confidence-weighted autonomy</p></div><div class="rv"><p>Let L3 widen or narrow its own action scope from a rolling accuracy score, with Ops able to pull the band back at any time.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Cross-rail coverage</p></div><div class="rv"><p>Extend the ladder past settlement retries into FX booking and reconciliation breaks, the two queues Ops flags as the next biggest time sink.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Shared team memory</p></div><div class="rv"><p>A decision one analyst makes on an edge case becomes context the agent offers the next analyst, instead of living in a private thread.</p></div></div>
+                </div>
+            </div>
+            <div class="wip-overlay">
+                <div class="wip-card">
+                    <p class="wip-title"><span class="wip-status">[status]</span> work in progress</p>
+                    <p class="wip-desc">This is an ongoing project, with new features coming soon.</p>
                 </div>
             </div>
         </div>
