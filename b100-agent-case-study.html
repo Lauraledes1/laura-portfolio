@@ -1566,12 +1566,12 @@
           var dots = Array.prototype.slice.call(demo.querySelectorAll('.flow-rail button'));
           var cap = demo.querySelector('.flow-cap');
           var CAPS = [
-            {tag:'l1', t:'L1', h:'The flag', c:'An anomaly chip on the Brightwater Logistics row: the amount to the supplier is off pattern. Ambient, no chat. Tap the row to open the copilot.'},
-            {tag:'tr', t:'L1 → L2', h:'Expand', c:'The chip opens the copilot with the anomaly loaded as context. It shows its plan and starts checking Gen 3, Transfermate, then Gen 2.'},
-            {tag:'l2', t:'L2', h:'The answer', c:'Each source is cited with its query time and opens to the record. Leg 2 was never initiated here or on 11 others, $284,900 in total. Confidence is medium, and says why.'},
-            {tag:'l3', t:'L2 → L3', h:'Propose', c:'The answer becomes an Agent Action Card, step 1 of 3: the total, the 11 transactions to review, and one action to approve. The disputed transaction is already dropped.'},
-            {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Step 2 of 3: progress is per-item and abortable at any point, and the skipped transaction stays out.'},
-            {tag:'l3', t:'L3', h:'Done', c:'Step 3 of 3: 11 settled, 1 skipped, $269,500 cleared. Reversible for 24h, with the full decision chain, intent to result, one tap away.'}
+            {tag:'l1', t:'L1', h:'Detect', c:'An ambient anomaly chip flags the supplier amount as off-pattern. Tap the row to open the copilot.'},
+            {tag:'tr', t:'L1 → L2', h:'Investigate', c:'The copilot opens with the anomaly in context, shows its plan, and checks Gen 3, Transfermate, and Gen 2.'},
+            {tag:'l2', t:'L2', h:'Explain', c:'Sources are cited and linked. Leg 2 was never initiated here or on 11 others, totaling $284,900. Confidence is medium, with the reason explained.'},
+            {tag:'l3', t:'L2 → L3', h:'Propose', c:'An Agent Action Card shows the total, 11 transactions to review, and one action to approve. The disputed transaction is excluded.'},
+            {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Step 2 of 3 shows per-item progress, can be aborted at any point, and keeps the skipped transaction excluded.'},
+            {tag:'l3', t:'L3', h:'Complete', c:'Step 3 of 3: 11 settled, 1 skipped, and $269,500 cleared. Reversible for 24 hours, with the full decision trail, from intent to result, one tap away.'}
           ];
           var i = 0, timer = null, paused = false;
           var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1581,7 +1581,7 @@
             demo.querySelectorAll('.m-src-item.open, .m-conf.open').forEach(function(x){ x.classList.remove('open'); });
             demo.querySelectorAll('.m-disc-wrap').forEach(function(x){ x.classList.toggle('open', x.dataset.default === 'open'); });
             var C = CAPS[i];
-            cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+'</b> &nbsp;'+C.c;
+            cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+':</b> '+C.c;
           }
           function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
           function tick(){ go(i+1); }
