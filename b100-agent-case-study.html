@@ -1061,6 +1061,23 @@
           .b100-row .rv { flex:1 1 0; }
           .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:17px; line-height:1.6; color:var(--typography-paragraph); }
 
+          /* patterns — expandable list (matches the Process section on the agentic case) */
+          .pat-item { border-top:1px solid rgba(255,255,255,.12); cursor:pointer; }
+          .pat-item:last-child { border-bottom:1px solid rgba(255,255,255,.12); }
+          .pat-head { display:flex; align-items:center; gap:14px; padding:22px 0; }
+          .pat-chevron { width:14px; height:14px; flex-shrink:0; color:#6a6a6a; transition:transform .3s ease; }
+          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#5c5c5c; flex-shrink:0; }
+          .pat-label { font-family:'Syne',sans-serif; font-size:19px; font-weight:600; letter-spacing:-.2px; color:#fff; }
+          .pat-item:hover .pat-label { color:#c8c8c8; }
+          .pat-body { overflow:hidden; max-height:0; opacity:0; transition:max-height .4s ease, opacity .3s ease .05s; }
+          .pat-body-inner { padding:0 0 24px 62px; }
+          .pat-desc { font-family:'Syne',sans-serif; font-size:15px; line-height:1.7; color:#9a9a9a; max-width:620px; margin:0; }
+          .pat-desc em { font-style:normal; color:#e0e0e0; }
+          .pat-item.open .pat-body { max-height:480px; opacity:1; }
+          .pat-item.open .pat-chevron { transform:rotate(90deg); }
+          .pat-item.open .pat-label { color:#fff; }
+          @media (max-width:640px){ .pat-body-inner { padding-left:0; } }
+
         </style>
 
         <!-- ============ HERO ============ -->
@@ -1503,12 +1520,42 @@
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="w-full">
                 <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Five patterns</h2>
-                <div class="b100-rows">
-                    <div class="b100-row"><div class="rk"><p>Confidence signal</p></div><div class="rv"><p>One vocabulary across levels, <em>confirmed / likely / uncertain</em>, shown on hover at L1, inline at L2, in the audit trail at L3. Never a bare number floating on its own.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Citation &amp; sourcing</p></div><div class="rv"><p>Every agent claim is tied to its source, Gen&nbsp;3 / Transfermate / Gen&nbsp;2, with the time it was queried. Hover at L1, inline at L2, in the audit trail at L3.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Permission model</p></div><div class="rv"><p>Actions are typed. <em>Safe</em> (retrieval, drafts) needs no approval. <em>Reversible</em> (label a transaction, save a filter) needs a simple approval. <em>Destructive</em> (retry settlement, send external comms) needs approval with details.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Graceful degradation</p></div><div class="rv"><p>If confidence drops at L3, the agent proposes L2, "I'm not sure, want me to investigate?" If L2 can't answer, it proposes a human handoff rather than guessing.</p></div></div>
-                    <div class="b100-row"><div class="rk"><p>Escape hatch</p></div><div class="rv"><p>At any level, any time, the analyst can get to "just show me the raw data." The agent is never the only door to the information or the action.</p></div></div>
+                <div class="pat-list">
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">01</span><span class="pat-label">Confidence signal</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">One vocabulary across levels, <em>confirmed / likely / uncertain</em>, shown on hover at L1, inline at L2, in the audit trail at L3. Never a bare number floating on its own.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">02</span><span class="pat-label">Citation &amp; sourcing</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">Every agent claim is tied to its source, Gen&nbsp;3 / Transfermate / Gen&nbsp;2, with the time it was queried. Hover at L1, inline at L2, in the audit trail at L3.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">03</span><span class="pat-label">Permission model</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">Actions are typed. <em>Safe</em> (retrieval, drafts) needs no approval. <em>Reversible</em> (label a transaction, save a filter) needs a simple approval. <em>Destructive</em> (retry settlement, send external comms) needs approval with details.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">04</span><span class="pat-label">Graceful degradation</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">If confidence drops at L3, the agent proposes L2, "I'm not sure, want me to investigate?" If L2 can't answer, it proposes a human handoff rather than guessing.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">05</span><span class="pat-label">Escape hatch</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">At any level, any time, the analyst can get to "just show me the raw data." The agent is never the only door to the information or the action.</p></div></div>
+                    </div>
                 </div>
             </div>
         </div>
