@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)agentic-system-case-study_25.html -->
+<html lang="en" class="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="assets/favicon.jpg">
+    <title>B100 Agent Case Study - Laura Ledesna</title>
+    <script src="./agentic-system-case-study_files/saved_resource"></script>
+    <link href="./agentic-system-case-study_files/css2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="./agentic-system-case-study_files/web"></script><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style.css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(1).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(2).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(3).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(4).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(5).css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'syne': ['Syne', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#ffffff',
+                        'inverse': '#cccccc',
+                        'paragraph': '#0d0d0d',
+                    },
+                    spacing: {
+                        'none': '0',
+                        'xxs': '4px',
+                        'xs': '8px',
+                        's': '16px',
+                        'm': '24px',
+                        'lg': '32px',
+                        'xl': '48px',
+                        '2xl': '64px',
+                        '3xl': '80px',
+                    },
+                }
+            }
+        }
+    </script>
+    <script>
+      // Variable Proximity effect (vanilla JS) for footer headline
+      (function(){
+        return; // disabled footer hover effect on headline
+        function init(){
+          const container = document.getElementById('vp-footer-container');
+          const headline = document.getElementById('vp-footer-headline');
+          if (!container || !headline) return;
+
+          const label = (headline.textContent || '').trim();
+          if (!label) return;
+
+          const radius = 100;
+          const falloff = 'linear';
+          const fromSettings = "'wght' 400, 'opsz' 9";
+          const toSettings = "'wght' 1000, 'opsz' 40";
+
+          function parseSettings(str){
+            const map = new Map();
+            str.split(',').map(s=>s.trim()).forEach(s=>{
+              if (!s) return;
+              const parts = s.split(/\s+/);
+              const axis = parts[0] ? parts[0].replace(/["']/g,'') : '';
+              const value = parts[1] ? parseFloat(parts[1]) : NaN;
+              if (axis && !Number.isNaN(value)) map.set(axis, value);
+            });
+            return map;
+          }
+          const fromMap = parseSettings(fromSettings);
+          const toMap = parseSettings(toSettings);
+          const parsed = [];
+          fromMap.forEach((fromValue, axis)=>{
+            const toValue = toMap.has(axis) ? toMap.get(axis) : fromValue;
+            parsed.push({ axis, fromValue, toValue });
+          });
+
+          const words = label.split(' ');
+          headline.textContent = '';
+          words.forEach((word, wi)=>{
+            const w = document.createElement('span');
+            w.className = 'vp-word';
+            for (let i=0;i<word.length;i++){
+              const l = document.createElement('span');
+              l.className = 'vp-letter';
+              l.textContent = word[i];
+              l.style.fontVariationSettings = fromSettings;
+              w.appendChild(l);
+            }
+            headline.appendChild(w);
+            if (wi < words.length - 1) headline.appendChild(document.createTextNode(' '));
+          });
+
+          const letters = Array.from(headline.querySelectorAll('.vp-letter'));
+          const mouse = { x: 0, y: 0 };
+          const last = { x: null, y: null };
+
+          function falloffValue(distance){
+            const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
+            if (falloff === 'exponential') return norm * norm;
+            if (falloff === 'gaussian') return Math.exp(-((distance / (radius / 2)) ** 2) / 2);
+            return norm;
+          }
+
+          function onMove(clientX, clientY){
+            const rect = container.getBoundingClientRect();
+            mouse.x = clientX - rect.left;
+            mouse.y = clientY - rect.top;
+          }
+
+          window.addEventListener('mousemove', (e)=> onMove(e.clientX, e.clientY), { passive: true });
+          window.addEventListener('touchmove', (e)=> {
+            const t = e.touches && e.touches[0];
+            if (t) onMove(t.clientX, t.clientY);
+          }, { passive: true });
+
+          function loop(){
+            if (last.x !== mouse.x || last.y !== mouse.y){
+              last.x = mouse.x; last.y = mouse.y;
+              const cr = container.getBoundingClientRect();
+              for (const el of letters){
+                const r = el.getBoundingClientRect();
+                const cx = r.left + r.width / 2 - cr.left;
+                const cy = r.top + r.height / 2 - cr.top;
+                const distance = Math.hypot(mouse.x - cx, mouse.y - cy);
+                if (distance >= radius){
+                  el.style.fontVariationSettings = fromSettings;
+                } else {
+                  const f = falloffValue(distance);
+                  const settings = parsed.map(({axis, fromValue, toValue})=>{
+                    const v = fromValue + (toValue - fromValue) * f;
+                    return `'${axis}' ${v}`;
+                  }).join(', ');
+                  el.style.fontVariationSettings = settings;
+                }
+              }
+            }
+            requestAnimationFrame(loop);
+          }
+          requestAnimationFrame(loop);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+    <style>
+        /* Roboto Flex helpers for Variable Proximity */
+        .vp-roboto-flex { font-family: "Roboto Flex", sans-serif !important; }
+        .vp-word { display: inline; white-space: nowrap; }
+        .vp-letter { display: inline-block; will-change: font-variation-settings; }
+        /* Include all the styles from index.html */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Full-screen menu overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 82px; /* keep header visible */
+            left: 0; right: 0; bottom: 0;
+            background: var(--surface-primary);
+            z-index: 100;
+            display: none;
+            align-items: flex-start; /* align to top */
+            justify-content: flex-start; /* start at top-left */
+            border-top: 1px solid var(--stroke-border); /* border below header */
+            /* Animation base */
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 200ms ease, transform 200ms ease;
+            pointer-events: none;
+        }
+        .menu-overlay.open { 
+            display: flex; 
+            opacity: 1; 
+            transform: none; 
+            pointer-events: auto;
+        }
+        .menu-overlay .overlay-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* borders divide items */
+            width: 100%;
+            max-width: none; /* full width */
+            padding: 0; /* edge-to-edge */
+            /* Staggered content entrance */
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 220ms ease 60ms, transform 220ms ease 60ms;
+        }
+        .menu-overlay.open .overlay-content { opacity: 1; transform: none; }
+        .menu-overlay a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 80px;
+            padding: 0 16px; /* 16px gutters */
+            border-bottom: 1px solid var(--stroke-border);
+        }
+        .menu-overlay a:last-child { border-bottom: 0; }
+        /* FAB hidden by default; enabled in mobile media query */
+        .fab-top { display: none; }
+        /* On mobile, keep the bottom border on the last item */
+        @media (max-width: 700px) {
+            .menu-overlay a {
+                border-left: 1px solid var(--stroke-border);
+                border-right: 1px solid var(--stroke-border);
+            }
+            .menu-overlay a:last-child { border-bottom: 1px solid var(--stroke-border); }
+            /* Floating action button (Back to top) */
+            .fab-top {
+                display: flex;
+                position: fixed;
+                right: 16px;
+                bottom: 16px;
+                width: 48px;
+                height: 48px;
+                border-radius: 0; /* square */
+                align-items: center;
+                justify-content: center;
+                background: var(--surface-primary);
+                color: var(--typography-heading);
+                border: 1px solid var(--stroke-border);
+                z-index: 90; /* below overlay (100) */
+            }
+            .fab-top img { width: 24px; height: 24px; }
+            /* Dark mode: make arrow white */
+            .dark .fab-top img { filter: invert(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .menu-overlay { transition: none; }
+            .menu-overlay .overlay-content { transition: none; }
+        }
+        /* removed overlay title */
+
+        /* Theme Variables */
+        .light {
+            --surface-primary: #ffffff;
+            --surface-inverse: #cccccc;
+            --surface-secondary: #f2f2f2;
+            --surface-tertiary: #e6e6e6;
+            --typography-heading: #000000;
+            --typography-paragraph: #0d0d0d;
+            --stroke-border: #cccccc;
+            --media-icon: #000000;
+        }
+
+        .dark {
+            --surface-primary: #000000;
+            --surface-inverse: #333333;
+            --surface-secondary: #1a1a1a;
+            --surface-tertiary: #333333;
+            --typography-heading: #ffffff;
+            --typography-paragraph: #ffffff;
+            --stroke-border: #333333;
+            --media-icon: #ffffff;
+        }
+
+        /* Theme Transition */
+        * {
+            transition: background-color 0.5s ease, 
+                      color 0.5s ease,
+                      border-color 0.5s ease,
+                      filter 0.5s ease;
+        }
+
+        .theme-transition-active {
+            animation: themeTransition 0.5s ease forwards;
+        }
+
+        @keyframes themeTransition {
+            0% {
+                transform: scale(1);
+                filter: blur(0);
+            }
+            50% {
+                transform: scale(1.02);
+                filter: blur(4px);
+            }
+            100% {
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* Theme-aware styles */
+        .bg-theme-primary {
+            background-color: var(--surface-primary);
+        }
+
+        .bg-theme-inverse {
+            background-color: var(--surface-inverse);
+        }
+
+        .text-theme-heading {
+            color: var(--typography-heading);
+        }
+
+        .text-theme-paragraph {
+            color: var(--typography-paragraph);
+        }
+
+        .border-theme {
+            border-color: var(--stroke-border);
+        }
+
+        .icon-theme {
+            filter: brightness(0) saturate(100%);
+            color: var(--media-icon);
+        }
+
+        /* Dark mode icon inversion */
+        .dark .icon-theme {
+            filter: brightness(0) saturate(100%) invert(1);
+        }
+
+        /* Force black icons inside light footers even when page is dark */
+        footer.light .icon-theme {
+            filter: brightness(0) saturate(100%) !important;
+            color: #000 !important;
+        }
+        /* Force black icons inside any light section even when page is dark */
+        .light .icon-theme {
+            filter: brightness(0) saturate(100%) !important;
+            color: #000 !important;
+        }
+
+        /* Menu Item States */
+        .menu-item {
+            background-color: var(--surface-primary);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-color: var(--stroke-border);
+        }
+
+        .menu-item:hover {
+            background-color: var(--surface-secondary);
+        }
+
+        .menu-item:active {
+            background-color: var(--surface-tertiary);
+        }
+
+        /* Scroll-in animations (animate inner content, not the container) */
+        .scroll-animate > * { opacity: 0; transform: translateY(100px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .scroll-animate.visible > * { opacity: 1; transform: translateY(0); }
+
+        /* Navigation Responsive Styles */
+        .mobile-menu {
+            display: none !important;
+        }
+
+        @media (max-width: 700px) {
+            .desktop-menu {
+                display: none !important;
+            }
+            .mobile-menu {
+                display: flex !important;
+                padding-left: 16px !important;
+                padding-right: 0 !important; /* remove right padding */
+            }
+            /* Global overrides to 16px gutters */
+            .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+            .p-8 { padding-left: 16px !important; padding-right: 16px !important; }
+            .pl-8 { padding-left: 16px !important; }
+            .pr-8 { padding-right: 16px !important; }
+            .case-study-content { padding: 16px !important; }
+        }
+
+        /* Case Study Specific Styles */
+        .case-study-hero {
+            width: 100%;
+            height: calc(100vh - 82px);
+            object-fit: cover;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .case-study-content {
+            width: 100%;
+            padding: 32px;
+        }
+
+        /* Ensure pb-16 wins over the base shorthand padding declaration */
+        .case-study-content.pb-16 { padding-bottom: 64px !important; }
+
+        /* Global horizontal spacing rules for <= 750px */
+        @media (max-width: 750px) {
+            .px-8 {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+            .p-8 {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+            .pl-8 { padding-left: 16px !important; }
+            .pr-8 { padding-right: 16px !important; }
+            /* Preserve bottom padding (e.g., pb-16) while tightening horizontal gutters */
+            .case-study-content { padding-left: 16px !important; padding-right: 16px !important; }
+            /* Footer adjustments */
+            footer .scroll-button { display: none !important; }
+            .theme-toggle .theme-text { display: none !important; }
+            .theme-toggle { gap: 0 !important; }
+        }
+
+        /* Stack horizontal content below 900px */
+        @media (max-width: 900px) {
+            /* Convert all horizontal flex rows inside content areas to vertical */
+            .bg-theme-primary .flex-row { flex-direction: column !important; }
+            /* Set horizontal gutters to 16px */
+            .px-8 { padding-left: 16px !important; padding-right: 16px !important; }
+            .p-8 { padding-left: 16px !important; padding-right: 16px !important; }
+            .pl-8 { padding-left: 16px !important; }
+            .pr-8 { padding-right: 16px !important; }
+            .case-study-content { padding-left: 16px !important; padding-right: 16px !important; }
+            /* Reduce large title text */
+            .text-\[36px\] { font-size: 27px !important; }
+            /* Statistics card titles: 24px -> 20px */
+            .text-\[27px\] { font-size: 23px !important; }
+            /* Statistics values: 64px -> 48px */
+            .text-\[80px\] { font-size: 60px !important; }
+            /* Two Column Image Block height fix */
+            .two-col-images { height: 600px !important; }
+            /* Spacing: gap-6 -> gap-4 */
+            .gap-6 { gap: 1rem !important; }
+            /* Spacing: gap-8 -> gap-12 */
+            .gap-8 { gap: 3rem !important; }
+            /* Content Block with Image */
+            .content-image-row { height: auto !important; }
+            /* Static cards: remove min width and reduce padding */
+            .min-w-\[300px\] { min-width: 0 !important; }
+            .min-w-\[300px\].p-6 { padding: 16px !important; }
+            /* Statistics section: stack cards vertically */
+            .stats-grid { flex-direction: column !important; flex-wrap: nowrap !important; }
+        }
+
+        /* Button States */
+        .scroll-button {
+            cursor: default;
+        }
+        
+        .scroll-text {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .scroll-text::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--typography-heading);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        
+        .scroll-text:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .scroll-text:active::after {
+            height: 4px;
+        }
+
+        /* Slide Up Animation */
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Update icon styles */
+        .sun-icon, .moon-icon {
+            font-size: 16px;
+        }
+        
+        .sun-icon {
+            display: block;
+        }
+        .moon-icon {
+            display: none;
+        }
+        
+        .dark .sun-icon {
+            display: none;
+        }
+        .dark .moon-icon {
+            display: block;
+        }
+
+        .theme-text {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .theme-text::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--typography-heading);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        
+        .theme-text:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .theme-text:active::after {
+            height: 4px;
+        }
+        /* Footer links: mimic Back to top hover/active underline */
+        .footer-link {
+            position: relative;
+            cursor: pointer;
+            text-decoration: none !important;
+            display: inline-block;
+            align-self: flex-start;
+            width: auto;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--typography-heading);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        .footer-link:hover::after { transform: scaleX(1); }
+        .footer-link:active::after { height: 4px; }
+
+        /* Footer responsive tweaks */
+        @media (max-width: 450px) {
+            .footer-buttons { flex-direction: column !important; width: 100% !important; gap: 2rem !important; }
+            .footer-buttons > a { width: 100% !important; text-align: center !important; }
+        }
+        /* Medium card responsive: image full width at <=900px */
+        @media (max-width: 900px) {
+            .medium-feature a > .flex > div:first-child {
+                width: 100% !important;
+                height: 200px !important;
+            }
+            .medium-feature a > .flex > div:last-child {
+                min-height: auto !important;
+                justify-content: flex-start !important; /* stop stretching to bottom */
+                row-gap: 12px !important; /* 12px between description and date */
+            }
+        }
+        @media (max-width: 900px) {
+            .footer-headline { font-size: 36px !important; }
+            footer.footer-figma { padding-top: 32px !important; padding-bottom: 32px !important; }
+            footer.footer-figma .gap-24 { gap: 3rem !important; }
+            footer.footer-figma .gap-32 { gap: 1.5rem !important; }
+            /* Increase top padding for right link columns */
+            #vp-footer-container > .grid { padding-top: 40px !important; }
+        }
+
+        /* Light mode button states */
+        .light .book-call { background: #000000 !important; color: #ffffff !important; }
+        .light .book-call:hover { background: #0d0d0d !important; }
+        .light .book-call:active { background: #1a1a1a !important; }
+        .light .message-btn { background: transparent !important; }
+        .light .message-btn:hover { background: rgba(0,0,0,0.05) !important; }
+        .light .message-btn:active { background: rgba(0,0,0,0.10) !important; }
+
+        /* Prevent scroll past the end (no bounce below footer) */
+        html, body {
+            overscroll-behavior-y: none;
+            overscroll-behavior-x: none;
+        }
+        /* Related cases (scoped to this page) */
+        .related-cases .case-study-card {
+            background-color: var(--surface-primary);
+            transition: background-color 0.2s ease;
+            border-color: var(--stroke-border);
+            flex-direction: column !important;
+            gap: 0 !important;
+            height: auto !important;
+            padding: 12px !important;
+        }
+        @media (min-width: 601px) {
+            .related-cases .case-study-card:hover { background-color: var(--surface-secondary); }
+        }
+        .related-cases .case-study-card:active { background-color: var(--surface-tertiary); }
+        .related-cases .case-study-card > div:first-child {
+            position: relative !important;
+            width: 100% !important;
+            height: 200px !important;
+            flex: none !important;
+        }
+        .related-cases .case-study-card > div:first-child > .absolute { inset: 0 !important; }
+        .related-cases .case-study-card > div:last-child {
+            width: 100% !important;
+            padding-top: 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            row-gap: 16px !important;
+            position: relative !important;
+            padding-bottom: 40px !important; /* space for arrow */
+        }
+        .related-cases .case-study-card > div:last-child > div:nth-child(2) { font-size: 23px !important; line-height: 1.4 !important; }
+        .related-cases .case-study-card > div:last-child > div:last-child { position: absolute !important; right: 0 !important; bottom: 0 !important; }
+        /* Equal height and 3-up grid, stack ≤900px */
+        .related-cases > .flex { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; align-items: stretch !important; overflow-x: hidden; }
+        @media (max-width: 900px) { .related-cases > .flex { grid-template-columns: 1fr !important; } }
+        .related-cases .basis-0.grow.min-w-\[300px\] { display: flex !important; flex: initial !important; max-width: none !important; min-width: 0 !important; box-sizing: border-box !important; }
+        .related-cases .basis-0.grow.min-w-\[300px\] > a { display: flex !important; width: 100% !important; flex: 1 1 auto !important; }
+        .related-cases .case-study-card { width: 100% !important; height: 100% !important; }
+        /* Medium feature card interactions (mirror case-study-card states) */
+        .medium-feature a {
+            background-color: var(--surface-primary);
+            transition: background-color 0.2s ease;
+        }
+        @media (min-width: 601px) {
+            .medium-feature a:hover { background-color: var(--surface-secondary); }
+        }
+        .medium-feature a:active { background-color: var(--surface-tertiary); }
+        /* Inline underline link (thicker on press, tiny gap, thicker on hover) */
+        .inline-underline { position: relative; text-decoration: none !important; display: inline-block; }
+        .inline-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5px;
+            width: 100%;
+            height: 1px;
+            background-color: var(--typography-heading);
+            transform: scaleX(1);
+            transform-origin: left center;
+            transition: transform 0.2s ease, height 0.1s ease;
+        }
+        .inline-underline:hover::after { transform: scaleX(1); height: 2px; }
+        .inline-underline:active::after { height: 4px; }
+    
+        @keyframes step2AnnotIn {
+          to { opacity: 1; transform: translateX(0); }
+        }
+        </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.absolute{position:absolute}.relative{position:relative}.inset-\[12\.5\%\]{inset:12.5%}.inset-0{inset:0px}.inset-\[15\%\]{inset:15%}.mx-auto{margin-left:auto;margin-right:auto}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mb-14{margin-bottom:3.5rem}.mb-6{margin-bottom:1.5rem}.mb-\[48px\]{margin-bottom:48px}.mt-\[24px\]{margin-top:24px}.block{display:block}.flex{display:flex}.grid{display:grid}.size-8{width:2rem;height:2rem}.size-\[82px\]{width:82px;height:82px}.size-full{width:100%;height:100%}.size-4{width:1rem;height:1rem}.h-\[82px\]{height:82px}.h-auto{height:auto}.h-full{height:100%}.h-\[180px\]{height:180px}.h-\[299px\]{height:299px}.h-\[725px\]{height:725px}.h-\[925px\]{height:925px}.min-h-screen{min-height:100vh}.min-h-\[180px\]{min-height:180px}.min-h-px{min-height:1px}.w-\[167px\]{width:167px}.w-full{width:100%}.w-\[300px\]{width:300px}.min-w-\[300px\]{min-width:300px}.min-w-px{min-width:1px}.max-w-\[1920px\]{max-width:1920px}.max-w-none{max-width:none}.max-w-\[950px\]{max-width:950px}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.grow{flex-grow:1}.basis-0{flex-basis:0px}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-row{flex-direction:row}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-10{gap:2.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-\[1px\]{gap:1px}.gap-12{gap:3rem}.gap-16{gap:4rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-32{gap:8rem}.gap-x-8{column-gap:2rem}.gap-y-12{row-gap:3rem}.whitespace-nowrap{white-space:nowrap}.whitespace-pre{white-space:pre}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-cover{background-size:cover}.bg-center{background-position:center}.bg-no-repeat{background-repeat:no-repeat}.object-cover{object-fit:cover}.p-8{padding:2rem}.p-\[1px\]{padding:1px}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-8{padding-left:2rem;padding-right:2rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-16{padding-bottom:4rem}.pl-4{padding-left:1rem}.pl-8{padding-left:2rem}.pr-0{padding-right:0px}.pt-16{padding-top:4rem}.pt-8{padding-top:2rem}.pb-\[54px\]{padding-bottom:54px}.pb-\[56px\]{padding-bottom:56px}.pt-\[54px\]{padding-top:54px}.pt-\[56px\]{padding-top:56px}.text-center{text-align:center}.font-syne{font-family:Syne, sans-serif}.font-inter{font-family:Inter, sans-serif}.text-\[17px\]{font-size:17px}.text-\[17px\]{font-size:17px}.text-\[23px\]{font-size:23px}.text-\[36px\]{font-size:36px}.text-\[36px\]{font-size:36px}.text-\[27px\]{font-size:27px}.text-\[54px\]{font-size:54px}.text-\[80px\]{font-size:80px}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-\[400\]{font-weight:400}.font-semibold{font-weight:600}.not-italic{font-style:normal}.leading-\[1\.4\]{line-height:1.4}.leading-\[1\.6\]{line-height:1.6}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.no-underline{-webkit-text-decoration-line:none;text-decoration-line:none}.opacity-40{opacity:0.4}.opacity-0{opacity:0}.opacity-70{opacity:0.7}.opacity-80{opacity:0.8}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-150{transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-\[\#f2f2f2\]:hover{--tw-bg-opacity:1;background-color:rgb(242 242 242 / var(--tw-bg-opacity, 1))}.active\:bg-\[\#e6e6e6\]:active{--tw-bg-opacity:1;background-color:rgb(230 230 230 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:flex-row{flex-direction:row}}</style></head>
+<body class="bg-theme-primary">
+    <div class="min-h-screen bg-theme-inverse p-[1px] flex flex-col gap-[1px] mx-auto max-w-[1920px] w-full">
+        <!-- Navigation -->
+        <nav class="desktop-menu bg-theme-primary h-[82px] flex items-center justify-between pl-8 animate-slide-up nav-animation">
+            <a href="index.html" class="font-syne font-medium text-[17px] leading-[1.6] text-theme-heading">Laura Ledesna</a>
+            <div class="flex h-full">
+                <a href="mailto:iamlauraledesna@gmail.com" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Email</span>
+                </a>
+                <a href="archive.html" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Archive</span>
+                </a>
+                <a href="assets/cv-laura-ledesna.pdf" download="" target="_blank" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
+                <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Resume</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile FAB: Back to Top -->
+        <button id="fab-top" class="fab-top" aria-label="Back to top" title="Back to top">
+            <img src="assets/ArrowUp.svg" alt="Back to top">
+        </button>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-menu bg-theme-primary h-[82px] flex items-center justify-between pl-4 pr-0 animate-slide-up nav-animation">
+            <a href="index.html" class="font-syne font-medium text-[17px] leading-[1.6] text-theme-heading whitespace-pre">Laura Ledesna</a>
+            <button id="mobile-menu-toggle" class="bg-theme-primary flex items-center justify-center size-[82px] relative shrink-0 border-l border-theme" aria-expanded="false" aria-controls="menu-overlay" aria-label="Open menu">
+                <div class="relative shrink-0 size-8">
+                    <div class="absolute inset-[12.5%] icon-menu">
+                        <img src="assets/List.svg" alt="Menu" class="block max-w-none size-full icon-theme">
+                    </div>
+                    <div class="absolute inset-[12.5%] icon-close" style="display:none;">
+                        <svg viewBox="0 0 256 256" class="block max-w-none size-full icon-theme" aria-hidden="true" focusable="false">
+                            <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="56" y1="56" x2="200" y2="200" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"></line>
+                        </svg>
+                    </div>
+                </div>
+            </button>
+        </nav>
+
+        <!-- Full-screen Menu Overlay -->
+        <div id="menu-overlay" class="menu-overlay" aria-hidden="true">
+            <div class="overlay-content">
+                <a href="index.html" class="menu-item">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Home</span>
+                </a>
+                <a href="archive.html" class="menu-item">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Archive</span>
+                </a>
+                <a href="mailto:iamlauraledesna@gmail.com" class="menu-item">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Email</span>
+                </a>
+                <a href="assets/cv-laura-ledesna.pdf" download="" target="_blank" class="menu-item">
+                    <span class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Resume</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ============ SCOPED STYLES FOR B100 CASE ============ -->
+        <style>
+          .b100 { --l1:#8A8F98; --l2:#2AA5E0; --l3:#D89486;
+                  --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#666;
+                  --b-mono:'DM Mono',ui-monospace,monospace; }
+          .b100-figure { width:100%; border:1px solid var(--b-line); border-radius:12px;
+                  background:#050505; overflow:hidden; position:relative; }
+          .b100-cap { font-family:var(--b-mono); font-size:12px; color:var(--b-faint);
+                  letter-spacing:0.03em; margin-top:12px; }
+          .b100-eyebrow { font-family:var(--b-mono); font-size:12px; letter-spacing:0.14em;
+                  text-transform:uppercase; color:var(--l2); display:flex; align-items:center; gap:10px; }
+          .b100-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--l2); }
+
+          /* ladder */
+          .ladder-wrap { font-family:var(--b-mono); user-select:none; padding:36px 24px 41px; }
+          .ladder-svg { width:100%; height:auto; display:block; overflow:visible; }
+          .ladder-svg.ladder-h { max-width:70%; margin:0 auto; }
+          .ladder-svg.ladder-v { display:none; max-width:360px; margin:0 auto; }
+          .ladder-panels { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; align-items:start; }
+          @media (max-width:820px){ .ladder-panels{ grid-template-columns:1fr; } }
+          @media (max-width:680px){
+            .ladder-wrap { padding:24px 14px 28px; }
+            .ladder-svg.ladder-h { display:none; }
+            .ladder-svg.ladder-v { display:block; }
+          }
+          .ladder-panel { border:1px solid var(--b-line); border-radius:10px; background:var(--b-panel); }
+          .ladder-panel > summary { list-style:none; cursor:pointer; padding:16px 18px; display:block; }
+          .ladder-panel > summary::-webkit-details-marker { display:none; }
+          .ladder-panel .lp-head { font-family:var(--b-mono); font-size:14px; font-weight:500; letter-spacing:.06em; color:#fff;
+                  display:flex; align-items:center; gap:9px; margin-bottom:11px; }
+          .ladder-panel .lp-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+          .ladder-panel .lp-head::after { content:'›'; margin-left:auto; font-size:15px; color:#5a5a5a;
+                  transition:transform .2s ease; }
+          .ladder-panel[open] .lp-head::after { transform:rotate(90deg); }
+          .ladder-panel .lp-sum { font-family:'Syne',sans-serif; font-size:17px; line-height:1.55; color:#d5d5d5; display:block; }
+          .ladder-panel .lp-detail { border-top:1px solid #262626; padding:16px 18px 18px; }
+          .ladder-panel dl { margin:0; font-family:var(--b-mono); font-size:13.5px; line-height:1.5; }
+          .ladder-panel dt { color:#5a5a5a; float:left; clear:left; width:124px; }
+          .ladder-panel dd { color:#8a8a8a; margin:0 0 5px 124px; }
+          .ladder-panel .lp-detail p { font-family:'Syne',sans-serif; font-size:16px; line-height:1.6;
+                  color:#8f8f8f; margin:14px 0 0; }
+
+          /* systems row */
+          .sys-row { display:grid; grid-template-columns:1fr 40px 1fr 40px 1fr; align-items:stretch;
+                  padding:40px 26px 34px; }
+          @media (max-width:760px){ .sys-row{ grid-template-columns:1fr; gap:26px; padding:28px 18px; } }
+          .sys-card { background:#0d0d0d; border:1px solid var(--b-line); border-radius:10px; padding:20px 18px; }
+          .sys-idx { font-family:var(--b-mono); font-size:10.5px; color:var(--b-faint); letter-spacing:.08em; margin-bottom:10px; }
+          .sys-name { font-family:'Syne',sans-serif; font-weight:600; font-size:16px; color:#fff; margin-bottom:6px; }
+          .sys-role { font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--l2); }
+          .sys-cross { display:flex; align-items:center; justify-content:center; position:relative; }
+          .sys-cross span { position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-family:var(--b-mono);
+                  font-size:9px; color:var(--b-faint); white-space:nowrap; letter-spacing:.03em; }
+          .sys-cross svg { width:100%; height:44px; overflow:visible; }
+          @media (max-width:760px){ .sys-cross{ height:34px; } .sys-cross svg{ width:80px; height:34px; margin:0 auto; } .sys-cross span{ top:-4px; } }
+          .sys-foot { padding:0 26px 30px; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.6; color:var(--b-dim); }
+          .sys-foot b { color:#fff; font-weight:600; }
+
+          /* ===== end-to-end flow: photo + pixel-polished mobile mockup ===== */
+          .b100-flowdemo { display:flex; flex-direction:column; align-items:center; }
+          .flow-split { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:32px;
+                  --flow-accent:#AEBFC9; }
+          @media (max-width:880px){ .flow-split { grid-template-columns:1fr; gap:24px; } }
+          .flow-photo { background:var(--flow-accent) center/cover no-repeat;
+                  background-image:url('assets/b100-agent-case-study/flow.jpg'); min-height:100%; }
+          @media (max-width:880px){ .flow-photo { min-height:0; height:320px; } }
+          .flow-stage { background:var(--flow-accent); display:flex; align-items:center; justify-content:center; padding:44px 20px; }
+          /* two-image placeholder pair */
+          .b100-imgpair { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+          @media (max-width:880px){ .b100-imgpair { grid-template-columns:1fr; gap:24px; } }
+          .b100-imgcell { aspect-ratio:1/1; width:100%; object-fit:cover; background:#D9BEB2 center/cover no-repeat;
+                  display:flex; align-items:center; justify-content:center;
+                  font-family:var(--b-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8A6F63; }
+          .b100-imgcell.alt { background-color:#C9AA9C; color:#5A413A; }
+          .b100-flowdemo .phone { position:relative; width:256px; height:524px; flex-shrink:0; border-radius:46px;
+                  background:linear-gradient(#1a1d22,#0c0e11); padding:11px; cursor:pointer;
+                  box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
+          .b100-flowdemo .phone::after { content:''; position:absolute; z-index:9; top:19px; left:50%; transform:translateX(-50%);
+                  width:70px; height:21px; background:#000; border-radius:11px; }
+          .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
+                  background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
+                  --m-bg:#F4F3EF; --m-surface:#FFFFFF;
+                  --m-ink:#1A2330; --m-ink2:#3F4855; --m-ink3:#565E6B;
+                  --m-line:#E9E5DD; --m-line2:#F1EEE7;
+                  --m-accent:#324e79; --m-accent-tint:#E9F0FC;
+                  --m-amber:#8F5410; --m-amber-bg:#FBEBD1; --m-amber-dot:#D68A1F;
+                  --m-green:#0E6E43; --m-green-bg:#E3F0E8; --m-green-dot:#1E9E63;
+                  --m-red:#AC382D; --m-red-bg:#FAE7E2; --m-red-dot:#CE5142;
+                  --m-sans:'Roboto',-apple-system,'Segoe UI',sans-serif;
+                  --m-sys:-apple-system,'SF Pro Text','Helvetica Neue',Roboto,sans-serif;
+                  --m-mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+                  --m-e1:0 1px 2px rgba(20,26,38,.05);
+                  --m-e2:0 8px 22px -8px rgba(20,26,38,.15),0 2px 6px rgba(20,26,38,.05);
+                  --m-e3:0 26px 52px -16px rgba(20,26,38,.30); }
+          .scr { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--m-bg);
+                  opacity:0; z-index:1; transition:none; pointer-events:none; }
+          .scr.on { opacity:1; z-index:2; pointer-events:auto; transition:opacity .28s ease; }
+          /* agent mark */
+          .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-accent); position:relative; flex-shrink:0;
+                  display:flex; align-items:center; justify-content:center; }
+          .m-mark::before { content:'b'; color:#fff; font-family:var(--m-sans); font-weight:700; font-size:14px; line-height:1; }
+          .m-mark.sm { width:17px; height:17px; border-radius:6px; }
+          .m-mark.sm::before { font-size:11px; }
+          /* status bar */
+          .m-status { height:38px; display:flex; align-items:center; justify-content:space-between; padding:0 15px 0 22px;
+                  font-family:var(--m-sys); font-size:13.5px; font-weight:600; letter-spacing:.1px; color:var(--m-ink); flex-shrink:0; }
+          .m-status > span:first-child { padding-left:2px; }
+          .m-status .m-r { display:flex; align-items:center; gap:5px; }
+          .m-status .m-cell { display:flex; align-items:flex-end; gap:1.5px; height:9px; }
+          .m-status .m-cell i { width:2.5px; background:var(--m-ink); border-radius:.5px; }
+          .m-status .m-cell i:nth-child(1){height:4px}.m-status .m-cell i:nth-child(2){height:5.5px}
+          .m-status .m-cell i:nth-child(3){height:7px}.m-status .m-cell i:nth-child(4){height:9px}
+          .m-status .m-cell i:nth-child(4){opacity:.3}
+          .m-status .m-wifi { width:15px; height:11px; color:var(--m-ink); }
+          .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(20,26,38,.32); border-radius:3px; position:relative; padding:1.3px; box-sizing:border-box; }
+          .m-status .m-bat::after { content:''; position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:1.4px; height:3.5px; background:rgba(20,26,38,.32); border-radius:0 1.5px 1.5px 0; }
+          .m-status .m-bat i { display:block; height:100%; width:72%; background:var(--m-ink); border-radius:1px; }
+          /* app bar */
+          .m-appbar { min-height:50px; padding:8px 14px 10px; display:flex; align-items:center; gap:10px; flex-shrink:0; background:var(--m-bg); border-bottom:1px solid var(--m-line); }
+          .m-appbar.plain { border-bottom-color:transparent; }
+          .m-appbar .m-back { width:11px; height:20px; flex-shrink:0; color:var(--m-ink); }
+          .m-appbar h5 { margin:0; font-size:18px; font-weight:700; letter-spacing:-.4px; color:var(--m-ink); flex:1;
+                  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-appbar .m-sub5 { display:block; font-family:var(--m-sans); font-size:10.5px; font-weight:400; color:var(--m-ink2); letter-spacing:0; margin-top:1px; }
+          .m-appbar h5.thread { font-size:14px; }
+          .m-appbar .m-act { width:19px; height:19px; flex-shrink:0; color:var(--m-ink2); }
+          /* filter row */
+          .m-filters { display:flex; gap:8px; padding:8px 13px 10px; flex-shrink:0; }
+          .m-fchip { display:inline-flex; align-items:center; gap:5px; height:26px; padding:0 10px; border:1px solid var(--m-line);
+                  background:transparent; border-radius:8px; font-size:11px; font-weight:500; color:var(--m-ink2); }
+          .m-fchip svg { width:10px; height:10px; color:var(--m-ink3); }
+          /* transaction list */
+          .m-body { flex:1; overflow-y:auto; scrollbar-width:none; padding:0 13px 16px; }
+          .m-body::-webkit-scrollbar { display:none; }
+          .m-list { background:var(--m-surface); border:1px solid var(--m-line); border-radius:13px; overflow:hidden; box-shadow:var(--m-e1); }
+          .m-row { padding:11px 13px; position:relative; border-bottom:1px solid var(--m-line2); }
+          .m-row:last-child { border-bottom:0; }
+          .m-row.flag { background:var(--m-red-bg); cursor:pointer; transition:background .12s ease; }
+          .m-row.flag:hover { background:#F6DED8; }
+          .m-row.flag::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--m-red-dot); }
+          .m-row .m-rt { display:flex; align-items:center; gap:8px; }
+          .m-buyer { flex:1; min-width:0; font-size:12px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink);
+                  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-row-b { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-top:3px; }
+          .m-sub { font-size:11px; color:var(--m-ink3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-money { font-family:var(--m-sans); font-size:12px; font-weight:600; letter-spacing:-.2px; color:var(--m-ink);
+                  font-variant-numeric:tabular-nums; white-space:nowrap; }
+          .m-chip { display:inline-flex; align-items:center; gap:4px; height:19px; padding:0 8px; border-radius:999px;
+                  font-size:9.5px; font-weight:600; white-space:nowrap; letter-spacing:.01em; flex-shrink:0; }
+          .m-chip::before { content:''; width:4px; height:4px; border-radius:50%; flex-shrink:0; }
+          .m-chip.warn { background:var(--m-red-bg); color:var(--m-red); } .m-chip.warn::before { background:var(--m-red-dot); }
+          .m-chip.ok { background:var(--m-green-bg); color:var(--m-green); } .m-chip.ok::before { background:var(--m-green-dot); }
+          .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
+          .m-chip.pend { background:#ECEAE3; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
+          .m-row.flag .m-chip.warn { background:var(--m-red-dot); color:#fff; } .m-row.flag .m-chip.warn::before { background:#fff; }
+          .m-flag-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
+          /* conversation */
+          .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:18px 16px 12px; display:flex; flex-direction:column; gap:18px; }
+          .m-conv::-webkit-scrollbar { display:none; }
+          .m-turn { display:flex; }
+          .m-turn.user { justify-content:flex-end; }
+          .m-turn.user .m-utext { max-width:80%; font-size:12.5px; line-height:1.45; padding:9px 13px; border-radius:16px 16px 6px 16px;
+                  background:var(--m-accent); color:#fff; }
+          .m-turn.bot { gap:9px; }
+          .m-turn.bot > .m-mark { margin-top:1px; }
+          .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:12px; }
+          /* bot response breaks out of the avatar indent to use the full conversation width;
+             only a leading text line (ctxline / short intro answer) stays beside the avatar */
+          .m-turn.bot .m-turn-c > .m-plan:first-child,
+          .m-turn.bot .m-turn-c > .m-srcs:first-child,
+          .m-turn.bot .m-turn-c > .m-action:first-child,
+          .m-turn.bot .m-turn-c > :not(:first-child) { margin-left:-26px; }
+          /* with no text line beside the avatar, a leading breakout card drops below it so the avatar never overlaps the card */
+          .m-turn.bot .m-turn-c > .m-plan:first-child,
+          .m-turn.bot .m-turn-c > .m-srcs:first-child,
+          .m-turn.bot .m-turn-c > .m-action:first-child { margin-top:22px; }
+          .m-ctxline { display:inline-flex; align-items:center; gap:5px; align-self:flex-start; background:var(--m-red-bg);
+                  color:var(--m-red); border-radius:999px; padding:3px 9px; font-size:9.5px; font-weight:600; letter-spacing:.01em; }
+          .m-ctxline::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--m-red-dot); flex-shrink:0; }
+          .m-answer { font-size:12.5px; line-height:1.62; color:var(--m-ink); }
+          .m-answer b { font-weight:700; }
+          /* plan stepper */
+          .m-plan { border:1px solid var(--m-line); border-radius:12px; padding:13px 14px; background:var(--m-surface); box-shadow:var(--m-e1); }
+          .m-plan-t { font-size:9.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--m-ink3); margin-bottom:11px; }
+          .m-steps { position:relative; }
+          .m-steps::before { content:''; position:absolute; left:7.5px; top:14px; bottom:14px; width:1.5px; background:var(--m-line); }
+          .m-step { display:flex; align-items:center; gap:11px; font-size:11.5px; color:var(--m-ink2); padding:6px 0; position:relative; white-space:nowrap; }
+          .m-step b { color:var(--m-ink); font-weight:600; }
+          .m-step .m-node { width:16px; height:16px; border-radius:50%; flex-shrink:0; background:var(--m-surface);
+                  border:1.6px solid var(--m-line); box-sizing:border-box; position:relative; }
+          .m-step.done .m-node { background:var(--m-green-dot); border-color:var(--m-green-dot); }
+          .m-step.done .m-node::after { content:''; position:absolute; left:5px; top:2.5px; width:3px; height:6px; border:solid #fff; border-width:0 1.6px 1.6px 0; transform:rotate(42deg); }
+          .m-step.run .m-node { border-color:var(--m-accent); border-right-color:transparent; animation:m-spin .7s linear infinite; }
+          @keyframes m-spin { to { transform:rotate(360deg); } }
+          .m-step.done, .m-step.run { color:var(--m-ink); }
+          /* source rows */
+          .m-srcs { border:1px solid var(--m-line); border-radius:12px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e1); }
+          .m-src-item { border-bottom:1px solid var(--m-line2); }
+          .m-src-item:last-child { border-bottom:0; }
+          .m-src { display:flex; align-items:center; gap:10px; padding:12px 12px;
+                  cursor:pointer; transition:background .12s ease; }
+          .m-src:hover { background:#EFEFF1; }
+          .m-src-item.open .m-src, .m-src:active { background:#E7E7EB; }
+          .m-src-item.open .m-src { padding-bottom:2px; }
+          .m-src-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); transition:transform .18s ease; }
+          .m-src-item.open .m-src-cv { transform:rotate(90deg); }
+          .m-src-detail { display:none; padding:12px 14px 12px 46px; }
+          .m-src-item.open .m-src-detail { display:block; }
+          .m-src-detail dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:5px 12px;
+                  font-family:var(--m-mono); font-size:10px; line-height:1.5; }
+          .m-src-detail dt { color:var(--m-ink); font-weight:500; white-space:nowrap; }
+          .m-src-detail dd { margin:0; color:var(--m-ink); }
+          .m-src-mono { width:24px; height:24px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                  font-family:var(--m-mono); font-size:8.5px; font-weight:500; background:#EEF0F3; color:var(--m-ink2); }
+          .m-src-c { flex:1; min-width:0; }
+          .m-src-name { font-size:11px; font-weight:600; color:var(--m-ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+          .m-src-r { flex-shrink:0; display:flex; align-items:center; gap:5px; }
+          .m-src-dot { width:6px; height:6px; border-radius:50%; }
+          .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
+          .m-src-status { font-size:10px; font-weight:600; letter-spacing:-.1px; white-space:nowrap; }
+          .m-src.ok .m-src-status { color:var(--m-green); } .m-src.warn .m-src-status { color:var(--m-amber); } .m-src.err .m-src-status { color:var(--m-red); }
+          /* confidence signal (expandable) */
+          .m-conf { border:1px solid var(--m-line2); border-radius:10px; overflow:hidden; background:var(--m-surface); }
+          .m-conf-b { display:flex; align-items:center; gap:7px; width:100%; padding:11px 12px; border:0; background:transparent;
+                  font-family:inherit; font-size:11px; font-weight:600; color:var(--m-ink3); text-align:left; cursor:pointer; }
+          .m-conf-b::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+          .m-conf-b .m-cv { margin-left:auto; width:12px; height:12px; transition:transform .18s ease; }
+          .m-conf.open .m-conf-b .m-cv { transform:rotate(90deg); }
+          .m-conf.med .m-conf-b { color:var(--m-amber); }
+          .m-conf.high .m-conf-b { color:var(--m-green); }
+          .m-conf-why { display:none; padding:2px 12px 12px; font-size:10.5px; line-height:1.55; color:var(--m-ink2); }
+          .m-conf.open .m-conf-why { display:block; }
+          /* CTA + buttons */
+          .m-cta { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap;
+                  height:32px; padding:0 13px; border:0; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:600;
+                  letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); cursor:pointer; }
+          .m-cta svg { width:12px; height:12px; flex-shrink:0; }
+          .m-cta.ghost { background:transparent; color:var(--m-ink2); box-shadow:none; padding:0 6px; }
+          .m-cta-row { display:flex; align-items:center; gap:4px; align-self:flex-start; }
+          .m-btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; height:32px; padding:0 15px; border:0; border-radius:8px;
+                  font-size:11.5px; font-weight:600; letter-spacing:-.1px; background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); cursor:pointer; }
+          .m-btn:not(.text):hover { filter:brightness(1.08); }
+          .m-btn.text { background:transparent; color:var(--m-ink); box-shadow:none; }
+          .m-btn.danger { background:transparent; color:var(--m-red); border:0; box-shadow:none; }
+          .m-btn.danger:hover { background:var(--m-red-bg); }
+          .m-action-f:has(.m-btn.danger) { border-top-color:var(--m-line); padding-top:11px; }
+          /* agent action card */
+          .m-action { border:1px solid var(--m-line); border-radius:16px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e3); }
+          .m-action-steps { background:var(--m-bg); padding:14px 15px 13px; }
+          .m-steps3 { display:flex; align-items:center; }
+          .m-st { width:22px; height:22px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                  font-family:var(--m-sans); font-size:11px; font-weight:700; background:var(--m-surface);
+                  border:1.5px solid var(--m-line); color:var(--m-ink3); font-variant-numeric:tabular-nums; }
+          .m-st.on, .m-st.done { background:var(--m-accent); border-color:var(--m-accent); color:#fff; }
+          .m-st.done svg { width:11px; height:11px; }
+          .m-st-line { flex:1; height:1.5px; background:var(--m-line); }
+          .m-st-line.done { background:var(--m-accent); }
+          .m-steps-l { margin-top:9px; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--m-ink); }
+          .m-action-steps.s2 .m-steps-l { text-align:center; }
+          .m-action-steps.s3 .m-steps-l { text-align:right; }
+          .m-action-b { padding:14px 15px 15px; }
+          .m-action-t { font-size:13px; font-weight:700; letter-spacing:-.2px; color:var(--m-ink); }
+          .m-action-type { margin-top:4px; display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:600;
+                  letter-spacing:.02em; color:var(--m-red); }
+          .m-action-type::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--m-red-dot); flex-shrink:0; }
+          .m-action-sum { margin-top:5px; font-size:11.5px; letter-spacing:-.1px; line-height:1.5; color:var(--m-ink3); }
+          .m-action-sum b { color:var(--m-ink); font-weight:700; font-variant-numeric:tabular-nums; }
+          .m-action-note { margin-top:3px; font-size:10px; line-height:1.4; letter-spacing:-.1px; color:var(--m-ink3); }
+          .m-disc-wrap { border-top:1px solid var(--m-line2); }
+          .m-disc { display:flex; align-items:center; gap:10px; padding:13px 15px; cursor:pointer;
+                  font-size:12px; font-weight:600; color:var(--m-ink); transition:background .12s ease; }
+          .m-disc:hover { background:#F6F5F2; }
+          .m-disc-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); transition:transform .18s ease; }
+          .m-disc-wrap.open .m-disc-cv { transform:rotate(90deg); }
+          .m-disc-n { margin-left:auto; color:var(--m-ink3); font-weight:600; font-variant-numeric:tabular-nums; }
+          .m-disc-wrap .m-alist { display:none; }
+          .m-disc-wrap.open .m-alist { display:block; }
+          .m-audit { display:none; border-top:1px solid var(--m-line2); padding:8px 15px 12px; }
+          .m-disc-wrap.open .m-audit { display:block; }
+          .m-au-row { position:relative; display:flex; align-items:baseline; gap:10px; padding:5px 0 5px 15px; }
+          .m-au-row::before { content:''; position:absolute; left:3px; top:0; bottom:0; width:1.5px; background:var(--m-line); }
+          .m-au-row:first-child::before { top:9px; }
+          .m-au-row:last-child::before { bottom:calc(100% - 9px); }
+          .m-au-row::after { content:''; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:50%; background:var(--m-accent); }
+          .m-au-k { width:60px; flex-shrink:0; font-size:10.5px; font-weight:500; color:var(--m-ink); }
+          .m-au-v { font-family:var(--m-mono); font-size:10px; color:var(--m-ink3); font-variant-numeric:tabular-nums; }
+          .m-progress { height:5px; background:var(--m-line); border-radius:3px; margin:13px 0 0; overflow:hidden; }
+          .m-progress i { display:block; height:100%; background:var(--m-accent); border-radius:3px; }
+          .m-progress-l { margin-top:8px; font-size:11px; letter-spacing:-.1px; color:var(--m-ink3); }
+          .m-revert { display:flex; align-items:center; gap:7px; padding:11px 15px; border-top:1px solid var(--m-line2);
+                  font-size:10.5px; line-height:1.4; color:var(--m-ink3); }
+          .m-revert > svg { width:13px; height:13px; color:var(--m-green-dot); flex-shrink:0; }
+          .m-revert .m-undo { border:0; background:transparent; font:inherit; color:var(--m-ink2); font-weight:600;
+                  text-decoration:underline; text-underline-offset:2px; cursor:pointer; padding:0; }
+          .m-alist { border-top:1px solid var(--m-line2); max-height:156px; overflow-y:auto; scrollbar-width:none; }
+          .m-alist::-webkit-scrollbar { display:none; }
+          .m-arow { display:flex; align-items:center; gap:10px; height:42px; padding:0 14px; border-bottom:1px solid var(--m-line2);
+                  font-size:11px; color:var(--m-ink); white-space:nowrap; }
+          .m-arow:last-child { border-bottom:0; }
+          .m-arow .m-gw { font-family:var(--m-mono); font-size:10px; letter-spacing:-.3px; }
+          .m-arow .m-amt { margin-left:auto; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.2px; }
+          .m-check { width:16px; height:16px; border-radius:5px; border:1.6px solid var(--m-ink); flex-shrink:0; position:relative; }
+          .m-check.on { background:var(--m-accent); border-color:var(--m-accent); }
+          .m-check.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
+          .m-check.off { border-color:var(--m-ink3); }
+          .m-tag { margin-left:auto; flex-shrink:0; display:inline-flex; align-items:center; gap:4px;
+                  font-size:9px; font-weight:600; letter-spacing:.02em; border-radius:999px; padding:3px 8px; white-space:nowrap; }
+          .m-tag.ok { background:var(--m-green-bg); color:var(--m-green); }
+          .m-tag.skip { background:#ECEAE3; color:var(--m-ink2); }
+          .m-tag.run { background:var(--m-accent-tint); color:var(--m-accent); }
+          .m-tag.run::before { content:''; flex-shrink:0; width:8px; height:8px; border:1.5px solid currentColor;
+                  border-right-color:transparent; border-radius:50%; animation:m-spin .7s linear infinite; }
+          .m-action-f { display:flex; align-items:center; gap:4px; justify-content:center; padding:11px 12px 13px; border-top:1px solid var(--m-line2); }
+          .m-action-f .m-btn { white-space:nowrap; height:34px; padding:0 16px; border-radius:9px; font-size:12px; }
+          .m-action-f .m-btn.text { padding:0 8px; }
+          /* input bar */
+          .m-inputbar { flex-shrink:0; display:flex; align-items:center; gap:7px; padding:8px 13px 10px; border-top:1px solid var(--m-line); background:var(--m-bg); }
+          .m-inputbar .m-field { flex:1; height:30px; border:1px solid var(--m-line); border-radius:999px; background:var(--m-surface);
+                  display:flex; align-items:center; padding:0 12px; font-size:10.5px; color:var(--m-ink3); }
+          .m-inputbar .m-send { width:30px; height:30px; border-radius:50%; background:var(--m-accent); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+          .m-inputbar .m-send svg { width:12px; height:12px; color:#fff; }
+          /* controls */
+          .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+          .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
+                  color:var(--b-faint); font-family:var(--b-mono); font-size:9.5px; cursor:pointer; transition:border-color .15s,color .15s; }
+          .flow-rail button:hover { color:var(--b-dim); }
+          .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
+          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.55; color:var(--b-dim); }
+          .flow-cap-tag { display:inline-block; font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+                  padding:2px 6px; border-radius:4px; margin-right:7px; white-space:nowrap; vertical-align:1px; }
+          .flow-cap-tag.l1 { color:var(--l1); border:1px solid var(--l1); }
+          .flow-cap-tag.l2 { color:var(--l2); border:1px solid var(--l2); }
+          .flow-cap-tag.l3 { color:var(--l3); border:1px solid var(--l3); }
+          .flow-cap-tag.tr { color:#ddd; border:1px dashed #777; }
+          .flow-cap b { color:#fff; font-weight:600; }
+          .flow-hint { margin-top:12px; font-family:var(--b-mono); font-size:10px; color:var(--b-faint); }
+          .b100-flowdemo.paused .flow-hint::before { content:'❚❚  '; }
+          @media (max-width:420px){ .flow-stage { padding:32px 14px; } .b100-flowdemo .phone { transform:scale(.92); margin:-20px 0; } }
+          @media (prefers-reduced-motion:reduce){ .scr,.m-sheet { transition:none; } .m-spin,.m-input::after { animation:none; } }
+
+          /* pattern + decision rows reuse .proc-h / plain rows */
+          .b100-rows { display:flex; flex-direction:column; gap:2rem; }
+          .b100-row { display:flex; flex-direction:row; gap:1.5rem; }
+          @media (max-width:900px){ .b100-row{ flex-direction:column !important; gap:.5rem; } }
+          .b100-row .rk { flex:1 1 0; }
+          .b100-row .rk p:first-child { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; line-height:1.6; color:var(--typography-heading); }
+          .b100-row .rv { flex:1 1 0; }
+          .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:17px; line-height:1.6; color:var(--typography-paragraph); }
+
+          /* work-in-progress section — blurred content behind a status card */
+          .wip-section { position:relative; }
+          .wip-section .wip-content { filter:blur(6px); opacity:.4; pointer-events:none; user-select:none; }
+          .wip-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:24px; }
+          .wip-card { border:1px solid var(--b-line); background:rgba(10,10,10,.7); backdrop-filter:blur(2px);
+                  -webkit-backdrop-filter:blur(2px); border-radius:14px; padding:30px 36px; max-width:440px; text-align:center; }
+          .wip-card .wip-title { font-family:'Syne',sans-serif; font-weight:600; font-size:22px; line-height:1.4; color:#fff; margin:0 0 9px; }
+          .wip-card .wip-title .wip-status { color:var(--l3); }
+          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:15px; line-height:1.6; color:var(--b-dim); margin:0; }
+          @media (max-width:900px){ .wip-card { padding:24px 22px; } .wip-card .wip-title { font-size:19px; } }
+
+          /* patterns — expandable list (matches the Process section on the agentic case) */
+          .pat-item { border-top:1px solid rgba(255,255,255,.12); cursor:pointer; }
+          .pat-item:last-child { border-bottom:1px solid rgba(255,255,255,.12); }
+          .pat-head { display:flex; align-items:center; gap:14px; padding:22px 0; }
+          .pat-chevron { width:14px; height:14px; flex-shrink:0; color:#6a6a6a; transition:transform .3s ease; }
+          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#5c5c5c; flex-shrink:0; }
+          .pat-label { font-family:'Syne',sans-serif; font-size:19px; font-weight:600; letter-spacing:-.2px; color:#fff; }
+          .pat-item:hover .pat-label { color:#c8c8c8; }
+          .pat-body { overflow:hidden; max-height:0; opacity:0; transition:max-height .4s ease, opacity .3s ease .05s; }
+          .pat-body-inner { padding:0 0 24px 62px; }
+          .pat-desc { font-family:'Syne',sans-serif; font-size:15px; line-height:1.7; color:#9a9a9a; max-width:620px; margin:0; }
+          .pat-desc em { font-style:normal; color:#e0e0e0; }
+          .pat-item.open .pat-body { max-height:480px; opacity:1; }
+          .pat-item.open .pat-chevron { transform:rotate(90deg); }
+          .pat-item.open .pat-label { color:#fff; }
+          @media (max-width:640px){ .pat-body-inner { padding-left:0; } }
+
+        </style>
+
+        <!-- ============ HERO ============ -->
+        <div class="bg-theme-primary case-study-content animate-slide-up pb-16 border-b border-theme b100" style="animation-delay: 0.2s; border-bottom-width: 1px; padding-top: 0;">
+            <video class="case-study-hero w-full object-cover" style="background:#000;" autoplay muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
+                <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4">
+            </video>
+
+            <div style="position: relative;">
+                <div class="w-full mx-auto" style="margin-top: 24px;">
+                    <div class="flex flex-row gap-6 mt-8 animate-slide-up items-start" style="animation-delay: 0.4s;">
+                        <div class="basis-0 grow">
+                            <h1 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading" style="margin-top: -7px;">
+                                Conversation Design for High-Stakes Escalations
+                            </h1>
+                        </div>
+                        <div class="basis-0 grow">
+                            <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="margin-top: 3px;">
+                                B100's Ops team rebuilds every payment case by hand across three disconnected systems, often while handling daily calls with clients. I designed a three-level escalation ladder, ambient, copilot, and agentic, with the transitions and trust patterns that hold it together while money is moving.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ META ROWS ============ -->
+        <div class="bg-theme-primary px-8 py-6 pb-16 animate-slide-up border-b border-theme" style="animation-delay: 0.6s;">
+            <div class="w-full mx-auto flex flex-row gap-6">
+                <div class="basis-0 grow"><p class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Timeline</p></div>
+                <div class="basis-0 grow"><p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">2026, in design</p></div>
+            </div>
+        </div>
+        <div class="bg-theme-primary px-8 py-6 pb-16 animate-slide-up border-b border-theme" style="animation-delay: 0.7s;">
+            <div class="w-full mx-auto flex flex-row gap-6">
+                <div class="basis-0 grow"><p class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Role</p></div>
+                <div class="basis-0 grow"><p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Lead Designer, Conversational &amp; Agentic AI</p></div>
+            </div>
+        </div>
+        <div class="bg-theme-primary px-8 py-6 pb-16 animate-slide-up border-b border-theme" style="animation-delay: 0.8s;">
+            <div class="w-full mx-auto flex flex-row gap-6">
+                <div class="basis-0 grow"><p class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Method</p></div>
+                <div class="basis-0 grow"><p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Escalation-ladder framework + interaction-pattern specs + one end-to-end flow</p></div>
+            </div>
+        </div>
+        <div class="bg-theme-primary px-8 py-6 pb-16 animate-slide-up border-b border-theme" style="animation-delay: 0.9s;">
+            <div class="w-full mx-auto flex flex-row gap-6">
+                <div class="basis-0 grow"><p class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Team</p></div>
+                <div class="basis-0 grow"><p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">1 Designer (Design &amp; AI architecture) + 1 Engineer</p></div>
+            </div>
+        </div>
+
+        <!-- ============ CONTEXT & OPPORTUNITY ============ -->
+        <div class="bg-theme-primary px-8 pt-8 scroll-animate b100" style="padding-bottom: 57px;" data-scroll="">
+            <div class="w-full mx-auto flex flex-col pt-16" style="gap:55px;">
+                <div class="flex flex-row gap-10 items-start">
+                    <div class="basis-0 grow">
+                        <p class="font-syne font-medium text-[36px] leading-[1.4]" style="color:#666666; margin-top:0;">Context &amp; Opportunity</p>
+                    </div>
+                    <div class="basis-0 grow">
+                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="margin-top:0;">To explain why a payment is stuck, an Ops analyst rebuilds the case by hand across three disconnected systems, the card processor, the provider that moves the money, and a legacy database linking them, with no single screen that shows all three.</p>
+                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph mt-6">This is agentic work: multi-source retrieval and reasoning. But because money is moving, confidence signals, citations, approval gates, and an audit trail need to be built in from the start.</p>
+                    </div>
+                </div>
+
+                <div class="b100-figure">
+                  <div class="sys-row">
+                    <div class="sys-card">
+                      <div class="sys-idx">SOURCE 01</div>
+                      <div class="sys-name">Gen 3</div>
+                      <div class="sys-role">Card transaction system</div>
+                    </div>
+                    <div class="sys-cross">
+                      <span>manual lookup</span>
+                      <svg viewBox="0 0 40 44" preserveAspectRatio="none"><line x1="0" y1="22" x2="40" y2="22" stroke="#5a5a5a" stroke-width="1.5" stroke-dasharray="4 5"/><circle cx="20" cy="22" r="2.5" fill="#D89486"/></svg>
+                    </div>
+                    <div class="sys-card">
+                      <div class="sys-idx">SOURCE 02</div>
+                      <div class="sys-name">Transfermate Portal</div>
+                      <div class="sys-role">External money-transfer agent</div>
+                    </div>
+                    <div class="sys-cross">
+                      <span>manual lookup</span>
+                      <svg viewBox="0 0 40 44" preserveAspectRatio="none"><line x1="0" y1="22" x2="40" y2="22" stroke="#5a5a5a" stroke-width="1.5" stroke-dasharray="4 5"/><circle cx="20" cy="22" r="2.5" fill="#D89486"/></svg>
+                    </div>
+                    <div class="sys-card">
+                      <div class="sys-idx">SOURCE 03</div>
+                      <div class="sys-name">Gen 2</div>
+                      <div class="sys-role">Legacy mapping database</div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ ONE CASE, END TO END ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" style="padding-top: 64px;" data-scroll="">
+            <div class="w-full flex flex-col gap-8">
+                <p class="font-syne font-medium text-[36px] leading-[1.4]" style="color:#666666;">The flow</p>
+                <div class="flex flex-row gap-6">
+                    <div class="basis-0 grow">
+                        <h2 class="font-syne font-medium text-[23px] leading-[1.4] text-theme-heading">One case, end to end</h2>
+                    </div>
+                    <div class="basis-0 grow flex flex-col gap-4">
+                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">A single scenario, a stuck Brightwater Logistics settlement, walked through all three levels and all four transitions. This is the flow the case study is built to demonstrate.</p>
+                    </div>
+                </div>
+
+                <div class="b100-flowdemo" data-flowdemo="">
+                  <div class="flow-split">
+                    <!-- replace with a photo at assets/b100-agent-case-study/flow.jpg -->
+                    <div class="flow-photo" role="img" aria-label="An operations analyst on a call at her laptop"></div>
+                    <div class="flow-stage">
+                      <div class="phone" aria-label="Mobile mockup of the B100 Ops app walking through the scenario">
+                        <div class="phone-screen">
+
+                      <!-- 1 — Transactions list -->
+                      <div class="scr on" data-step="1">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar plain"><h5>Transactions</h5><svg class="m-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg></div>
+                        <div class="m-filters">
+                          <span class="m-fchip">This month <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
+                        </div>
+                        <div class="m-body"><div class="m-list">
+                          <div class="m-row flag" role="button" tabindex="0" aria-label="Open Brightwater Logistics in the copilot">
+                            <div class="m-rt"><span class="m-buyer">Brightwater Logistics</span><span class="m-chip warn">Anomaly</span></div>
+                            <div class="m-row-b"><span class="m-sub">Tamsett Co. · due today</span><span class="m-money">$10,000</span></div>
+                            <div class="m-flag-why">$10,000 vs ~$3,100 typical · flagged by Gen 3</div>
+                          </div>
+                          <div class="m-row">
+                            <div class="m-rt"><span class="m-buyer">Kestrel Mfg.</span><span class="m-chip pend">Pending</span></div>
+                            <div class="m-row-b"><span class="m-sub">Orbit Industrial · Sep 3</span><span class="m-money">$25,000</span></div>
+                          </div>
+                          <div class="m-row">
+                            <div class="m-rt"><span class="m-buyer">Halden Freight</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">Ridgeline Fleet · settled</span><span class="m-money">$42,000</span></div>
+                          </div>
+                          <div class="m-row">
+                            <div class="m-rt"><span class="m-buyer">Verde Foods Co.</span><span class="m-chip ok">Funded</span></div>
+                            <div class="m-row-b"><span class="m-sub">Greenfield Produce · Aug 29</span><span class="m-money">$8,200</span></div>
+                          </div>
+                          <div class="m-row">
+                            <div class="m-rt"><span class="m-buyer">Larkspur Systems</span><span class="m-chip err">Error</span></div>
+                            <div class="m-row-b"><span class="m-sub">Datapoint · failed 14:02</span><span class="m-money">$5,500</span></div>
+                          </div>
+                        </div></div>
+                      </div>
+
+                      <!-- 2 — Copilot: question sent, plan running -->
+                      <div class="scr" data-step="2">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-ctxline">Anomaly · loaded as context</div>
+                            <div class="m-plan">
+                              <div class="m-plan-t">Checking sources</div>
+                              <div class="m-steps">
+                                <div class="m-step run"><span class="m-node"></span><b>Gen 3</b> · card system</div>
+                                <div class="m-step"><span class="m-node"></span>Transfermate · transfer</div>
+                                <div class="m-step"><span class="m-node"></span>Gen 2 · mapping</div>
+                              </div>
+                            </div>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                      <!-- 3 — Copilot: the answer -->
+                      <div class="scr" data-step="3">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-srcs">
+                              <div class="m-src-item">
+                                <div class="m-src ok" role="button" tabindex="0"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">Complete</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Amount</dt><dd>$10,000.00 · full capture</dd><dt>Card</dt><dd>••4471 · auth 14:29:58</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+                              </div>
+                              <div class="m-src-item">
+                                <div class="m-src warn" role="button" tabindex="0"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">Partial</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Leg 1</dt><dd>settled 14:12:30</dd><dt>Leg 2</dt><dd>not initiated, no trigger event</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+                              </div>
+                              <div class="m-src-item">
+                                <div class="m-src err" role="button" tabindex="0"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-status">No match</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                                <div class="m-src-detail"><dl><dt>Expected</dt><dd>GW-826541</dd><dt>Found</dt><dd>no match</dd><dt>Mapping</dt><dd>table last synced Aug 28</dd></dl></div>
+                              </div>
+                            </div>
+                            <div class="m-answer">Leg 2 was never initiated for this transaction or for <b>11 others</b>, totaling <b>$284,900</b>.</div>
+                            <div class="m-conf med">
+                              <button type="button" class="m-conf-b">Confidence: medium<svg class="m-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+                              <div class="m-conf-why">Gen 3 and Transfermate agree, but Gen 2's mapping is stale, so the affected count may be off by one or two. I can retry the 11 confirmed transactions or re-check the count first.</div>
+                            </div>
+                            <div class="m-cta-row">
+                              <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry 11</button>
+                              <button type="button" class="m-cta ghost">Re-check</button>
+                            </div>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                      <!-- 4 — Agent Action Card: proposed -->
+                      <div class="scr" data-step="4">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Here's the retry, ready for your approval.</div>
+                            <div class="m-action">
+                              <div class="m-action-steps">
+                                <div class="m-steps3"><span class="m-st on">1</span><span class="m-st-line"></span><span class="m-st">2</span><span class="m-st-line"></span><span class="m-st">3</span></div>
+                                <div class="m-steps-l">Proposed</div>
+                              </div>
+                              <div class="m-action-b">
+                                <div class="m-action-t">Retry Leg 2 settlement</div>
+                                <div class="m-action-type">Destructive action</div>
+                                <div class="m-action-sum"><b>$284,900</b> · 11 of 12 transactions</div>
+                                <div class="m-action-note">1 excluded — under dispute, can't verify</div>
+                              </div>
+                              <div class="m-disc-wrap">
+                                <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Review transactions</span><span class="m-disc-n">11</span></div>
+                                <div class="m-alist">
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826541</span><span class="m-amt">$10,000</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826544</span><span class="m-amt">$42,000</span></div>
+                                  <div class="m-arow"><span class="m-check off"></span><span class="m-gw">GW…826547</span><span class="m-tag skip">under dispute</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826550</span><span class="m-amt">$8,200</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826551</span><span class="m-amt">$15,400</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-amt">$31,000</span></div>
+                                </div>
+                              </div>
+                              <div class="m-action-f"><span class="m-btn" role="button" tabindex="0">Approve All</span><span class="m-btn text" role="button" tabindex="0">Review each</span></div>
+                            </div>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                      <!-- 5 — Agent Action Card: executing -->
+                      <div class="scr" data-step="5">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Retrying now. You can stop the remaining at any point.</div>
+                            <div class="m-action">
+                              <div class="m-action-steps s2">
+                                <div class="m-steps3"><span class="m-st done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="m-st-line done"></span><span class="m-st on">2</span><span class="m-st-line"></span><span class="m-st">3</span></div>
+                                <div class="m-steps-l">Executing</div>
+                              </div>
+                              <div class="m-action-b">
+                                <div class="m-action-t">Retry Leg 2 settlement</div>
+                                <div class="m-progress"><i style="width:82%"></i></div>
+                                <div class="m-progress-l">9 of 11 settled · 2 in progress</div>
+                              </div>
+                              <div class="m-disc-wrap open" data-default="open">
+                                <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Transactions</span><span class="m-disc-n">11</span></div>
+                                <div class="m-alist">
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826541</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826544</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check off"></span><span class="m-gw">GW…826547</span><span class="m-tag skip">skipped</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826550</span><span class="m-tag run">Retrying</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826551</span><span class="m-tag run">Retrying</span></div>
+                                </div>
+                              </div>
+                              <div class="m-action-f"><span class="m-btn danger">Cancel</span></div>
+                            </div>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                      <!-- 6 — Agent Action Card: done -->
+                      <div class="scr" data-step="6">
+                        <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+                        <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5 class="thread">Brightwater · GW…826541</h5></div>
+                        <div class="m-conv">
+                          <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+                            <div class="m-answer">Done. 11 settled, 1 skipped.</div>
+                            <div class="m-action">
+                              <div class="m-action-steps s3">
+                                <div class="m-steps3"><span class="m-st done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="m-st-line done"></span><span class="m-st done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="m-st-line done"></span><span class="m-st on">3</span></div>
+                                <div class="m-steps-l">Done</div>
+                              </div>
+                              <div class="m-action-b">
+                                <div class="m-action-t">Retry Leg 2 settlement</div>
+                                <div class="m-action-sum"><b>$269,500</b> cleared · 11 settled, 1 skipped</div>
+                              </div>
+                              <div class="m-disc-wrap">
+                                <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Transactions</span><span class="m-disc-n">11</span></div>
+                                <div class="m-alist">
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826541</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826544</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check off"></span><span class="m-gw">GW…826547</span><span class="m-tag skip">skipped</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826550</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826551</span><span class="m-tag ok">Settled</span></div>
+                                  <div class="m-arow"><span class="m-check on"></span><span class="m-gw">GW…826553</span><span class="m-tag ok">Settled</span></div>
+                                </div>
+                              </div>
+                              <div class="m-disc-wrap">
+                                <div class="m-disc" role="button" tabindex="0"><svg class="m-disc-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Audit trail</span></div>
+                                <div class="m-audit">
+                                  <div class="m-au-row"><span class="m-au-k">Intent</span><span class="m-au-v">Ops · 14:29</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Plan</span><span class="m-au-v">Agent · 14:30</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Approved</span><span class="m-au-v">Ops · 14:31</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Executed</span><span class="m-au-v">Agent · 14:32</span></div>
+                                  <div class="m-au-row"><span class="m-au-k">Result</span><span class="m-au-v">Settled</span></div>
+                                </div>
+                              </div>
+                              <div class="m-revert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4"></path></svg>Reversible until 3:32pm · <button type="button" class="m-undo">Undo</button></div>
+                            </div>
+                          </div></div>
+                        </div>
+                        <div class="m-inputbar"><div class="m-field">Ask a follow-up…</div><div class="m-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></div></div>
+                      </div>
+
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flow-rail" role="tablist">
+                    <button data-step="1" class="on" aria-label="Step 1: the flag">01</button>
+                    <button data-step="2" aria-label="Step 2: expand">02</button>
+                    <button data-step="3" aria-label="Step 3: the answer">03</button>
+                    <button data-step="4" aria-label="Step 4: propose">04</button>
+                    <button data-step="5" aria-label="Step 5: execute">05</button>
+                    <button data-step="6" aria-label="Step 6: done">06</button>
+                  </div>
+                  <p class="flow-cap"></p>
+                  <p class="flow-hint">tap the phone to pause&nbsp;·&nbsp;tap a number to jump</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ WHERE AI DOESN'T GO ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="w-full">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where AI doesn't go</h2>
+                <div class="b100-rows">
+                    <div class="b100-row"><div class="rk"><p>Direct Ops data entry</p></div><div class="rv"><p>New buyer mapping stays manual until volume justifies the calibration cost.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Compliance &amp; legal approvals</p></div><div class="rv"><p>Human, non-negotiable. The agent can assemble the packet; it cannot sign off.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Terminal states of money already moved</p></div><div class="rv"><p>Audit yes, action no. Once funds have settled, the interaction is read-only by design.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ IMAGE PAIR 1 ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="b100-imgpair">
+                <img src="assets/b100-agent-case-study/image2.jpg" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell">
+                <!-- replace with assets/b100-agent-case-study/patterns-b.jpg -->
+                <div class="b100-imgcell alt" role="img" aria-label="Photo placeholder">image</div>
+            </div>
+        </div>
+
+        <!-- ============ THE ESCALATION LADDER ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="w-full flex flex-col gap-8">
+                <p class="font-syne font-medium text-[36px] leading-[1.4]" style="color:#666666;">The framework</p>
+                <div class="flex flex-row gap-6">
+                    <div class="basis-0 grow">
+                        <h2 class="font-syne font-medium text-[23px] leading-[1.4] text-theme-heading">The Escalation Ladder</h2>
+                    </div>
+                    <div class="basis-0 grow flex flex-col gap-4">
+                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Three levels of AI sit on one continuum. As you move up, four things shift together: who takes initiative, whether AI can change state, how much trust the interaction requires, and how reversible the output is. What makes it a ladder, not three separate products, is the transition between levels, allowing analysts to move up or down without losing context.</p>
+                    </div>
+                </div>
+
+                <div class="b100-figure">
+                  <div class="ladder-wrap">
+                    <svg class="ladder-svg ladder-h" viewBox="0 0 820 300" role="img" aria-label="A three-level escalation ladder: L1 ambient, L2 copilot, L3 agentic, with escalation arrows rising and de-escalation arrows returning.">
+                      <rect x="40"  y="208" width="200" height="56" rx="8" fill="rgba(138,143,152,0.12)" stroke="#8A8F98" stroke-width="1.5"/>
+                      <rect x="310" y="126" width="200" height="56" rx="8" fill="rgba(42,165,224,0.12)"  stroke="#2AA5E0" stroke-width="1.5"/>
+                      <rect x="580" y="44"  width="200" height="56" rx="8" fill="rgba(216,148,134,0.18)"  stroke="#D89486" stroke-width="1.5"/>
+                      <text x="140" y="234" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#8A8F98" letter-spacing="1">L1 · AMBIENT</text>
+                      <text x="140" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#777">system speaks</text>
+                      <text x="410" y="152" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#2AA5E0" letter-spacing="1">L2 · COPILOT</text>
+                      <text x="410" y="170" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#777">dialogue</text>
+                      <text x="680" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#D89486" letter-spacing="1">L3 · AGENTIC</text>
+                      <text x="680" y="88" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#777">propose → approve → act</text>
+                      <path d="M240 224 C 275 224, 275 148, 310 148" fill="none" stroke="#cfd2d6" stroke-width="1.5"/>
+                      <path d="M304 144 L312 148 L304 152 Z" fill="#cfd2d6"/>
+                      <path d="M310 165 C 275 165, 275 248, 240 248" fill="none" stroke="#777" stroke-width="1.3" stroke-dasharray="4 4"/>
+                      <path d="M246 244 L238 248 L246 252 Z" fill="#777"/>
+                      <text x="275" y="126" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#b9c0c6">expand</text>
+                      <text x="275" y="272" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#888">audit trail</text>
+                      <path d="M510 142 C 545 142, 545 66, 580 66" fill="none" stroke="#cfd2d6" stroke-width="1.5"/>
+                      <path d="M574 62 L582 66 L574 70 Z" fill="#cfd2d6"/>
+                      <path d="M580 83 C 545 83, 545 166, 510 166" fill="none" stroke="#777" stroke-width="1.3" stroke-dasharray="4 4"/>
+                      <path d="M516 162 L508 166 L516 170 Z" fill="#777"/>
+                      <text x="545" y="44" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#b9c0c6">promote</text>
+                      <text x="545" y="190" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#888">explain</text>
+                      <circle r="3" fill="#2AA5E0">
+                        <animateMotion dur="6s" repeatCount="indefinite" path="M140 240 C 240 240 275 150 410 150 C 545 150 580 68 680 68"/>
+                        <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
+                      </circle>
+                    </svg>
+
+                    <svg class="ladder-svg ladder-v" viewBox="0 0 340 372" role="img" aria-label="A three-level escalation ladder stacked vertically: L3 agentic on top, then L2 copilot, then L1 ambient. Solid arrows escalate up a level, dashed arrows return down a level.">
+                      <rect x="86" y="16"  width="168" height="54" rx="9" fill="rgba(216,148,134,0.18)" stroke="#D89486" stroke-width="1.5"/>
+                      <rect x="86" y="159" width="168" height="54" rx="9" fill="rgba(42,165,224,0.12)"  stroke="#2AA5E0" stroke-width="1.5"/>
+                      <rect x="86" y="302" width="168" height="54" rx="9" fill="rgba(138,143,152,0.12)"  stroke="#8A8F98" stroke-width="1.5"/>
+                      <text x="170" y="38"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#D89486" letter-spacing="1">L3 · AGENTIC</text>
+                      <text x="170" y="55"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">propose → approve → act</text>
+                      <text x="170" y="181" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#2AA5E0" letter-spacing="1">L2 · COPILOT</text>
+                      <text x="170" y="198" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">dialogue</text>
+                      <text x="170" y="324" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#8A8F98" letter-spacing="1">L1 · AMBIENT</text>
+                      <text x="170" y="341" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9"  fill="#7d7d7d">system speaks</text>
+                      <line x1="150" y1="153" x2="150" y2="84" stroke="#cfd2d6" stroke-width="1.6"/>
+                      <path d="M144 92 L150 78 L156 92 Z" fill="#cfd2d6"/>
+                      <line x1="190" y1="82" x2="190" y2="151" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 4"/>
+                      <path d="M184 143 L190 157 L196 143 Z" fill="#8a8a8a"/>
+                      <line x1="150" y1="296" x2="150" y2="227" stroke="#cfd2d6" stroke-width="1.6"/>
+                      <path d="M144 235 L150 221 L156 235 Z" fill="#cfd2d6"/>
+                      <line x1="190" y1="225" x2="190" y2="294" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 4"/>
+                      <path d="M184 286 L190 300 L196 286 Z" fill="#8a8a8a"/>
+                    </svg>
+
+                    <div class="ladder-panels">
+                      <details class="ladder-panel">
+                        <summary>
+                          <span class="lp-head"><span class="lp-dot" style="background:#8A8F98"></span>L1 · Ambient</span>
+                          <span class="lp-sum">Help built into the screens people already use. No chat, no agent.</span>
+                        </summary>
+                        <div class="lp-detail">
+                          <dl>
+                            <dt>Initiative</dt><dd>System</dd>
+                            <dt>Turn-taking</dt><dd>None</dd>
+                            <dt>Mutates state</dt><dd>Never</dd>
+                            <dt>Trust</dt><dd>Low</dd>
+                          </dl>
+                          <p>Explain-this-status on a badge, proactive anomaly flags on odd rows, smart empty states, inline summaries inside the drawer that already exists.</p>
+                        </div>
+                      </details>
+                      <details class="ladder-panel">
+                        <summary>
+                          <span class="lp-head"><span class="lp-dot" style="background:#2AA5E0"></span>L2 · Copilot</span>
+                          <span class="lp-sum">A side panel that answers questions. It reads and reasons, nothing more.</span>
+                        </summary>
+                        <div class="lp-detail">
+                          <dl>
+                            <dt>Initiative</dt><dd>User</dd>
+                            <dt>Turn-taking</dt><dd>Multi-turn</dd>
+                            <dt>Mutates state</dt><dd>Never</dd>
+                            <dt>Trust</dt><dd>Medium</dd>
+                          </dl>
+                          <p>Every answer shows its plan, the systems it checked and when, and how sure it is.</p>
+                        </div>
+                      </details>
+                      <details class="ladder-panel">
+                        <summary>
+                          <span class="lp-head"><span class="lp-dot" style="background:#D89486"></span>L3 · Agentic</span>
+                          <span class="lp-sum">The agent proposes an action, a person approves it, then it runs.</span>
+                        </summary>
+                        <div class="lp-detail">
+                          <dl>
+                            <dt>Initiative</dt><dd>Shared</dd>
+                            <dt>Turn-taking</dt><dd>Propose, approve, run</dd>
+                            <dt>Mutates state</dt><dd>Yes</dd>
+                            <dt>Trust</dt><dd>High</dd>
+                          </dl>
+                          <p>An action card with a plan you can preview, approve in bulk or one by one, stop mid-run, and undo. Every step is logged.</p>
+                        </div>
+                      </details>
+                    </div>
+                    <script>
+                      (function(){
+                        var panels = document.querySelectorAll('.ladder-panel');
+                        panels.forEach(function(p){
+                          p.addEventListener('toggle', function(){
+                            if (p.open) panels.forEach(function(o){ if (o !== p) o.open = false; });
+                          });
+                        });
+                      })();
+                    </script>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ IMAGE PAIR 2 ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="b100-imgpair">
+                <!-- replace with assets/b100-agent-case-study/boundary-a.jpg -->
+                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
+                <img src="assets/b100-agent-case-study/image3.jpg" alt="B100 payments operations" class="b100-imgcell">
+            </div>
+        </div>
+
+        <!-- ============ FIVE PATTERNS ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="w-full">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Five patterns</h2>
+                <div class="pat-list">
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">01</span><span class="pat-label">Confidence signal</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">One vocabulary across levels, <em>confirmed / likely / uncertain</em>, shown on hover at L1, inline at L2, in the audit trail at L3. Never a bare number floating on its own.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">02</span><span class="pat-label">Citation &amp; sourcing</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">Every agent claim is tied to its source, Gen&nbsp;3 / Transfermate / Gen&nbsp;2, with the time it was queried. Hover at L1, inline at L2, in the audit trail at L3.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">03</span><span class="pat-label">Permission model</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">Actions are typed. <em>Safe</em> (retrieval, drafts) needs no approval. <em>Reversible</em> (label a transaction, save a filter) needs a simple approval. <em>Destructive</em> (retry settlement, send external comms) needs approval with details.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">04</span><span class="pat-label">Graceful degradation</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">If confidence drops at L3, the agent proposes L2, "I'm not sure, want me to investigate?" If L2 can't answer, it proposes a human handoff rather than guessing.</p></div></div>
+                    </div>
+                    <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
+                        <div class="pat-head">
+                            <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            <span class="pat-num">05</span><span class="pat-label">Escape hatch</span>
+                        </div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">At any level, any time, the analyst can get to "just show me the raw data." The agent is never the only door to the information or the action.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ TRADE-OFFS & OPEN QUESTIONS ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
+            <div class="w-full">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Trade-offs &amp; open questions</h2>
+                <div class="b100-rows">
+                    <div class="b100-row"><div class="rk"><p>Three levels, not two or five</p></div><div class="rv"><p>Two collapses ambient into copilot and loses the "the product got smarter" move. Five splits hairs Ops won't feel. Three maps to the real thresholds: does it talk back, and can it change state.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Batch approval for destructive actions</p></div><div class="rv"><p>Far faster for the 12-transaction case, but one "approve all" click carries more weight. Mitigated with per-item opt-out and undo, still open whether high-value transactions should force per-item approval.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Open, whose name is on the action?</p></div><div class="rv"><p>Accountability blurs between the human who approved and the agent that executed. The audit trail captures the full chain, but the org still has to decide where responsibility sits.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ WHERE WE'RE GOING (WORK IN PROGRESS) ============ -->
+        <div class="bg-theme-primary p-8 pb-16 scroll-animate b100 wip-section" data-scroll="">
+            <div class="w-full wip-content" aria-hidden="true">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Where we're going</h2>
+                <div class="b100-rows">
+                    <div class="b100-row"><div class="rk"><p>Confidence-weighted autonomy</p></div><div class="rv"><p>Let L3 widen or narrow its own action scope from a rolling accuracy score, with Ops able to pull the band back at any time.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Cross-rail coverage</p></div><div class="rv"><p>Extend the ladder past settlement retries into FX booking and reconciliation breaks, the two queues Ops flags as the next biggest time sink.</p></div></div>
+                    <div class="b100-row"><div class="rk"><p>Shared team memory</p></div><div class="rv"><p>A decision one analyst makes on an edge case becomes context the agent offers the next analyst, instead of living in a private thread.</p></div></div>
+                </div>
+            </div>
+            <div class="wip-overlay">
+                <div class="wip-card">
+                    <p class="wip-title"><span class="wip-status">[status]</span> work in progress</p>
+                    <p class="wip-desc">This is an ongoing project, with new features coming soon.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ FLOW DEMO SCRIPT ============ -->
+        <script>
+        (function(){
+          var demo = document.querySelector('[data-flowdemo]');
+          if(!demo) return;
+          var screens = Array.prototype.slice.call(demo.querySelectorAll('.scr'));
+          var dots = Array.prototype.slice.call(demo.querySelectorAll('.flow-rail button'));
+          var cap = demo.querySelector('.flow-cap');
+          var CAPS = [
+            {tag:'l1', t:'L1', h:'Detect', c:'An ambient anomaly chip flags the supplier amount as off-pattern. Tap the row to open the copilot.'},
+            {tag:'tr', t:'L1 → L2', h:'Investigate', c:'The copilot opens with the anomaly in context, shows its plan, and checks Gen 3, Transfermate, and Gen 2.'},
+            {tag:'l2', t:'L2', h:'Explain', c:'Sources are cited and linked. Leg 2 was never initiated here or on 11 others, totaling $284,900. Confidence is medium, with the reason explained.'},
+            {tag:'l3', t:'L2 → L3', h:'Propose', c:'An Agent Action Card shows the total, 11 transactions to review, and one action to approve. The disputed transaction is excluded.'},
+            {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Step 2 of 3 shows per-item progress, can be aborted at any point, and keeps the skipped transaction excluded.'},
+            {tag:'l3', t:'L3', h:'Complete', c:'Step 3 of 3: 11 settled, 1 skipped, and $269,500 cleared. Reversible for 24 hours, with the full decision trail, from intent to result, one tap away.'}
+          ];
+          var i = 0, timer = null, paused = false;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          function render(){
+            screens.forEach(function(s,k){ s.classList.toggle('on', k===i); });
+            dots.forEach(function(d,k){ d.classList.toggle('on', k===i); });
+            demo.querySelectorAll('.m-src-item.open, .m-conf.open').forEach(function(x){ x.classList.remove('open'); });
+            demo.querySelectorAll('.m-disc-wrap').forEach(function(x){ x.classList.toggle('open', x.dataset.default === 'open'); });
+            var C = CAPS[i];
+            cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+':</b> '+C.c;
+          }
+          function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
+          function tick(){ go(i+1); }
+          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 3400); }
+          function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+          demo.querySelector('.phone').addEventListener('click', function(){
+            paused = !paused; demo.classList.toggle('paused', paused);
+            paused ? stop() : play();
+          });
+          dots.forEach(function(d){
+            d.addEventListener('click', function(){
+              go(parseInt(d.getAttribute('data-step'),10) - 1);
+              paused = true; demo.classList.add('paused'); stop();
+            });
+          });
+          demo.querySelectorAll('.m-src').forEach(function(s){
+            function toggle(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              s.parentElement.classList.toggle('open');
+            }
+            s.addEventListener('click', toggle);
+            s.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(e); }
+            });
+          });
+          demo.querySelectorAll('.m-conf-b').forEach(function(b){
+            b.addEventListener('click', function(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              b.parentElement.classList.toggle('open');
+            });
+          });
+          demo.querySelectorAll('.m-disc').forEach(function(d){
+            function toggle(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              d.parentElement.classList.toggle('open');
+            }
+            d.addEventListener('click', toggle);
+            d.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(e); }
+            });
+          });
+          var flagRow = demo.querySelector('.scr[data-step="1"] .m-row.flag');
+          if(flagRow){
+            function openCopilot(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              go(1);
+            }
+            flagRow.addEventListener('click', openCopilot);
+            flagRow.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openCopilot(e); }
+            });
+          }
+          var retryBtn = demo.querySelector('.scr[data-step="3"] .m-cta:not(.ghost)');
+          if(retryBtn){
+            retryBtn.addEventListener('click', function(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              go(3);
+            });
+          }
+          var approveBtn = demo.querySelector('.scr[data-step="4"] .m-action-f .m-btn:not(.text)');
+          if(approveBtn){
+            function approveAll(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              go(4);
+            }
+            approveBtn.addEventListener('click', approveAll);
+            approveBtn.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); approveAll(e); }
+            });
+          }
+          var reviewEachBtn = demo.querySelector('.scr[data-step="4"] .m-action-f .m-btn.text');
+          if(reviewEachBtn){
+            function reviewEach(e){
+              e.stopPropagation();
+              paused = true; demo.classList.add('paused'); stop();
+              var w = reviewEachBtn.closest('.m-action').querySelector('.m-disc-wrap');
+              if(w){ w.classList.add('open'); }
+            }
+            reviewEachBtn.addEventListener('click', reviewEach);
+            reviewEachBtn.addEventListener('keydown', function(e){
+              if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); reviewEach(e); }
+            });
+          }
+          render();
+          if('IntersectionObserver' in window){
+            new IntersectionObserver(function(entries){
+              entries.forEach(function(e){ e.isIntersecting ? play() : stop(); });
+            }, {threshold: 0.35}).observe(demo);
+          } else { play(); }
+        })();
+        </script>
+
+        <section class="bg-theme-primary px-8 pt-[56px] pb-[56px] scroll-animate medium-feature" data-scroll="">
+            <div class="w-full mx-auto flex flex-col gap-6">
+                <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading text-center">Want to know more about this project?</h2>
+                <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph text-center opacity-80">The framework and the prototype behind it are written up on my <a href="https://medium.com/@iamlauraledesna" target="_blank" rel="noopener noreferrer" class="inline-underline">Medium</a>.</p>
+            </div>
+        </section>
+
+        <!-- Related Case Studies -->
+        <section class="light bg-theme-primary px-8 pt-[54px] pb-[54px] animate-slide-up related-cases" style="animation-delay: 1.0s;">
+            <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-[48px]">More from me</h2>
+            <div class="w-full mx-auto flex flex-row gap-6 flex-wrap">
+                <!-- Case Study: Agentic System -->
+                <div class="basis-0 grow min-w-[300px]">
+                    <a href="agentic-system-case-study.html" class="block">
+                        <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
+                            <div class="flex-1 relative">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Agentic Systems • Workflow Design</div>
+                                <div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">No More Handoffs</div>
+                                <div class="flex justify-end">
+                                    <div class="relative shrink-0 size-8">
+                                        <div class="absolute inset-[15%]">
+                                            <img src="assets/ArrowDownRight.svg" alt="Arrow" class="block max-w-none size-full icon-theme">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Case Study: Medigo (Healthtech) -->
+                <div class="basis-0 grow min-w-[300px]">
+                    <a href="medigo-case-study.html" class="block">
+                        <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
+                            <div class="flex-1 relative">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Lead UX • Healthtech • AI Driven • MedBridge</div>
+                                <div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">When Doctors Said No to AI</div>
+                                <div class="flex justify-end">
+                                    <div class="relative shrink-0 size-8">
+                                        <div class="absolute inset-[15%]">
+                                            <img src="assets/ArrowDownRight.svg" alt="Arrow" class="block max-w-none size-full icon-theme">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Case Study: Grameen America -->
+                <div class="basis-0 grow min-w-[300px]">
+                    <a href="nestbank-case-study.html" class="block">
+                        <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
+                            <div class="flex-1 relative">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Lead UX • Fintech • 0-1</div>
+                                <div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">Grameen America</div>
+                                <div class="flex justify-end">
+                                    <div class="relative shrink-0 size-8">
+                                        <div class="absolute inset-[15%]">
+                                            <img src="assets/ArrowDownRight.svg" alt="Arrow" class="block max-w-none size-full icon-theme">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="light bg-theme-primary px-8 py-12 animate-slide-up footer-figma" style="animation-delay: 1.2s;">
+            <div id="vp-footer-container" class="w-full mx-auto flex flex-col lg:flex-row gap-32 items-start justify-between">
+                <!-- Left: Title + Buttons -->
+                <div class="basis-0 grow flex flex-col gap-12">
+                    <h2 id="vp-footer-headline" class="font-syne font-medium text-[54px] leading-[1.4] text-theme-heading footer-headline">
+                        Every great experience starts with a conversation.
+                    </h2>
+                    <div class="flex gap-8 footer-buttons">
+                        <a href="https://calendly.com/iamlauraledesna/new-meeting?month=2025-08" target="_blank" rel="noopener noreferrer" class="book-call bg-white hover:bg-[#f2f2f2] active:bg-[#e6e6e6] transition-colors duration-150 text-black px-6 py-4 font-syne font-medium not-italic text-[17px] leading-[1.6] whitespace-nowrap" aria-label="Book a call">
+                            Book a call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Link columns -->
+                <div class="basis-0 grow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 w-full " style="
+                padding-top: 16px;
+            ">
+                    <!-- Navigation -->
+                    <div class="flex flex-col gap-4">
+                        <div class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Navigation</div>
+                        <nav class="flex flex-col gap-4 font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">
+                            <a href="index.html" class="footer-link">Home</a>
+                            <a href="agentic-system-case-study.html" class="footer-link">Agentic Systems</a>
+                            <a href="medigo-case-study.html" class="footer-link">Healthtech</a>
+                        </nav>
+                    </div>
+
+                    <!-- More From Me -->
+                    <div class="flex flex-col gap-4">
+                        <div class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">More From Me</div>
+                        <div class="flex flex-col gap-4 font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">
+                            <a href="https://medium.com/@iamlauraledesna" target="_blank" rel="noopener noreferrer" class="footer-link">Medium Articles</a>
+                            <a href="assets/cv-laura-ledesna.pdf" download="" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Me -->
+                    <div class="flex flex-col gap-4">
+                        <div class="font-syne font-bold text-[17px] leading-[1.6] text-theme-heading">Contact Me</div>
+                        <div class="flex flex-col gap-4 font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">
+                            <a href="https://calendly.com/iamlauraledesna/new-meeting?month=2025-08" target="_blank" rel="noopener noreferrer" class="footer-link">Book a Call</a>
+                            <a href="mailto:iamlauraledesna@gmail.com" class="footer-link">Email</a>
+                            <a href="https://www.linkedin.com/in/iamlauraledesna/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+    <!-- Scroll-in Observer (match index) -->
+    <script>
+      (function(){
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-scroll]').forEach((el) => observer.observe(el));
+      })();
+    </script>
+        <!-- Footer -->
+        <footer class="light bg-theme-primary px-8 py-6 flex items-center justify-between animate-slide-up" style="animation-delay: 1.2s;">
+            <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">
+                <a href="index.html" class="no-underline text-theme-heading">Laura Ledesna • ©2025</a>
+            </div>
+            <button onclick="window.scrollTo({top: 0, behavior: &#39;smooth&#39;})" class="scroll-button flex items-center gap-2">
+                <span class="scroll-text font-syne font-normal text-[17px] leading-[1.6] text-theme-heading">Back to top</span>
+                <div class="relative shrink-0 size-4">
+                    <div class="absolute inset-[12.5%]">
+                        <img src="assets/ArrowUp.svg" alt="Arrow Up" class="block max-w-none size-full icon-theme">
+                    </div>
+                </div>
+            </button>
+        </footer>
+    </div>
+    <script>
+        // Theme management
+        function setTheme(theme) {
+            const html = document.documentElement;
+            const mainContent = document.querySelector('.min-h-screen');
+            
+            mainContent?.classList.add('theme-transition-active');
+            
+            html.classList.remove('light', 'dark');
+            html.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            
+            setTimeout(() => {
+                mainContent?.classList.remove('theme-transition-active');
+            }, 500);
+        }
+
+        // Set initial theme: always dark; ignore stored or system preferences
+        function setInitialTheme() {
+            setTheme('dark');
+        }
+        
+        // Call immediately to avoid flash of wrong theme
+        setInitialTheme();
+
+        // Remove theme switching: no listeners or UI
+    </script>
+    <!-- Overlay toggle script -->
+    <script>
+      // Mobile full-screen overlay menu (active only when <=600px)
+      (function(){
+        const toggle = document.getElementById('mobile-menu-toggle');
+        const overlay = document.getElementById('menu-overlay');
+        if (!toggle || !overlay) return;
+        const mql = window.matchMedia('(max-width: 600px)');
+
+        let __overlayScrollY = 0;
+        function lockScroll(){
+          __overlayScrollY = window.scrollY || window.pageYOffset || 0;
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${__overlayScrollY}px`;
+          document.body.style.left = '0';
+          document.body.style.right = '0';
+          document.body.style.width = '100%';
+        }
+        function unlockScroll(){
+          document.documentElement.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.left = '';
+          document.body.style.right = '';
+          document.body.style.width = '';
+          window.scrollTo(0, __overlayScrollY || 0);
+        }
+
+        function openOverlay(){
+          overlay.classList.add('open');
+          overlay.setAttribute('aria-hidden','false');
+          toggle.setAttribute('aria-expanded','true');
+          document.addEventListener('click', onDoc, true);
+          document.addEventListener('keydown', onKey, true);
+          lockScroll();
+        }
+        function closeOverlay(){
+          overlay.classList.remove('open');
+          overlay.setAttribute('aria-hidden','true');
+          toggle.setAttribute('aria-expanded','false');
+          document.removeEventListener('click', onDoc, true);
+          document.removeEventListener('keydown', onKey, true);
+          unlockScroll();
+        }
+        function onToggle(e){
+          e.stopPropagation();
+          if (!mql.matches) return;
+          const open = overlay.classList.contains('open');
+          open ? closeOverlay() : openOverlay();
+        }
+        function onDoc(e){
+          const content = overlay.querySelector('.overlay-content');
+          if (!content.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) closeOverlay();
+        }
+        function onKey(e){ if (e.key === 'Escape') closeOverlay(); }
+        function handle(){ closeOverlay(); if (mql.matches){ toggle.addEventListener('click', onToggle); } else { toggle.removeEventListener('click', onToggle); } }
+
+        handle();
+        mql.addEventListener('change', handle);
+        overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeOverlay));
+      })();
+    </script>
+    <script>
+      // FAB scroll-to-top
+      (function(){
+        const fab = document.getElementById('fab-top');
+        if (!fab) return;
+        fab.addEventListener('click', function(){
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
+
+</body></html>
