@@ -1177,8 +1177,10 @@
                   /* undo the placeholder-label typography that .b100-imgcell inherits down */
                   font-family:'Roboto',-apple-system,'Segoe UI',sans-serif; font-size:14px;
                   letter-spacing:normal; text-transform:none; color:#1A2330; }
-          .ba-fit { width:620px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:20px;
+          .ba-fit { width:620px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:18px;
                   transform:scale(.95); transform-origin:center center; }
+          .ba-hint { width:596px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em;
+                  text-transform:uppercase; color:#8b909a; }
           .ba-cards { display:flex; align-items:flex-start; justify-content:center; gap:20px; }
           .ba-cardwrap { position:relative; }
           .ba-pin { position:absolute; right:-11px; width:22px; height:22px; border-radius:50%; background:#e0a55c; color:#231708;
@@ -1189,8 +1191,8 @@
           .ba-legend { list-style:none; display:flex; flex-direction:column; gap:9px; margin:15px 0 0; padding:0; width:288px; }
           .ba-legend li { display:flex; gap:9px; font-family:'Syne',sans-serif; font-size:12px; line-height:1.4; color:#c7cad0;
                   transition:opacity .2s ease, color .2s ease; }
-          .ba-legend .n { flex-shrink:0; width:17px; height:17px; border-radius:50%; background:#e0a55c; color:#231708;
-                  font-family:'DM Mono',monospace; font-size:9.5px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+          .ba-legend .n { flex-shrink:0; width:13px; color:inherit;
+                  font-family:'DM Mono',monospace; font-size:11px; font-weight:500; font-variant-numeric:tabular-nums; }
           .ba-legend.on li:not(.hl) { opacity:.34; }
           .ba-legend li.hl { color:#f4f2ee; }
           @media (max-width:1160px){ .ba-fit { transform:scale(.83); } }
@@ -1200,6 +1202,7 @@
             .b100-imgcell.ba-cell { aspect-ratio:auto; padding:30px 14px; }
             .ba-fit { transform:none; width:auto; }
             .ba-cards { flex-direction:column; align-items:center; }
+            .ba-hint { width:288px; }
           }
 
         </style>
@@ -1556,6 +1559,7 @@
                 <img src="assets/b100-agent-case-study/image2.jpg" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell">
                 <div class="b100-imgcell ba-cell">
                   <div class="ba-fit">
+                    <p class="ba-hint">Click a number to see what changed</p>
                     <div class="ba-cards">
 
                       <div class="ba-col before">
