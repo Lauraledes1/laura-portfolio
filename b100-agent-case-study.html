@@ -1184,7 +1184,7 @@
                   border:0; cursor:pointer; padding:0; z-index:5; box-shadow:0 0 0 4px rgba(224,165,92,.16),0 2px 8px rgba(0,0,0,.5); transition:transform .12s ease; }
           .ba-pin:hover { transform:scale(1.1); }
           .ba-pin[aria-pressed="true"] { box-shadow:0 0 0 5px rgba(224,165,92,.3),0 2px 8px rgba(0,0,0,.5); }
-          .ba-legend { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; margin:0; padding:0; width:596px; }
+          .ba-legend { list-style:none; display:flex; flex-direction:column; gap:9px; margin:15px 0 0; padding:0; width:288px; }
           .ba-legend li { display:flex; gap:9px; font-family:'Syne',sans-serif; font-size:12px; line-height:1.4; color:#c7cad0;
                   transition:opacity .2s ease, color .2s ease; }
           .ba-legend .n { flex-shrink:0; width:17px; height:17px; border-radius:50%; background:#e0a55c; color:#231708;
@@ -1198,7 +1198,6 @@
             .b100-imgcell.ba-cell { aspect-ratio:auto; padding:30px 14px; }
             .ba-fit { transform:none; width:auto; }
             .ba-cards { flex-direction:column; align-items:center; }
-            .ba-legend { grid-template-columns:1fr; width:288px; }
           }
 
         </style>
@@ -1606,15 +1605,15 @@
                           <button class="ba-pin" data-n="3" style="top:172px" aria-pressed="false">3</button>
                           <button class="ba-pin" data-n="4" style="top:224px" aria-pressed="false">4</button>
                         </div>
+                        <ol class="ba-legend" id="baLegend">
+                          <li data-n="1"><span class="n">1</span><span>Positioned as a checkpoint, not a commit</span></li>
+                          <li data-n="2"><span class="n">2</span><span>The agent marked this destructive</span></li>
+                          <li data-n="3"><span class="n">3</span><span>The agent set the scope: 11 of 12</span></li>
+                          <li data-n="4"><span class="n">4</span><span>Confident enough to batch; review each is the hedge</span></li>
+                        </ol>
                       </div>
 
                     </div>
-                    <ol class="ba-legend" id="baLegend">
-                      <li data-n="1"><span class="n">1</span><span>Positioned as a checkpoint, not a commit</span></li>
-                      <li data-n="2"><span class="n">2</span><span>The agent marked this destructive</span></li>
-                      <li data-n="3"><span class="n">3</span><span>The agent set the scope: 11 of 12</span></li>
-                      <li data-n="4"><span class="n">4</span><span>Confident enough to batch; review each is the hedge</span></li>
-                    </ol>
                   </div>
                 </div>
             </div>
