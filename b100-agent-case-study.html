@@ -1110,6 +1110,92 @@
           .pat-item.open .pat-label { color:#fff; }
           @media (max-width:640px){ .pat-body-inner { padding-left:0; } }
 
+          /* ---- Action card: before / after ---- */
+          .ba-embed { background:#23262b; display:flex; justify-content:center; padding:46px 28px; overflow-x:auto; }
+          .ba-frame { display:flex; align-items:flex-start; gap:44px; }
+          .ba-col { display:flex; flex-direction:column; }
+          .ba-eyebrow { font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:.18em;
+                  text-transform:uppercase; color:#e0a55c; margin-bottom:13px; padding-left:2px; }
+          .ba-card { width:288px; flex-shrink:0; border:1px solid #E9E5DD; border-radius:16px; overflow:hidden; background:#fff; color:#1A2330;
+                  box-shadow:0 28px 56px -22px rgba(0,0,0,.55),0 8px 20px rgba(0,0,0,.22);
+                  --ink:#1A2330; --ink2:#3F4855; --ink3:#565E6B; --line:#E9E5DD; --line2:#F1EEE7; --surface:#fff;
+                  --accent:#324e79; --red:#AC382D; --red-dot:#CE5142; --green-dot:#0E6E43; }
+          .ba-col.before .ba-card { opacity:.96; }
+          .ba-body { padding:14px 15px 15px; }
+          .ba-title { font-size:13px; font-weight:700; letter-spacing:-.2px; color:var(--ink); }
+          .ba-steps { background:#F4F3EF; padding:14px 15px 13px; }
+          .ba-steps3 { display:flex; align-items:center; }
+          .ba-st { width:22px; height:22px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                  font-family:'DM Mono',monospace; font-size:11px; font-weight:700; background:var(--surface); border:1.5px solid var(--line);
+                  color:var(--ink3); font-variant-numeric:tabular-nums; }
+          .ba-st.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+          .ba-stline { flex:1; height:1.5px; background:var(--line); }
+          .ba-stepsl { margin-top:9px; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); }
+          .ba-type { margin-top:4px; display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:600; letter-spacing:.02em; color:var(--red); }
+          .ba-type::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--red-dot); flex-shrink:0; }
+          .ba-sum { margin-top:5px; font-size:11.5px; letter-spacing:-.1px; line-height:1.5; color:var(--ink3); }
+          .ba-sum b { color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
+          .ba-note { margin-top:3px; font-size:10px; line-height:1.4; letter-spacing:-.1px; color:var(--ink3); }
+          .ba-discwrap { border-top:1px solid var(--line2); }
+          .ba-disc { display:flex; align-items:center; gap:10px; padding:13px 15px; font-size:12px; font-weight:600; color:var(--ink); }
+          .ba-disccv { width:12px; height:12px; flex-shrink:0; color:var(--ink3); }
+          .ba-discn { margin-left:auto; color:var(--ink3); font-weight:600; font-variant-numeric:tabular-nums; }
+          .ba-foot { display:flex; align-items:center; gap:4px; justify-content:center; padding:11px 12px 13px; border-top:1px solid var(--line2); }
+          .ba-btn { display:inline-flex; align-items:center; justify-content:center; height:34px; padding:0 16px; border-radius:9px;
+                  font-size:12px; font-weight:600; letter-spacing:-.1px; background:var(--accent); color:#fff; box-shadow:0 1px 2px rgba(20,26,38,.05); white-space:nowrap; }
+          .ba-btn.text { background:transparent; color:var(--ink); box-shadow:none; padding:0 8px; }
+          .ba-bhead { display:flex; align-items:center; gap:6px; background:var(--ink); padding:10px 12px; font-size:9px; font-weight:600;
+                  letter-spacing:.06em; text-transform:uppercase; color:#fff; white-space:nowrap; }
+          .ba-bmark { width:15px; height:15px; border-radius:5px; background:rgba(255,255,255,.16); display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:9px; }
+          .ba-bstate { margin-left:auto; font-size:8.5px; font-weight:600; letter-spacing:.05em; padding:3px 8px; border-radius:999px; background:rgba(255,255,255,.18); }
+          .ba-bfacts { margin-top:9px; display:flex; flex-direction:column; gap:5px; }
+          .ba-bfact { display:grid; grid-template-columns:44px 1fr; column-gap:8px; font-size:10.5px; color:var(--ink2); line-height:1.35; }
+          .ba-bfact b { color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+          .ba-bfact .k { color:var(--ink3); }
+          .ba-bnote { margin-top:9px; font-size:10.5px; color:var(--ink2); display:flex; align-items:center; gap:6px; }
+          .ba-bnote svg { width:12px; height:12px; color:var(--green-dot); flex-shrink:0; }
+          .ba-blist { border-top:1px solid var(--line2); }
+          .ba-barow { display:flex; align-items:center; gap:10px; height:35px; padding:0 14px; border-bottom:1px solid var(--line2); font-size:11px; color:var(--ink); white-space:nowrap; }
+          .ba-barow:last-child { border-bottom:0; }
+          .ba-bgw { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:-.3px; }
+          .ba-bamt { margin-left:auto; font-weight:600; font-variant-numeric:tabular-nums; }
+          .ba-bcheck { width:16px; height:16px; border-radius:5px; border:1.6px solid var(--ink); flex-shrink:0; position:relative; }
+          .ba-bcheck.on { background:var(--accent); border-color:var(--accent); }
+          .ba-bcheck.on::after { content:''; position:absolute; left:5px; top:2px; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg); }
+          .ba-bcheck.off { border-color:var(--ink3); }
+          .ba-btag { margin-left:auto; flex-shrink:0; font-size:9px; font-weight:600; border-radius:999px; padding:3px 8px; background:#ECEAE3; color:var(--ink2); }
+          .ba-bshowall { display:flex; align-items:center; justify-content:center; gap:6px; height:28px; font-family:'DM Mono',monospace; font-size:9.5px; color:var(--ink3); border-top:1px solid var(--line2); }
+          .ba-bfoot { border-top:1px solid var(--line2); padding:10px 12px 12px; display:flex; flex-direction:column; gap:6px; }
+          .ba-bfoot .ba-prim { height:30px; border-radius:9px; background:var(--accent); color:#fff; font-weight:600; font-size:11px; display:flex; align-items:center; justify-content:center; }
+          .ba-bfoot .ba-secs { display:flex; gap:7px; }
+          .ba-bfoot .ba-sec { flex:1; height:27px; border-radius:9px; border:1px solid var(--line); color:var(--ink2); font-size:10px; display:flex; align-items:center; justify-content:center; }
+          .ba-afterrow { display:flex; align-items:flex-start; }
+          .ba-cardwrap { position:relative; flex-shrink:0; }
+          .ba-rail { position:relative; width:264px; flex-shrink:0; align-self:stretch; }
+          .ba-railtext { position:absolute; left:32px; width:224px; opacity:0; pointer-events:none;
+                  transition:opacity .18s ease, transform .18s ease; transform:translateY(calc(-50% + 4px)); }
+          .ba-railtext.show { opacity:1; transform:translateY(-50%); }
+          .ba-railt { font-family:'Syne',sans-serif; font-size:13.5px; font-weight:600; line-height:1.45; color:#f2f0ec; letter-spacing:-.1px; }
+          #baCard .ba-tgt, #baCard .ba-title, #baCard .ba-sum, #baCard .ba-note { transition:opacity .2s ease, filter .2s ease; border-radius:8px; }
+          .ba-dim { opacity:.3; filter:saturate(.35); }
+          .ba-pin { position:absolute; right:-11px; width:22px; height:22px; border-radius:50%; background:#e0a55c; color:#231708;
+                  font-family:'DM Mono',monospace; font-weight:500; font-size:11px; display:flex; align-items:center; justify-content:center;
+                  border:0; cursor:pointer; padding:0; z-index:5; box-shadow:0 0 0 4px rgba(224,165,92,.16),0 2px 8px rgba(0,0,0,.5); transition:transform .12s ease; }
+          .ba-pin:hover { transform:scale(1.1); }
+          .ba-pin[aria-pressed="true"] { box-shadow:0 0 0 5px rgba(224,165,92,.3),0 2px 8px rgba(0,0,0,.5); }
+          .ba-hint { margin-top:14px; font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:.06em; color:#767b84; }
+          .ba-legend { display:none; }
+          @media (max-width:900px){
+            .ba-embed { padding:36px 18px; }
+            .ba-frame { flex-direction:column; align-items:center; gap:30px; }
+            .ba-rail, .ba-pin, .ba-hint { display:none; }
+            .ba-afterrow { display:block; }
+            .ba-legend { display:flex; flex-direction:column; gap:12px; margin-top:20px; max-width:288px; padding:0; }
+            .ba-legend li { display:flex; gap:10px; font-family:'Syne',sans-serif; font-size:13px; line-height:1.45; color:#d9dbe0; }
+            .ba-legend .n { flex-shrink:0; width:18px; height:18px; border-radius:50%; background:#e0a55c; color:#231708;
+                    font-family:'DM Mono',monospace; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+          }
+
         </style>
 
         <!-- ============ HERO ============ -->
@@ -1462,8 +1548,7 @@
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
                 <img src="assets/b100-agent-case-study/image2.jpg" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell">
-                <!-- replace with assets/b100-agent-case-study/patterns-b.jpg -->
-                <div class="b100-imgcell alt" role="img" aria-label="Photo placeholder">image</div>
+                <img src="assets/b100-agent-case-study/image3.jpg" alt="B100 payments operations" class="b100-imgcell">
             </div>
         </div>
 
@@ -1592,13 +1677,112 @@
             </div>
         </div>
 
-        <!-- ============ IMAGE PAIR 2 ============ -->
+        <!-- ============ ACTION CARD: BEFORE / AFTER ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
-            <div class="b100-imgpair">
-                <!-- replace with assets/b100-agent-case-study/boundary-a.jpg -->
-                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
-                <img src="assets/b100-agent-case-study/image3.jpg" alt="B100 payments operations" class="b100-imgcell">
+            <div class="ba-embed">
+              <div class="ba-frame">
+
+                <div class="ba-col before">
+                  <span class="ba-eyebrow">Before</span>
+                  <div class="ba-card">
+                    <div class="ba-bhead"><span class="ba-bmark">b</span>Agent action<span class="ba-bstate">Proposed</span></div>
+                    <div class="ba-body">
+                      <div class="ba-title">Retry Leg 2 settlement</div>
+                      <div class="ba-bfacts">
+                        <div class="ba-bfact"><span class="k">Scope</span><span><b>11 of 12</b> transactions</span></div>
+                        <div class="ba-bfact"><span class="k">Total</span><span><b>$284,900</b> to 11 suppliers</span></div>
+                        <div class="ba-bfact"><span class="k">Order</span><span>Oldest first, stop after 2 fails</span></div>
+                      </div>
+                      <div class="ba-bnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4"></path></svg>Reversible for 24h</div>
+                    </div>
+                    <div class="ba-blist">
+                      <div class="ba-barow"><span class="ba-bcheck on"></span><span class="ba-bgw">GW…826541</span><span class="ba-bamt">$10,000</span></div>
+                      <div class="ba-barow"><span class="ba-bcheck off"></span><span class="ba-bgw">GW…826547</span><span class="ba-btag">Under dispute</span></div>
+                    </div>
+                    <div class="ba-bshowall">Show all 11 &#9207;</div>
+                    <div class="ba-bfoot">
+                      <div class="ba-prim">Approve 11</div>
+                      <div class="ba-secs"><span class="ba-sec">Review each</span><span class="ba-sec">Edit rules</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ba-col after">
+                  <span class="ba-eyebrow">After</span>
+                  <div class="ba-afterrow">
+                    <div class="ba-cardwrap">
+                      <div class="ba-card" id="baCard">
+                        <div class="ba-steps ba-tgt" data-tgt="1">
+                          <div class="ba-steps3"><span class="ba-st on">1</span><span class="ba-stline"></span><span class="ba-st">2</span><span class="ba-stline"></span><span class="ba-st">3</span></div>
+                          <div class="ba-stepsl">Proposed</div>
+                        </div>
+                        <div class="ba-body">
+                          <div class="ba-title">Retry Leg 2 settlement</div>
+                          <div class="ba-type ba-tgt" data-tgt="2">Destructive action</div>
+                          <div class="ba-sum"><b>$284,900</b> · 11 of 12 transactions</div>
+                          <div class="ba-note">1 excluded — under dispute, can't verify</div>
+                        </div>
+                        <div class="ba-discwrap">
+                          <div class="ba-disc ba-tgt" data-tgt="3"><svg class="ba-disccv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg><span>Review transactions</span><span class="ba-discn">11</span></div>
+                        </div>
+                        <div class="ba-foot ba-tgt" data-tgt="4"><span class="ba-btn">Approve All</span><span class="ba-btn text">Review each</span></div>
+                      </div>
+                      <button class="ba-pin" data-n="1" style="top:19px" aria-pressed="false">1</button>
+                      <button class="ba-pin" data-n="2" style="top:98px" aria-pressed="false">2</button>
+                      <button class="ba-pin" data-n="3" style="top:172px" aria-pressed="false">3</button>
+                      <button class="ba-pin" data-n="4" style="top:224px" aria-pressed="false">4</button>
+                    </div>
+                    <div class="ba-rail">
+                      <div class="ba-railtext" id="baRailText" style="top:30px"><span class="ba-railt" id="baRailT"></span></div>
+                    </div>
+                  </div>
+                  <ol class="ba-legend">
+                    <li><span class="n">1</span><span>Positioned as a checkpoint, not a commit</span></li>
+                    <li><span class="n">2</span><span>The agent marked this destructive</span></li>
+                    <li><span class="n">3</span><span>The agent set the scope: 11 of 12</span></li>
+                    <li><span class="n">4</span><span>Confident enough to batch; review each is the hedge</span></li>
+                  </ol>
+                  <div class="ba-hint">Tap a number</div>
+                </div>
+
+              </div>
             </div>
+            <script>
+              (function(){
+                var titles={
+                  1:'Positioned as a checkpoint,<br>not a commit',
+                  2:'The agent marked<br>this destructive',
+                  3:'The agent set the<br>scope: 11 of 12',
+                  4:'Confident enough to batch;<br>review each is the hedge'
+                };
+                var card=document.getElementById('baCard');
+                if(!card) return;
+                var pins=[].slice.call(document.querySelectorAll('.ba-pin'));
+                var dimmable=[].slice.call(card.querySelectorAll('.ba-tgt, .ba-title, .ba-sum, .ba-note'));
+                var railText=document.getElementById('baRailText'), railT=document.getElementById('baRailT');
+                var active=null;
+                function clear(){
+                  dimmable.forEach(function(el){ el.classList.remove('ba-dim'); });
+                  pins.forEach(function(p){ p.setAttribute('aria-pressed','false'); });
+                  railText.classList.remove('show'); active=null;
+                }
+                pins.forEach(function(pin){
+                  pin.addEventListener('click',function(e){
+                    e.stopPropagation();
+                    var n=pin.dataset.n;
+                    if(active===n){ clear(); return; }
+                    clear(); active=n; pin.setAttribute('aria-pressed','true');
+                    var tgt=card.querySelector('.ba-tgt[data-tgt="'+n+'"]');
+                    dimmable.forEach(function(el){ if(el!==tgt) el.classList.add('ba-dim'); });
+                    railT.innerHTML=titles[n];
+                    railText.style.top=(parseInt(pin.style.top,10)+11)+'px';
+                    railText.classList.add('show');
+                  });
+                });
+                document.addEventListener('click',clear);
+                document.addEventListener('keydown',function(e){ if(e.key==='Escape') clear(); });
+              })();
+            </script>
         </div>
 
         <!-- ============ FIVE PATTERNS ============ -->
