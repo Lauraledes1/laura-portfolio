@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/jpg" href="assets/favicon.jpg" />
-  <title>Archive - Laura Ledesna</title>
+  <title>Graphics - Laura Ledesna</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@600&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -87,6 +87,22 @@
     }
     @media (min-width: 601px) {
       .menu-item:hover { background-color: var(--surface-secondary); }
+
+        /* Graphics nav cell — a strip of the gallery's palette wipes in on hover.
+           Colours sampled from the 21 gallery images. */
+        .menu-item.nav-graphics { position: relative; overflow: hidden; }
+        .menu-item.nav-graphics::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #2858C3, #3B86AB, #D5BC3E, #D34853, #CA6F55);
+        }
+        .menu-item.nav-graphics:hover::after { transform: scaleX(1); }
+
     }
     .menu-item:active { background-color: var(--surface-tertiary); }
 
@@ -263,8 +279,8 @@
         <a href="mailto:iamlauraledesna@gmail.com" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
           <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Email</span>
         </a>
-        <a href="archive.html" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
-          <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Archive</span>
+        <a href="archive.html" class="menu-item nav-graphics h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
+          <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Graphics</span>
         </a>
         <a href="assets/cv-laura-ledesna.pdf" download target="_blank" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
           <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Resume</span>
@@ -297,7 +313,7 @@
           <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Home</span>
         </a>
         <a href="archive.html" class="menu-item">
-          <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Archive</span>
+          <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Graphics</span>
         </a>
         <a href="mailto:iamlauraledesna@gmail.com" class="menu-item">
           <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Email</span>

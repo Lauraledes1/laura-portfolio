@@ -299,6 +299,22 @@
             background-color: var(--surface-secondary);
         }
 
+        /* Graphics nav cell — a strip of the gallery's palette wipes in on hover.
+           Colours sampled from the 21 gallery images. */
+        .menu-item.nav-graphics { position: relative; overflow: hidden; }
+        .menu-item.nav-graphics::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #2858C3, #3B86AB, #D5BC3E, #D34853, #CA6F55);
+        }
+        .menu-item.nav-graphics:hover::after { transform: scaleX(1); }
+
+
         .menu-item:active {
             background-color: var(--surface-tertiary);
         }
@@ -744,8 +760,8 @@
                 <a href="mailto:iamlauraledesna@gmail.com" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
                     <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Email</span>
                 </a>
-                <a href="archive.html" class="menu-item h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
-                    <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Archive</span>
+                <a href="archive.html" class="menu-item nav-graphics h-[82px] w-[167px] flex items-center px-4 border-l border-theme">
+                    <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Graphics</span>
                 </a>
 
         <script>
@@ -812,7 +828,7 @@
                     <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Home</span>
                 </a>
                 <a href="archive.html" class="menu-item">
-                    <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Archive</span>
+                    <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Graphics</span>
                 </a>
                 <a href="mailto:iamlauraledesna@gmail.com" class="menu-item">
                     <span class="font-syne font-normal text-[16px] leading-[1.6] text-theme-heading">Email</span>
@@ -938,7 +954,7 @@
                             <div class="flex-1 flex flex-col justify-between">
                             <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Agentic Systems • Workflow Design</div>
                             <div class="font-syne font-normal text-[14px] leading-[1.6] text-theme-paragraph opacity-70">Client: Boost B2B payments.</div>
-                            <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">No More Handoffs, No More Waiting</div>
+                            <div class="font-syne font-medium text-[24px] leading-[1.4] text-theme-heading">From Roles to Agents</div>
                             <div class="flex justify-end">
                                 <div class="relative shrink-0 size-8">
                                     <div class="absolute inset-[15%]">
@@ -1136,7 +1152,7 @@
                     <div class="flex flex-col gap-4 scroll-animate" data-scroll>
                         <div class="font-syne font-bold text-[16px] leading-[1.6] text-theme-heading">More From Me</div>
                         <div class="flex flex-col gap-4 font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph">
-                            <a href="archive.html" class="footer-link">Archive</a>
+                            <a href="archive.html" class="footer-link">Graphics</a>
                             <a href="https://medium.com/@iamlauraledesna" target="_blank" rel="noopener noreferrer" class="footer-link">Medium Articles</a>
                             <a href="assets/cv-laura-ledesna.pdf" download target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
                         </div>
