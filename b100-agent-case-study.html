@@ -1231,6 +1231,59 @@
             .ba-legend { width:288px; grid-template-columns:1fr; grid-template-rows:none; grid-auto-flow:row; }
           }
 
+          /* ---- Pattern 01 figure: the reason travels with the signal (static) ---- */
+          .b100-imgcell.cf-cell { background:#23262b; padding:0; overflow:hidden;
+                  display:flex; align-items:center; justify-content:center;
+                  font-family:'Roboto',-apple-system,'Segoe UI',sans-serif; font-size:14px;
+                  letter-spacing:normal; text-transform:none; color:#1A2330; }
+          .cf-fit { display:flex; align-items:stretch; gap:26px; flex-shrink:0; transform-origin:center center; }
+          .cf-col { display:flex; flex-direction:column; width:252px; }
+          .cf-col .cf-surface { flex:1; }
+          .cf-eyebrow { font-family:'Syne',sans-serif; font-size:11px; font-weight:600; letter-spacing:.14em;
+                  text-transform:uppercase; margin-bottom:12px; padding-left:2px; color:#8A8F98; }
+          .cf-cap { margin:14px 0 0; font-family:'Syne',sans-serif; font-size:12.5px; font-weight:400; line-height:1.5; color:#a8acb4; }
+          .cf-surface { background:#fff; border:1px solid #E9E5DD; border-radius:14px; overflow:hidden; color:#1A2330;
+                  box-shadow:0 24px 48px -20px rgba(0,0,0,.55),0 6px 16px rgba(0,0,0,.2);
+                  --ink:#1A2330; --ink2:#3F4855; --ink3:#565E6B; --line:#E9E5DD; --line2:#F1EEE7; --surface:#fff;
+                  --accent:#324e79; --red:#AC382D; --red-bg:#FAE7E2; --red-dot:#CE5142; --amber:#8F5410; }
+          .cf-row { padding:11px 13px; position:relative; background:var(--red-bg); }
+          .cf-row::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--red-dot); }
+          .cf-rt { display:flex; align-items:center; gap:8px; }
+          .cf-buyer { flex:1; min-width:0; font-size:12px; font-weight:600; letter-spacing:-.2px; color:var(--ink); }
+          .cf-rowb { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-top:3px; }
+          .cf-sub { font-size:11px; color:var(--ink3); }
+          .cf-money { font-size:12px; font-weight:600; letter-spacing:-.2px; color:var(--ink); font-variant-numeric:tabular-nums; }
+          .cf-chip { display:inline-flex; align-items:center; gap:4px; height:19px; padding:0 8px; border-radius:999px;
+                  font-size:9.5px; font-weight:600; white-space:nowrap; background:var(--red-dot); color:#fff; }
+          .cf-chip::before { content:''; width:4px; height:4px; border-radius:50%; background:#fff; flex-shrink:0; }
+          .cf-anom { margin-top:7px; height:21px; padding:0 7px 0 9px; vertical-align:top; }
+          .cf-anom::before { content:none; }
+          .cf-anom svg { width:10px; height:10px; margin-left:1px; transform:rotate(90deg); }
+          .cf-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
+          .cf-rowq { padding:11px 13px; border-top:1px solid var(--line2); opacity:.45; }
+          .cf-chip.pend { background:#ECEAE3; color:var(--ink2); } .cf-chip.pend::before { background:var(--ink3); }
+          .cf-l2wrap { padding:13px; }
+          .cf-say { margin:0 0 11px; font-size:11.5px; line-height:1.55; letter-spacing:-.1px; color:var(--ink); }
+          .cf-say b { font-weight:700; font-variant-numeric:tabular-nums; }
+          .cf-conf { border:1px solid var(--line2); border-radius:10px; overflow:hidden; background:var(--surface); }
+          .cf-conf-b { display:flex; align-items:center; gap:7px; padding:11px 12px; font-size:11px; font-weight:600; color:var(--amber); }
+          .cf-conf-b::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+          .cf-conf-b svg { margin-left:auto; width:12px; height:12px; transform:rotate(90deg); }
+          .cf-conf-why { padding:2px 12px 12px; font-size:10.5px; line-height:1.55; color:var(--ink2); }
+          .cf-cta-row { display:flex; align-items:center; gap:4px; margin-top:11px; }
+          .cf-cta { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap;
+                  height:32px; padding:0 13px; border-radius:8px; font-size:11.5px; font-weight:600; letter-spacing:-.1px;
+                  background:var(--accent); color:#fff; box-shadow:0 1px 2px rgba(20,26,38,.05); }
+          .cf-cta svg { width:12px; height:12px; flex-shrink:0; }
+          .cf-cta.ghost { background:transparent; color:var(--ink2); box-shadow:none; padding:0 6px; }
+          @media (max-width:1180px){ .cf-fit { transform:scale(.90); } }
+          @media (max-width:1010px){ .cf-fit { transform:scale(.80); } }
+          @media (max-width:880px){ .cf-fit { transform:scale(1); } }
+          @media (max-width:620px){
+            .b100-imgcell.cf-cell { aspect-ratio:auto; padding:30px 14px; }
+            .cf-fit { flex-direction:column; align-items:center; transform:none; }
+          }
+
         </style>
 
         <!-- ============ HERO ============ -->
@@ -1818,8 +1871,50 @@
         <!-- ============ IMAGE PAIR 2 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
-                <!-- replace with assets/b100-agent-case-study/boundary-a.jpg -->
-                <div class="b100-imgcell" role="img" aria-label="Photo placeholder">image</div>
+                <div class="b100-imgcell cf-cell" role="img" aria-label="The confidence signal at two levels: at L1 the Anomaly tag opens the reason the row was flagged; at L2 confidence sits inline with the agent's reasoning.">
+                  <div class="cf-fit">
+
+                    <div class="cf-col">
+                      <span class="cf-eyebrow">L1 · Ambient</span>
+                      <div class="cf-surface">
+                        <div class="cf-row">
+                          <div class="cf-rt"><span class="cf-buyer">Brightwater Logistics</span></div>
+                          <div class="cf-rowb"><span class="cf-sub">Tamsett Co. · due today</span><span class="cf-money">$10,000</span></div>
+                          <span class="cf-chip cf-anom">Anomaly<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span>
+                          <div class="cf-why">$10,000 vs ~$3,100 typical · flagged by Gen 3</div>
+                        </div>
+                        <div class="cf-rowq">
+                          <div class="cf-rt"><span class="cf-buyer">Kestrel Mfg.</span><span class="cf-chip pend">Pending</span></div>
+                          <div class="cf-rowb"><span class="cf-sub">Orbit Industrial · Sep 3</span><span class="cf-money">$25,000</span></div>
+                        </div>
+                        <div class="cf-rowq">
+                          <div class="cf-rt"><span class="cf-buyer">Halden Freight</span><span class="cf-chip pend">Pending</span></div>
+                          <div class="cf-rowb"><span class="cf-sub">Vantor SA · Sep 4</span><span class="cf-money">$7,400</span></div>
+                        </div>
+                      </div>
+                      <p class="cf-cap">The agent flagged it.</p>
+                    </div>
+
+                    <div class="cf-col">
+                      <span class="cf-eyebrow">L2 · Copilot</span>
+                      <div class="cf-surface">
+                        <div class="cf-l2wrap">
+                          <p class="cf-say">Leg 2 was never initiated here or on 11 others, totaling <b>$284,900</b>.</p>
+                          <div class="cf-conf">
+                            <div class="cf-conf-b">Confidence: medium<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+                            <div class="cf-conf-why">Gen 3 and Transfermate agree, but Gen 2's mapping is stale, so the affected count may be off by one or two.</div>
+                          </div>
+                          <div class="cf-cta-row">
+                            <span class="cf-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry 11</span>
+                            <span class="cf-cta ghost">Re-check</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="cf-cap">Inline, with the reasoning.</p>
+                    </div>
+
+                  </div>
+                </div>
                 <img src="assets/b100-agent-case-study/image3.jpg" alt="B100 payments operations" class="b100-imgcell">
             </div>
         </div>
