@@ -338,19 +338,20 @@
             background-color: var(--surface-secondary);
         }
 
-        /* Graphics nav cell — the colourful archive leaks through on hover.
-           Palette sampled from the gallery images. */
+        /* Graphics nav cell — a strip of the gallery's palette wipes in on hover.
+           Colours sampled from the 21 gallery images. */
         .menu-item.nav-graphics { position: relative; overflow: hidden; }
-        .menu-item.nav-graphics > span { position: relative; z-index: 2; }
-        .menu-item.nav-graphics::before {
+        .menu-item.nav-graphics::after {
             content: '';
             position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 0.28s ease;
-            background: linear-gradient(115deg, #2858C3, #3B86AB 38%, #D5BC3E 66%, #D34853);
+            left: 0; right: 0; bottom: 0;
+            height: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #2858C3, #3B86AB, #D5BC3E, #D34853, #CA6F55);
         }
-        .menu-item.nav-graphics:hover::before { opacity: 0.26; }
+        .menu-item.nav-graphics:hover::after { transform: scaleX(1); }
 
 
         .menu-item:active {

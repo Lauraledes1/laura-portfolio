@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the amount lives — A vs B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#050505; color:#ddd; font-family:'Syne',sans-serif; padding:44px 20px 70px; }
+  h1 { font-family:'DM Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#2AA5E0; margin:0 0 6px; text-align:center; }
+  p.sub { font-size:13px; color:#9a9a9a; margin:0 auto 44px; max-width:560px; line-height:1.6; text-align:center; }
+  p.sub b { color:#d0d0d0; }
+
+  .grid { display:flex; flex-wrap:wrap; gap:36px 40px; justify-content:center; align-items:flex-start; }
+  .col { width:290px; }
+  .col h2 { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#eee; margin:0 0 6px; }
+  .col h2 .n { color:#E7B24B; }
+  .col .why { font-size:12px; color:#9a9a9a; line-height:1.55; margin:0 0 16px; min-height:56px; }
+  .col .why b { color:#dcdcdc; font-weight:600; }
+  .col.problem h2 .n { color:#CE5142; }
+  .tag { display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.06em;
+         border:1px solid #E7B24B; color:#E7B24B; border-radius:4px; padding:1px 6px; margin-bottom:10px; }
+
+  .pw { position:relative; }
+  .delta { position:absolute; top:96px; left:-14px; z-index:20; display:flex; align-items:center; gap:6px; }
+  .delta .dot { width:9px; height:9px; border-radius:50%; background:#E7B24B; box-shadow:0 0 0 4px rgba(231,178,75,.22); }
+  .delta .lbl { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.04em; color:#E7B24B; white-space:nowrap;
+                background:#141414; padding:2px 6px; border-radius:4px; border:1px solid rgba(231,178,75,.35); }
+
+  .verdict { max-width:900px; margin:44px auto 0; padding:16px 20px; border:1px solid #262626; border-left:3px solid #2AA5E0;
+             border-radius:8px; background:#0c0c0c; font-size:13px; line-height:1.6; color:#c4c4c4; }
+  .verdict b { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#2AA5E0;
+               display:block; margin-bottom:5px; font-weight:500; }
+
+  /* ===== phone ===== */
+  .phone { position:relative; width:256px; height:524px; border-radius:46px; margin:0 auto;
+           background:linear-gradient(#1a1d22,#0c0e11); padding:11px;
+           box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
+  .phone::after { content:''; position:absolute; z-index:9; top:19px; left:50%; transform:translateX(-50%);
+           width:70px; height:21px; background:#000; border-radius:11px; }
+  .phone.dim { opacity:.62; }
+  .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
+           background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
+           display:flex; flex-direction:column;
+           --m-bg:#F4F3EF; --m-surface:#FFFFFF;
+           --m-ink:#1A2330; --m-ink2:#5C6672; --m-ink3:#98A0AB;
+           --m-line:#E9E5DD; --m-line2:#F1EEE7;
+           --m-accent:#324e79;
+           --m-amber:#8F5410; --m-amber-bg:#FBEBD1; --m-amber-dot:#D68A1F;
+           --m-green:#0E6E43; --m-green-bg:#E3F0E8; --m-green-dot:#1E9E63;
+           --m-red:#AC382D; --m-red-bg:#FAE7E2; --m-red-dot:#CE5142;
+           --m-sans:'Roboto',-apple-system,'Segoe UI',sans-serif;
+           --m-sys:-apple-system,'SF Pro Text','Helvetica Neue',Roboto,sans-serif;
+           --m-mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;
+           --m-e1:0 1px 2px rgba(20,26,38,.05); }
+
+  .m-mark { width:22px; height:22px; border-radius:7px; background:var(--m-ink); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .m-mark::before { content:'b'; color:#fff; font-family:var(--m-sans); font-weight:700; font-size:13px; line-height:1; }
+  .m-mark.sm { width:17px; height:17px; border-radius:6px; }
+  .m-mark.sm::before { font-size:10px; }
+
+  .m-status { height:38px; display:flex; align-items:center; justify-content:space-between; padding:0 15px 0 22px;
+           font-family:var(--m-sys); font-size:13.5px; font-weight:600; letter-spacing:.1px; color:var(--m-ink); flex-shrink:0; }
+  .m-status .m-r { display:flex; align-items:center; gap:5px; }
+  .m-status .m-cell { display:flex; align-items:flex-end; gap:1.5px; height:9px; }
+  .m-status .m-cell i { width:2.5px; background:var(--m-ink); border-radius:.5px; }
+  .m-status .m-cell i:nth-child(1){height:4px}.m-status .m-cell i:nth-child(2){height:5.5px}
+  .m-status .m-cell i:nth-child(3){height:7px}.m-status .m-cell i:nth-child(4){height:9px}
+  .m-status .m-cell i:nth-child(4){opacity:.3}
+  .m-status .m-wifi { width:15px; height:11px; color:var(--m-ink); }
+  .m-status .m-bat { width:20px; height:10px; border:1px solid rgba(20,26,38,.32); border-radius:3px; position:relative; padding:1.3px; }
+  .m-status .m-bat::after { content:''; position:absolute; right:-2px; top:50%; transform:translateY(-50%); width:1.4px; height:3.5px; background:rgba(20,26,38,.32); border-radius:0 1.5px 1.5px 0; }
+  .m-status .m-bat i { display:block; height:100%; width:72%; background:var(--m-ink); border-radius:1px; }
+
+  .m-appbar { min-height:50px; padding:8px 14px 10px; display:flex; align-items:center; gap:10px; flex-shrink:0; background:var(--m-bg); border-bottom:1px solid var(--m-line); }
+  .m-appbar .m-back { width:11px; height:20px; flex-shrink:0; color:var(--m-ink); }
+  .m-appbar h5 { margin:0; font-size:14px; font-weight:700; letter-spacing:-.4px; color:var(--m-ink); flex:1;
+           white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  .m-conv { flex:1; overflow:hidden; padding:14px 15px 8px; display:flex; flex-direction:column; gap:14px; }
+  .m-turn { display:flex; }
+  .m-turn.user { justify-content:flex-end; }
+  .m-turn.user .m-utext { max-width:80%; font-size:12.5px; line-height:1.45; padding:9px 13px; border-radius:16px 16px 6px 16px;
+           background:var(--m-ink); color:#fff; }
+  .m-turn.bot { gap:9px; }
+  .m-turn.bot > .m-mark { margin-top:1px; }
+  .m-turn-c { flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
+  .m-turn.bot .m-turn-c > .m-srcs:first-child,
+  .m-turn.bot .m-turn-c > :not(:first-child) { margin-left:-26px; }
+  /* no text line beside the avatar: drop the leading card below it so the avatar never overlaps the card */
+  .m-turn.bot .m-turn-c > .m-srcs:first-child { margin-top:22px; }
+  .m-answer { font-size:12.5px; line-height:1.55; color:var(--m-ink); }
+  .m-answer b { font-weight:700; }
+
+  .m-srcs { border:1px solid var(--m-line); border-radius:12px; overflow:hidden; background:var(--m-surface); box-shadow:var(--m-e1); }
+  .m-src-item { border-bottom:1px solid var(--m-line2); }
+  .m-src-item:last-child { border-bottom:0; }
+  .m-src { display:flex; align-items:center; gap:10px; padding:9px 10px 9px 12px; }
+  .m-src-item.open .m-src { background:#E7E7EB; }
+  .m-src-cv { width:12px; height:12px; flex-shrink:0; color:var(--m-ink3); }
+  .m-src-item.open .m-src-cv { transform:rotate(90deg); }
+  .m-src-detail { display:none; padding:2px 12px 11px 46px; }
+  .m-src-item.open .m-src-detail { display:block; }
+  .m-src-detail dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:3px 12px;
+           font-family:var(--m-mono); font-size:9.5px; line-height:1.4; }
+  .m-src-detail dt { color:var(--m-ink3); white-space:nowrap; }
+  .m-src-detail dd { margin:0; color:var(--m-ink2); }
+  .m-src-detail dd.amt { color:var(--m-ink); font-weight:500; }
+  .m-src-mono { width:24px; height:24px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+           font-family:var(--m-mono); font-size:8.5px; font-weight:500; background:#EEF0F3; color:var(--m-ink2); }
+  .m-src-c { flex:1; min-width:0; }
+  .m-src-name { font-size:11px; font-weight:600; color:var(--m-ink); }
+  .m-src-body { font-size:10.5px; line-height:1.35; color:#3D4652; margin-top:2px; }
+  .m-src-r { flex-shrink:0; display:flex; align-items:center; gap:6px; }
+  .m-src-dot { width:6px; height:6px; border-radius:50%; }
+  .m-src.ok .m-src-dot { background:var(--m-green-dot); } .m-src.warn .m-src-dot { background:var(--m-amber-dot); } .m-src.err .m-src-dot { background:var(--m-red-dot); }
+  .m-src-time { font-family:var(--m-mono); font-size:9px; color:#79818D; }
+
+  .m-cta { display:inline-flex; align-items:center; justify-content:center; gap:6px; align-self:flex-start;
+           height:32px; padding:0 15px; border:0; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:600;
+           background:var(--m-accent); color:#fff; box-shadow:var(--m-e1); }
+  .m-cta svg { width:13px; height:13px; }
+
+  .m-chip { display:inline-flex; align-items:center; gap:5px; height:21px; padding:0 9px 0 8px; border-radius:999px;
+           font-size:10px; font-weight:600; white-space:nowrap; letter-spacing:.1px; flex-shrink:0; }
+  .m-chip::before { content:''; width:5px; height:5px; border-radius:50%; }
+  .m-chip.warn { background:var(--m-red-bg); color:var(--m-red); } .m-chip.warn::before { background:var(--m-red-dot); }
+
+  /* pinned transaction context strip — the delta in Option B */
+  .m-pin { flex-shrink:0; padding:10px 15px 12px; background:var(--m-bg); border-bottom:1px solid var(--m-line); }
+  .m-pin.hl { box-shadow:inset 0 0 0 2px rgba(231,178,75,.55); }
+  .m-txn { border:1px solid var(--m-line); border-radius:12px; background:var(--m-surface); padding:9px 12px; box-shadow:var(--m-e1); }
+  .m-txn-top { display:flex; align-items:center; gap:8px; }
+  .m-txn-amt { font-size:14px; font-weight:700; letter-spacing:-.3px; color:var(--m-ink); font-variant-numeric:tabular-nums; }
+  .m-txn-top .m-chip { margin-left:auto; }
+  .m-txn-bot { display:flex; align-items:center; gap:5px; margin-top:3px; font-size:11px; color:var(--m-ink2); min-width:0; }
+  .m-txn-bot svg { width:11px; height:11px; color:var(--m-ink3); flex-shrink:0; }
+  .m-txn-party { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+</style>
+</head>
+<body>
+
+<h1>Where the amount lives</h1>
+<p class="sub"><b>Persistent context vs. progressive disclosure.</b> Ops is about to approve a <b>$284,900</b> bulk retry, the amount at stake shouldn't take digging.</p>
+
+<div class="grid">
+
+  <!-- ============ PROBLEM ============ -->
+  <div class="col problem">
+    <span class="tag" style="border-color:#CE5142;color:#CE5142;">Before</span>
+    <h2><span class="n">·</span> The gap</h2>
+    <p class="why">The copilot answers, but never shows the money. <b>$10,000</b> for this one, <b>$284,900</b> for the batch, neither is on screen.</p>
+    <div class="pw">
+    <div class="phone dim"><div class="phone-screen">
+      <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+      <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5>Brightwater · GW…826541</h5></div>
+      <div class="m-conv">
+        <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+        <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+          <div class="m-srcs">
+            <div class="m-src-item"><div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div></div>
+            <div class="m-src-item"><div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div></div>
+            <div class="m-src-item"><div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span></div></div>
+          </div>
+          <div class="m-answer">Leg 2 was never initiated. <b>11 more</b> Brightwater transactions are stuck the same way.</div>
+          <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry Leg 2 for all 12</button>
+        </div></div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION A ============ -->
+  <div class="col">
+    <span class="tag">Option A</span>
+    <h2><span class="n">A ·</span> In the Gen 3 detail</h2>
+    <p class="why">Amount inside the source that explains it. One tap to reveal, gone when you scroll on. <b>Least chrome.</b></p>
+    <div class="pw">
+    <div class="phone"><div class="phone-screen">
+      <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+      <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5>Brightwater · GW…826541</h5></div>
+      <div class="m-conv">
+        <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+        <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+          <div class="m-srcs">
+            <div class="m-src-item open">
+              <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+              <div class="m-src-detail"><dl><dt>Amount</dt><dd class="amt">$10,000.00 · full capture</dd><dt>Card</dt><dd>••4471 · auth 14:29:58</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+            </div>
+            <div class="m-src-item"><div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div>
+            <div class="m-src-item"><div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div>
+          </div>
+          <div class="m-answer">Leg 2 was never initiated for this transaction or for <b>11 others</b>, totaling <b>$284,900</b>.</div>
+          <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry Leg 2 for all 12</button>
+        </div></div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION B ============ -->
+  <div class="col">
+    <span class="tag">Option B</span>
+    <h2><span class="n">B ·</span> Pinned strip + detail</h2>
+    <p class="why">A strip pinned under the app bar. Always in view, at the cost of repeating the number in three places.</p>
+    <div class="pw">
+    <div class="delta"><span class="dot"></span><span class="lbl">the only change</span></div>
+    <div class="phone"><div class="phone-screen">
+      <div class="m-status"><span>9:41</span><span class="m-r"><span class="m-cell"><i></i><i></i><i></i><i></i></span><svg class="m-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a10 10 0 0 1 13 0"></path><path d="M3.8 6.9a6.6 6.6 0 0 1 8.4 0"></path><path d="M6.2 9.5a3 3 0 0 1 3.6 0"></path><circle cx="8" cy="11.3" r="0.9" fill="currentColor" stroke="none"></circle></svg><span class="m-bat"><i></i></span></span></div>
+      <div class="m-appbar"><svg class="m-back" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"></path></svg><span class="m-mark sm"></span><h5>Brightwater · GW…826541</h5></div>
+      <div class="m-pin hl">
+        <div class="m-txn">
+          <div class="m-txn-top"><span class="m-txn-amt">$10,000.00</span><span class="m-chip warn">Anomaly</span></div>
+          <div class="m-txn-bot"><span class="m-txn-party">Brightwater Logistics</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg><span class="m-txn-party">Tamsett Components</span></div>
+        </div>
+      </div>
+      <div class="m-conv">
+        <div class="m-turn user"><span class="m-utext">Why didn't this settle?</span></div>
+        <div class="m-turn bot"><span class="m-mark sm"></span><div class="m-turn-c">
+          <div class="m-srcs">
+            <div class="m-src-item open">
+              <div class="m-src ok"><span class="m-src-mono">G3</span><div class="m-src-c"><div class="m-src-name">Gen 3</div><div class="m-src-body">Card captured in full</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+              <div class="m-src-detail"><dl><dt>Amount</dt><dd class="amt">$10,000.00 · full capture</dd><dt>Card</dt><dd>••4471 · auth 14:29:58</dd><dt>Queried</dt><dd>14:31:04</dd></dl></div>
+            </div>
+            <div class="m-src-item"><div class="m-src warn"><span class="m-src-mono">TM</span><div class="m-src-c"><div class="m-src-name">Transfermate</div><div class="m-src-body">Leg 1 done · Leg 2 not started</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div>
+            <div class="m-src-item"><div class="m-src err"><span class="m-src-mono">G2</span><div class="m-src-c"><div class="m-src-name">Gen 2</div><div class="m-src-body">No Gateway ID match</div></div><span class="m-src-r"><span class="m-src-dot"></span><span class="m-src-time">14:31</span></span><svg class="m-src-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div>
+          </div>
+          <div class="m-answer">Leg 2 was never initiated for this transaction or for <b>11 others</b>, totaling <b>$284,900</b>.</div>
+          <button type="button" class="m-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 4v5h-5"></path></svg>Retry Leg 2 for all 12</button>
+        </div></div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+
+</div>
+
+<p class="verdict"><b>Decision</b>Shipped <b style="display:inline;color:#c4c4c4;font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;">A</b>. On a screen that already scrolls, the strip's vertical cost outweighed the benefit, and it repeated a number that's already in the answer. Flagged to revisit if Ops loses track of the amount at approval time.</p>
+
+</body>
+</html>
