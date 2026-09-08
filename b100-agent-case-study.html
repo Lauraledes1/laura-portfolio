@@ -1185,14 +1185,12 @@
                   font-family:'DM Mono',monospace; font-weight:500; font-size:11px; display:flex; align-items:center; justify-content:center;
                   border:0; cursor:pointer; padding:0; z-index:5; box-shadow:0 0 0 4px rgba(224,165,92,.16),0 2px 8px rgba(0,0,0,.5); transition:transform .12s ease; }
           .ba-pin:hover { transform:scale(1.1); }
-          .ba-pin[aria-pressed="true"] { box-shadow:0 0 0 5px rgba(224,165,92,.3),0 2px 8px rgba(0,0,0,.5); }
-          /* pin 1 pulses until the reader clicks something, so the figure reads as interactive */
-          @keyframes ba-pulse {
-            0%,100% { box-shadow:0 0 0 4px rgba(224,165,92,.16), 0 2px 8px rgba(0,0,0,.5); }
-            50%     { box-shadow:0 0 0 10px rgba(224,165,92,.32), 0 2px 8px rgba(0,0,0,.5); }
-          }
-          .ba-cell:not(.ba-touched) .ba-pin[data-n="1"] { animation:ba-pulse 1.9s ease-in-out infinite; }
-          @media (prefers-reduced-motion:reduce){ .ba-pin { animation:none !important; } }
+          /* one pin is always active: it wears a wider halo, the resting ones sit back */
+          .ba-pin[aria-pressed="false"] { background:#c99a63; box-shadow:0 0 0 3px rgba(224,165,92,.12),0 2px 8px rgba(0,0,0,.5); }
+          .ba-pin[aria-pressed="true"] { background:#e0a55c; box-shadow:0 0 0 6px rgba(224,165,92,.34),0 2px 8px rgba(0,0,0,.5); }
+          /* hovering a pin previews its state at half strength, without committing */
+          .ba-cell.ba-previewing .ba-dim { opacity:.6; }
+          .ba-cell.ba-previewing .ba-legend.on li:not(.hl) { opacity:.6; }
           .ba-legend { list-style:none; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto;
                   grid-auto-flow:column; gap:11px 22px; margin:0; padding:0; width:596px; }
           .ba-legend li { display:flex; gap:9px; font-family:'Syne',sans-serif; font-size:13px; line-height:1.45; color:#c7cad0;
@@ -1637,29 +1635,31 @@
                 var legend=document.getElementById('baLegend');
                 var items=[].slice.call(legend.querySelectorAll('li'));
                 var dimmable=[].slice.call(card.querySelectorAll('.ba-tgt, .ba-title, .ba-sum, .ba-note'));
-                var active=null;
-                function clear(){
-                  dimmable.forEach(function(el){ el.classList.remove('ba-dim'); });
-                  pins.forEach(function(p){ p.setAttribute('aria-pressed','false'); });
-                  legend.classList.remove('on');
-                  items.forEach(function(it){ it.classList.remove('hl'); });
-                  active=null;
+                var cell=card.closest('.ba-cell');
+                // one pin is always selected — the figure opens on 1, so it shows what a
+                // click does before anyone clicks. Hovering another pin previews it.
+                var committed='1', touched=false;
+                function apply(n, preview){
+                  cell.classList.toggle('ba-previewing', !!preview);
+                  var tgt=card.querySelector('.ba-tgt[data-tgt="'+n+'"]');
+                  dimmable.forEach(function(el){ el.classList.toggle('ba-dim', el!==tgt); });
+                  pins.forEach(function(p){ p.setAttribute('aria-pressed', p.dataset.n===n ? 'true' : 'false'); });
+                  legend.classList.add('on');
+                  items.forEach(function(it){ it.classList.toggle('hl', it.dataset.n===n); });
                 }
                 pins.forEach(function(pin){
                   pin.addEventListener('click',function(e){
                     e.stopPropagation();
-                    var n=pin.dataset.n;
-                    if(active===n){ clear(); return; }
-                    card.closest('.ba-cell').classList.add('ba-touched');
-                    clear(); active=n; pin.setAttribute('aria-pressed','true');
-                    var tgt=card.querySelector('.ba-tgt[data-tgt="'+n+'"]');
-                    dimmable.forEach(function(el){ if(el!==tgt) el.classList.add('ba-dim'); });
-                    legend.classList.add('on');
-                    items.forEach(function(it){ it.classList.toggle('hl', it.dataset.n===n); });
+                    touched=true; committed=pin.dataset.n; apply(committed,false);
                   });
+                  pin.addEventListener('mouseenter',function(){
+                    if(pin.dataset.n!==committed) apply(pin.dataset.n,true);
+                  });
+                  pin.addEventListener('mouseleave',function(){ apply(committed,!touched); });
+                  pin.addEventListener('focus',function(){ touched=true; committed=pin.dataset.n; apply(committed,false); });
                 });
-                document.addEventListener('click',clear);
-                document.addEventListener('keydown',function(e){ if(e.key==='Escape') clear(); });
+                // open softly: the mechanism is legible but the After card still reads whole
+                apply(committed,true);
               })();
             </script>
         </div>
