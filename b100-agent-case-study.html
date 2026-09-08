@@ -1191,6 +1191,18 @@
           /* hovering a pin previews its state at half strength, without committing */
           .ba-cell.ba-previewing .ba-dim { opacity:.6; }
           .ba-cell.ba-previewing .ba-legend.on li:not(.hl) { opacity:.6; }
+          /* a ring pulses out of pin 1 to mark the starting point — on at first load and
+             again once the reader has been through all four. Uses its own ::after so it
+             never fights the active pin's halo. */
+          .ba-pin::after { content:''; position:absolute; inset:-4px; border-radius:50%;
+                  border:2px solid rgba(224,165,92,.6); opacity:0; pointer-events:none; }
+          .ba-cell.ba-cue .ba-pin[data-n="1"]::after { animation:ba-ring 1.9s ease-out infinite; }
+          @keyframes ba-ring {
+            0%   { transform:scale(.8);  opacity:.8; }
+            70%  { transform:scale(1.9); opacity:0; }
+            100% { transform:scale(1.9); opacity:0; }
+          }
+          @media (prefers-reduced-motion:reduce){ .ba-pin::after { animation:none !important; } }
           .ba-legend { list-style:none; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto;
                   grid-auto-flow:column; gap:11px 22px; margin:0; padding:0; width:596px; }
           .ba-legend li { display:flex; gap:9px; font-family:'Syne',sans-serif; font-size:13px; line-height:1.45; color:#c7cad0;
@@ -1638,7 +1650,8 @@
                 var cell=card.closest('.ba-cell');
                 // one pin is always selected — the figure opens on 1, so it shows what a
                 // click does before anyone clicks. Hovering another pin previews it.
-                var committed='1', touched=false;
+                var committed='1', touched=false, seen={}, seenCount=0;
+                function cue(on){ cell.classList.toggle('ba-cue', on); }
                 function apply(n, preview){
                   cell.classList.toggle('ba-previewing', !!preview);
                   var tgt=card.querySelector('.ba-tgt[data-tgt="'+n+'"]');
@@ -1651,6 +1664,9 @@
                   pin.addEventListener('click',function(e){
                     e.stopPropagation();
                     touched=true; committed=pin.dataset.n; apply(committed,false);
+                    if(!seen[committed]){ seen[committed]=1; seenCount++; }
+                    if(seenCount===pins.length){ seen={}; seenCount=0; cue(true); }  // full round: point back to 1
+                    else { cue(false); }
                   });
                   pin.addEventListener('mouseenter',function(){
                     if(pin.dataset.n!==committed) apply(pin.dataset.n,true);
@@ -1659,7 +1675,7 @@
                   pin.addEventListener('focus',function(){ touched=true; committed=pin.dataset.n; apply(committed,false); });
                 });
                 // open softly: the mechanism is legible but the After card still reads whole
-                apply(committed,true);
+                apply(committed,true); cue(true);
               })();
             </script>
         </div>
