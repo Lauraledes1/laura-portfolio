@@ -1112,7 +1112,7 @@
 
           /* ---- Action card: before / after ---- */
           .ba-col { display:flex; flex-direction:column; }
-          .ba-eyebrow { font-family:'DM Mono',monospace; font-size:10px; font-weight:500; letter-spacing:.18em;
+          .ba-eyebrow { font-family:'Syne',sans-serif; font-size:11px; font-weight:600; letter-spacing:.14em;
                   text-transform:uppercase; color:#e0a55c; margin-bottom:13px; padding-left:2px; }
           .ba-card { width:288px; flex-shrink:0; border:1px solid #E9E5DD; border-radius:16px; overflow:hidden; background:#fff; color:#1A2330;
                   box-shadow:0 28px 56px -22px rgba(0,0,0,.55),0 8px 20px rgba(0,0,0,.22);
@@ -1179,8 +1179,8 @@
                   letter-spacing:normal; text-transform:none; color:#1A2330; }
           .ba-fit { width:620px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:18px;
                   transform:scale(.93); transform-origin:center center; }
-          .ba-hint { width:596px; margin:0 0 14px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em;
-                  text-transform:uppercase; color:#8b909a; }
+          .ba-hint { width:596px; margin:0 0 14px; font-family:'Syne',sans-serif; font-size:12px; font-weight:400;
+                  letter-spacing:normal; text-transform:none; color:#c7cad0; opacity:.5; }
           .ba-cards { display:flex; align-items:flex-start; justify-content:center; gap:20px; }
           .ba-cardwrap { position:relative; }
           .ba-pin { position:absolute; right:-11px; width:22px; height:22px; border-radius:50%; background:#e0a55c; color:#231708;
@@ -1188,6 +1188,13 @@
                   border:0; cursor:pointer; padding:0; z-index:5; box-shadow:0 0 0 4px rgba(224,165,92,.16),0 2px 8px rgba(0,0,0,.5); transition:transform .12s ease; }
           .ba-pin:hover { transform:scale(1.1); }
           .ba-pin[aria-pressed="true"] { box-shadow:0 0 0 5px rgba(224,165,92,.3),0 2px 8px rgba(0,0,0,.5); }
+          /* pin 1 pulses until the reader clicks something, so the figure reads as interactive */
+          @keyframes ba-pulse {
+            0%,100% { box-shadow:0 0 0 4px rgba(224,165,92,.16), 0 2px 8px rgba(0,0,0,.5); }
+            50%     { box-shadow:0 0 0 10px rgba(224,165,92,.32), 0 2px 8px rgba(0,0,0,.5); }
+          }
+          .ba-cell:not(.ba-touched) .ba-pin[data-n="1"] { animation:ba-pulse 1.9s ease-in-out infinite; }
+          @media (prefers-reduced-motion:reduce){ .ba-pin { animation:none !important; } }
           .ba-legend { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:11px 22px; margin:0; padding:0; width:596px; }
           .ba-legend li { display:flex; gap:9px; font-family:'Syne',sans-serif; font-size:13px; line-height:1.45; color:#c7cad0;
                   transition:opacity .2s ease, color .2s ease; }
@@ -1645,6 +1652,7 @@
                     e.stopPropagation();
                     var n=pin.dataset.n;
                     if(active===n){ clear(); return; }
+                    card.closest('.ba-cell').classList.add('ba-touched');
                     clear(); active=n; pin.setAttribute('aria-pressed','true');
                     var tgt=card.querySelector('.ba-tgt[data-tgt="'+n+'"]');
                     dimmable.forEach(function(el){ if(el!==tgt) el.classList.add('ba-dim'); });
