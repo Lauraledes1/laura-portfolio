@@ -888,7 +888,16 @@
           .m-chip.err { background:var(--m-red-bg); color:var(--m-red); } .m-chip.err::before { background:var(--m-red-dot); }
           .m-chip.pend { background:#ECEAE3; color:var(--m-ink2); } .m-chip.pend::before { background:var(--m-ink3); }
           .m-row.flag .m-chip.warn { background:var(--m-red-dot); color:#fff; } .m-row.flag .m-chip.warn::before { background:#fff; }
-          .m-flag-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
+          /* the Anomaly tag is the control that opens the reason — a tap, not a hover,
+             and separate from the row's own tap, which opens the copilot */
+          .m-anom { position:relative; margin-top:7px; height:21px; padding:0 7px 0 9px; border:0;
+                  font-family:inherit; cursor:pointer; }
+          .m-anom::before { content:none; }
+          .m-anom::after { content:''; position:absolute; left:-9px; right:-9px; top:-11px; bottom:-11px; }
+          .m-anom .m-anom-cv { width:10px; height:10px; margin-left:1px; transition:transform .18s ease; }
+          .m-anom[aria-expanded="true"] .m-anom-cv { transform:rotate(90deg); }
+          .m-flag-why { display:none; margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
+          .m-anom[aria-expanded="true"] + .m-flag-why { display:block; }
           /* conversation */
           .m-conv { flex:1; overflow-y:auto; scrollbar-width:none; padding:18px 16px 12px; display:flex; flex-direction:column; gap:18px; }
           .m-conv::-webkit-scrollbar { display:none; }
@@ -1347,8 +1356,9 @@
                         </div>
                         <div class="m-body"><div class="m-list">
                           <div class="m-row flag" role="button" tabindex="0" aria-label="Open Brightwater Logistics in the copilot">
-                            <div class="m-rt"><span class="m-buyer">Brightwater Logistics</span><span class="m-chip warn">Anomaly</span></div>
+                            <div class="m-rt"><span class="m-buyer">Brightwater Logistics</span></div>
                             <div class="m-row-b"><span class="m-sub">Tamsett Co. · due today</span><span class="m-money">$10,000</span></div>
+                            <button type="button" class="m-chip warn m-anom" aria-expanded="false" aria-label="Why this was flagged">Anomaly<svg class="m-anom-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
                             <div class="m-flag-why">$10,000 vs ~$3,100 typical · flagged by Gen 3</div>
                           </div>
                           <div class="m-row">
@@ -1824,7 +1834,7 @@
                             <svg class="pat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
                             <span class="pat-num">01</span><span class="pat-label">Confidence signal</span>
                         </div>
-                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">The signal never travels alone; it arrives with its reason. At L1 the row states why it was flagged — <em>$10,000 vs ~$3,100 typical · flagged by Gen 3</em>. At L2 confidence sits inline, with the reasoning one tap away. On a phone there is no hover, and the tap already opens the copilot, so the reason has to be visible without being asked for.</p></div></div>
+                        <div class="pat-body"><div class="pat-body-inner"><p class="pat-desc">The signal never travels alone; it arrives with its reason. At L1 the Anomaly tag is the control — tapping it opens why the row was flagged: <em>$10,000 vs ~$3,100 typical · flagged by Gen 3</em>. At L2 confidence sits inline, with the reasoning one tap away. A tap, never a hover: there is no hover on a phone, and the row's own tap is already spoken for — it opens the copilot.</p></div></div>
                     </div>
                     <div class="pat-item" onclick="var w=this.classList.contains('open');this.parentElement.querySelectorAll('.pat-item').forEach(function(e){e.classList.remove('open')});if(!w)this.classList.add('open')">
                         <div class="pat-head">
@@ -1910,6 +1920,7 @@
             screens.forEach(function(s,k){ s.classList.toggle('on', k===i); });
             dots.forEach(function(d,k){ d.classList.toggle('on', k===i); });
             demo.querySelectorAll('.m-src-item.open, .m-conf.open').forEach(function(x){ x.classList.remove('open'); });
+            demo.querySelectorAll('.m-anom').forEach(function(x){ x.setAttribute('aria-expanded','false'); });
             demo.querySelectorAll('.m-disc-wrap').forEach(function(x){ x.classList.toggle('open', x.dataset.default === 'open'); });
             var C = CAPS[i];
             cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+':</b> '+C.c;
@@ -1963,6 +1974,14 @@
               e.stopPropagation();
               paused = true; demo.classList.add('paused'); stop();
               go(1);
+            }
+            var anom = flagRow.querySelector('.m-anom');
+            if(anom){
+              anom.addEventListener('click', function(e){
+                e.stopPropagation();  // the row's own tap stays "open the copilot"
+                paused = true; demo.classList.add('paused'); stop();
+                anom.setAttribute('aria-expanded', anom.getAttribute('aria-expanded')==='true' ? 'false' : 'true');
+              });
             }
             flagRow.addEventListener('click', openCopilot);
             flagRow.addEventListener('keydown', function(e){
