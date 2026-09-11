@@ -1095,9 +1095,9 @@
           .m-inputbar .m-send { width:30px; height:30px; border-radius:50%; background:var(--m-accent); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
           .m-inputbar .m-send svg { width:12px; height:12px; color:#fff; }
           /* controls */
-          .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
-          .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
-                  color:var(--b-faint); font-family:var(--b-mono); font-size:9.5px; cursor:pointer; transition:border-color .15s,color .15s; }
+          .flow-rail { display:flex; gap:8px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+          .flow-rail button { min-width:44px; height:40px; padding:0 4px; border-radius:8px; border:1px solid var(--b-line); background:transparent;
+                  color:var(--b-faint); font-family:var(--b-mono); font-size:13px; cursor:pointer; transition:border-color .15s,color .15s; }
           .flow-rail button:hover { color:var(--b-dim); }
           .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
           .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:14.5px; line-height:1.55; color:var(--b-dim); }
@@ -1341,8 +1341,6 @@
           /* Once an image pair stacks, its photo shows whole at its own ratio instead of a square crop */
           @media (max-width:880px){ .b100-imgcell.is-natural { aspect-ratio:auto; } }
           @media (max-width:640px){
-            .flow-rail { gap:8px; }
-            .flow-rail button { min-width:44px; height:40px; border-radius:8px; font-size:13px; }
             .flow-hint { display:none; }
           }
           /* Back to top: out of the way while reading down; offered when scrolling back up or at the end */
