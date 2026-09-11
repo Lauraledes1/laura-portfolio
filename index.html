@@ -748,6 +748,12 @@
         .light .message-btn { background: transparent !important; }
         .light .message-btn:hover { background: rgba(0,0,0,0.05) !important; }
         .light .message-btn:active { background: rgba(0,0,0,0.10) !important; }
+        /* Phones: the stacked 01-03 tiles filled the first screen and read like buttons.
+           Show the case studies first and move the tiles after About (below Mentor at ADPList). */
+        @media (max-width: 700px) {
+            .home-tiles { order: 1; }
+            .min-h-screen > footer { order: 2; }
+        }
     </style>
 </head>
 <body class="bg-theme-primary">
@@ -874,7 +880,7 @@
       })();
     </script>
         <!-- Hero Section -->
-        <section class="bg-theme-inverse flex flex-wrap gap-[1px] w-full">
+        <section class="home-tiles bg-theme-inverse flex flex-wrap gap-[1px] w-full">
             <div class="tile bg-theme-primary flex flex-col justify-between basis-0 grow min-w-[350px] h-[400px] px-8 py-6 animate-slide-up tile-1">
                 <div class="font-inter font-semibold text-[64px] leading-[1.4] text-theme-heading">01</div>
                 <div class="flex flex-col gap-2">
