@@ -1152,11 +1152,12 @@
           .ba-col { display:flex; flex-direction:column; }
           .ba-eyebrow { font-family:'Syne',sans-serif; font-size:11px; font-weight:600; letter-spacing:.14em;
                   text-transform:uppercase; color:#e0a55c; margin-bottom:13px; padding-left:2px; }
-          .ba-card { width:288px; flex-shrink:0; border:1px solid #E9E5DD; border-radius:16px; overflow:hidden; background:#fff; color:#1A2330;
+          .ba-card { width:288px; flex-shrink:0; border-radius:16px; overflow:hidden; background:#fff; color:#1A2330;
                   box-shadow:0 28px 56px -22px rgba(0,0,0,.55),0 8px 20px rgba(0,0,0,.22);
                   --ink:#1A2330; --ink2:#3F4855; --ink3:#565E6B; --line:#E9E5DD; --line2:#F1EEE7; --surface:#fff;
                   --accent:#324e79; --red:#AC382D; --red-dot:#CE5142; --green-dot:#0E6E43; }
-          .ba-col.before .ba-card { opacity:.96; }
+          /* dark behind the rounded top corners, so the white card body can't fringe around the dark header */
+          .ba-col.before .ba-card { opacity:.96; background:linear-gradient(var(--ink) 0 20px, #fff 20px); }
           .ba-body { padding:14px 15px 15px; }
           /* the Before card breathes a little more so its bottom lines up with the legend */
           .ba-col.before .ba-body { padding:17px 15px 18px; }
