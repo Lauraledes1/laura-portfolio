@@ -767,7 +767,7 @@
         <!-- ============ SCOPED STYLES FOR B100 CASE ============ -->
         <style>
           .b100 { --l1:#8A8F98; --l2:#2AA5E0; --l3:#D89486;
-                  --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#666;
+                  --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#8a8a8a;
                   --b-mono:'DM Mono',ui-monospace,monospace; }
           .b100-figure { width:100%; border:1px solid var(--b-line); border-radius:12px;
                   background:#050505; overflow:hidden; position:relative; }
@@ -795,16 +795,16 @@
           .ladder-panel .lp-head { font-family:var(--b-mono); font-size:14px; font-weight:500; letter-spacing:.06em; color:#fff;
                   display:flex; align-items:center; gap:9px; margin-bottom:11px; }
           .ladder-panel .lp-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-          .ladder-panel .lp-head::after { content:'›'; margin-left:auto; font-size:15px; color:#5a5a5a;
+          .ladder-panel .lp-head::after { content:'›'; margin-left:auto; font-size:15px; color:#8a8a8a;
                   transition:transform .2s ease; }
           .ladder-panel[open] .lp-head::after { transform:rotate(90deg); }
-          .ladder-panel .lp-sum { font-family:'Syne',sans-serif; font-size:17px; line-height:1.55; color:#d5d5d5; display:block; }
+          .ladder-panel .lp-sum { font-family:'Syne',sans-serif; font-size:18px; line-height:1.55; color:#c8c8c8; display:block; }
           .ladder-panel .lp-detail { border-top:1px solid #262626; padding:16px 18px 18px; }
-          .ladder-panel dl { margin:0; font-family:var(--b-mono); font-size:13.5px; line-height:1.5; }
-          .ladder-panel dt { color:#5a5a5a; float:left; clear:left; width:124px; }
-          .ladder-panel dd { color:#8a8a8a; margin:0 0 5px 124px; }
-          .ladder-panel .lp-detail p { font-family:'Syne',sans-serif; font-size:16px; line-height:1.6;
-                  color:#8f8f8f; margin:14px 0 0; }
+          .ladder-panel dl { margin:0; font-family:var(--b-mono); font-size:14.5px; line-height:1.5; }
+          .ladder-panel dt { color:#8a8a8a; float:left; clear:left; width:124px; }
+          .ladder-panel dd { color:#999; margin:0 0 5px 124px; }
+          .ladder-panel .lp-detail p { font-family:'Syne',sans-serif; font-size:17px; line-height:1.6;
+                  color:#999; margin:14px 0 0; }
 
           /* systems row */
           .sys-row { display:grid; grid-template-columns:1fr 40px 1fr 40px 1fr; align-items:stretch;
@@ -1100,7 +1100,7 @@
                   color:var(--b-faint); font-family:var(--b-mono); font-size:9.5px; cursor:pointer; transition:border-color .15s,color .15s; }
           .flow-rail button:hover { color:var(--b-dim); }
           .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
-          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.55; color:var(--b-dim); }
+          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:14.5px; line-height:1.55; color:var(--b-dim); }
           .flow-cap-tag { display:inline-block; font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
                   padding:2px 6px; border-radius:4px; margin-right:7px; white-space:nowrap; vertical-align:1px; }
           .flow-cap-tag.l1 { color:var(--l1); border:1px solid var(--l1); }
@@ -1118,9 +1118,9 @@
           .b100-row { display:flex; flex-direction:row; gap:1.5rem; }
           @media (max-width:900px){ .b100-row{ flex-direction:column !important; gap:.5rem; } }
           .b100-row .rk { flex:1 1 0; }
-          .b100-row .rk p:first-child { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; line-height:1.6; color:var(--typography-heading); }
+          .b100-row .rk p:first-child { font-family:'Syne',sans-serif; font-weight:700; font-size:18px; line-height:1.6; color:var(--typography-heading); }
           .b100-row .rv { flex:1 1 0; }
-          .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:17px; line-height:1.6; color:var(--typography-paragraph); }
+          .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:18px; line-height:1.6; color:#c8c8c8; }
 
           /* work-in-progress section — blurred content behind a status card */
           .wip-section { position:relative; }
@@ -1130,7 +1130,7 @@
                   -webkit-backdrop-filter:blur(2px); border-radius:14px; padding:30px 36px; max-width:440px; text-align:center; }
           .wip-card .wip-title { font-family:'Syne',sans-serif; font-weight:600; font-size:22px; line-height:1.4; color:#fff; margin:0 0 9px; }
           .wip-card .wip-title .wip-status { color:var(--l3); }
-          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:15px; line-height:1.6; color:var(--b-dim); margin:0; }
+          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:16px; line-height:1.6; color:var(--b-dim); margin:0; }
           @media (max-width:900px){ .wip-card { padding:24px 22px; } .wip-card .wip-title { font-size:19px; } }
 
           /* patterns — expandable list (matches the Process section on the agentic case) */
@@ -1138,13 +1138,13 @@
           .pat-item:last-child { border-bottom:1px solid rgba(255,255,255,.12); }
           .pat-head { display:flex; align-items:center; gap:14px; padding:22px 0; }
           .pat-chevron { width:14px; height:14px; flex-shrink:0; color:#6a6a6a; transition:transform .3s ease; }
-          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#5c5c5c; flex-shrink:0; }
+          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#8a8a8a; flex-shrink:0; }
           .pat-label { font-family:'Syne',sans-serif; font-size:19px; font-weight:600; letter-spacing:-.2px; color:#fff; }
           .pat-item:hover .pat-label { color:#c8c8c8; }
           .pat-body { overflow:hidden; max-height:0; opacity:0; transition:max-height .4s ease, opacity .3s ease .05s; }
           .pat-body-inner { padding:0 0 24px 62px; }
-          .pat-desc { font-family:'Syne',sans-serif; font-size:15px; line-height:1.7; color:#9a9a9a; max-width:620px; margin:0; }
-          .pat-desc em { font-style:normal; color:#e0e0e0; }
+          .pat-desc { font-family:'Syne',sans-serif; font-size:16px; line-height:1.7; color:#999; max-width:620px; margin:0; }
+          .pat-desc em { font-style:normal; color:#fff; }
           .pat-item.open .pat-body { max-height:480px; opacity:1; }
           .pat-item.open .pat-chevron { transform:rotate(90deg); }
           .pat-item.open .pat-label { color:#fff; }
@@ -1334,8 +1334,10 @@
           }
           /* Phone menu stays pinned instead of scrolling half under the status bar */
           @media (max-width:700px){ .mobile-menu { position:sticky; top:0; z-index:95; } }
-          /* Stacked rows lose the side-by-side layout, so colour carries the title/text hierarchy */
-          @media (max-width:900px){ .b100-row .rv p { color:var(--b-dim); } }
+          /* Type colour system, all breakpoints: titles #fff, body #c8c8c8, secondary #999, labels #8a8a8a.
+             Scoped to the case itself; the nav, More from me and footer are shared portfolio chrome. */
+          .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\] { font-size:18px; }
+          .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\].font-normal { color:#c8c8c8; opacity:1; }
           /* Once the image pair stacks, the landscape team photo shows whole instead of a square crop */
           @media (max-width:880px){ .b100-imgcell.is-landscape { aspect-ratio:3/2; } }
           @media (max-width:640px){
@@ -1361,7 +1363,7 @@
           @media (max-width:700px){
             h1.text-\[36px\] { font-size:32px !important; }
             .sys-idx, .sys-role, .sys-cross span { font-size:12px; }
-            .sys-foot, .flow-cap, .ladder-panel dl { font-size:15px; }
+            .sys-foot, .flow-cap, .ladder-panel dl { font-size:16px; }
             .flow-cap-tag { font-size:12px; }
           }
 
