@@ -754,6 +754,13 @@
             .home-tiles { order: 1; }
             .min-h-screen > footer { order: 2; }
         }
+        /* Phones get still frames instead of the card videos (iOS paints nothing for an idle video
+           without a poster, and one of them is 17 MB). Same condition as the <source media>, so they never download there. */
+        .m-still { display: none; }
+        @media (max-width: 640px), (pointer: coarse) and (max-height: 500px) {
+            video.has-still { display: none; }
+            picture.m-still { display: contents; }
+        }
     </style>
 </head>
 <body class="bg-theme-primary">
@@ -927,8 +934,8 @@
                     <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative" style="background:#000;">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/b100-agent-case-study/hero-poster.jpg')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
-                                    <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
+                                    <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
@@ -952,10 +959,14 @@
                     <a href="agentic-system-case-study.html" class="block">
                     <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/ai-solution-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
+                                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/agentic-system-case-study/media-6-still.jpg')"></div>
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/agentic-system-case-study/media-6-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                             <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Agentic Systems • Workflow Design</div>
@@ -979,9 +990,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/nestbank-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/nestbank-case-study/media-14-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Fintech • 0-1</div>
@@ -1005,9 +1020,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medigo-case-study/media-20.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/medigo-case-study/media-19-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                             <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Healthtech • AI Driven</div>
@@ -1381,6 +1400,12 @@
 
         document.addEventListener('visibilitychange', () => {
           if (document.hidden) videos.forEach(pauseVideo);
+        });
+
+        // A card video whose source was skipped on a phone-sized load needs a reload if the window later grows.
+        window.matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').addEventListener('change', (e) => {
+          if (e.matches) return;
+          videos.forEach((video) => { if (!video.currentSrc) video.load(); });
         });
       })();
     </script>
