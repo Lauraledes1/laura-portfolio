@@ -774,9 +774,8 @@
             /* agentic system cycle: the original radial diagram on its dotted canvas, one step at a time underneath */
             .agmcy-canvas { border-radius: 12px; padding: 14px 0 16px; background-color: #000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px; }
             .agmcy-canvas svg { display: block; width: 100%; height: auto; }
-            /* tap hint above the diagram; fades after the first tap but keeps its space so the diagram doesn't jump */
-            .agmcy-hint { margin: 0 0 14px; text-align: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #8a8a8a; transition: opacity .4s ease; }
-            .agmcy-hint.is-done { opacity: 0; }
+            /* tap hint above the diagram, always visible */
+            .agmcy-hint { margin: 0 0 14px; text-align: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #8a8a8a; }
             .agmcy-node { cursor: pointer; outline: none; }
             .agmcy-node:focus-visible .agmcy-dot { stroke-width: 3.5; }
             .agmcy-caption { margin-top: 36px; padding: 0 20px; text-align: center; font-family: 'DM Mono', monospace; }
@@ -3514,7 +3513,6 @@
         var P = [['Setup','#E8F0FE','#1A56B0',['PM Agent → PRD.md']],['Generation','#EDE9FE','#5B21B6',['DA generates UXDD + design-spec','EA generates TDD + openspec']],['Review','#FFF4E0','#B8860B',['Designer/Engineer review &amp; PR','QA Agent scans assumptions','Orchestrator notifies PM Agent']],['Validation','#F3F4F6','#374151',['PM Agent validates coherence','QA Agent generates evals.yaml','Designer/Engineer approve evals']],['Prototype Gen','#E1F5EE','#0F6E56',['DA generates HTML prototype','Designer reviews &amp; approves','EA implements React code','QA runs evals → eval-report']],['Closure','#F5E6F0','#9E5A8A',['Orchestrator archives findings','PM delivers V0.1','Cycle restarts']]];
         var nodes = svg.querySelectorAll('.agmcy-node');
         var title = document.querySelector('.agmcy-title'), desc = document.querySelector('.agmcy-desc'), prog = document.querySelector('.agmcy-progress');
-        var hint = document.querySelector('.agmcy-hint');
         var a = 0, s = 0, pausedAt = 0, visible = false;
         function render() {
           nodes.forEach(function (g, i) {
@@ -3528,7 +3526,7 @@
           desc.innerHTML = p[3][s];
           prog.innerHTML = p[3].map(function (_, i) { return '<span' + (i === s ? ' class="on"' : '') + '></span>'; }).join('');
         }
-        function pick(i) { a = i; s = 0; pausedAt = Date.now(); if (hint) hint.classList.add('is-done'); render(); }
+        function pick(i) { a = i; s = 0; pausedAt = Date.now(); render(); }
         nodes.forEach(function (g, i) {
           g.addEventListener('click', function () { pick(i); });
           g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i); } });
