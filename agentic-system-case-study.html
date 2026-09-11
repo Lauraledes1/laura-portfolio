@@ -746,6 +746,62 @@
         .proc-h-item .proc-h-label { font-size: 18px; }
         .proc-h-item .proc-h-desc { font-size: 16px; }
         .proc-h-item .proc-h-num { color: #8a8a8a; }
+
+        /* ===== Stage 2: phone versions of the four diagrams (desktop keeps the originals) ===== */
+        .agm { display: none; }
+        @media (max-width: 700px) {
+            .agm { display: block; font-family: 'Syne', sans-serif; }
+            .agd-only { display: none !important; }
+            .agm-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #8a8a8a; margin: 0 0 12px; }
+            .agm-hint { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a8a8a; margin: 0 0 12px; }
+            .agm strong { color: #fff; font-weight: 600; }
+            /* bento: square photo, then the new-model diagram */
+            .ag-bento { height: auto !important; }
+            .ag-bento > .ag-photo-5 { flex: none !important; aspect-ratio: 1 / 1; }
+            .ag-bento > div:last-child { flex: none !important; }
+            .ag-bento > div:last-child > div { height: auto !important; flex-direction: column; align-items: stretch !important; }
+            /* old model */
+            .agm-old { margin-top: 4px; }
+            .agm-role { border: 1px solid var(--c); border-radius: 10px; padding: 14px 16px; }
+            .agm-role-name { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 10px; }
+            .agm-tasks { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+            .agm-tasks li { font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--c); }
+            .agm-down { text-align: center; color: #8a8a8a; font-size: 18px; line-height: 1; padding: 8px 0; }
+            .agm-zone { margin-top: 16px; border: 1px solid #666; border-radius: 10px; padding: 12px 16px; text-align: center; font-family: 'DM Mono', monospace; font-size: 14px; color: #e5e5e5; }
+            .agm-flow { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 8px; }
+            .agm-flow li { font-family: 'DM Mono', monospace; font-size: 13px; color: #c8c8c8; }
+            .agm-flow .sep { color: #666; }
+            /* new model */
+            .agm-new { width: 100%; padding-top: 16px; }
+            .agm-orch { border: 1px dashed rgba(255,255,255,.5); border-radius: 12px; padding: 14px; }
+            .agm-orch .agm-eyebrow { text-align: center; }
+            .agm-agents { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+            .agm-agent { background: #fff; border-radius: 10px; padding: 12px; }
+            .agm-agent-name { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: #1a1a1a; }
+            .agm-agent-files { font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.45; color: #6b6b6b; margin-top: 4px; }
+            /* accordions: cycle phases, layers, layer components */
+            .agm-list { display: flex; flex-direction: column; gap: 10px; }
+            .agm-card { border: 1px solid rgba(255,255,255,.15); border-radius: 12px; background: #0a0a0a; overflow: hidden; }
+            .agm-toggle { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #fff; text-align: left; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 500; }
+            .agm-chev { margin-left: auto; flex: none; width: 18px; height: 18px; color: #8a8a8a; transition: transform .2s ease; }
+            .agm-toggle[aria-expanded="true"] > .agm-chev { transform: rotate(90deg); }
+            .agm-num { flex: none; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; background: var(--bg); color: var(--fg); }
+            .agm-cycle .agm-panel { padding: 0 16px 16px 56px; }
+            .agm-steps { list-style: decimal; padding-left: 18px; color: #c8c8c8; font-size: 16px; line-height: 1.6; }
+            .agm-steps li + li { margin-top: 4px; }
+            .agm-layer-num { flex: none; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .06em; padding: 4px 8px; border-radius: 6px; background: var(--bg); color: var(--fg); }
+            .agm-layer > .agm-panel { padding: 0 16px 8px; }
+            .agm-sub { border-top: 1px solid rgba(255,255,255,.1); }
+            .agm-sub > .agm-toggle { min-height: 52px; padding: 10px 0; font-size: 16px; }
+            .agm-tag { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px; background: var(--bg); color: var(--fg); }
+            .agm-sub > .agm-panel { padding: 0 0 14px; }
+            .agm-text { color: #c8c8c8; font-size: 16px; line-height: 1.6; }
+            .agm-dl { display: grid; gap: 12px; }
+            .agm-dl dt { color: #fff; font-size: 15px; font-weight: 600; }
+            .agm-dl dd { margin: 2px 0 0; color: #c8c8c8; font-size: 16px; line-height: 1.55; }
+            .agm-dl dd + dd { margin-top: 6px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .agm-chev { transition: none; } }
     </style>
 </head>
 <body class="bg-theme-primary">
@@ -900,7 +956,8 @@
                 </div>
                 <!-- Image -->
                 <div <div="" class="basis-0 grow h-auto">
-                    <img src="assets/agentic-system-case-study/media-1.jpg" alt="Collaboration model — Sequential" class="w-full h-auto object-cover">
+                    <img src="assets/agentic-system-case-study/media-1.jpg" alt="Collaboration model — Sequential" class="w-full h-auto object-cover agd-only">
+                    <div class="agm agm-old"><ol class="agm-roles"><li class="agm-role" style="--c:#9ee0c0"><div class="agm-role-name">Product Manager</div><ul class="agm-tasks"><li>Product Exploration</li><li>Planning</li><li>Roadmap drafting</li><li>Brief generation (PRD)</li><li>Stakeholder docs</li></ul></li><li class="agm-down" aria-hidden="true">↓</li><li class="agm-role" style="--c:#c4b5fd"><div class="agm-role-name">Product Designer</div><ul class="agm-tasks"><li>Research</li><li>Quick wireframes</li><li>Component specs</li><li>State docs</li><li>UX analysis</li><li>Flow Charts</li></ul></li><li class="agm-down" aria-hidden="true">↓</li><li class="agm-role" style="--c:#bfdbfe"><div class="agm-role-name">Developer</div><ul class="agm-tasks"><li>Scaffolding</li><li>Development</li><li>Code review</li><li>Test generation</li><li>Documentation</li></ul></li></ol><div class="agm-zone">Shared Decision Zone</div><ol class="agm-flow"><li>Problem</li><li class="sep" aria-hidden="true">→</li><li>Criteria</li><li class="sep" aria-hidden="true">→</li><li>Priority</li><li class="sep" aria-hidden="true">→</li><li>Design</li><li class="sep" aria-hidden="true">→</li><li>Iteration</li><li class="sep" aria-hidden="true">⇄</li><li>Handoff</li></ol></div>
                     <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph mt-6" style="font-style: italic; text-align: right; margin-right: 7%;">Old model</p>
                 </div>
             </div>
@@ -908,13 +965,13 @@
 
         <!-- Bento Grid Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full flex flex-row gap-8" style="height: 740px;">
+            <div class="w-full flex flex-row gap-8 ag-bento" style="height: 740px;">
                 <!-- Left: Photo -->
                 <div class="ag-photo-5 basis-0 grow shrink-0 min-h-px min-w-px bg-cover bg-center bg-no-repeat" style="background-image: url('assets/agentic-system-case-study/media-5.jpg'); overflow: hidden;"></div>
                 <!-- Right: Mockup on colored background -->
                 <div class="basis-0 grow shrink-0 min-h-px min-w-px" style="overflow: hidden;">
 <div style="width:100%; height:100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-  <svg viewBox="118 48 664 664" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; transform: scale(1.17) translateX(2%); transform-origin: center center;">
+  <svg class="agd-only" viewBox="118 48 664 664" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; transform: scale(1.17) translateX(2%); transform-origin: center center;">
     <defs>
       <filter id="card-shadow-bento" x="-40%" y="-40%" width="180%" height="180%">
         <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#4a5568" flood-opacity="0.1"/>
@@ -964,6 +1021,7 @@
       <text x="0" y="22" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#999">evals files</text>
     </g>
   </svg>
+                    <div class="agm agm-new"><div class="agm-orch"><p class="agm-eyebrow">Orchestrator</p><div class="agm-agents"><div class="agm-agent"><div class="agm-agent-name">PM Agent</div><div class="agm-agent-files">PRD.md</div></div><div class="agm-agent"><div class="agm-agent-name">DA</div><div class="agm-agent-files">UXDD.md · design-spec.md</div></div><div class="agm-agent"><div class="agm-agent-name">EA</div><div class="agm-agent-files">TDD.md · open-spec.md</div></div><div class="agm-agent"><div class="agm-agent-name">QA Agent</div><div class="agm-agent-files">assumptions and evals files</div></div></div></div></div>
                     <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph mt-6" style="font-style: italic; text-align: right; margin-right: 7%; white-space: nowrap; position: relative; top: -3%;">New model</p>
 </div>
                 </div>
@@ -1018,8 +1076,9 @@
                     </div>
                 </div>
 
+                <div class="agm agm-cycle"><p class="agm-eyebrow">Agentic system cycle</p><p class="agm-hint">Tap a phase for details</p><ol class="agm-list"><li class="agm-card" style="--bg:#E8F0FE;--fg:#1A56B0"><button type="button" class="agm-toggle" aria-expanded="true" aria-controls="agm-cy-1"><span class="agm-num">1</span>Setup<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-1"><ol class="agm-steps"><li>PM Agent → PRD.md</li></ol></div></li><li class="agm-card" style="--bg:#EDE9FE;--fg:#5B21B6"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-2"><span class="agm-num">2</span>Generation<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-2" hidden><ol class="agm-steps"><li>DA generates UXDD + design-spec</li><li>EA generates TDD + openspec</li></ol></div></li><li class="agm-card" style="--bg:#FFF4E0;--fg:#B8860B"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-3"><span class="agm-num">3</span>Review<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-3" hidden><ol class="agm-steps"><li>Designer/Engineer review &amp; PR</li><li>QA Agent scans assumptions</li><li>Orchestrator notifies PM Agent</li></ol></div></li><li class="agm-card" style="--bg:#F3F4F6;--fg:#374151"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-4"><span class="agm-num">4</span>Validation<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-4" hidden><ol class="agm-steps"><li>PM Agent validates coherence</li><li>QA Agent generates evals.yaml</li><li>Designer/Engineer approve evals</li></ol></div></li><li class="agm-card" style="--bg:#E1F5EE;--fg:#0F6E56"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-5"><span class="agm-num">5</span>Prototype Gen<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-5" hidden><ol class="agm-steps"><li>DA generates HTML prototype</li><li>Designer reviews &amp; approves</li><li>EA implements React code</li><li>QA runs evals → eval-report</li></ol></div></li><li class="agm-card" style="--bg:#F5E6F0;--fg:#9E5A8A"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-6"><span class="agm-num">6</span>Closure<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-6" hidden><ol class="agm-steps"><li>Orchestrator archives findings</li><li>PM delivers V0.1</li><li>Cycle restarts</li></ol></div></li></ol></div>
                 <!-- Agentic Cycle Diagram -->
-                <div class="w-full" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
+                <div class="w-full agd-only" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
                   <style>
                     .cg-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: 'DM Mono', monospace; user-select: none; }
                     .cg-wrap svg { width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; transform: scale(1.1); transform-origin: center center; }
@@ -1230,7 +1289,8 @@
 
         <!-- Video Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="" style="padding-top: 0;">
-                <div class="w-full" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
+                <div class="agm agm-layers"><p class="agm-hint">Tap a layer title</p><div class="agm-list"><div class="agm-card agm-layer" style="--bg:#d1fae5;--fg:#065f46"><button type="button" class="agm-toggle" aria-expanded="true" aria-controls="agm-ly-1"><span class="agm-layer-num">Layer 01</span>Foundations<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1"><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1a"><span class="agm-tag">Agent Architecture</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1a" hidden><p class="agm-text">Multi-agent graph-based · workspace memory</p></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1b"><span class="agm-tag">Intent Patterns</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1b" hidden><p class="agm-text">Context-rich delegation</p></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1c"><span class="agm-tag">Autonomy Spectrum</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1c" hidden><dl class="agm-dl"><div><dt>L2 — Collaborator</dt><dd>PM Agent, Designer Agent, Engineer Agent propose → human approves</dd></div><div><dt>L3 — Delegator</dt><dd>Orchestrator, QA Agent operate within limits, no step-by-step approval</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#f3e8ff;--fg:#6d28d9"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2"><span class="agm-layer-num">Layer 02</span>Trust<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2a"><span class="agm-tag">Trust Layers</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2a" hidden><dl class="agm-dl"><div><dt>1. Competency</dt><dd>Agent's domain expertise</dd></div><div><dt>2. Alignment</dt><dd>Work's transparency</dd></div><div><dt>3. Identity</dt><dd>Human authority</dd></div></dl></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2b"><span class="agm-tag">Mechanisms</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2b" hidden><dl class="agm-dl"><div><dt>1 · Legibility</dt><dd><strong>Assumption Tags:</strong> agent decisions flagged inline for human review or override</dd><dd><strong>Validation Report + Eval Report:</strong> make agent reasoning visible</dd><dd><strong>Orchestrator @mentions:</strong> narrate progress</dd></div><div><dt>2 · Boundaries</dt><dd><strong>Never Zone:</strong> agents never create or merge PRs</dd><dd><strong>Approval Zone:</strong> every output requires human PR review</dd><dd><strong>Autonomous Zone:</strong> agents read/write within their domain</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#dbeafe;--fg:#1e40af"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3"><span class="agm-layer-num">Layer 03</span>Behavior Specs<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3a"><span class="agm-tag">Character</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3a" hidden><dl class="agm-dl"><div><dt>DA</dt><dd>owns design decisions.</dd></div><div><dt>EA</dt><dd>owns technical constraints.</dd></div><div><dt>PM Agent</dt><dd>owns coherence.</dd></div><div><dt>QA Agent</dt><dd>owns validation.</dd></div><div><dt>Orchestrator</dt><dd>owns sequencing.</dd></div></dl></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3b"><span class="agm-tag">Behavior Dims</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3b" hidden><dl class="agm-dl"><div><dt>Ambiguity</dt><dd>Flag gaps with "assumption tags".</dd></div><div><dt>Communication</dt><dd>Name the exact doc and agent.</dd></div><div><dt>Proactivity</dt><dd>Surface gaps before being asked.</dd></div><div><dt>Domain</dt><dd>Stay within the domain.</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#fee2e2;--fg:#b91c1c"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-4"><span class="agm-layer-num">Layer 04</span>Evals<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-4" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-4a"><span class="agm-tag">Agentic Moments</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-4a" hidden><dl class="agm-dl"><div><dt>Intent intake</dt><dd>each agent reads and re-structures its input before acting</dd></div><div><dt>Execution visibility</dt><dd>assumption tags · validation reports · eval reports</dd></div><div><dt>Mid-task steering</dt><dd>validation loops and inline feedback</dd></div><div><dt>Failure handling</dt><dd>explicit recovery path at every step</dd></div></dl></div></div></div></div></div></div>
+                <div class="w-full agd-only" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
                   <style>
                     #sa38-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: 'DM Mono', monospace; user-select: none; }
                     #sa38-wrap svg#main-svg { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%) scale(1.04); overflow: visible; }
@@ -3406,4 +3466,15 @@
     })();
     </script>
   
+    <script>
+      // Phone diagram versions: each toggle opens or closes the panel it controls
+      document.querySelectorAll('.agm .agm-toggle[aria-controls]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var panel = document.getElementById(btn.getAttribute('aria-controls'));
+          var open = btn.getAttribute('aria-expanded') !== 'true';
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          panel.hidden = !open;
+        });
+      });
+    </script>
 </body></html>
