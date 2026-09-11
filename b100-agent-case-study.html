@@ -1336,6 +1336,8 @@
           @media (max-width:700px){ .mobile-menu { position:sticky; top:0; z-index:95; } }
           /* Stacked rows lose the side-by-side layout, so colour carries the title/text hierarchy */
           @media (max-width:900px){ .b100-row .rv p { color:var(--b-dim); } }
+          /* Once the image pair stacks, the landscape team photo shows whole instead of a square crop */
+          @media (max-width:880px){ .b100-imgcell.is-landscape { aspect-ratio:3/2; } }
           @media (max-width:640px){
             .flow-rail { gap:8px; }
             .flow-rail button { min-width:44px; height:40px; border-radius:8px; font-size:13px; }
@@ -1716,7 +1718,7 @@
         <!-- ============ IMAGE PAIR 1 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
-                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(150vw - 51px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell">
+                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-landscape">
                 <div class="b100-imgcell ba-cell">
                   <div class="ba-fit">
                     <div class="ba-cards">
