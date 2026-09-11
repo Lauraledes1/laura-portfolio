@@ -771,10 +771,16 @@
             .agm-toggle { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #fff; text-align: left; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 500; }
             .agm-chev { margin-left: auto; flex: none; width: 18px; height: 18px; color: #8a8a8a; transition: transform .2s ease; }
             .agm-toggle[aria-expanded="true"] > .agm-chev { transform: rotate(90deg); }
-            .agm-num { flex: none; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; background: var(--bg); color: var(--fg); }
-            .agm-cycle .agm-panel { padding: 0 16px 16px 56px; }
-            .agm-steps { list-style: decimal; padding-left: 18px; color: #c8c8c8; font-size: 16px; line-height: 1.6; }
-            .agm-steps li + li { margin-top: 4px; }
+            /* agentic system cycle: the original radial diagram on its dotted canvas, one step at a time underneath */
+            .agmcy-canvas { border-radius: 12px; padding: 14px 0 16px; background-color: #000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px; }
+            .agmcy-canvas svg { display: block; width: 100%; height: auto; }
+            .agmcy-node { cursor: pointer; outline: none; }
+            .agmcy-node:focus-visible .agmcy-dot { stroke-width: 3.5; }
+            .agmcy-line { margin: 36px 0 0; padding: 0 20px; min-height: 40px; line-height: 20px; text-align: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #bbb; }
+            .agmcy-progress { display: flex; justify-content: center; gap: 5px; margin-top: 18px; }
+            .agmcy-progress span { width: 5px; height: 5px; border-radius: 50%; background: #444; }
+            .agmcy-progress span.on { background: #d1d5db; }
+            .agmcy-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
             .agm-layer-num { flex: none; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .06em; padding: 4px 8px; border-radius: 6px; background: var(--bg); color: var(--fg); }
             .agm-layer > .agm-panel { padding: 0 16px 8px; }
             .agm-sub { border-top: 1px solid rgba(255,255,255,.1); }
@@ -1061,7 +1067,7 @@
                     </div>
                 </div>
 
-                <div class="agm agm-cycle"><p class="agm-eyebrow">Agentic system cycle</p><p class="agm-hint">Tap a phase for details</p><ol class="agm-list"><li class="agm-card" style="--bg:#E8F0FE;--fg:#1A56B0"><button type="button" class="agm-toggle" aria-expanded="true" aria-controls="agm-cy-1"><span class="agm-num">1</span>Setup<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-1"><ol class="agm-steps"><li>PM Agent → PRD.md</li></ol></div></li><li class="agm-card" style="--bg:#EDE9FE;--fg:#5B21B6"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-2"><span class="agm-num">2</span>Generation<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-2" hidden><ol class="agm-steps"><li>DA generates UXDD + design-spec</li><li>EA generates TDD + openspec</li></ol></div></li><li class="agm-card" style="--bg:#FFF4E0;--fg:#B8860B"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-3"><span class="agm-num">3</span>Review<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-3" hidden><ol class="agm-steps"><li>Designer/Engineer review &amp; PR</li><li>QA Agent scans assumptions</li><li>Orchestrator notifies PM Agent</li></ol></div></li><li class="agm-card" style="--bg:#F3F4F6;--fg:#374151"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-4"><span class="agm-num">4</span>Validation<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-4" hidden><ol class="agm-steps"><li>PM Agent validates coherence</li><li>QA Agent generates evals.yaml</li><li>Designer/Engineer approve evals</li></ol></div></li><li class="agm-card" style="--bg:#E1F5EE;--fg:#0F6E56"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-5"><span class="agm-num">5</span>Prototype Gen<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-5" hidden><ol class="agm-steps"><li>DA generates HTML prototype</li><li>Designer reviews &amp; approves</li><li>EA implements React code</li><li>QA runs evals → eval-report</li></ol></div></li><li class="agm-card" style="--bg:#F5E6F0;--fg:#9E5A8A"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-cy-6"><span class="agm-num">6</span>Closure<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-cy-6" hidden><ol class="agm-steps"><li>Orchestrator archives findings</li><li>PM delivers V0.1</li><li>Cycle restarts</li></ol></div></li></ol></div>
+                <div class="agm agm-cycle"><div class="agmcy-canvas"><svg id="agmcy" viewBox="0 0 300 318" role="group" aria-label="Agentic system cycle"><g stroke="#444" stroke-width="1.5" fill="none"><path d="M150 162 Q168 112 150 57"/><path d="M150 162 Q205 150 241 109"/><path d="M150 162 Q200 192 241 215"/><path d="M150 162 Q134 217 150 267"/><path d="M150 162 Q95 190 59 215"/><path d="M150 162 Q100 134 59 109"/></g><circle cx="150" cy="162" r="8" fill="#000" stroke="#d1d5db" stroke-width="1.5"/><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 1: Setup" aria-pressed="true"><circle class="agmcy-halo" cx="150" cy="57" r="25" fill="#1A56B0" opacity="0.22"/><circle class="agmcy-dot" cx="150" cy="57" r="16" fill="#E8F0FE" stroke="#1A56B0" stroke-width="2.5"/><text x="150" y="61.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#1A56B0">1</text><text class="agmcy-label" x="150" y="25" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#fff">Setup</text><circle cx="150" cy="57" r="24" fill="transparent"/></g><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 2: Generation" aria-pressed="false"><circle class="agmcy-halo" cx="241" cy="109" r="25" fill="#5B21B6" opacity="0"/><circle class="agmcy-dot" cx="241" cy="109" r="16" fill="#EDE9FE" stroke="#5B21B6" stroke-width="1.5"/><text x="241" y="113.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#5B21B6">2</text><text class="agmcy-label" x="241" y="149" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#bbb">Generation</text><circle cx="241" cy="109" r="24" fill="transparent"/></g><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 3: Review" aria-pressed="false"><circle class="agmcy-halo" cx="241" cy="215" r="25" fill="#B8860B" opacity="0"/><circle class="agmcy-dot" cx="241" cy="215" r="16" fill="#FFF4E0" stroke="#B8860B" stroke-width="1.5"/><text x="241" y="219.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#B8860B">3</text><text class="agmcy-label" x="241" y="255" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#bbb">Review</text><circle cx="241" cy="215" r="24" fill="transparent"/></g><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 4: Validation" aria-pressed="false"><circle class="agmcy-halo" cx="150" cy="267" r="25" fill="#374151" opacity="0"/><circle class="agmcy-dot" cx="150" cy="267" r="16" fill="#F3F4F6" stroke="#374151" stroke-width="1.5"/><text x="150" y="271.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#374151">4</text><text class="agmcy-label" x="150" y="307" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#bbb">Validation</text><circle cx="150" cy="267" r="24" fill="transparent"/></g><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 5: Prototype Gen" aria-pressed="false"><circle class="agmcy-halo" cx="59" cy="215" r="25" fill="#0F6E56" opacity="0"/><circle class="agmcy-dot" cx="59" cy="215" r="16" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/><text x="59" y="219.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#0F6E56">5</text><text class="agmcy-label" x="59" y="255" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#bbb">Prototype Gen</text><circle cx="59" cy="215" r="24" fill="transparent"/></g><g class="agmcy-node" role="button" tabindex="0" aria-label="Phase 6: Closure" aria-pressed="false"><circle class="agmcy-halo" cx="59" cy="109" r="25" fill="#9E5A8A" opacity="0"/><circle class="agmcy-dot" cx="59" cy="109" r="16" fill="#F5E6F0" stroke="#9E5A8A" stroke-width="1.5"/><text x="59" y="113.5" text-anchor="middle" font-family="'DM Mono',monospace" font-size="13" font-weight="500" fill="#9E5A8A">6</text><text class="agmcy-label" x="59" y="149" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12" fill="#bbb">Closure</text><circle cx="59" cy="109" r="24" fill="transparent"/></g></svg></div><p class="agmcy-line" aria-hidden="true"><span style="color:#E8F0FE">Setup</span> · PM Agent → PRD.md</p><div class="agmcy-progress" aria-hidden="true"><span class="on"></span></div><ol class="agmcy-sr"><li>Setup: PM Agent → PRD.md</li><li>Generation: DA generates UXDD + design-spec; EA generates TDD + openspec</li><li>Review: Designer/Engineer review &amp; PR; QA Agent scans assumptions; Orchestrator notifies PM Agent</li><li>Validation: PM Agent validates coherence; QA Agent generates evals.yaml; Designer/Engineer approve evals</li><li>Prototype Gen: DA generates HTML prototype; Designer reviews &amp; approves; EA implements React code; QA runs evals → eval-report</li><li>Closure: Orchestrator archives findings; PM delivers V0.1; Cycle restarts</li></ol></div>
                 <!-- Agentic Cycle Diagram -->
                 <div class="w-full agd-only" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
                   <style>
@@ -3493,6 +3499,45 @@
         layout();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
         mq.addEventListener('change', layout);
+      })();
+
+      // Agentic system cycle on phones: walks through each phase one step at a time; tapping a phase jumps to it.
+      // Autoplay only runs while the diagram is on screen, and never with reduced motion.
+      (function () {
+        var svg = document.getElementById('agmcy');
+        if (!svg) return;
+        var P = [['Setup','#E8F0FE','#1A56B0',['PM Agent → PRD.md']],['Generation','#EDE9FE','#5B21B6',['DA generates UXDD + design-spec','EA generates TDD + openspec']],['Review','#FFF4E0','#B8860B',['Designer/Engineer review &amp; PR','QA Agent scans assumptions','Orchestrator notifies PM Agent']],['Validation','#F3F4F6','#374151',['PM Agent validates coherence','QA Agent generates evals.yaml','Designer/Engineer approve evals']],['Prototype Gen','#E1F5EE','#0F6E56',['DA generates HTML prototype','Designer reviews &amp; approves','EA implements React code','QA runs evals → eval-report']],['Closure','#F5E6F0','#9E5A8A',['Orchestrator archives findings','PM delivers V0.1','Cycle restarts']]];
+        var nodes = svg.querySelectorAll('.agmcy-node');
+        var line = document.querySelector('.agmcy-line'), prog = document.querySelector('.agmcy-progress');
+        var a = 0, s = 0, pausedAt = 0, visible = false;
+        function render() {
+          nodes.forEach(function (g, i) {
+            var on = i === a;
+            g.querySelector('.agmcy-halo').setAttribute('opacity', on ? '0.22' : '0');
+            g.querySelector('.agmcy-dot').setAttribute('stroke-width', on ? '2.5' : '1.5');
+            g.querySelector('.agmcy-label').setAttribute('fill', on ? '#fff' : '#bbb');
+            g.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          var p = P[a];
+          line.innerHTML = '<span style="color:' + p[1] + '">' + p[0] + '</span> · ' + p[3][s];
+          prog.innerHTML = p[3].map(function (_, i) { return '<span' + (i === s ? ' class="on"' : '') + '></span>'; }).join('');
+        }
+        function pick(i) { a = i; s = 0; pausedAt = Date.now(); render(); }
+        nodes.forEach(function (g, i) {
+          g.addEventListener('click', function () { pick(i); });
+          g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i); } });
+        });
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(svg);
+        } else { visible = true; }
+        render();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          setInterval(function () {
+            if (!visible || Date.now() - pausedAt < 6000) return;
+            if (s < P[a][3].length - 1) { s++; } else { s = 0; a = (a + 1) % P.length; }
+            render();
+          }, 2200);
+        }
       })();
     </script>
 </body></html>
