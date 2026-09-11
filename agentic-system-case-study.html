@@ -757,20 +757,19 @@
             .agm strong { color: #fff; font-weight: 600; }
             /* bento: square photo, then the new-model diagram */
             .ag-bento { height: auto !important; }
-            .ag-bento > .ag-photo-5 { flex: none !important; aspect-ratio: 1 / 1; }
+            /* landscape like the B100 photos: 4:3, framed on the head (the photo is 2:3, so head and laptop can't both fit) */
+            .ag-bento > .ag-photo-5 { flex: none !important; aspect-ratio: 4 / 3; background-position: center top; }
             .ag-bento > div:last-child { flex: none !important; }
             .ag-bento > div:last-child > div { height: auto !important; flex-direction: column; align-items: stretch !important; }
-            /* old model */
-            .agm-old { margin-top: 4px; }
-            .agm-role { border: 1px solid var(--c); border-radius: 10px; padding: 14px 16px; }
-            .agm-role-name { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 10px; }
-            .agm-tasks { display: flex; flex-wrap: wrap; gap: 4px 16px; }
-            .agm-tasks li { font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--c); }
-            .agm-down { text-align: center; color: #8a8a8a; font-size: 18px; line-height: 1; padding: 8px 0; }
-            .agm-zone { margin-top: 16px; border: 1px solid #666; border-radius: 10px; padding: 12px 16px; text-align: center; font-family: 'DM Mono', monospace; font-size: 14px; color: #e5e5e5; }
-            .agm-flow { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 8px; }
-            .agm-flow li { font-family: 'DM Mono', monospace; font-size: 13px; color: #c8c8c8; }
-            .agm-flow .sep { color: #666; }
+            /* old model: the original image's look, summarised to roles, shared zone and sequence */
+            .agm-old { margin-top: 4px; font-family: 'DM Mono', monospace; }
+            .agm-old-roles { display: flex; align-items: center; gap: 6px; }
+            .agm-old-role { flex: 1; min-height: 52px; display: flex; align-items: center; justify-content: center; text-align: center; border: 1px solid var(--c); border-radius: 6px; padding: 8px 4px; font-size: 12px; line-height: 1.35; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+            .agm-old-arrow { flex: none; color: #fff; font-size: 14px; }
+            .agm-old-zone { margin-top: 16px; border: 1px solid #777; border-radius: 6px; padding: 12px; text-align: center; font-size: 13px; letter-spacing: .04em; color: #e5e5e5; }
+            .agm-old-flow { margin-top: 14px; display: flex; align-items: center; font-size: 12px; color: #e5e5e5; }
+            .agm-old-flow + .agm-old-flow { margin-top: 10px; }
+            .agm-old-flow i { flex: 1; margin: 0 8px; border-top: 1px dotted #777; }
             /* new model */
             .agm-new { width: 100%; padding-top: 16px; }
             .agm-orch { border: 1px dashed rgba(255,255,255,.5); border-radius: 12px; padding: 14px; }
@@ -957,7 +956,7 @@
                 <!-- Image -->
                 <div <div="" class="basis-0 grow h-auto">
                     <img src="assets/agentic-system-case-study/media-1.jpg" alt="Collaboration model — Sequential" class="w-full h-auto object-cover agd-only">
-                    <div class="agm agm-old"><ol class="agm-roles"><li class="agm-role" style="--c:#9ee0c0"><div class="agm-role-name">Product Manager</div><ul class="agm-tasks"><li>Product Exploration</li><li>Planning</li><li>Roadmap drafting</li><li>Brief generation (PRD)</li><li>Stakeholder docs</li></ul></li><li class="agm-down" aria-hidden="true">↓</li><li class="agm-role" style="--c:#c4b5fd"><div class="agm-role-name">Product Designer</div><ul class="agm-tasks"><li>Research</li><li>Quick wireframes</li><li>Component specs</li><li>State docs</li><li>UX analysis</li><li>Flow Charts</li></ul></li><li class="agm-down" aria-hidden="true">↓</li><li class="agm-role" style="--c:#bfdbfe"><div class="agm-role-name">Developer</div><ul class="agm-tasks"><li>Scaffolding</li><li>Development</li><li>Code review</li><li>Test generation</li><li>Documentation</li></ul></li></ol><div class="agm-zone">Shared Decision Zone</div><ol class="agm-flow"><li>Problem</li><li class="sep" aria-hidden="true">→</li><li>Criteria</li><li class="sep" aria-hidden="true">→</li><li>Priority</li><li class="sep" aria-hidden="true">→</li><li>Design</li><li class="sep" aria-hidden="true">→</li><li>Iteration</li><li class="sep" aria-hidden="true">⇄</li><li>Handoff</li></ol></div>
+                    <div class="agm agm-old"><div class="agm-old-roles"><div class="agm-old-role" style="--c:#8fd6b6">Product<br>Manager</div><span class="agm-old-arrow" aria-hidden="true">→</span><div class="agm-old-role" style="--c:#b9a8f0">Product<br>Designer</div><span class="agm-old-arrow" aria-hidden="true">→</span><div class="agm-old-role" style="--c:#aac4ec">Developer</div></div><div class="agm-old-zone">Shared Decision Zone</div><div class="agm-old-flow"><span>Problem</span><i aria-hidden="true"></i><span>Criteria</span><i aria-hidden="true"></i><span>Priority</span></div><div class="agm-old-flow"><span>Design</span><i aria-hidden="true"></i><span>Iteration</span><i aria-hidden="true"></i><span>Handoff</span></div></div>
                     <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph mt-6" style="font-style: italic; text-align: right; margin-right: 7%;">Old model</p>
                 </div>
             </div>
