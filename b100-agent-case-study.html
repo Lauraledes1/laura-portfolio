@@ -1108,8 +1108,6 @@
           .flow-cap-tag.l3 { color:var(--l3); border:1px solid var(--l3); }
           .flow-cap-tag.tr { color:#ddd; border:1px dashed #777; }
           .flow-cap b { color:#fff; font-weight:600; }
-          .flow-hint { margin-top:12px; font-family:var(--b-mono); font-size:10px; color:var(--b-faint); }
-          .b100-flowdemo.paused .flow-hint::before { content:'❚❚  '; }
           @media (max-width:420px){ .flow-stage { padding:32px 14px; } }
           @media (prefers-reduced-motion:reduce){ .scr,.m-sheet { transition:none; } .m-spin,.m-input::after { animation:none; } }
 
@@ -1338,9 +1336,11 @@
           .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\] { font-size:18px; }
           .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\].font-normal { color:#c8c8c8; opacity:1; }
           /* Once an image pair stacks, its photo shows whole at its own ratio instead of a square crop */
-          @media (max-width:880px){ .b100-imgcell.is-natural { aspect-ratio:auto; } }
-          @media (max-width:640px){
-            .flow-hint { display:none; }
+          @media (max-width:880px){
+            /* explicit ratios so the box is sized before the lazy image loads */
+            .b100-imgcell.is-3x2 { aspect-ratio:3/2; }
+            /* the portrait photo goes landscape like the others; 4:3 is the widest crop that keeps head and phone whole */
+            .b100-imgcell.is-crop-4x3 { aspect-ratio:4/3; object-position:50% 8%; }
           }
           /* Back to top: out of the way while reading down; offered when scrolling back up or at the end */
           @media (max-width:700px){
@@ -1697,7 +1697,6 @@
                     <button data-step="6" aria-label="Step 6: done">06</button>
                   </div>
                   <p class="flow-cap"></p>
-                  <p class="flow-hint">tap the phone to pause&nbsp;·&nbsp;tap a number to jump</p>
                 </div>
             </div>
         </div>
@@ -1717,7 +1716,7 @@
         <!-- ============ IMAGE PAIR 1 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
-                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-natural">
+                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-3x2">
                 <div class="b100-imgcell ba-cell">
                   <div class="ba-fit">
                     <div class="ba-cards">
@@ -1996,7 +1995,7 @@
 
                   </div>
                 </div>
-                <img src="assets/b100-agent-case-study/image3.jpg" srcset="assets/b100-agent-case-study/image3-700.jpg 700w, assets/b100-agent-case-study/image3.jpg 1122w" sizes="(max-width: 880px) calc(100vw - 34px), 1122px" width="1122" height="1402" loading="lazy" decoding="async" alt="B100 payments operations" class="b100-imgcell is-natural">
+                <img src="assets/b100-agent-case-study/image3.jpg" srcset="assets/b100-agent-case-study/image3-700.jpg 700w, assets/b100-agent-case-study/image3.jpg 1122w" sizes="(max-width: 880px) calc(100vw - 34px), 1122px" width="1122" height="1402" loading="lazy" decoding="async" alt="B100 payments operations" class="b100-imgcell is-crop-4x3">
             </div>
         </div>
 
@@ -2502,13 +2501,13 @@
     <script>
       /* Mobile. The flow phone and the two annotated figures are drawn at fixed pixel sizes;
          on narrow screens zoom them up to fill their column instead of leaving them small.
-         zoom re-lays out and re-rasterises the text, so nothing goes soft. On desktop only the confidence figure is sized (up to 1.2x). */
+         zoom re-lays out and re-rasterises the text, so nothing goes soft. On desktop only the confidence figure is sized (up to 1.08x). */
       (function(){
         var fits = [
           { sel:'.b100-flowdemo .phone', base:256, mq:'(max-width:640px)', fitHeight:true },
           { sel:'.ba-fit', base:310, mq:'(max-width:660px)' },   /* 288px card + an 11px pin each side */
           { sel:'.cf-fit', base:252, mq:'(max-width:620px)', max:1.08 },   /* full-width cards read too heavy */
-          { sel:'.cf-fit', base:554, mq:'(min-width:881px)', max:1.2, min:0.5 }   /* desktop: two 252px columns + gap, 12px air each side */
+          { sel:'.cf-fit', base:554, mq:'(min-width:881px)', max:1.08, min:0.5 }   /* desktop: two 252px columns + gap, 12px air each side */
         ].map(function(f){ f.el = document.querySelector(f.sel); f.mql = window.matchMedia(f.mq); return f; })
          .filter(function(f){ return f.el; });
         var lastW = -1;
