@@ -1346,6 +1346,9 @@
           @media (max-width:700px){
             .fab-top { opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .2s ease, transform .2s ease; }
             .fab-top.show { opacity:1; transform:none; pointer-events:auto; }
+            /* inverted so it stands out on the black page (was black on black with a #333 edge); the black edge keeps it visible over the white footer */
+            .fab-top { background:#fff; border-color:#000; }
+            .dark .fab-top img { filter:none; }
           }
           @media (prefers-reduced-motion:reduce){ .fab-top { transition:none; } }
           /* Shorter pinned menu on phones gives every screen 18px back */
