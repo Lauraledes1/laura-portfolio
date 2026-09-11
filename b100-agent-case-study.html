@@ -1338,8 +1338,8 @@
              Scoped to the case itself; the nav, More from me and footer are shared portfolio chrome. */
           .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\] { font-size:18px; }
           .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\].font-normal { color:#c8c8c8; opacity:1; }
-          /* Once the image pair stacks, the landscape team photo shows whole instead of a square crop */
-          @media (max-width:880px){ .b100-imgcell.is-landscape { aspect-ratio:3/2; } }
+          /* Once an image pair stacks, its photo shows whole at its own ratio instead of a square crop */
+          @media (max-width:880px){ .b100-imgcell.is-natural { aspect-ratio:auto; } }
           @media (max-width:640px){
             .flow-rail { gap:8px; }
             .flow-rail button { min-width:44px; height:40px; border-radius:8px; font-size:13px; }
@@ -1720,7 +1720,7 @@
         <!-- ============ IMAGE PAIR 1 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
-                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-landscape">
+                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-natural">
                 <div class="b100-imgcell ba-cell">
                   <div class="ba-fit">
                     <div class="ba-cards">
@@ -1999,7 +1999,7 @@
 
                   </div>
                 </div>
-                <img src="assets/b100-agent-case-study/image3.jpg" srcset="assets/b100-agent-case-study/image3-700.jpg 700w, assets/b100-agent-case-study/image3.jpg 1122w" sizes="(max-width: 880px) calc(100vw - 34px), 1122px" width="1122" height="1402" loading="lazy" decoding="async" alt="B100 payments operations" class="b100-imgcell">
+                <img src="assets/b100-agent-case-study/image3.jpg" srcset="assets/b100-agent-case-study/image3-700.jpg 700w, assets/b100-agent-case-study/image3.jpg 1122w" sizes="(max-width: 880px) calc(100vw - 34px), 1122px" width="1122" height="1402" loading="lazy" decoding="async" alt="B100 payments operations" class="b100-imgcell is-natural">
             </div>
         </div>
 
