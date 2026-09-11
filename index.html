@@ -748,6 +748,19 @@
         .light .message-btn { background: transparent !important; }
         .light .message-btn:hover { background: rgba(0,0,0,0.05) !important; }
         .light .message-btn:active { background: rgba(0,0,0,0.10) !important; }
+        /* Phones: the stacked 01-03 tiles filled the first screen and read like buttons.
+           Show the case studies first and move the tiles after About (below Mentor at ADPList). */
+        @media (max-width: 700px) {
+            .home-tiles { order: 1; }
+            .min-h-screen > footer { order: 2; }
+        }
+        /* Phones get still frames instead of the card videos (iOS paints nothing for an idle video
+           without a poster, and one of them is 17 MB). Same condition as the <source media>, so they never download there. */
+        .m-still { display: none; }
+        @media (max-width: 640px), (pointer: coarse) and (max-height: 500px) {
+            video.has-still { display: none; }
+            picture.m-still { display: contents; }
+        }
     </style>
 </head>
 <body class="bg-theme-primary">
@@ -874,7 +887,7 @@
       })();
     </script>
         <!-- Hero Section -->
-        <section class="bg-theme-inverse flex flex-wrap gap-[1px] w-full">
+        <section class="home-tiles bg-theme-inverse flex flex-wrap gap-[1px] w-full">
             <div class="tile bg-theme-primary flex flex-col justify-between basis-0 grow min-w-[350px] h-[400px] px-8 py-6 animate-slide-up tile-1">
                 <div class="font-inter font-semibold text-[64px] leading-[1.4] text-theme-heading">01</div>
                 <div class="flex flex-col gap-2">
@@ -921,8 +934,8 @@
                     <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative" style="background:#000;">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/b100-agent-case-study/hero-poster.jpg')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
-                                    <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
+                                    <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
@@ -946,10 +959,14 @@
                     <a href="agentic-system-case-study.html" class="block">
                     <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/ai-solution-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
+                                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/agentic-system-case-study/media-6-still.jpg')"></div>
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/agentic-system-case-study/media-6-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                             <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Agentic Systems • Workflow Design</div>
@@ -973,9 +990,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/nestbank-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/nestbank-case-study/media-14-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Fintech • 0-1</div>
@@ -999,9 +1020,13 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medigo-case-study/media-20.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" muted loop playsinline preload="metadata">
-                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" muted loop playsinline preload="metadata">
+                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/medigo-case-study/media-19-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                             <div class="font-syne font-normal text-[16px] leading-[1.6] text-theme-paragraph whitespace-nowrap">Lead UX • Healthtech • AI Driven</div>
@@ -1109,10 +1134,9 @@
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Book a call"
-          class="fixed z-[1000] bg-white text-black box-border flex gap-2.5 items-center justify-center pl-1 pr-2 py-1 whitespace-nowrap group cursor-pointer transition-all duration-150 ease-out fab-hidden"
-          style="right: calc(16px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom));"
+          class="fixed z-[1000] bg-white text-black box-border flex gap-2.5 items-center justify-center whitespace-nowrap group cursor-pointer transition-all duration-150 ease-out fab-hidden"
+          style="right: calc(16px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); padding: 8.8px 8px 8.8px 18px;"
         >
-          <span class="bg-center bg-cover bg-no-repeat h-[35.243px] w-[37px] shrink-0" style="background-image: url('assets/profile-img.jpeg');"></span>
           <span class="font-syne font-bold not-italic text-[16px] leading-[1.6] pr-0 group-hover:pr-0">Book a call</span>
           <span class="relative shrink-0 h-6 w-0 overflow-hidden opacity-0 translate-x-2 transition-all duration-150 ease-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:w-6">
             <i class="ph ph-arrow-up-right block w-6 h-6 text-black text-[24px] leading-none" aria-hidden="true"></i>
@@ -1375,6 +1399,12 @@
 
         document.addEventListener('visibilitychange', () => {
           if (document.hidden) videos.forEach(pauseVideo);
+        });
+
+        // A card video whose source was skipped on a phone-sized load needs a reload if the window later grows.
+        window.matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').addEventListener('change', (e) => {
+          if (e.matches) return;
+          videos.forEach((video) => { if (!video.currentSrc) video.load(); });
         });
       })();
     </script>

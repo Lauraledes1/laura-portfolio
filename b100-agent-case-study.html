@@ -767,7 +767,7 @@
         <!-- ============ SCOPED STYLES FOR B100 CASE ============ -->
         <style>
           .b100 { --l1:#8A8F98; --l2:#2AA5E0; --l3:#D89486;
-                  --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#666;
+                  --b-line:#333; --b-panel:#0a0a0a; --b-dim:#999; --b-faint:#8a8a8a;
                   --b-mono:'DM Mono',ui-monospace,monospace; }
           .b100-figure { width:100%; border:1px solid var(--b-line); border-radius:12px;
                   background:#050505; overflow:hidden; position:relative; }
@@ -795,16 +795,16 @@
           .ladder-panel .lp-head { font-family:var(--b-mono); font-size:14px; font-weight:500; letter-spacing:.06em; color:#fff;
                   display:flex; align-items:center; gap:9px; margin-bottom:11px; }
           .ladder-panel .lp-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-          .ladder-panel .lp-head::after { content:'›'; margin-left:auto; font-size:15px; color:#5a5a5a;
+          .ladder-panel .lp-head::after { content:'›'; margin-left:auto; font-size:15px; color:#8a8a8a;
                   transition:transform .2s ease; }
           .ladder-panel[open] .lp-head::after { transform:rotate(90deg); }
-          .ladder-panel .lp-sum { font-family:'Syne',sans-serif; font-size:17px; line-height:1.55; color:#d5d5d5; display:block; }
+          .ladder-panel .lp-sum { font-family:'Syne',sans-serif; font-size:18px; line-height:1.55; color:#c8c8c8; display:block; }
           .ladder-panel .lp-detail { border-top:1px solid #262626; padding:16px 18px 18px; }
-          .ladder-panel dl { margin:0; font-family:var(--b-mono); font-size:13.5px; line-height:1.5; }
-          .ladder-panel dt { color:#5a5a5a; float:left; clear:left; width:124px; }
-          .ladder-panel dd { color:#8a8a8a; margin:0 0 5px 124px; }
-          .ladder-panel .lp-detail p { font-family:'Syne',sans-serif; font-size:16px; line-height:1.6;
-                  color:#8f8f8f; margin:14px 0 0; }
+          .ladder-panel dl { margin:0; font-family:var(--b-mono); font-size:14.5px; line-height:1.5; }
+          .ladder-panel dt { color:#8a8a8a; float:left; clear:left; width:124px; }
+          .ladder-panel dd { color:#999; margin:0 0 5px 124px; }
+          .ladder-panel .lp-detail p { font-family:'Syne',sans-serif; font-size:17px; line-height:1.6;
+                  color:#999; margin:14px 0 0; }
 
           /* systems row */
           .sys-row { display:grid; grid-template-columns:1fr 40px 1fr 40px 1fr; align-items:stretch;
@@ -1095,12 +1095,12 @@
           .m-inputbar .m-send { width:30px; height:30px; border-radius:50%; background:var(--m-accent); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
           .m-inputbar .m-send svg { width:12px; height:12px; color:#fff; }
           /* controls */
-          .flow-rail { display:flex; gap:7px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
-          .flow-rail button { min-width:30px; height:24px; padding:0 4px; border-radius:6px; border:1px solid var(--b-line); background:transparent;
-                  color:var(--b-faint); font-family:var(--b-mono); font-size:9.5px; cursor:pointer; transition:border-color .15s,color .15s; }
+          .flow-rail { display:flex; gap:8px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+          .flow-rail button { min-width:44px; height:40px; padding:0 4px; border-radius:8px; border:1px solid var(--b-line); background:transparent;
+                  color:var(--b-faint); font-family:var(--b-mono); font-size:13px; cursor:pointer; transition:border-color .15s,color .15s; }
           .flow-rail button:hover { color:var(--b-dim); }
           .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
-          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:13.5px; line-height:1.55; color:var(--b-dim); }
+          .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:14.5px; line-height:1.55; color:var(--b-dim); }
           .flow-cap-tag { display:inline-block; font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
                   padding:2px 6px; border-radius:4px; margin-right:7px; white-space:nowrap; vertical-align:1px; }
           .flow-cap-tag.l1 { color:var(--l1); border:1px solid var(--l1); }
@@ -1108,9 +1108,7 @@
           .flow-cap-tag.l3 { color:var(--l3); border:1px solid var(--l3); }
           .flow-cap-tag.tr { color:#ddd; border:1px dashed #777; }
           .flow-cap b { color:#fff; font-weight:600; }
-          .flow-hint { margin-top:12px; font-family:var(--b-mono); font-size:10px; color:var(--b-faint); }
-          .b100-flowdemo.paused .flow-hint::before { content:'❚❚  '; }
-          @media (max-width:420px){ .flow-stage { padding:32px 14px; } .b100-flowdemo .phone { transform:scale(.92); margin:-20px 0; } }
+          @media (max-width:420px){ .flow-stage { padding:32px 14px; } }
           @media (prefers-reduced-motion:reduce){ .scr,.m-sheet { transition:none; } .m-spin,.m-input::after { animation:none; } }
 
           /* pattern + decision rows reuse .proc-h / plain rows */
@@ -1118,9 +1116,9 @@
           .b100-row { display:flex; flex-direction:row; gap:1.5rem; }
           @media (max-width:900px){ .b100-row{ flex-direction:column !important; gap:.5rem; } }
           .b100-row .rk { flex:1 1 0; }
-          .b100-row .rk p:first-child { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; line-height:1.6; color:var(--typography-heading); }
+          .b100-row .rk p:first-child { font-family:'Syne',sans-serif; font-weight:700; font-size:18px; line-height:1.6; color:var(--typography-heading); }
           .b100-row .rv { flex:1 1 0; }
-          .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:17px; line-height:1.6; color:var(--typography-paragraph); }
+          .b100-row .rv p { font-family:'Syne',sans-serif; font-weight:400; font-size:18px; line-height:1.6; color:#c8c8c8; }
 
           /* work-in-progress section — blurred content behind a status card */
           .wip-section { position:relative; }
@@ -1130,7 +1128,7 @@
                   -webkit-backdrop-filter:blur(2px); border-radius:14px; padding:30px 36px; max-width:440px; text-align:center; }
           .wip-card .wip-title { font-family:'Syne',sans-serif; font-weight:600; font-size:22px; line-height:1.4; color:#fff; margin:0 0 9px; }
           .wip-card .wip-title .wip-status { color:var(--l3); }
-          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:15px; line-height:1.6; color:var(--b-dim); margin:0; }
+          .wip-card .wip-desc { font-family:'Syne',sans-serif; font-weight:400; font-size:16px; line-height:1.6; color:var(--b-dim); margin:0; }
           @media (max-width:900px){ .wip-card { padding:24px 22px; } .wip-card .wip-title { font-size:19px; } }
 
           /* patterns — expandable list (matches the Process section on the agentic case) */
@@ -1138,13 +1136,13 @@
           .pat-item:last-child { border-bottom:1px solid rgba(255,255,255,.12); }
           .pat-head { display:flex; align-items:center; gap:14px; padding:22px 0; }
           .pat-chevron { width:14px; height:14px; flex-shrink:0; color:#6a6a6a; transition:transform .3s ease; }
-          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#5c5c5c; flex-shrink:0; }
+          .pat-num { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:#8a8a8a; flex-shrink:0; }
           .pat-label { font-family:'Syne',sans-serif; font-size:19px; font-weight:600; letter-spacing:-.2px; color:#fff; }
           .pat-item:hover .pat-label { color:#c8c8c8; }
           .pat-body { overflow:hidden; max-height:0; opacity:0; transition:max-height .4s ease, opacity .3s ease .05s; }
           .pat-body-inner { padding:0 0 24px 62px; }
-          .pat-desc { font-family:'Syne',sans-serif; font-size:15px; line-height:1.7; color:#9a9a9a; max-width:620px; margin:0; }
-          .pat-desc em { font-style:normal; color:#e0e0e0; }
+          .pat-desc { font-family:'Syne',sans-serif; font-size:16px; line-height:1.7; color:#999; max-width:620px; margin:0; }
+          .pat-desc em { font-style:normal; color:#fff; }
           .pat-item.open .pat-body { max-height:480px; opacity:1; }
           .pat-item.open .pat-chevron { transform:rotate(90deg); }
           .pat-item.open .pat-label { color:#fff; }
@@ -1252,6 +1250,7 @@
           .ba-legend.on li:not(.hl) { opacity:.4; }
           .ba-legend li.hl { color:#f6f4f0; }
           .ba-legend li.hl .n { color:#e0a55c; }
+          @media (min-width:661px){ .ba-legend li, .ba-legend .n { font-size:14px; } }
           @media (max-width:1160px){ .ba-fit { transform:scale(.83); } }
           @media (max-width:1000px){ .ba-fit { transform:scale(.72); } }
           @media (max-width:880px){ .ba-fit { transform:scale(.88); } }
@@ -1307,21 +1306,75 @@
                   background:var(--accent); color:#fff; box-shadow:0 1px 2px rgba(20,26,38,.05); }
           .cf-cta svg { width:12px; height:12px; flex-shrink:0; }
           .cf-cta.ghost { background:transparent; color:var(--ink2); box-shadow:none; padding:0 6px; }
-          @media (max-width:1180px){ .cf-fit { transform:scale(.90); } }
-          @media (max-width:1010px){ .cf-fit { transform:scale(.80); } }
           @media (max-width:880px){ .cf-fit { transform:scale(1); } }
           @media (max-width:620px){
             .b100-imgcell.cf-cell { aspect-ratio:auto; padding:30px 14px; }
             .cf-fit { flex-direction:column; align-items:center; transform:none; }
           }
 
+          /* ---- Mobile ---- */
+          /* Phones get a still frame instead of the autoplay videos (hero + More from me).
+             Same condition as the <source media> on those videos, so they never download there. */
+          .m-still { display:none; }
+          @media (max-width:640px), (pointer:coarse) and (max-height:500px){
+            video.has-still { display:none; }
+            img.m-still { display:block; }
+            picture.m-still { display:contents; }
+            /* the hero photo is landscape; a full-height portrait box cropped ~70% of it away */
+            img.m-still.case-study-hero { height:auto; aspect-ratio:2560/1350; }
+          }
+          /* Touch: ~44px hit areas without changing how the controls look */
+          @media (pointer:coarse){
+            .flow-rail button { position:relative; }
+            .flow-rail button::after { content:''; position:absolute; inset:-10px -3px; }
+            .ba-pin::before { content:''; position:absolute; inset:-11px; border-radius:50%; }
+          }
+          /* Phone menu stays pinned instead of scrolling half under the status bar */
+          @media (max-width:700px){ .mobile-menu { position:sticky; top:0; z-index:95; } }
+          /* Type colour system, all breakpoints: titles #fff, body #c8c8c8, secondary #999, labels #8a8a8a.
+             Scoped to the case itself; the nav, More from me and footer are shared portfolio chrome. */
+          .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\] { font-size:18px; }
+          .min-h-screen > :not(nav):not(.related-cases):not(footer) p.text-\[17px\].font-normal { color:#c8c8c8; opacity:1; }
+          /* Once an image pair stacks, its photo shows whole at its own ratio instead of a square crop */
+          @media (max-width:880px){
+            /* explicit ratios so the box is sized before the lazy image loads */
+            .b100-imgcell.is-3x2 { aspect-ratio:3/2; }
+            /* the portrait photo goes landscape like the others; 4:3 is the widest crop that keeps head and phone whole */
+            .b100-imgcell.is-crop-4x3 { aspect-ratio:4/3; object-position:50% 8%; }
+          }
+          /* Back to top: out of the way while reading down; offered when scrolling back up or at the end */
+          @media (max-width:700px){
+            .fab-top { opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .2s ease, transform .2s ease; }
+            .fab-top.show { opacity:1; transform:none; pointer-events:auto; }
+            /* inverted so it stands out on the black page (was black on black with a #333 edge); the black edge keeps it visible over the white footer */
+            .fab-top { background:#fff; border-color:#000; }
+            .dark .fab-top img { filter:none; }
+          }
+          @media (prefers-reduced-motion:reduce){ .fab-top { transition:none; } }
+          /* Shorter pinned menu on phones gives every screen 18px back */
+          @media (max-width:700px){
+            .mobile-menu { height:64px; }
+            #mobile-menu-toggle { width:64px; height:64px; }
+            .menu-overlay { top:64px; }
+            .case-study-hero { height:calc(100vh - 64px); }
+          }
+          /* Phone type scale: 17px body, 15px secondary, a 12px floor for diagram labels,
+             and a case title that sits above the 27px section titles */
+          @media (max-width:700px){
+            h1.text-\[36px\] { font-size:32px !important; }
+            .sys-idx, .sys-role, .sys-cross span { font-size:12px; }
+            .sys-foot, .flow-cap, .ladder-panel dl { font-size:16px; }
+            .flow-cap-tag { font-size:12px; }
+          }
+
         </style>
 
         <!-- ============ HERO ============ -->
         <div class="bg-theme-primary case-study-content animate-slide-up pb-16 border-b border-theme b100" style="animation-delay: 0.2s; border-bottom-width: 1px; padding-top: 0;">
-            <video class="case-study-hero w-full object-cover" style="background:#000;" autoplay muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
-                <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4">
+            <video class="case-study-hero w-full object-cover has-still" style="background:#000;" autoplay muted loop playsinline preload="metadata" poster="assets/b100-agent-case-study/hero-poster.jpg">
+                <source src="assets/b100-agent-case-study/video1.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
             </video>
+            <img class="case-study-hero w-full object-cover m-still" style="background:#000;" src="assets/b100-agent-case-study/hero-poster.jpg" alt="" width="2560" height="1350" decoding="async">
 
             <div style="position: relative;">
                 <div class="w-full mx-auto" style="margin-top: 24px;">
@@ -1647,7 +1700,6 @@
                     <button data-step="6" aria-label="Step 6: done">06</button>
                   </div>
                   <p class="flow-cap"></p>
-                  <p class="flow-hint">tap the phone to pause&nbsp;·&nbsp;tap a number to jump</p>
                 </div>
             </div>
         </div>
@@ -1667,7 +1719,7 @@
         <!-- ============ IMAGE PAIR 1 ============ -->
         <div class="bg-theme-primary p-8 pb-16 scroll-animate b100" data-scroll="">
             <div class="b100-imgpair">
-                <img src="assets/b100-agent-case-study/image2.jpg" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell">
+                <img src="assets/b100-agent-case-study/image2-1600.jpg" srcset="assets/b100-agent-case-study/image2-1000.jpg 1000w, assets/b100-agent-case-study/image2-1600.jpg 1600w, assets/b100-agent-case-study/image2-2400.jpg 2400w" sizes="(max-width: 880px) calc(100vw - 34px), 1000px" width="2400" height="1600" loading="lazy" decoding="async" alt="The B100 Operations team reviewing a payment case" class="b100-imgcell is-3x2">
                 <div class="b100-imgcell ba-cell">
                   <div class="ba-fit">
                     <div class="ba-cards">
@@ -1946,7 +1998,7 @@
 
                   </div>
                 </div>
-                <img src="assets/b100-agent-case-study/image3.jpg" alt="B100 payments operations" class="b100-imgcell">
+                <img src="assets/b100-agent-case-study/image3.jpg" srcset="assets/b100-agent-case-study/image3-700.jpg 700w, assets/b100-agent-case-study/image3.jpg 1122w" sizes="(max-width: 880px) calc(100vw - 34px), 1122px" width="1122" height="1402" loading="lazy" decoding="async" alt="B100 payments operations" class="b100-imgcell is-crop-4x3">
             </div>
         </div>
 
@@ -2171,9 +2223,13 @@
                     <a href="agentic-system-case-study.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
-                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/agentic-system-case-study/media-6-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Agentic Systems • Workflow Design</div>
@@ -2195,9 +2251,13 @@
                     <a href="medigo-case-study.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
-                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/medigo-case-study/media-19.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/medigo-case-study/media-19-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Lead UX • Healthtech • AI Driven • MedBridge</div>
@@ -2219,9 +2279,13 @@
                     <a href="nestbank-case-study.html" class="block">
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay="" muted="" loop="" playsinline="">
-                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay="" muted="" loop="" playsinline="">
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
                                 </video>
+                                <picture class="m-still">
+                                    <source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                                    <img class="absolute inset-0 w-full h-full object-cover" src="assets/nestbank-case-study/media-14-still.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Lead UX • Fintech • 0-1</div>
@@ -2420,7 +2484,70 @@
         fab.addEventListener('click', function(){
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+        // Only offer it when it's wanted: past the first screen and heading back up, or at the end
+        let lastY = window.scrollY, ticking = false;
+        function update(){
+          ticking = false;
+          const y = window.scrollY, vh = window.innerHeight;
+          const atEnd = y + vh >= document.documentElement.scrollHeight - 80;
+          if (y < vh) fab.classList.remove('show');
+          else if (atEnd || y < lastY - 6) fab.classList.add('show');
+          else if (y > lastY + 6) fab.classList.remove('show');
+          if (Math.abs(y - lastY) > 6) lastY = y;
+        }
+        window.addEventListener('scroll', function(){
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
       })();
     </script>
 
+    <script>
+      /* Mobile. The flow phone and the two annotated figures are drawn at fixed pixel sizes;
+         on narrow screens zoom them up to fill their column instead of leaving them small.
+         zoom re-lays out and re-rasterises the text, so nothing goes soft. On desktop only the confidence figure is sized (up to 1.08x). */
+      (function(){
+        var fits = [
+          { sel:'.b100-flowdemo .phone', base:256, mq:'(max-width:640px)', fitHeight:true },
+          { sel:'.ba-fit', base:310, mq:'(max-width:660px)' },   /* 288px card + an 11px pin each side */
+          { sel:'.cf-fit', base:252, mq:'(max-width:620px)', max:1.08 },   /* full-width cards read too heavy */
+          { sel:'.cf-fit', base:554, mq:'(min-width:881px)', max:1.08, min:0.5 }   /* desktop: two 252px columns + gap, 12px air each side */
+        ].map(function(f){ f.el = document.querySelector(f.sel); f.mql = window.matchMedia(f.mq); return f; })
+         .filter(function(f){ return f.el; });
+        var lastW = -1;
+        function fit(){
+          var w = document.documentElement.clientWidth;
+          if (w === lastW) return;   /* ignore height-only resizes from mobile browser bars */
+          lastW = w;
+          fits.forEach(function(f){
+            if (!f.mql.matches) {
+              if (!fits.some(function(g){ return g.el === f.el && g.mql.matches; })) f.el.style.zoom = '';
+              return;
+            }
+            f.el.style.zoom = '';
+            var p = f.el.parentElement, cs = getComputedStyle(p);
+            var z = (p.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) / f.base;
+            if (f.fitHeight) {
+              /* the phone and its 01–06 rail should fit one screen below the pinned menu */
+              var nav = document.querySelector('.mobile-menu'), rail = document.querySelector('.b100-flowdemo .flow-rail');
+              var pr = f.el.getBoundingClientRect();
+              var navH = nav ? nav.getBoundingClientRect().height : 0;
+              var below = rail ? rail.getBoundingClientRect().bottom - pr.bottom : 0;
+              z = Math.min(z, (document.documentElement.clientHeight - navH - below - 24) / pr.height);
+            }
+            f.el.style.zoom = Math.floor(Math.min(f.max || 1.3, Math.max(f.min || 1, z)) * 1000) / 1000;
+          });
+        }
+        fit();
+        window.addEventListener('resize', fit);
+
+        /* A video whose source was skipped on a phone-sized load needs a reload if the
+           window later grows past the breakpoint (e.g. a tablet leaving split view). */
+        window.matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').addEventListener('change', function(e){
+          if (e.matches) return;
+          document.querySelectorAll('video.has-still').forEach(function(v){
+            if (!v.currentSrc) { v.load(); var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
+          });
+        });
+      })();
+    </script>
 </body></html>
