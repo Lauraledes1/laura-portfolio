@@ -715,6 +715,11 @@
         @media (max-width: 700px) {
             /* lighter photos (the originals are 4288px / 3582px wide) */
             .ag-photo-8 { background-image: url('assets/agentic-system-case-study/media-8-1024.jpg') !important; }
+            /* the eval terminal is desktop-only: its lines are far too long to read on a phone */
+            .qat-stage { display: none !important; }
+            .qat-row { height: auto !important; }
+            /* the photo was sized by the row's 740px; on its own it needs a shape of its own */
+            .qat-row .ag-photo-8 { aspect-ratio: 3 / 2; }
             /* pinned 64px menu */
             .mobile-menu { position: sticky; top: 0; z-index: 95; height: 64px; }
             #mobile-menu-toggle { width: 64px; height: 64px; }
@@ -2559,7 +2564,7 @@
 
         <!-- Full Width Animated Terminal: QA Evals Loop -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
-            <div class="w-full flex flex-row gap-8" style="height: 740px;">
+            <div class="w-full flex flex-row gap-8 qat-row" style="height: 740px;">
                 <!-- Left: Terminal animation -->
                 <div class="basis-0 grow qat-stage" style="background-color:#000; display:flex; align-items:center; justify-content:center; overflow:hidden;">
                     <style>
@@ -2667,6 +2672,7 @@
         (function () {
             var body = document.getElementById('qat-term-body');
             if (!body) return;
+            if (window.matchMedia('(max-width: 700px)').matches) return;
 
             var PROMPT_HTML = '<span class="qat-prompt-arrow">➜</span>&nbsp;&nbsp;<span class="qat-prompt-path">agentic-workspace</span> <span class="qat-prompt-branch">git:(main)</span> ';
 
