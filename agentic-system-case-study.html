@@ -2523,7 +2523,7 @@
         </div>
 
         <!-- Controversial Decisions -->
-        <div class="bg-theme-primary p-8 pb-16 scroll-animate" data-scroll="">
+        <div id="ag-controversial" class="bg-theme-primary p-8 pb-16 scroll-animate" data-scroll="">
             <div class="w-full">
                 <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading mb-14">Controversial Decisions</h2>
                 <div class="flex flex-col gap-8">
@@ -2563,7 +2563,7 @@
         </div>  
 
         <!-- Full Width Animated Terminal: QA Evals Loop -->
-        <div class="bg-theme-primary p-8 scroll-animate" data-scroll="">
+        <div id="ag-terminal-row" class="bg-theme-primary p-8 scroll-animate" data-scroll="">
             <div class="w-full flex flex-row gap-8 qat-row" style="height: 740px;">
                 <!-- Left: Terminal animation -->
                 <div class="basis-0 grow qat-stage" style="background-color:#000; display:flex; align-items:center; justify-content:center; overflow:hidden;">
@@ -3507,6 +3507,14 @@
         layout();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
         mq.addEventListener('change', layout);
+      })();
+
+      // On phones the closing photo reads better before Controversial Decisions than after it.
+      // The terminal sharing this section is hidden here, so what moves is the photo.
+      (function () {
+        if (!window.matchMedia('(max-width: 700px)').matches) return;
+        var row = document.getElementById('ag-terminal-row'), anchor = document.getElementById('ag-controversial');
+        if (row && anchor && anchor.parentNode) anchor.parentNode.insertBefore(row, anchor);
       })();
 
       // Layers on phones: the desktop rings, one per layer, drawn over a single canvas so they overlap.
