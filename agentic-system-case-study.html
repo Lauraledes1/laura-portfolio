@@ -3508,6 +3508,7 @@
       (function () {
         var svg = document.getElementById('agmly'), bar = document.getElementById('agmly-bar'), card = document.getElementById('agmly-card');
         if (!svg || !bar || !card) return;
+        var canvas = bar.parentNode;
         var L = [
           ['Foundations', '#10b981', [[60, 95], [240, 78], [228, 138]], [
             ['Agent Architecture', ['Graph-based · multi-agent', 'Workspace memory']],
@@ -3629,11 +3630,15 @@
             '<span style="opacity:.55;font-size:9px">' + (open ? '▲' : '▼') + '</span>';
           btn.addEventListener('click', function (e) { e.stopPropagation(); open = !open; paint(); });
           bar.appendChild(btn);
+          var stale = canvas.querySelector('.agmly-back');
+          if (stale) stale.remove();
           if (open) {
+            // the backdrop covers the whole canvas, so a tap on the rings closes the menu instead of dragging one
             var back = document.createElement('button');
             back.type = 'button'; back.className = 'agmly-back agmly-t'; back.setAttribute('aria-label', 'Close the layers menu');
-            back.addEventListener('click', function (e) { e.stopPropagation(); open = false; paint(); });
-            bar.appendChild(back); bar.appendChild(menu());
+            back.addEventListener('pointerdown', function (e) { e.preventDefault(); e.stopPropagation(); open = false; paint(); });
+            canvas.appendChild(back);
+            bar.appendChild(menu());
           }
           L.forEach(function (l, li) {
             var o = G[li];
@@ -3675,6 +3680,9 @@
             });
           });
         }
+        document.addEventListener('pointerdown', function (e) {
+          if (open && !bar.contains(e.target)) { open = false; paint(); }
+        });
         if ('IntersectionObserver' in window) {
           new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(svg);
         } else { visible = true; }
