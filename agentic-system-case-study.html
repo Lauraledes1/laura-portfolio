@@ -752,7 +752,6 @@
             .agm { display: block; font-family: 'Syne', sans-serif; }
             .agd-only { display: none !important; }
             .agm-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #8a8a8a; margin: 0 0 12px; }
-            .agm-hint { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a8a8a; margin: 0 0 12px; }
             .agm strong { color: #fff; font-weight: 600; }
             /* bento: photo is desktop-only, phones show just the new-model diagram */
             .ag-bento { height: auto !important; }
@@ -784,7 +783,7 @@
             .agmly-all { display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; min-height: 44px; margin-top: 3px; border: 0; border-top: 1px solid rgba(255,255,255,.1); background: none; color: rgba(255,255,255,.5); cursor: pointer; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
             .agmly-node { cursor: pointer; outline: none; }
             .agmly-node:focus-visible .agmly-core { stroke-width: 3; }
-            .agmly-card { min-height: 132px; margin: 0 0 8px; }
+            .agmly-card { min-height: 132px; margin: 8px 0 0; }
             .agmly-box { background: #fff; border-radius: 12px; padding: 9px 12px; }
             .agmly-box h4 { margin: 0 0 4px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
             .agmly-box p { margin: 0; padding: 1px 0; font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.4; color: #6b6b6b; }
@@ -1290,7 +1289,7 @@
 
         <!-- Video Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="" style="padding-top: 0;">
-                <div class="agm agm-layers"><p class="agm-hint">choose layers · tap a node</p><div class="agmly-card" id="agmly-card" aria-live="polite"></div><div class="agmly-canvas"><div class="agmly-bar" id="agmly-bar"></div><svg id="agmly" viewBox="0 0 300 205" role="group" aria-label="Layers of the agentic system"></svg></div><ol class="agmcy-sr"><li>Layer 01 Foundations. Agent architecture: multi-agent graph-based, workspace memory. Intent patterns: context-rich delegation. Autonomy spectrum: L2 Collaborator, agents propose and a human approves; L3 Delegator, agents operate within limits with no step-by-step approval.</li><li>Layer 02 Trust. Trust layers: competency is the agent&#39;s domain expertise; alignment is the work&#39;s transparency; identity is human authority. Mechanisms: legibility and boundaries.</li><li>Layer 03 Behavior specs. Character: DA owns design decisions; EA owns technical constraints; PM Agent owns coherence; QA Agent owns validation; Orchestrator owns sequencing. Behavior dimensions: flag gaps with assumption tags; name the exact doc and agent; surface gaps before being asked; stay within the domain.</li><li>Layer 04 Evals. Agentic moments: intent intake, each agent re-structures its input before acting; execution visibility through assumption tags, validation reports and eval reports; mid-task steering with validation loops and inline feedback; failure handling with an explicit recovery path at every step.</li></ol></div>
+                <div class="agm agm-layers"><div class="agmly-canvas"><div class="agmly-bar" id="agmly-bar"></div><svg id="agmly" viewBox="0 0 300 205" role="group" aria-label="Layers of the agentic system"></svg></div><div class="agmly-card" id="agmly-card" aria-live="polite"></div><ol class="agmcy-sr"><li>Layer 01 Foundations. Agent architecture: multi-agent graph-based, workspace memory. Intent patterns: context-rich delegation. Autonomy spectrum: L2 Collaborator, agents propose and a human approves; L3 Delegator, agents operate within limits with no step-by-step approval.</li><li>Layer 02 Trust. Trust layers: competency is the agent&#39;s domain expertise; alignment is the work&#39;s transparency; identity is human authority. Mechanisms: legibility and boundaries.</li><li>Layer 03 Behavior specs. Character: DA owns design decisions; EA owns technical constraints; PM Agent owns coherence; QA Agent owns validation; Orchestrator owns sequencing. Behavior dimensions: flag gaps with assumption tags; name the exact doc and agent; surface gaps before being asked; stay within the domain.</li><li>Layer 04 Evals. Agentic moments: intent intake, each agent re-structures its input before acting; execution visibility through assumption tags, validation reports and eval reports; mid-task steering with validation loops and inline feedback; failure handling with an explicit recovery path at every step.</li></ol></div>
                 <div class="w-full agd-only" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
                   <style>
                     #sa38-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: 'DM Mono', monospace; user-select: none; }
