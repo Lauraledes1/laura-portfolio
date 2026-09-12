@@ -766,12 +766,21 @@
             .agm-new .agm-eyebrow { text-align: center; letter-spacing: .2em; color: rgba(255,255,255,.5); margin-bottom: 6px; }
             .agm-new svg { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; }
             /* accordions: cycle phases, layers, layer components */
-            .agm-list { display: flex; flex-direction: column; gap: 10px; }
-            .agm-card { border: 1px solid rgba(255,255,255,.15); border-radius: 12px; background: #0a0a0a; overflow: hidden; }
-            .agm-toggle { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #fff; text-align: left; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 500; }
-            .agm-chev { margin-left: auto; flex: none; width: 18px; height: 18px; color: #8a8a8a; transition: transform .2s ease; }
-            .agm-toggle[aria-expanded="true"] > .agm-chev { transform: rotate(90deg); }
             /* agentic system cycle: the original radial diagram on its dotted canvas, the active step shown above it so it's in view while tapping */
+            /* layers on phones: the desktop rings, stacked over one canvas, with the tapped node's card underneath */
+            .agmly-canvas { border-radius: 12px; padding: 10px 10px 14px; background-color: #000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px; }
+            .agmly-titles { display: flex; flex-direction: column; }
+            .agmly-title { display: flex; align-items: center; gap: 7px; width: 100%; min-height: 40px; padding: 4px 3px; border: 0; background: none; text-align: left; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+            .agmly-title.is-on { color: #fff; }
+            .agmly-dot { flex: none; width: 5px; height: 5px; border-radius: 50%; }
+            .agmly-canvas svg { display: block; width: 100%; height: auto; }
+            .agmly-node { cursor: pointer; outline: none; }
+            .agmly-node:focus-visible .agmly-core { stroke-width: 3; }
+            .agmly-card { margin-top: 10px; }
+            .agmly-box { background: #fff; border-radius: 12px; padding: 9px 12px; }
+            .agmly-box h4 { margin: 0 0 4px; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+            .agmly-box p { margin: 0; padding: 1px 0; font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.4; color: #444; }
+            .agmly-box b { font-weight: 500; color: #111; }
             .agmcy-canvas { border-radius: 12px; padding: 14px 0 16px; background-color: #000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px; }
             .agmcy-canvas svg { display: block; width: 100%; height: auto; }
             /* tap hint above the diagram, always visible */
@@ -785,19 +794,7 @@
             .agmcy-progress span { width: 5px; height: 5px; border-radius: 50%; background: #444; }
             .agmcy-progress span.on { background: #d1d5db; }
             .agmcy-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-            .agm-layer-num { flex: none; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .06em; padding: 4px 8px; border-radius: 6px; background: var(--bg); color: var(--fg); }
-            .agm-layer > .agm-panel { padding: 0 16px 8px; }
-            .agm-sub { border-top: 1px solid rgba(255,255,255,.1); }
-            .agm-sub > .agm-toggle { min-height: 52px; padding: 10px 0; font-size: 16px; }
-            .agm-tag { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px; background: var(--bg); color: var(--fg); }
-            .agm-sub > .agm-panel { padding: 0 0 14px; }
-            .agm-text { color: #c8c8c8; font-size: 16px; line-height: 1.6; }
-            .agm-dl { display: grid; gap: 12px; }
-            .agm-dl dt { color: #fff; font-size: 15px; font-weight: 600; }
-            .agm-dl dd { margin: 2px 0 0; color: #c8c8c8; font-size: 16px; line-height: 1.55; }
-            .agm-dl dd + dd { margin-top: 6px; }
         }
-        @media (prefers-reduced-motion: reduce) { .agm-chev { transition: none; } }
     </style>
 </head>
 <body class="bg-theme-primary">
@@ -1284,7 +1281,7 @@
 
         <!-- Video Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll="" style="padding-top: 0;">
-                <div class="agm agm-layers"><p class="agm-hint">Tap a layer title</p><div class="agm-list"><div class="agm-card agm-layer" style="--bg:#d1fae5;--fg:#065f46"><button type="button" class="agm-toggle" aria-expanded="true" aria-controls="agm-ly-1"><span class="agm-layer-num">Layer 01</span>Foundations<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1"><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1a"><span class="agm-tag">Agent Architecture</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1a" hidden><p class="agm-text">Multi-agent graph-based · workspace memory</p></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1b"><span class="agm-tag">Intent Patterns</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1b" hidden><p class="agm-text">Context-rich delegation</p></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-1c"><span class="agm-tag">Autonomy Spectrum</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-1c" hidden><dl class="agm-dl"><div><dt>L2 — Collaborator</dt><dd>PM Agent, Designer Agent, Engineer Agent propose → human approves</dd></div><div><dt>L3 — Delegator</dt><dd>Orchestrator, QA Agent operate within limits, no step-by-step approval</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#f3e8ff;--fg:#6d28d9"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2"><span class="agm-layer-num">Layer 02</span>Trust<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2a"><span class="agm-tag">Trust Layers</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2a" hidden><dl class="agm-dl"><div><dt>1. Competency</dt><dd>Agent's domain expertise</dd></div><div><dt>2. Alignment</dt><dd>Work's transparency</dd></div><div><dt>3. Identity</dt><dd>Human authority</dd></div></dl></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-2b"><span class="agm-tag">Mechanisms</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-2b" hidden><dl class="agm-dl"><div><dt>1 · Legibility</dt><dd><strong>Assumption Tags:</strong> agent decisions flagged inline for human review or override</dd><dd><strong>Validation Report + Eval Report:</strong> make agent reasoning visible</dd><dd><strong>Orchestrator @mentions:</strong> narrate progress</dd></div><div><dt>2 · Boundaries</dt><dd><strong>Never Zone:</strong> agents never create or merge PRs</dd><dd><strong>Approval Zone:</strong> every output requires human PR review</dd><dd><strong>Autonomous Zone:</strong> agents read/write within their domain</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#dbeafe;--fg:#1e40af"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3"><span class="agm-layer-num">Layer 03</span>Behavior Specs<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3a"><span class="agm-tag">Character</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3a" hidden><dl class="agm-dl"><div><dt>DA</dt><dd>owns design decisions.</dd></div><div><dt>EA</dt><dd>owns technical constraints.</dd></div><div><dt>PM Agent</dt><dd>owns coherence.</dd></div><div><dt>QA Agent</dt><dd>owns validation.</dd></div><div><dt>Orchestrator</dt><dd>owns sequencing.</dd></div></dl></div></div><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-3b"><span class="agm-tag">Behavior Dims</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-3b" hidden><dl class="agm-dl"><div><dt>Ambiguity</dt><dd>Flag gaps with "assumption tags".</dd></div><div><dt>Communication</dt><dd>Name the exact doc and agent.</dd></div><div><dt>Proactivity</dt><dd>Surface gaps before being asked.</dd></div><div><dt>Domain</dt><dd>Stay within the domain.</dd></div></dl></div></div></div></div><div class="agm-card agm-layer" style="--bg:#fee2e2;--fg:#b91c1c"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-4"><span class="agm-layer-num">Layer 04</span>Evals<svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-4" hidden><div class="agm-sub"><button type="button" class="agm-toggle" aria-expanded="false" aria-controls="agm-ly-4a"><span class="agm-tag">Agentic Moments</span><svg class="agm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><div class="agm-panel" id="agm-ly-4a" hidden><dl class="agm-dl"><div><dt>Intent intake</dt><dd>each agent reads and re-structures its input before acting</dd></div><div><dt>Execution visibility</dt><dd>assumption tags · validation reports · eval reports</dd></div><div><dt>Mid-task steering</dt><dd>validation loops and inline feedback</dd></div><div><dt>Failure handling</dt><dd>explicit recovery path at every step</dd></div></dl></div></div></div></div></div></div>
+                <div class="agm agm-layers"><p class="agm-hint">tap a layer title</p><div class="agmly-canvas"><div class="agmly-titles"><button type="button" class="agmly-title is-on" data-l="0" aria-pressed="true"><span class="agmly-dot" style="background:#10b981"></span>Layer 01 · Foundations</button><button type="button" class="agmly-title" data-l="1" aria-pressed="false"><span class="agmly-dot" style="background:rgba(255,255,255,.22)"></span>Layer 02 · Trust</button><button type="button" class="agmly-title" data-l="2" aria-pressed="false"><span class="agmly-dot" style="background:rgba(255,255,255,.22)"></span>Layer 03 · Behavior Specs</button><button type="button" class="agmly-title" data-l="3" aria-pressed="false"><span class="agmly-dot" style="background:rgba(255,255,255,.22)"></span>Layer 04 · Evals</button></div><svg id="agmly" viewBox="0 0 300 235" role="group" aria-label="Layers of the agentic system"></svg></div><div class="agmly-card" id="agmly-card" aria-live="polite"></div><ol class="agmcy-sr"><li>Layer 01 Foundations. Agent architecture: multi-agent graph-based, workspace memory. Intent patterns: context-rich delegation. Autonomy spectrum: L2 Collaborator, agents propose and a human approves; L3 Delegator, agents operate within limits with no step-by-step approval.</li><li>Layer 02 Trust. Trust layers: competency is the agent&#39;s domain expertise; alignment is the work&#39;s transparency; identity is human authority. Mechanisms: legibility and boundaries.</li><li>Layer 03 Behavior specs. Character: DA owns design decisions; EA owns technical constraints; PM Agent owns coherence; QA Agent owns validation; Orchestrator owns sequencing. Behavior dimensions: flag gaps with assumption tags; name the exact doc and agent; surface gaps before being asked; stay within the domain.</li><li>Layer 04 Evals. Agentic moments: intent intake, each agent re-structures its input before acting; execution visibility through assumption tags, validation reports and eval reports; mid-task steering with validation loops and inline feedback; failure handling with an explicit recovery path at every step.</li></ol></div>
                 <div class="w-full agd-only" style="height: 540px; border-radius: 12px; overflow: hidden; position: relative; background-color: #000000; background-image: radial-gradient(circle, #333 0.8px, transparent 0.8px); background-size: 20px 20px;">
                   <style>
                     #sa38-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: 'DM Mono', monospace; user-select: none; }
@@ -3462,16 +3459,6 @@
     </script>
   
     <script>
-      // Phone diagram versions: each toggle opens or closes the panel it controls
-      document.querySelectorAll('.agm .agm-toggle[aria-controls]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var panel = document.getElementById(btn.getAttribute('aria-controls'));
-          var open = btn.getAttribute('aria-expanded') !== 'true';
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          panel.hidden = !open;
-        });
-      });
-
       // New model on phones: every agent card gets the same 14px padding around its text,
       // and the flow lines are re-aimed at the card edges
       (function () {
@@ -3503,6 +3490,124 @@
         layout();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
         mq.addEventListener('change', layout);
+      })();
+
+      // Layers on phones: the desktop rings, one per layer, drawn over a single canvas so they overlap.
+      // Each title is its own switch, and tapping a node opens that node's card underneath.
+      (function () {
+        var svg = document.getElementById('agmly');
+        if (!svg) return;
+        var L = [
+          ['01', '#10b981', [[62, 112], [238, 90], [225, 152]], [
+            ['Agent Architecture', ['Graph-based · multi-agent', 'Workspace memory']],
+            ['Intent Patterns', ['Context-rich delegation']],
+            ['Autonomy Spectrum', ['L2 · propose, human approves', 'L3 · act within limits']]]],
+          ['02', '#a855f7', [[176, 169], [105, 99]], [
+            ['Trust Layers', ['Competency · domain expertise', 'Alignment · transparent work', 'Identity · human authority']],
+            ['Mechanisms', ['Legibility', 'Boundaries']]]],
+          ['03', '#0ea5e9', [[101, 198], [207, 58]], [
+            ['Character', ['DA · design decisions', 'EA · technical constraints', 'PM · coherence', 'QA · validation', 'Orchestrator · sequencing']],
+            ['Behavior Dims', ['Ambiguity · flag gaps', 'Communication · name doc and agent', 'Proactivity · surface early', 'Domain · stay in scope']]]],
+          ['04', '#ef4444', [[150, 150]], [
+            ['Agentic Moments', ['Intent intake · restructure input', 'Visibility · assumption reports', 'Steering · validation loops', 'Failure · recovery path']]]]];
+        var NS = 'http://www.w3.org/2000/svg', CX = 150, CY = 112;
+        var on = [true, false, false, false], sel = [0, 0], visible = false, G = [];
+        var card = document.getElementById('agmly-card');
+        var titles = document.querySelectorAll('.agmly-title');
+        // a ring that actually passes through the nodes: the circle through three of them,
+        // an ellipse carrying two at its ends, a circle around a lone one
+        function ring(p) {
+          if (p.length === 1) { var r0 = Math.max(40, Math.hypot(p[0][0] - CX, p[0][1] - CY)); return { cx: CX, cy: CY, rx: r0, ry: r0, rot: 0 }; }
+          if (p.length === 2) {
+            var mx = (p[0][0] + p[1][0]) / 2, my = (p[0][1] + p[1][1]) / 2, dx = p[1][0] - p[0][0], dy = p[1][1] - p[0][1], rx = Math.hypot(dx, dy) / 2;
+            return { cx: mx, cy: my, rx: rx, ry: Math.max(22, rx * 0.5), rot: Math.atan2(dy, dx) * 180 / Math.PI };
+          }
+          var A = p[0], B = p[1], C = p[2], d = 2 * (A[0] * (B[1] - C[1]) + B[0] * (C[1] - A[1]) + C[0] * (A[1] - B[1]));
+          if (Math.abs(d) < 1) return { cx: CX, cy: CY, rx: 90, ry: 90, rot: 0 };
+          var a2 = A[0] * A[0] + A[1] * A[1], b2 = B[0] * B[0] + B[1] * B[1], c2 = C[0] * C[0] + C[1] * C[1];
+          var ux = (a2 * (B[1] - C[1]) + b2 * (C[1] - A[1]) + c2 * (A[1] - B[1])) / d;
+          var uy = (a2 * (C[0] - B[0]) + b2 * (A[0] - C[0]) + c2 * (B[0] - A[0])) / d;
+          var r = Math.hypot(A[0] - ux, A[1] - uy);
+          return { cx: ux, cy: uy, rx: r, ry: r, rot: 0 };
+        }
+        L.forEach(function (l, li) {
+          var g = document.createElementNS(NS, 'g'), els = [], nodes = [];
+          [[10, '0.10'], [2.5, '0.55']].forEach(function (w) {
+            var e = document.createElementNS(NS, 'ellipse');
+            e.setAttribute('fill', 'none'); e.setAttribute('stroke', l[1]);
+            e.setAttribute('stroke-width', w[0]); e.setAttribute('stroke-opacity', w[1]);
+            g.appendChild(e); els.push(e);
+          });
+          l[2].forEach(function (pt, i) {
+            var n = document.createElementNS(NS, 'g');
+            n.setAttribute('class', 'agmly-node'); n.setAttribute('role', 'button'); n.setAttribute('tabindex', '0');
+            n.setAttribute('aria-label', l[3][i][0]);
+            n.innerHTML = '<circle class="agmly-halo" cx="' + pt[0] + '" cy="' + pt[1] + '" r="15" fill="' + l[1] + '" opacity="0"/>' +
+              '<circle class="agmly-core" cx="' + pt[0] + '" cy="' + pt[1] + '" r="5" fill="' + l[1] + '" stroke="#fff" stroke-width="1"/>' +
+              '<circle cx="' + pt[0] + '" cy="' + pt[1] + '" r="22" fill="transparent"/>';
+            n.addEventListener('click', function () { pick(li, i); });
+            n.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(li, i); } });
+            g.appendChild(n); nodes.push(n);
+          });
+          svg.appendChild(g); G.push({ g: g, els: els, nodes: nodes });
+        });
+        function pick(li, i) { sel = [li, i]; paint(); }
+        function paint() {
+          L.forEach(function (l, li) {
+            var o = G[li];
+            o.g.setAttribute('display', on[li] ? 'inline' : 'none');
+            o.nodes.forEach(function (n, i) {
+              var act = sel && sel[0] === li && sel[1] === i;
+              n.querySelector('.agmly-halo').setAttribute('opacity', act ? '0.2' : '0');
+              n.querySelector('.agmly-core').setAttribute('r', act ? 7 : 5);
+              n.querySelector('.agmly-core').setAttribute('stroke-width', act ? 2 : 1);
+              n.setAttribute('aria-pressed', act ? 'true' : 'false');
+            });
+            titles[li].classList.toggle('is-on', on[li]);
+            titles[li].setAttribute('aria-pressed', on[li] ? 'true' : 'false');
+            titles[li].querySelector('.agmly-dot').style.background = on[li] ? l[1] : 'rgba(255,255,255,.22)';
+          });
+          if (!sel) { card.innerHTML = ''; return; }
+          var l = L[sel[0]], it = l[3][sel[1]];
+          card.innerHTML = '<div class="agmly-box" style="box-shadow:0 0 18px ' + l[1] + '2e"><h4 style="color:' + l[1] + '">' + it[0] + '</h4>' +
+            it[1].map(function (x) {
+              var k = x.indexOf(' · ');
+              return '<p>' + (k < 0 ? '<b>' + x + '</b>' : '<b>' + x.slice(0, k) + '</b>' + x.slice(k)) + '</p>';
+            }).join('') + '</div>';
+        }
+        titles.forEach(function (b, i) {
+          b.addEventListener('click', function () {
+            on[i] = !on[i];
+            if (!on[i] && sel && sel[0] === i) sel = null;
+            if (on[i] && !sel) sel = [i, 0];
+            paint();
+          });
+        });
+        function shape(now) {
+          L.forEach(function (l, li) {
+            if (!on[li]) return;
+            var o = G[li];
+            var pts = l[2].map(function (b, i) {
+              var ph = li * 1.3 + i * 0.9;
+              var fx = now ? Math.cos(now / 1700 + ph) * 4 : 0, fy = now ? Math.sin(now / 1400 + ph) * 4 : 0;
+              o.nodes[i].setAttribute('transform', 'translate(' + fx.toFixed(2) + ',' + fy.toFixed(2) + ')');
+              return [b[0] + fx, b[1] + fy];
+            });
+            var r = ring(pts);
+            o.els.forEach(function (e) {
+              e.setAttribute('cx', r.cx.toFixed(1)); e.setAttribute('cy', r.cy.toFixed(1));
+              e.setAttribute('rx', r.rx.toFixed(1)); e.setAttribute('ry', r.ry.toFixed(1));
+              e.setAttribute('transform', 'rotate(' + r.rot.toFixed(1) + ' ' + r.cx.toFixed(1) + ' ' + r.cy.toFixed(1) + ')');
+            });
+          });
+        }
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(svg);
+        } else { visible = true; }
+        paint(); shape(0);
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          (function float(now) { if (visible) shape(now); requestAnimationFrame(float); })(0);
+        }
       })();
 
       // Agentic system cycle on phones: walks through each phase one step at a time; tapping a phase jumps to it.
