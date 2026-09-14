@@ -843,6 +843,7 @@
                   box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
           .b100-flowdemo .phone::after { content:''; position:absolute; z-index:9; top:19px; left:50%; transform:translateX(-50%);
                   width:70px; height:21px; background:#000; border-radius:11px; }
+          .phone { touch-action: pan-y; }
           .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
                   background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
                   --m-bg:#F4F3EF; --m-surface:#FFFFFF;
@@ -2091,7 +2092,7 @@
             {tag:'l3', t:'L3', h:'Execute', c:'Ops approves. Step 2 of 3 shows per-item progress, can be aborted at any point, and keeps the skipped transaction excluded.'},
             {tag:'l3', t:'L3', h:'Complete', c:'Step 3 of 3: 11 settled, 1 skipped, and $269,500 cleared. Reversible for 1 hour, with the full decision trail, from intent to result, one tap away.'}
           ];
-          var i = 0, timer = null, paused = false;
+          var i = 0, timer = null, paused = false, idle = null, onScreen = false;
           var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           function render(){
             screens.forEach(function(s,k){ s.classList.toggle('on', k===i); });
@@ -2104,22 +2105,73 @@
           }
           function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
           function tick(){ go(i+1); }
-          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 3400); }
+          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 2600); }
           function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-          demo.querySelector('.phone').addEventListener('click', function(){
+          // exploring pauses the walkthrough, but only until you stop: it picks itself back up
+          function hold(){
+            paused = true; demo.classList.add('paused'); stop();
+            if(idle) clearTimeout(idle);
+            idle = setTimeout(function(){
+              idle = null;
+              if(!onScreen) return;
+              paused = false; demo.classList.remove('paused'); play();
+            }, 8000);
+          }
+          var phone = demo.querySelector('.phone');
+          // a swipe walks the screens; a plain tap still pauses, so the two must not fire together
+          var swipeX = 0, swipeY = 0, tracking = false, swiped = false, usedTouch = false;
+          phone.addEventListener('click', function(){
+            if (swiped) { swiped = false; return; }
+            if(idle){ clearTimeout(idle); idle = null; }
             paused = !paused; demo.classList.toggle('paused', paused);
             paused ? stop() : play();
+          });
+          function startSwipe(x, y){ swipeX = x; swipeY = y; tracking = true; swiped = false; }
+          function moveSwipe(x, y, e){
+            if (!tracking) return;
+            var dx = x - swipeX, dy = y - swipeY;
+            // act only once the movement is clearly sideways, so vertical scrolling still belongs to the page
+            if (Math.abs(dx) > 24 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+              tracking = false; swiped = true;
+              if (e && e.cancelable) e.preventDefault();
+              go(i + (dx < 0 ? 1 : -1));
+              hold();
+            } else if (Math.abs(dy) > 22) {
+              tracking = false;
+            }
+          }
+          // touch events are what iOS fires reliably; pointer events cover mouse dragging
+          phone.addEventListener('touchstart', function(e){
+            usedTouch = true;
+            if (e.touches.length === 1) startSwipe(e.touches[0].clientX, e.touches[0].clientY);
+          }, { passive: true });
+          phone.addEventListener('touchmove', function(e){
+            if (e.touches.length === 1) moveSwipe(e.touches[0].clientX, e.touches[0].clientY, e);
+          }, { passive: false });
+          ['touchend', 'touchcancel'].forEach(function(t){
+            phone.addEventListener(t, function(){ tracking = false; });
+          });
+          phone.addEventListener('pointerdown', function(e){
+            if (usedTouch || e.pointerType === 'touch') return;
+            startSwipe(e.clientX, e.clientY);
+          });
+          phone.addEventListener('pointermove', function(e){
+            if (usedTouch || e.pointerType === 'touch') return;
+            moveSwipe(e.clientX, e.clientY, e);
+          });
+          ['pointerup', 'pointercancel'].forEach(function(t){
+            phone.addEventListener(t, function(){ tracking = false; });
           });
           dots.forEach(function(d){
             d.addEventListener('click', function(){
               go(parseInt(d.getAttribute('data-step'),10) - 1);
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
             });
           });
           demo.querySelectorAll('.m-src').forEach(function(s){
             function toggle(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               s.parentElement.classList.toggle('open');
             }
             s.addEventListener('click', toggle);
@@ -2130,14 +2182,14 @@
           demo.querySelectorAll('.m-conf-b').forEach(function(b){
             b.addEventListener('click', function(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               b.parentElement.classList.toggle('open');
             });
           });
           demo.querySelectorAll('.m-disc').forEach(function(d){
             function toggle(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               d.parentElement.classList.toggle('open');
             }
             d.addEventListener('click', toggle);
@@ -2149,14 +2201,14 @@
           if(flagRow){
             function openCopilot(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               go(1);
             }
             var anom = flagRow.querySelector('.m-anom');
             if(anom){
               anom.addEventListener('click', function(e){
                 e.stopPropagation();  // the row's own tap stays "open the copilot"
-                paused = true; demo.classList.add('paused'); stop();
+                hold();
                 anom.setAttribute('aria-expanded', anom.getAttribute('aria-expanded')==='true' ? 'false' : 'true');
               });
             }
@@ -2169,7 +2221,7 @@
           if(retryBtn){
             retryBtn.addEventListener('click', function(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               go(3);
             });
           }
@@ -2177,7 +2229,7 @@
           if(approveBtn){
             function approveAll(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               go(4);
             }
             approveBtn.addEventListener('click', approveAll);
@@ -2189,7 +2241,7 @@
           if(reviewEachBtn){
             function reviewEach(e){
               e.stopPropagation();
-              paused = true; demo.classList.add('paused'); stop();
+              hold();
               var w = reviewEachBtn.closest('.m-action').querySelector('.m-disc-wrap');
               if(w){ w.classList.add('open'); }
             }
@@ -2201,9 +2253,12 @@
           render();
           if('IntersectionObserver' in window){
             new IntersectionObserver(function(entries){
-              entries.forEach(function(e){ e.isIntersecting ? play() : stop(); });
+              entries.forEach(function(e){
+                onScreen = e.isIntersecting;
+                if(onScreen){ play(); } else { stop(); if(idle){ clearTimeout(idle); idle = null; } }
+              });
             }, {threshold: 0.35}).observe(demo);
-          } else { play(); }
+          } else { onScreen = true; play(); }
         })();
         </script>
 
