@@ -2105,7 +2105,7 @@
           }
           function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
           function tick(){ go(i+1); }
-          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 3400); }
+          function play(){ if(reduce||paused) return; stop(); timer = setInterval(tick, 2600); }
           function stop(){ if(timer){ clearInterval(timer); timer = null; } }
           // exploring pauses the walkthrough, but only until you stop: it picks itself back up
           function hold(){
