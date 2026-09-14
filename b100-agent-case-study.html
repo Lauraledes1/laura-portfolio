@@ -843,6 +843,7 @@
                   box-shadow:0 44px 90px -22px rgba(0,0,0,.62), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 3px #060708; }
           .b100-flowdemo .phone::after { content:''; position:absolute; z-index:9; top:19px; left:50%; transform:translateX(-50%);
                   width:70px; height:21px; background:#000; border-radius:11px; }
+          .phone { touch-action: pan-y; }
           .phone-screen { position:relative; width:100%; height:100%; border-radius:35px; overflow:hidden;
                   background:var(--m-bg); font-family:var(--m-sans); -webkit-font-smoothing:antialiased; color:var(--m-ink);
                   --m-bg:#F4F3EF; --m-surface:#FFFFFF;
@@ -2108,28 +2109,46 @@
           function stop(){ if(timer){ clearInterval(timer); timer = null; } }
           var phone = demo.querySelector('.phone');
           // a swipe walks the screens; a plain tap still pauses, so the two must not fire together
-          var swipeX = 0, swipeY = 0, tracking = false, swiped = false;
+          var swipeX = 0, swipeY = 0, tracking = false, swiped = false, usedTouch = false;
           phone.addEventListener('click', function(){
             if (swiped) { swiped = false; return; }
             paused = !paused; demo.classList.toggle('paused', paused);
             paused ? stop() : play();
           });
-          phone.addEventListener('pointerdown', function(e){
-            swipeX = e.clientX; swipeY = e.clientY; tracking = true; swiped = false;
-          });
-          phone.addEventListener('pointermove', function(e){
+          function startSwipe(x, y){ swipeX = x; swipeY = y; tracking = true; swiped = false; }
+          function moveSwipe(x, y, e){
             if (!tracking) return;
-            var dx = e.clientX - swipeX, dy = e.clientY - swipeY;
-            // only once the movement is clearly sideways, so vertical scrolling still belongs to the page
-            if (Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+            var dx = x - swipeX, dy = y - swipeY;
+            // act only once the movement is clearly sideways, so vertical scrolling still belongs to the page
+            if (Math.abs(dx) > 24 && Math.abs(dx) > Math.abs(dy) * 1.3) {
               tracking = false; swiped = true;
+              if (e && e.cancelable) e.preventDefault();
               go(i + (dx < 0 ? 1 : -1));
               paused = true; demo.classList.add('paused'); stop();
-            } else if (Math.abs(dy) > 24) {
+            } else if (Math.abs(dy) > 22) {
               tracking = false;
             }
+          }
+          // touch events are what iOS fires reliably; pointer events cover mouse dragging
+          phone.addEventListener('touchstart', function(e){
+            usedTouch = true;
+            if (e.touches.length === 1) startSwipe(e.touches[0].clientX, e.touches[0].clientY);
+          }, { passive: true });
+          phone.addEventListener('touchmove', function(e){
+            if (e.touches.length === 1) moveSwipe(e.touches[0].clientX, e.touches[0].clientY, e);
+          }, { passive: false });
+          ['touchend', 'touchcancel'].forEach(function(t){
+            phone.addEventListener(t, function(){ tracking = false; });
           });
-          ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(t){
+          phone.addEventListener('pointerdown', function(e){
+            if (usedTouch || e.pointerType === 'touch') return;
+            startSwipe(e.clientX, e.clientY);
+          });
+          phone.addEventListener('pointermove', function(e){
+            if (usedTouch || e.pointerType === 'touch') return;
+            moveSwipe(e.clientX, e.clientY, e);
+          });
+          ['pointerup', 'pointercancel'].forEach(function(t){
             phone.addEventListener(t, function(){ tracking = false; });
           });
           dots.forEach(function(d){
