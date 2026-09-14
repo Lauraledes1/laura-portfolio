@@ -674,6 +674,20 @@
         .related-cases .basis-0.grow.min-w-\[300px\] { display: flex !important; flex: initial !important; max-width: none !important; min-width: 0 !important; box-sizing: border-box !important; }
         .related-cases .basis-0.grow.min-w-\[300px\] > a { display: flex !important; width: 100% !important; flex: 1 1 auto !important; }
         .related-cases .case-study-card { width: 100% !important; height: 100% !important; }
+
+        /* Medium articles: a swipeable strip on phones, a single feature on desktop */
+        .mf-strip { display: flex; gap: 12px; margin-top: 24px; padding-bottom: 4px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .mf-strip::-webkit-scrollbar { display: none; }
+        .mf-strip > a { flex: 0 0 86%; scroll-snap-align: center; }
+        .mf-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+        .mf-dots span { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .25; }
+        .mf-dots span.on { opacity: 1; }
+        @media (min-width: 701px) {
+            .mf-strip { display: block; margin-top: 0; overflow: visible; }
+            .mf-strip > a:not(.mf-desk) { display: none; }
+            .mf-strip > a.mf-desk { max-width: 950px; margin: 24px auto 0; }
+            .mf-dots { display: none; }
+        }
         /* Medium feature card interactions (mirror case-study-card states) */
         .medium-feature a {
             background-color: var(--surface-primary);
@@ -2265,7 +2279,7 @@
         <section class="bg-theme-primary px-8 pt-[56px] pb-[56px] scroll-animate medium-feature" data-scroll="">
             <div class="w-full mx-auto flex flex-col gap-6">
                 <h2 class="font-syne font-medium text-[36px] leading-[1.4] text-theme-heading text-center">Want to know more about this project?</h2>
-                <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph text-center opacity-80">The framework and the prototype behind it are written up on my <a href="https://medium.com/@iamlauraledesna" target="_blank" rel="noopener noreferrer" class="inline-underline">Medium</a>.</p>
+                <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph text-center opacity-80">The framework and the prototype behind it are written up on my <a href="https://medium.com/@iamlauraledesna" target="_blank" rel="noopener noreferrer" class="inline-underline">Medium</a>.</p><div class="mf-strip"><a href="https://medium.com/@iamlauraledesna/anti-convergence-design-technology-that-scales-diversity-9360cea37ef1" target="_blank" rel="noopener noreferrer" class="block border border-theme p-4 group bg-theme-primary mf-desk"><div class="flex flex-row items-center gap-6"><div class="shrink-0 w-[300px] h-[180px] border border-theme bg-theme-primary relative flex items-center justify-center" style="background-image: url('https://miro.medium.com/v2/resize:fit:1200/1*BmXtqASXXUClTY1TnNhcKg.jpeg'); background-size: cover; background-position: center;"></div><div class="basis-0 grow flex flex-col min-h-[180px] justify-between"><div class="flex flex-col gap-3"><div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">Anti-Convergence Design: Technology that Scales Diversity</div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph">How do we design systems that grow without erasing different ways of thinking?</div></div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph opacity-70">Sep 9 • Medium</div></div></div></a><a href="https://medium.com/@iamlauraledesna/will-ai-replace-my-doctor-0db75e7781d0" target="_blank" rel="noopener noreferrer" class="block border border-theme p-4 group bg-theme-primary"><div class="flex flex-row items-center gap-6"><div class="shrink-0 w-[300px] h-[180px] border border-theme bg-theme-primary relative flex items-center justify-center" style="background-image: url('https://miro.medium.com/v2/resize:fit:1200/1*8oXaDIGEhR9362I2oBB5AA.png'); background-size: cover; background-position: center;"></div><div class="basis-0 grow flex flex-col min-h-[180px] justify-between"><div class="flex flex-col gap-3"><div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">Will AI Replace My Doctor?</div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph">We had artificial intelligence for everything except understanding what patients actually needed.</div></div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph opacity-70">Jul 30 • Medium</div></div></div></a><a href="https://medium.com/@iamlauraledesna/the-women-banks-forgot-16e62daa3a50" target="_blank" rel="noopener noreferrer" class="block border border-theme p-4 group bg-theme-primary"><div class="flex flex-row items-center gap-6"><div class="shrink-0 w-[300px] h-[180px] border border-theme bg-theme-primary relative flex items-center justify-center" style="background-image: url('https://miro.medium.com/v2/da:true/resize:fit:1200/0*Hqb-hlkJsfrE4yFU'); background-size: cover; background-position: center;"></div><div class="basis-0 grow flex flex-col min-h-[180px] justify-between"><div class="flex flex-col gap-3"><div class="font-syne font-medium text-[27px] leading-[1.4] text-theme-heading">The Women Banks Forgot</div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph">One year of designing for an excluded community taught me that technology isn’t just about features—it’s about dignity and trust.</div></div><div class="font-syne font-normal font-[400] text-[17px] leading-[1.6] text-theme-paragraph opacity-70">Jul 30 • Medium</div></div></div></a></div><div class="mf-dots" aria-hidden="true"></div>
             </div>
         </section>
 
@@ -2604,5 +2618,19 @@
           });
         });
       })();
+    </script>
+    <script>
+    // the article strip: dots follow the swipe; desktop shows a single card and no dots
+    (function () {
+      var strip = document.querySelector('.mf-strip'), dots = document.querySelector('.mf-dots');
+      if (!strip || !dots) return;
+      var n = strip.children.length, html = '';
+      for (var i = 0; i < n; i++) html += '<span' + (i ? '' : ' class="on"') + '></span>';
+      dots.innerHTML = html;
+      strip.addEventListener('scroll', function () {
+        var i = Math.round(strip.scrollLeft / (strip.scrollWidth / n));
+        for (var k = 0; k < dots.children.length; k++) dots.children[k].className = k === i ? 'on' : '';
+      });
+    })();
     </script>
 </body></html>
