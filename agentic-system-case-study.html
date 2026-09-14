@@ -3694,6 +3694,13 @@
               e.setAttribute('transform', 'rotate(' + r.rot.toFixed(1) + ' ' + r.cx.toFixed(1) + ' ' + r.cy.toFixed(1) + ')');
             });
           });
+          // the selected node breathes, so it reads as tappable at a glance
+          if (sel && on[sel[0]]) {
+            var halo = G[sel[0]].nodes[sel[1]].querySelector('.agmly-halo');
+            var v = now ? (Math.sin(now / 400) + 1) / 2 : 0.5;
+            halo.setAttribute('opacity', (0.12 + v * 0.2).toFixed(3));
+            halo.setAttribute('r', (13 + v * 5).toFixed(2));
+          }
         }
         document.addEventListener('pointerdown', function (e) {
           if (open && !bar.contains(e.target)) { open = false; paint(); }
