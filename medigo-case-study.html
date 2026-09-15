@@ -741,7 +741,16 @@
         }
         .inline-underline:hover::after { transform: scaleX(1); height: 2px; }
         .inline-underline:active::after { height: 4px; }
-    </style>
+              /* ---- Mobile ---- */
+          /* Phones get a still frame instead of the autoplay videos (hero + More from me).
+             Same condition as the <source media> on those videos, so they never download there. */
+          .m-still { display:none; }
+          @media (max-width:640px), (pointer:coarse) and (max-height:500px){
+            video.has-still { display:none; }
+            img.m-still { display:block; }
+            picture.m-still { display:contents; }
+          }
+        </style>
 </head>
 <body class="bg-theme-primary">
     <div class="min-h-screen bg-theme-inverse p-[1px] flex flex-col gap-[1px] mx-auto max-w-[1920px] w-full">
@@ -804,9 +813,9 @@
 
         <!-- Case Study Content -->
         <div class="bg-theme-primary case-study-content animate-slide-up pb-16" style="animation-delay: 0.2s;">
-            <video class="case-study-hero w-full h-full object-cover" autoplay muted loop playsinline>
-                <source src="assets/medigo-case-study/media-3.mp4" type="video/mp4">
-            </video>
+            <video class="case-study-hero w-full h-full object-cover has-still" autoplay muted loop playsinline>
+                <source src="assets/medigo-case-study/media-3.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+            </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="case-study-hero w-full h-full object-cover" src="assets/medigo-case-study/media-3-still.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" width="1024" height="539" style="height:auto; aspect-ratio:1024/539;"></picture>
             <div class="w-full mx-auto">
                 <div class="flex flex-row gap-6 mt-8 animate-slide-up" style="animation-delay: 0.4s;">
                     <div class="basis-0 grow">
@@ -990,9 +999,9 @@
         
         <!-- Full Width Image Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll>
-            <video class="case-study-hero w-full h-full object-cover" autoplay muted loop playsinline>
-                <source src="assets/medigo-case-study/media-13.mp4" type="video/mp4">
-            </video>
+            <video class="case-study-hero w-full h-full object-cover has-still" autoplay muted loop playsinline>
+                <source src="assets/medigo-case-study/media-13.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+            </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="case-study-hero w-full h-full object-cover" src="assets/medigo-case-study/media-13-still.jpg" alt="" loading="lazy" decoding="async" width="1024" height="640" style="height:auto; aspect-ratio:1024/640;"></picture>
         </div>
 
         <!-- Content Block with Multiple Text Sections -->
@@ -1168,9 +1177,9 @@
         <!-- Full Width Image Section -->
         <div class="bg-theme-primary p-8 scroll-animate" data-scroll>
             <div class="w-full mx-auto">
-                <video class="case-study-hero w-full h-full object-cover" autoplay muted loop playsinline>
-                    <source src="assets/medigo-case-study/media-15.mp4" type="video/mp4">
-                </video>            </div>
+                <video class="case-study-hero w-full h-full object-cover has-still" autoplay muted loop playsinline>
+                    <source src="assets/medigo-case-study/media-15.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+                </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="case-study-hero w-full h-full object-cover" src="assets/medigo-case-study/media-15-still.jpg" alt="" loading="lazy" decoding="async" width="1024" height="853" style="height:auto; aspect-ratio:1024/853;"></picture>            </div>
         </div>
 
 
@@ -1237,9 +1246,9 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/agentic-system-case-study/media-8.jpg')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay muted loop playsinline>
-                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4">
-                                </video>
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay muted loop playsinline>
+                                    <source src="assets/agentic-system-case-study/media-6.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+                                </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="absolute inset-0 w-full h-full object-cover opacity-100" src="assets/agentic-system-case-study/media-6-still.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720"></picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Agentic Systems • Workflow Design • Boost B2B payments</div>
@@ -1262,9 +1271,9 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/nestbank-case-study/media-13.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay muted loop playsinline>
-                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4">
-                                </video>
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay muted loop playsinline>
+                                    <source src="assets/nestbank-case-study/media-14.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+                                </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="absolute inset-0 w-full h-full object-cover opacity-100" src="assets/nestbank-case-study/media-14-still.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720"></picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Lead UX • Fintech • 0-1 • Grameen America</div>
@@ -1287,9 +1296,9 @@
                         <div class="case-study-card border border-theme p-2 flex gap-4 h-[299px] group">
                             <div class="flex-1 relative">
                                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/archive/archive.png')"></div>
-                                <video class="absolute inset-0 w-full h-full object-cover opacity-100" autoplay muted loop playsinline>
-                                    <source src="assets/archive/archive.mp4" type="video/mp4">
-                                </video>
+                                <video class="absolute inset-0 w-full h-full object-cover opacity-100 has-still" autoplay muted loop playsinline>
+                                    <source src="assets/archive/archive.mp4" type="video/mp4" media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))">
+                                </video><picture class="m-still"><source media="(min-width: 641px) and (min-height: 501px), (min-width: 641px) and (not (pointer: coarse))" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><img class="absolute inset-0 w-full h-full object-cover opacity-100" src="assets/archive/archive-still.jpg" alt="" loading="lazy" decoding="async" width="1280" height="693"></picture>
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
                                 <div class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph">Collection • More Work</div>
@@ -1515,6 +1524,18 @@
       strip.addEventListener('scroll', function () {
         var i = Math.round(strip.scrollLeft / (strip.scrollWidth / n));
         for (var k = 0; k < dots.children.length; k++) dots.children[k].className = k === i ? 'on' : '';
+      });
+    })();
+    </script>
+    <script>
+    /* A video whose source was skipped on a phone-sized load needs a reload if the
+       window later grows past the breakpoint (e.g. a tablet leaving split view). */
+    (function () {
+      window.matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').addEventListener('change', function (e) {
+        if (e.matches) return;
+        document.querySelectorAll('video.has-still').forEach(function (v) {
+          if (!v.currentSrc) { v.load(); var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
+        });
       });
     })();
     </script>
