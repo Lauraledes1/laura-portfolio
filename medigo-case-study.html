@@ -750,7 +750,16 @@
             img.m-still { display:block; }
             picture.m-still { display:contents; }
           }
-        </style>
+        
+        /* Back to top: offered on every screen size, not only phones. It stays out of the
+           way until the reader is past the first screen and heading back up, or at the end. */
+        .fab-top { display: flex; position: fixed; right: 24px; bottom: 24px; width: 48px; height: 48px; align-items: center; justify-content: center; border-radius: 0; background: #fff; border: 1px solid #000; z-index: 90; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+        .fab-top.show { opacity: 1; transform: none; pointer-events: auto; }
+        .fab-top img { width: 24px; height: 24px; }
+        .dark .fab-top img { filter: none; }
+        @media (max-width: 700px) { .fab-top { right: 16px; bottom: 16px; } }
+        @media (prefers-reduced-motion: reduce) { .fab-top { transition: none; } }
+    </style>
 </head>
 <body class="bg-theme-primary">
     <div class="min-h-screen bg-theme-inverse p-[1px] flex flex-col gap-[1px] mx-auto max-w-[1920px] w-full">
@@ -1537,6 +1546,27 @@
           if (!v.currentSrc) { v.load(); var pr = v.play(); if (pr && pr.catch) pr.catch(function(){}); }
         });
       });
+    })();
+    </script>
+    <script>
+    // Back to top: shown past the first screen when scrolling back up, or at the end of the page
+    (function () {
+      var fab = document.getElementById('fab-top');
+      if (!fab) return;
+      var lastY = window.scrollY, ticking = false;
+      function update() {
+        ticking = false;
+        var y = window.scrollY, vh = window.innerHeight;
+        var atEnd = y + vh >= document.documentElement.scrollHeight - 80;
+        if (y < vh) fab.classList.remove('show');
+        else if (atEnd || y < lastY - 6) fab.classList.add('show');
+        else if (y > lastY + 6) fab.classList.remove('show');
+        if (Math.abs(y - lastY) > 6) lastY = y;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
     })();
     </script>
 </body>
