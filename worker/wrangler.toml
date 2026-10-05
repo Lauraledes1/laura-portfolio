@@ -1,0 +1,12 @@
+name = "break-room-api"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Origins allowed to call this Worker. The first one is the fallback
+# used when a request arrives with no Origin header.
+ALLOWED_ORIGINS = "https://lauraledesna.io,http://localhost:8000"
+
+# ANTHROPIC_API_KEY is NOT set here — it is a secret:
+#   npx wrangler secret put ANTHROPIC_API_KEY

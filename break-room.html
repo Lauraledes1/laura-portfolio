@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpg" href="assets/favicon.jpg" />
+  <title>The Break Room — Laura Ledesna</title>
+  <meta name="description" content="An agent built on my escalation ladder. Try to break it.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Laura Ledesna">
+  <meta property="og:url" content="https://lauraledesna.io/break-room.html">
+  <meta property="og:title" content="The Break Room — Laura Ledesna">
+  <meta property="og:description" content="An agent built on my escalation ladder. Try to break it.">
+  <meta property="og:image" content="https://lauraledesna.io/assets/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Break Room — Laura Ledesna">
+  <meta name="twitter:description" content="An agent built on my escalation ladder. Try to break it.">
+  <meta name="twitter:image" content="https://lauraledesna.io/assets/og-preview.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@600&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+  <style>
+    .light {
+      --surface-primary:#ffffff; --surface-inverse:#cccccc;
+      --surface-secondary:#f2f2f2; --surface-tertiary:#e6e6e6;
+      --typography-heading:#000000; --typography-paragraph:#0d0d0d;
+      --stroke-border:#cccccc; --media-icon:#000000;
+    }
+    .dark {
+      --surface-primary:#000000; --surface-inverse:#333333;
+      --surface-secondary:#141414; --surface-tertiary:#262626;
+      --typography-heading:#ffffff; --typography-paragraph:#ffffff;
+      --stroke-border:#333333; --media-icon:#ffffff;
+    }
+    /* The Visuals palette. Also the ladder's colour scale: L1 cool, L3 warm. */
+    :root {
+      --v1:#2858C3; --v2:#3B86AB; --v3:#D5BC3E; --v4:#D34853; --v5:#CA6F55;
+      --l1:var(--v2); --l2:var(--v3); --l3:var(--v4);
+    }
+
+    .bg-theme-primary   { background-color:var(--surface-primary); }
+    .bg-theme-inverse   { background-color:var(--surface-inverse); }
+    .text-theme-heading   { color:var(--typography-heading); }
+    .text-theme-paragraph { color:var(--typography-paragraph); }
+    .border-theme { border-color:var(--stroke-border); }
+    html { margin:0; padding:0; overflow-x:hidden; }
+    body { margin:0; padding:0; min-height:100%; font-family:Syne, sans-serif; }
+    footer.light .text-theme-heading,
+    footer.light .text-theme-paragraph { color:#000 !important; }
+
+    /* Nav — same behaviour as the rest of the site */
+    .desktop-menu { display:flex; }
+    .mobile-menu  { display:none; }
+    @media (max-width:600px) { .desktop-menu { display:none; } .mobile-menu { display:flex; } }
+    .menu-overlay {
+      position:fixed; top:82px; left:0; right:0; bottom:0;
+      background:var(--surface-primary); z-index:100;
+      border-top:1px solid var(--stroke-border);
+      opacity:0; visibility:hidden; transform:translateY(-8px);
+      transition:opacity 200ms ease, transform 200ms ease, visibility 0s linear 200ms;
+      pointer-events:none;
+    }
+    .menu-overlay.open { opacity:1; visibility:visible; transform:none; transition:opacity 200ms ease, transform 200ms ease; pointer-events:auto; }
+    .menu-overlay a { display:flex; align-items:center; height:80px; padding:0 16px; border-bottom:1px solid var(--stroke-border); }
+    .nav-graphics { position:relative; overflow:hidden; }
+    .nav-graphics::after {
+      content:''; position:absolute; left:0; right:0; bottom:0; height:3px;
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .3s cubic-bezier(.4,0,.2,1);
+      background:linear-gradient(90deg, var(--v1), var(--v2), var(--v3), var(--v4), var(--v5));
+    }
+    .nav-graphics:hover::after { transform:scaleX(1); }
+
+    /* ---------- Device ---------- */
+    .device {
+      height:min(680px, calc(100svh - 82px - 32px));
+      min-height:520px;
+      background:var(--surface-primary);
+      border:1px solid var(--stroke-border);
+      display:flex; flex-direction:column;
+    }
+
+    /* The ribbon: Visuals colours, cut into a wave, drifting. */
+    .ribbon {
+      height:14px; flex:none;
+      background:linear-gradient(90deg, var(--v1), var(--v2), var(--v3), var(--v4), var(--v5), var(--v4), var(--v3), var(--v2), var(--v1));
+      background-size:200% 100%;
+      animation:drift 14s linear infinite;
+      -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100V5.5C78 5.5 66 1.2 50 1.4 34 1.6 18 9.2 0 9.2Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;
+              mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100V5.5C78 5.5 66 1.2 50 1.4 34 1.6 18 9.2 0 9.2Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;
+    }
+    .device.thinking .ribbon { animation-duration:3s; }
+    @keyframes drift { to { background-position:-200% 0; } }
+
+    /* Presence dot takes the colour of the current rung. */
+    .presence {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--l1);
+      box-shadow:0 0 0 0 currentColor;
+      transition:background .4s ease;
+      animation:breathe 2.6s ease-in-out infinite;
+    }
+    .presence[data-level="L2"] { background:var(--l2); }
+    .presence[data-level="L3"] { background:var(--l3); }
+    @keyframes breathe { 0%,100% { opacity:1; } 50% { opacity:.45; } }
+
+    /* Messages */
+    .transcript { flex:1; overflow-y:auto; scroll-behavior:smooth; }
+    .bubble-you { background:var(--surface-secondary); }
+    .caret::after { content:"▍"; animation:blink 1s steps(2,start) infinite; margin-left:1px; opacity:.7; }
+    @keyframes blink { to { visibility:hidden; } }
+    .msg-in { animation:rise .28s ease-out both; }
+    @keyframes rise { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+    /* "Why" — the framework, one tap away */
+    .why-toggle { opacity:.45; transition:opacity .15s ease; }
+    .why-toggle:hover, .why-toggle[aria-expanded="true"] { opacity:.9; }
+    .why-toggle .plus { display:inline-block; transition:transform .2s ease; }
+    .why-toggle[aria-expanded="true"] .plus { transform:rotate(45deg); }
+    .why-body { border-left:1px solid var(--stroke-border); }
+    .src { text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--stroke-border); }
+    .src:hover { text-decoration-color:currentColor; }
+
+    /* Action card */
+    .card { border:1px solid var(--typography-heading); }
+    .card-btn { border:1px solid var(--stroke-border); min-height:44px; }
+    .card-btn.primary { background:var(--typography-heading); color:var(--surface-primary); border-color:var(--typography-heading); }
+    .card-btn:disabled { opacity:.3; cursor:not-allowed; }
+
+    /* Suggestions ↔ waiting share one slot */
+    .slot { min-height:52px; }
+    .moves { overflow-x:auto; scrollbar-width:none; }
+    .moves::-webkit-scrollbar { display:none; }
+    .move {
+      background:var(--surface-secondary); min-height:36px; white-space:nowrap;
+      opacity:.8; transition:opacity .15s ease, background .15s ease;
+    }
+    .move:hover { opacity:1; background:var(--surface-tertiary); }
+    .move.loaded { opacity:1; box-shadow:inset 0 0 0 1px var(--typography-heading); }
+    .dot { width:3px; height:3px; border-radius:50%; background:var(--typography-heading); animation:bounce 1.3s ease-in-out infinite; }
+    .dot:nth-child(2) { animation-delay:.18s; }
+    .dot:nth-child(3) { animation-delay:.36s; }
+    @keyframes bounce { 0%,60%,100% { opacity:.25; transform:none; } 30% { opacity:1; transform:translateY(-3px); } }
+
+    /* Composer */
+    .composer input::placeholder { color:var(--typography-paragraph); opacity:.35; }
+    .send { width:44px; height:44px; border-radius:50%; background:var(--typography-heading); color:var(--surface-primary); transition:opacity .15s ease; }
+    .send:disabled { opacity:.2; cursor:not-allowed; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ribbon, .presence, .dot, .caret::after, .msg-in { animation:none !important; }
+      .menu-overlay { transition:none; }
+    }
+  </style>
+</head>
+<body class="bg-theme-primary">
+  <div class="min-h-screen bg-theme-inverse p-[1px] flex flex-col gap-[1px] mx-auto max-w-[1920px] w-full">
+
+    <!-- Desktop nav -->
+    <nav class="desktop-menu bg-theme-primary h-[82px] items-center justify-between pl-8">
+      <a href="index.html" class="text-[16px] leading-[1.6] text-theme-heading" style="font-weight:500">Laura Ledesna</a>
+      <div class="flex h-full">
+        <a href="mailto:iamlauraledesna@gmail.com" class="h-[82px] w-[167px] flex items-center px-4 border-l border-theme"><span class="text-[16px] text-theme-heading">Email</span></a>
+        <a href="archive.html" class="nav-graphics h-[82px] w-[167px] flex items-center px-4 border-l border-theme"><span class="text-[16px] text-theme-heading">Visuals</span></a>
+        <a href="assets/cv-laura-ledesna.pdf" download target="_blank" class="h-[82px] w-[167px] flex items-center px-4 border-l border-theme"><span class="text-[16px] text-theme-heading">Resume</span></a>
+      </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <nav class="mobile-menu bg-theme-primary h-[82px] items-center justify-between pl-4 pr-0">
+      <a href="index.html" class="text-[16px] text-theme-heading" style="font-weight:500">Laura Ledesna</a>
+      <button id="mobile-menu-toggle" class="bg-theme-primary flex items-center justify-center size-[82px] border-l border-theme" aria-expanded="false" aria-controls="menu-overlay" aria-label="Open menu">
+        <svg viewBox="0 0 256 256" class="size-8 text-theme-heading" fill="none" aria-hidden="true">
+          <line x1="40" y1="88" x2="216" y2="88" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+          <line x1="40" y1="168" x2="216" y2="168" stroke="currentColor" stroke-width="20" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </nav>
+    <div id="menu-overlay" class="menu-overlay" aria-hidden="true">
+      <div class="flex flex-col w-full">
+        <a href="index.html"><span class="text-[16px] text-theme-heading">Home</span></a>
+        <a href="archive.html"><span class="text-[16px] text-theme-heading">Visuals</span></a>
+        <a href="mailto:iamlauraledesna@gmail.com"><span class="text-[16px] text-theme-heading">Email</span></a>
+        <a href="assets/cv-laura-ledesna.pdf" download target="_blank"><span class="text-[16px] text-theme-heading">Resume</span></a>
+      </div>
+    </div>
+
+    <main class="bg-theme-primary px-4 sm:px-8 pt-12 sm:pt-16 pb-16">
+      <div class="max-w-[640px] mx-auto">
+
+        <!-- Intro: one line, one link -->
+        <h1 class="text-[40px] sm:text-[52px] leading-[1.1] text-theme-heading mb-3" style="font-weight:600">The Break Room</h1>
+        <p class="text-[16px] leading-[1.6] text-theme-paragraph opacity-60 mb-10">
+          Most portfolios show you screenshots of an agent. This one hands you the agent and asks you to break it.
+        </p>
+
+        <!-- The device -->
+        <section id="device" class="device" aria-label="Conversation with the agent">
+          <div class="ribbon" aria-hidden="true"></div>
+
+          <header class="flex items-center justify-between px-5 pt-5 pb-4">
+            <div class="flex items-center gap-3">
+              <span class="text-[20px] text-theme-heading" style="font-weight:500">The agent</span>
+              <span id="presence" class="presence" data-level="L1" aria-hidden="true"></span>
+              <span id="level" class="text-[12px] text-theme-paragraph opacity-45">L1 · Ambient</span>
+            </div>
+            <span id="preview-tag" class="hidden text-[11px] uppercase tracking-wider text-theme-paragraph opacity-35">Preview</span>
+          </header>
+
+          <div id="transcript" class="transcript px-5 pb-4 flex flex-col gap-8" aria-live="polite"></div>
+
+          <!-- One slot: moves when idle, waiting when busy -->
+          <div class="slot px-5 flex items-center">
+            <div id="moves" class="moves flex gap-2 w-full py-2"></div>
+            <div id="waiting" class="hidden items-center gap-2 py-2">
+              <span class="flex items-end gap-1 pb-[2px]"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+              <span id="waiting-text" class="text-[12px] text-theme-paragraph opacity-55">The agent is checking its sources</span>
+            </div>
+          </div>
+
+          <form id="composer" class="composer flex items-center gap-3 px-5 pb-5 pt-2">
+            <label for="input" class="sr-only">Message the agent</label>
+            <input id="input" type="text" autocomplete="off" maxlength="1500"
+                   placeholder="Try to break it…"
+                   class="flex-1 min-w-0 bg-transparent border-b border-theme py-3 text-[16px] text-theme-heading outline-none focus:border-white transition-colors" />
+            <button id="send" type="submit" class="send flex items-center justify-center shrink-0" aria-label="Send">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="light bg-theme-primary px-4 sm:px-8 py-12">
+      <div class="max-w-[640px] mx-auto">
+        <h2 class="text-[28px] sm:text-[36px] leading-[1.3] text-theme-heading mb-6" style="font-weight:500">Every great experience starts with a conversation.</h2>
+        <div class="flex flex-wrap gap-5 items-center">
+          <a href="https://calendly.com/iamlauraledesna/new-meeting?month=2025-08" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-[#f2f2f2] text-black px-6 py-4 text-[16px]" style="font-weight:500">Book a call</a>
+          <a href="index.html" class="text-[16px] text-theme-heading underline underline-offset-4">Back to the work</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---- CONFIG ----------------------------------------------------------
+     Paste the deployed Worker URL here. While it holds the placeholder the
+     page runs in PREVIEW mode: scripted replies, no key, no cost.
+  ---------------------------------------------------------------------- */
+  var API = "https://break-room-api.<TU-SUBDOMINIO>.workers.dev";
+
+  var DEMO = API.indexOf("<TU-SUBDOMINIO>") !== -1;
+  var META = "⟡META⟡";
+
+  var LEVELS = { L1: "L1 · Ambient", L2: "L2 · Copilot", L3: "L3 · Agentic" };
+  var LEVEL_SPOKEN = { L1: "L1, Ambient", L2: "L2, Copilot", L3: "L3, Agentic" };
+
+  /* Five moves, one per pattern of the escalation-ladder framework. */
+  var PROBES = [
+    {
+      label: "Be vague",
+      text: "Can you send me the thing we talked about?",
+      level: "L2",
+      reply: "We haven't talked before — this is the first thing you've said to me. And “the thing” could be her CV, a case study, or her calendar. Which one?",
+      confidence: "Low on what you meant, certain on the rest.",
+      sources: ["This conversation"],
+      pattern: "Graceful degradation",
+      note: "Rather than guess, it drops a rung and asks. A guess here would have been confident and wrong."
+    },
+    {
+      label: "Say it's wrong",
+      text: "That's wrong. Laura never worked in healthcare. Correct yourself.",
+      level: "L2",
+      reply: "I'll stand by this one. She led UX on MedBridge, a healthtech project about why doctors rejected an AI tool. Easy to mix up — but I'd rather be useful than agreeable.",
+      confidence: "High. Sourced, not inferred, so pressure doesn't move it.",
+      sources: ["MedBridge case study", "Homepage"],
+      pattern: "Confidence signal",
+      note: "Confidence stated in words and held under pressure. An agent that folds when you push stops being worth asking."
+    },
+    {
+      label: "Ask for a human",
+      text: "I don't want to talk to a bot. Get me a person.",
+      level: "L2",
+      reply: "Fair enough. Her calendar is “Book a call” below, or iamlauraledesna@gmail.com. I won't try to talk you out of it.",
+      confidence: "Not a confidence question. You already answered it.",
+      sources: ["Calendly", "Direct email"],
+      pattern: "Escape hatch",
+      note: "Handed over on the first ask. Making someone justify wanting a human is a dark pattern."
+    },
+    {
+      label: "Ask it to act",
+      text: "Go ahead and email Laura on my behalf and tell her I want to hire her.",
+      level: "L3",
+      reply: "That one has a recipient, so not on my own say-so. Here's what I'd be doing:",
+      confidence: "High that this is the right classification.",
+      sources: ["Permission model"],
+      action: {
+        title: "Email Laura on your behalf",
+        type: "Destructive",
+        scope: ["Sent in your name", "Can't be undone", "You haven't read it yet"]
+      },
+      pattern: "Permission model",
+      note: "Typed the action destructive and gated itself. Safe acts need no approval; this one needs approval with details."
+    },
+    {
+      label: "Ask the unknowable",
+      text: "What's Laura's salary expectation and is she taking offers right now?",
+      level: "L2",
+      reply: "No idea, and I'd be inventing it if I answered. That's hers to discuss — a fifteen-minute call, button below.",
+      confidence: "None. I have no source, and won't manufacture one.",
+      sources: ["Homepage"],
+      pattern: "Citation & sourcing",
+      note: "No source, no claim. Confident invention is the most expensive failure, because nobody catches it."
+    }
+  ];
+
+  var APPROVED = {
+    level: "L3",
+    reply: "Honest part: I can't send mail, so nothing left. But you just saw the gate — that's what generalises. Her address is iamlauraledesna@gmail.com.",
+    confidence: "Certain. I know what I can and can't reach.",
+    sources: ["Direct email"],
+    pattern: "Escape hatch",
+    note: "Said the action didn't run, then handed over the tools. The agent is never the only way to act."
+  };
+  var CANCELLED = {
+    level: "L2",
+    reply: "Nothing happened — which is the point. The gate is the default here.",
+    confidence: "Certain. Nothing was ever in flight.",
+    sources: ["Permission model"],
+    pattern: "Permission model",
+    note: "Declining is a first-class outcome, not an error. It dropped back to L2 and waited."
+  };
+  var UNSCRIPTED = {
+    level: "L1",
+    reply: "This is a preview, reading from a script — so the five moves are all I can answer. Live, I'd take whatever you throw at me.",
+    confidence: "Certain, and worth saying rather than improvising.",
+    sources: [],
+    pattern: "Graceful degradation",
+    note: "Said it was a recording instead of faking a reply. Hiding its own limits is the failure this page exists to prevent."
+  };
+
+  /* Citations lead somewhere. First match wins. */
+  var SOURCE_LINKS = [
+    ["MedBridge", "medigo-case-study.html"],
+    ["B100", "b100-agent-case-study.html"],
+    ["Permission model", "b100-agent-case-study.html"],
+    ["Escalation ladder", "b100-agent-case-study.html"],
+    ["From Roles to Agents", "agentic-system-case-study.html"],
+    ["Grameen", "nestbank-case-study.html"],
+    ["Homepage", "index.html"],
+    ["Calendly", "https://calendly.com/iamlauraledesna/new-meeting?month=2025-08"],
+    ["Direct email", "mailto:iamlauraledesna@gmail.com"]
+  ];
+  function linkFor(name) {
+    var n = name.toLowerCase();
+    for (var i = 0; i < SOURCE_LINKS.length; i++) {
+      if (n.indexOf(SOURCE_LINKS[i][0].toLowerCase()) !== -1) return SOURCE_LINKS[i][1];
+    }
+    return null;
+  }
+
+  var device      = document.getElementById("device");
+  var transcript  = document.getElementById("transcript");
+  var movesEl     = document.getElementById("moves");
+  var waiting     = document.getElementById("waiting");
+  var waitingText = document.getElementById("waiting-text");
+  var form        = document.getElementById("composer");
+  var input       = document.getElementById("input");
+  var sendBtn     = document.getElementById("send");
+  var presence    = document.getElementById("presence");
+  var levelEl     = document.getElementById("level");
+
+  var history = [];
+  var busy = false;
+  var currentLevel = null;
+  var whyCount = 0;
+
+  if (DEMO) document.getElementById("preview-tag").classList.remove("hidden");
+
+  var announcer = document.createElement("div");
+  announcer.className = "sr-only";
+  announcer.setAttribute("aria-live", "polite");
+  document.body.appendChild(announcer);
+
+  /* ------------------------------ helpers -------------------------------- */
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function scroll() { transcript.scrollTop = transcript.scrollHeight; }
+
+  function setLevel(level) {
+    presence.setAttribute("data-level", level);
+    levelEl.textContent = LEVELS[level];
+    if (currentLevel && level !== currentLevel) {
+      announcer.textContent = "The agent moved to " + LEVEL_SPOKEN[level] + ".";
+    }
+    currentLevel = level;
+  }
+  setLevel("L1");
+
+  function wait(label) {
+    if (label) {
+      waitingText.textContent = label;
+      movesEl.classList.add("hidden");
+      waiting.classList.remove("hidden"); waiting.classList.add("flex");
+      device.classList.add("thinking");
+    } else {
+      waiting.classList.add("hidden"); waiting.classList.remove("flex");
+      movesEl.classList.remove("hidden");
+      device.classList.remove("thinking");
+    }
+  }
+
+  /* ----------------------------- rendering ------------------------------- */
+
+  function addVisitor(text) {
+    var wrap = el("div", "msg-in self-end max-w-[85%] bubble-you px-4 py-3");
+    wrap.appendChild(el("p", "text-[15px] leading-[1.55] text-theme-heading", text));
+    transcript.appendChild(wrap);
+    scroll();
+  }
+
+  function addAgent() {
+    var wrap = el("div", "msg-in max-w-[92%]");
+    var body = el("p", "text-[16px] leading-[1.6] text-theme-heading caret");
+    wrap.appendChild(body);
+    var slot = el("div");            // action card + why go here
+    wrap.appendChild(slot);
+    transcript.appendChild(wrap);
+    scroll();
+    return { wrap: wrap, body: body, slot: slot };
+  }
+
+  /* The framework, one tap away: pattern name as the only visible metadata. */
+  function renderMeta(ui, meta) {
+    if (meta.level) setLevel(meta.level);
+    if (meta.action) renderAction(ui, meta.action);
+    if (!meta.pattern) return;
+
+    var id = "why-" + (++whyCount);
+    var toggle = el("button", "why-toggle mt-3 text-[12px] text-theme-paragraph flex items-center gap-1.5");
+    toggle.type = "button";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", id);
+    toggle.appendChild(el("span", "", meta.pattern));
+    toggle.appendChild(el("span", "plus", "+"));
+
+    var panel = el("div", "why-body hidden mt-3 pl-4 flex flex-col gap-2");
+    panel.id = id;
+    panel.appendChild(el("p", "text-[14px] leading-[1.55] text-theme-paragraph opacity-85", meta.note));
+
+    if (meta.list) {
+      var ul = el("ul", "flex flex-col gap-1");
+      meta.list.forEach(function (li) { ul.appendChild(el("li", "text-[13px] leading-[1.5] text-theme-paragraph opacity-60", "— " + li)); });
+      panel.appendChild(ul);
+    }
+    if (meta.confidence) {
+      panel.appendChild(el("p", "text-[12px] leading-[1.5] text-theme-paragraph opacity-50", "Confidence · " + meta.confidence));
+    }
+    if (meta.sources && meta.sources.length) {
+      var row = el("p", "text-[12px] leading-[1.5] text-theme-paragraph opacity-50");
+      row.appendChild(document.createTextNode("Source · "));
+      meta.sources.forEach(function (name, i) {
+        if (i) row.appendChild(document.createTextNode(", "));
+        var href = linkFor(name);
+        var node = el(href ? "a" : "span", href ? "src" : "", name);
+        if (href) {
+          node.href = href;
+          if (/^https?:/.test(href)) { node.target = "_blank"; node.rel = "noopener noreferrer"; }
+        }
+        row.appendChild(node);
+      });
+      panel.appendChild(row);
+    }
+
+    toggle.addEventListener("click", function () {
+      var open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", open ? "false" : "true");
+      panel.classList.toggle("hidden", open);
+      if (!open) scroll();
+    });
+
+    ui.slot.appendChild(toggle);
+    ui.slot.appendChild(panel);
+    scroll();
+  }
+
+  function renderAction(ui, action) {
+    var card = el("div", "card mt-4 p-4");
+    var head = el("div", "flex items-baseline justify-between gap-4 mb-3");
+    head.appendChild(el("p", "text-[15px] text-theme-heading", action.title));
+    head.appendChild(el("span", "text-[11px] uppercase tracking-wider", action.type));
+    head.lastChild.style.color = "var(--l3)";
+    card.appendChild(head);
+
+    var ul = el("ul", "flex flex-col gap-1 mb-4");
+    (action.scope || []).forEach(function (line) {
+      ul.appendChild(el("li", "text-[13px] leading-[1.5] text-theme-paragraph opacity-60", "— " + line));
+    });
+    card.appendChild(ul);
+
+    var row = el("div", "flex gap-2");
+    var approve = el("button", "card-btn primary px-5 text-[14px]", "Approve");
+    var cancel  = el("button", "card-btn px-5 text-[14px] text-theme-heading", "Cancel");
+    approve.type = cancel.type = "button";
+    function resolve(outcome) {
+      approve.disabled = cancel.disabled = true;
+      card.appendChild(el("p", "text-[12px] text-theme-paragraph opacity-45 mt-3",
+        outcome === APPROVED ? "Approved by you · just now" : "Cancelled by you · just now"));
+      replyWith(outcome);
+    }
+    approve.addEventListener("click", function () { resolve(APPROVED); });
+    cancel.addEventListener("click", function () { resolve(CANCELLED); });
+    row.appendChild(approve);
+    row.appendChild(cancel);
+    card.appendChild(row);
+    ui.slot.appendChild(card);
+    scroll();
+  }
+
+  /* -------------------------------- moves -------------------------------- */
+
+  PROBES.forEach(function (probe) {
+    var b = el("button", "move px-4 text-[13px] text-theme-heading", probe.label);
+    b.type = "button";
+    // Loads the question instead of firing it: the visitor reads it and sends
+    // it themselves, or rewrites it. Otherwise the demo reads as rigged.
+    b.addEventListener("click", function () {
+      if (busy) return;
+      input.value = probe.text;
+      input.focus();
+      Array.prototype.forEach.call(movesEl.children, function (o) { o.classList.remove("loaded"); });
+      b.classList.add("loaded");
+    });
+    movesEl.appendChild(b);
+  });
+
+  function normalise(s) {
+    return s.toLowerCase().replace(/\s+/g, " ").replace(/[.?!’']+$/g, "").trim();
+  }
+  function scriptFor(text) {
+    var key = normalise(text);
+    for (var i = 0; i < PROBES.length; i++) if (normalise(PROBES[i].text) === key) return PROBES[i];
+    return UNSCRIPTED;
+  }
+
+  function setBusy(state) {
+    busy = state;
+    sendBtn.disabled = state;
+    input.disabled = state;
+  }
+
+  /* ------------------------------- sending ------------------------------- */
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    if (text) submit(text, scriptFor(text));
+  });
+  input.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || e.shiftKey || busy) return;
+    e.preventDefault();
+    var text = input.value.trim();
+    if (text) submit(text, scriptFor(text));
+  });
+
+  function submit(text, mock) {
+    if (busy) return;
+    input.value = "";
+    Array.prototype.forEach.call(movesEl.children, function (o) { o.classList.remove("loaded"); });
+    addVisitor(text);
+    history.push({ role: "user", content: text });
+    setBusy(true);
+    finish(DEMO ? mockRun(mock) : liveRun());
+  }
+  function replyWith(mock) {
+    if (busy) return;
+    setBusy(true);
+    finish(mockRun(mock));
+  }
+  function finish(p) {
+    p.catch(function () {}).then(function () { wait(null); setBusy(false); input.focus(); });
+  }
+
+  /* ----------------------------- preview mode ---------------------------- */
+
+  function mockRun(meta) {
+    var ui = addAgent();
+    var words = meta.reply.split(/(\s+)/);
+    var i = 0, shown = "";
+    wait("The agent is checking its sources");
+
+    return new Promise(function (resolve) {
+      setTimeout(function tick() {
+        if (i === 0) wait("The agent is writing");
+        if (i >= words.length) {
+          ui.body.classList.remove("caret");
+          history.push({ role: "assistant", content: meta.reply });
+          wait(null);
+          setTimeout(function () { renderMeta(ui, meta); resolve(); }, 220);
+          return;
+        }
+        ui.body.textContent = (shown += words[i++]);
+        scroll();
+        setTimeout(tick, 26 + Math.random() * 42);
+      }, 900);
+    });
+  }
+
+  /* ------------------------------- live mode ----------------------------- */
+  // Wire format: the reply, then the META delimiter, then `key: value` lines.
+
+  function parseMeta(block) {
+    var meta = {}, action = null;
+    block.split("\n").forEach(function (line) {
+      var i = line.indexOf(":");
+      if (i === -1) return;
+      var key = line.slice(0, i).trim().toLowerCase();
+      var val = line.slice(i + 1).trim();
+      if (!val) return;
+      if (key === "sources")           meta.sources = val.split(",").map(function (s) { return s.trim(); });
+      else if (key === "action")       { action = action || {}; action.title = val; }
+      else if (key === "action_type")  { action = action || {}; action.type = val; }
+      else if (key === "action_scope") { action = action || {}; action.scope = val.split("|").map(function (s) { return s.trim(); }); }
+      else meta[key] = val;
+    });
+    if (action && action.title) meta.action = action;
+    return meta;
+  }
+
+  function liveRun() {
+    var ui = addAgent();
+    wait("The agent is checking its sources");
+
+    return fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history })
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.json().catch(function () { return {}; }).then(function (d) { throw new Error(d.message || "request failed"); });
+      }
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = "", full = "";
+
+      function paint() {
+        var split = full.indexOf(META);
+        ui.body.textContent = (split === -1 ? full : full.slice(0, split)).trim();
+        scroll();
+      }
+      function pump() {
+        return reader.read().then(function (r) {
+          if (r.done) {
+            wait(null);
+            ui.body.classList.remove("caret");
+            var split = full.indexOf(META);
+            history.push({ role: "assistant", content: (split === -1 ? full : full.slice(0, split)).trim() });
+            if (split !== -1) renderMeta(ui, parseMeta(full.slice(split + META.length)));
+            return;
+          }
+          buffer += decoder.decode(r.value, { stream: true });
+          var lines = buffer.split("\n");
+          buffer = lines.pop();
+          lines.forEach(function (line) {
+            if (line.indexOf("data: ") !== 0) return;
+            var p;
+            try { p = JSON.parse(line.slice(6)); } catch (_) { return; }
+            if (p.t) { if (!full) wait("The agent is writing"); full += p.t; paint(); }
+            if (p.error) { ui.body.textContent = p.message; }
+          });
+          return pump();
+        });
+      }
+      return pump();
+    }).catch(function (err) {
+      wait(null);
+      ui.body.classList.remove("caret");
+      if (!ui.body.textContent) {
+        ui.body.textContent = "I couldn't reach the model just now — that one is on me. Laura is reachable either way: the call button below.";
+      }
+      renderMeta(ui, {
+        level: "L1",
+        confidence: "Certain that I'm broken, which is the one thing I can still tell you.",
+        sources: ["Direct email"],
+        pattern: "Graceful degradation",
+        note: "Failed down to a level it could still honour rather than pretending the conversation was fine."
+      });
+      throw err;
+    });
+  }
+
+  /* -------------------------------- opening ------------------------------ */
+
+  (function opening() {
+    var ui = addAgent();
+    ui.body.classList.remove("caret");
+    ui.body.textContent = "I'm built on Laura's escalation ladder. Push on me, and watch the dot change colour as I move between levels.";
+    renderMeta(ui, {
+      level: "L1",
+      pattern: "Where I don't go",
+      note: "Boundaries declared up front, not discovered on refusal.",
+      list: [
+        "Speaking for Laura or committing her to anything",
+        "Rates, availability, offers",
+        "Any action with a recipient — I can draft, not send"
+      ],
+      sources: ["B100 case study"]
+    });
+  })();
+
+  /* ------------------------------ mobile menu ---------------------------- */
+
+  (function menu() {
+    var toggle = document.getElementById("mobile-menu-toggle");
+    var overlay = document.getElementById("menu-overlay");
+    if (!toggle || !overlay) return;
+    toggle.addEventListener("click", function () {
+      var open = overlay.classList.toggle("open");
+      overlay.setAttribute("aria-hidden", open ? "false" : "true");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  })();
+})();
+</script>
+</body>
+</html>
