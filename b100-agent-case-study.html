@@ -1293,7 +1293,10 @@
           .cf-chip { display:inline-flex; align-items:center; gap:4px; height:19px; padding:0 8px; border-radius:999px;
                   font-size:9.5px; font-weight:600; white-space:nowrap; background:var(--red-dot); color:#fff; }
           .cf-chip::before { content:''; width:4px; height:4px; border-radius:50%; background:#fff; flex-shrink:0; }
-          .cf-anom { margin-top:7px; height:21px; padding:0 7px 0 9px; vertical-align:top; }
+          /* Same treatment as the phone: the row's tint and bar carry the warning,
+             so the label is text rather than a second solid object. */
+          .cf-anom { margin-top:7px; height:auto; padding:0; vertical-align:top;
+                  background:transparent; color:var(--red); font-size:11px; }
           .cf-anom::before { content:none; }
           .cf-anom svg { width:10px; height:10px; margin-left:1px; transform:rotate(90deg); }
           .cf-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
