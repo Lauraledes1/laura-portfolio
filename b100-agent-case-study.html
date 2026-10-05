@@ -920,11 +920,16 @@
           .m-anom::after { content:''; position:absolute; left:-9px; right:-9px; top:-11px; bottom:-11px; }
           .m-anom .m-anom-cv { width:10px; height:10px; margin-left:1px; transition:transform .18s ease; }
           .m-anom[aria-expanded="true"] .m-anom-cv { transform:rotate(90deg); }
-          .m-askwhy { display:inline-flex; align-items:center; gap:5px; margin-top:9px; padding:5px 10px;
-                  border:1px solid rgba(50,78,121,.45); border-radius:7px; background:rgba(255,255,255,.7);
-                  color:var(--m-accent); font-family:inherit; font-size:11px; font-weight:600; letter-spacing:-.1px;
-                  cursor:pointer; transition:background .12s ease, border-color .12s ease; }
-          .m-askwhy:hover { background:#fff; border-color:var(--m-accent); }
+          /* Text, not a pill: beside the Anomaly chip two pills competed. The chip
+             carries the status, this carries the action, and they stop fighting. */
+          .m-askwhy { display:inline-flex; align-items:center; gap:5px; margin-left:10px; padding:0;
+                  border:0; background:none; color:var(--m-ink); font-family:inherit; font-size:11.5px;
+                  font-weight:700; letter-spacing:-.1px; cursor:pointer; opacity:.85;
+                  transition:opacity .12s ease; }
+          .m-askwhy:hover { opacity:1; }
+          /* Expanded, it drops onto its own line and the indent that kept it
+             clear of the chip would read as a stray step in. */
+          .m-anom[aria-expanded="true"] ~ .m-askwhy { margin-left:0; margin-top:8px; }
           .m-askwhy svg { width:11px; height:11px; flex-shrink:0; }
           .m-flag-why { display:none; margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
           .m-anom[aria-expanded="true"] + .m-flag-why { display:block; }
