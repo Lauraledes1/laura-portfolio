@@ -1281,7 +1281,8 @@
           .cf-surface { background:#fff; border:1px solid #E9E5DD; border-radius:14px; overflow:hidden; color:#1A2330;
                   box-shadow:0 24px 48px -20px rgba(0,0,0,.55),0 6px 16px rgba(0,0,0,.2);
                   --ink:#1A2330; --ink2:#3F4855; --ink3:#565E6B; --line:#E9E5DD; --line2:#F1EEE7; --surface:#fff;
-                  --accent:#324e79; --red:#AC382D; --red-bg:#FAE7E2; --red-dot:#CE5142; --amber:#8F5410; }
+                  --accent:#324e79; --red:#AC382D; --red-bg:#FAE7E2; --red-dot:#CE5142; --amber:#8F5410;
+                  --green:#0E6E43; --green-bg:#E3F0E8; --green-dot:#1E9E63; }
           .cf-row { padding:11px 13px; position:relative; background:var(--red-bg); }
           .cf-row::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--red-dot); }
           .cf-rt { display:flex; align-items:center; gap:8px; }
@@ -1298,6 +1299,7 @@
           .cf-why { margin-top:6px; font-size:10px; font-weight:500; color:var(--red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
           .cf-rowq { padding:11px 13px; border-top:1px solid var(--line2); opacity:.45; }
           .cf-chip.pend { background:#ECEAE3; color:var(--ink2); } .cf-chip.pend::before { background:var(--ink3); }
+          .cf-chip.ok { background:var(--green-bg); color:var(--green); } .cf-chip.ok::before { background:var(--green-dot); }
           .cf-l2wrap { padding:13px; }
           .cf-say { margin:0 0 11px; font-size:11.5px; line-height:1.55; letter-spacing:-.1px; color:var(--ink); }
           .cf-say b { font-weight:700; font-variant-numeric:tabular-nums; }
@@ -1978,8 +1980,8 @@
                           <div class="cf-rowb"><span class="cf-sub">Orbit Industrial · Sep 3</span><span class="cf-money">$25,000</span></div>
                         </div>
                         <div class="cf-rowq">
-                          <div class="cf-rt"><span class="cf-buyer">Halden Freight</span><span class="cf-chip pend">Pending</span></div>
-                          <div class="cf-rowb"><span class="cf-sub">Vantor SA · Sep 4</span><span class="cf-money">$7,400</span></div>
+                          <div class="cf-rt"><span class="cf-buyer">Halden Freight</span><span class="cf-chip ok">Funded</span></div>
+                          <div class="cf-rowb"><span class="cf-sub">Ridgeline Fleet · Sep 2</span><span class="cf-money">$42,000</span></div>
                         </div>
                       </div>
                       <p class="cf-cap">The agent flagged it.</p>
