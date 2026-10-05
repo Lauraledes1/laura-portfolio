@@ -20,40 +20,9 @@
     <meta name="twitter:title" content="Conversation Design for High-Stakes Escalations">
     <meta name="twitter:description" content="An escalation ladder for agentic payments ops: ambient signals, a copilot that cites its sources, and typed actions that ask before they move money.">
     <meta name="twitter:image" content="https://lauraledesna.io/assets/og/b100-card-hd.jpg">
-    <script src="./agentic-system-case-study_files/saved_resource"></script>
-    <link href="./agentic-system-case-study_files/css2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="./agentic-system-case-study_files/web"></script><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style.css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(1).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(2).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(3).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(4).css"><link rel="stylesheet" type="text/css" href="./agentic-system-case-study_files/style(5).css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'syne': ['Syne', 'sans-serif'],
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'primary': '#ffffff',
-                        'inverse': '#cccccc',
-                        'paragraph': '#0d0d0d',
-                    },
-                    spacing: {
-                        'none': '0',
-                        'xxs': '4px',
-                        'xs': '8px',
-                        's': '16px',
-                        'm': '24px',
-                        'lg': '32px',
-                        'xl': '48px',
-                        '2xl': '64px',
-                        '3xl': '80px',
-                    },
-                }
-            }
-        }
-    </script>
     <script>
       // Variable Proximity effect (vanilla JS) for footer headline
       (function(){
@@ -1124,6 +1093,8 @@
                   color:var(--b-faint); font-family:var(--b-mono); font-size:13px; cursor:pointer; transition:border-color .15s,color .15s; }
           .flow-rail button:hover { color:var(--b-dim); }
           .flow-rail button.on { border-color:var(--l2); color:var(--l2); }
+          /* Held: the active step fills in, so a pause is something you can see. */
+          [data-flowdemo].paused .flow-rail button.on { background:var(--l2); color:#07080a; }
           .flow-cap { margin-top:16px; max-width:460px; text-align:center; font-family:'Syne',sans-serif; font-size:14.5px; line-height:1.55; color:var(--b-dim); }
           .flow-cap-tag { display:inline-block; font-family:var(--b-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
                   padding:2px 6px; border-radius:4px; margin-right:7px; white-space:nowrap; vertical-align:1px; }
@@ -1452,7 +1423,7 @@
                         <p class="font-syne font-medium text-[36px] leading-[1.4]" style="color:#666666; margin-top:0;">Context &amp; Opportunity</p>
                     </div>
                     <div class="basis-0 grow">
-                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="margin-top:0;">To explain why a payment is stuck, an Ops analyst rebuilds the case by hand across three disconnected systems, the card processor, the provider that moves the money, and a legacy database linking them, with no single screen that shows all three.</p>
+                        <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph" style="margin-top:0;">To explain why a payment is stuck, an Ops analyst rebuilds the case by hand across three disconnected systems, the card processor, the provider that moves the money, and a legacy database used to reconcile the two systems, with no single screen that shows all three.</p>
                         <p class="font-syne font-normal text-[17px] leading-[1.6] text-theme-paragraph mt-6">This is agentic work: multi-source retrieval and reasoning. But because money is moving, confidence signals, citations, approval gates, and an audit trail need to be built in from the start.</p>
                     </div>
                 </div>
@@ -1480,7 +1451,7 @@
                     <div class="sys-card">
                       <div class="sys-idx">SOURCE 03</div>
                       <div class="sys-name">Gen 2</div>
-                      <div class="sys-role">Legacy mapping database</div>
+                      <div class="sys-role">Internal mapping system</div>
                     </div>
                   </div>
                 </div>
@@ -2125,6 +2096,7 @@
             demo.querySelectorAll('.m-disc-wrap').forEach(function(x){ x.classList.toggle('open', x.dataset.default === 'open'); });
             var C = CAPS[i];
             cap.innerHTML = '<span class="flow-cap-tag '+C.tag+'">'+C.t+'</span><b>'+C.h+':</b> '+C.c;
+            syncRailLabels();
           }
           function go(n){ i = (n%screens.length + screens.length) % screens.length; render(); }
           function tick(){ go(i+1); }
@@ -2185,12 +2157,32 @@
           ['pointerup', 'pointercancel'].forEach(function(t){
             phone.addEventListener(t, function(){ tracking = false; });
           });
-          dots.forEach(function(d){
+          // The active step is the blue one. Tapping it holds the walkthrough and
+          // tapping it again sets it going — a deliberate pause, so no timeout
+          // picks it back up. Tapping any other step still jumps there.
+          function syncRailLabels(){
+            dots.forEach(function(d,k){
+              if(!d.dataset.baseLabel) d.dataset.baseLabel = d.getAttribute('aria-label') || '';
+              d.setAttribute('aria-label', k === i
+                ? d.dataset.baseLabel + (paused ? ' — paused, tap to resume' : ' — tap to pause')
+                : d.dataset.baseLabel);
+            });
+          }
+          function togglePause(){
+            if(idle){ clearTimeout(idle); idle = null; }
+            paused = !paused;
+            demo.classList.toggle('paused', paused);
+            paused ? stop() : play();
+            syncRailLabels();
+          }
+          dots.forEach(function(d,k){
             d.addEventListener('click', function(){
-              go(parseInt(d.getAttribute('data-step'),10) - 1);
+              if(k === i){ togglePause(); return; }
+              go(k);
               hold();
             });
           });
+          syncRailLabels();
           demo.querySelectorAll('.m-src').forEach(function(s){
             function toggle(e){
               e.stopPropagation();
