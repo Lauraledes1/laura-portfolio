@@ -920,6 +920,12 @@
           .m-anom::after { content:''; position:absolute; left:-9px; right:-9px; top:-11px; bottom:-11px; }
           .m-anom .m-anom-cv { width:10px; height:10px; margin-left:1px; transition:transform .18s ease; }
           .m-anom[aria-expanded="true"] .m-anom-cv { transform:rotate(90deg); }
+          .m-askwhy { display:inline-flex; align-items:center; gap:5px; margin-top:9px; padding:5px 10px;
+                  border:1px solid rgba(50,78,121,.45); border-radius:7px; background:rgba(255,255,255,.7);
+                  color:var(--m-accent); font-family:inherit; font-size:11px; font-weight:600; letter-spacing:-.1px;
+                  cursor:pointer; transition:background .12s ease, border-color .12s ease; }
+          .m-askwhy:hover { background:#fff; border-color:var(--m-accent); }
+          .m-askwhy svg { width:11px; height:11px; flex-shrink:0; }
           .m-flag-why { display:none; margin-top:6px; font-size:10px; font-weight:500; color:var(--m-red); letter-spacing:-.1px; font-variant-numeric:tabular-nums; }
           .m-anom[aria-expanded="true"] + .m-flag-why { display:block; }
           /* conversation */
@@ -1490,6 +1496,7 @@
                             <div class="m-row-b"><span class="m-sub">Tamsett Co. · due today</span><span class="m-money">$10,000</span></div>
                             <button type="button" class="m-chip warn m-anom" aria-expanded="false" aria-label="Why this was flagged">Anomaly<svg class="m-anom-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
                             <div class="m-flag-why">$10,000 vs ~$3,100 typical · flagged by Gen 3</div>
+                            <button type="button" class="m-askwhy">Ask why<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
                           </div>
                           <div class="m-row">
                             <div class="m-rt"><span class="m-buyer">Kestrel Mfg.</span><span class="m-chip pend">Pending</span></div>
@@ -2178,6 +2185,8 @@
                 anom.setAttribute('aria-expanded', anom.getAttribute('aria-expanded')==='true' ? 'false' : 'true');
               });
             }
+            var askWhy = flagRow.querySelector('.m-askwhy');
+            if(askWhy) askWhy.addEventListener('click', openCopilot);
             flagRow.addEventListener('click', openCopilot);
             flagRow.addEventListener('keydown', function(e){
               if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openCopilot(e); }
