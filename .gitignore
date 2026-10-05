@@ -2,3 +2,6 @@
 # scratch mockups, not part of the site
 assets/b100-agent-case-study/amountoptions.html
 .DS_Store
+
+# local tooling, never part of the published site
+.claude/
